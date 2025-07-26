@@ -143,6 +143,15 @@
     .facebook-section p {
       margin: 10px 0;
     }
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .whatsapp-button img {
+      height: 50px;
+    }
   </style>
 </head>
 <body>
@@ -194,9 +203,15 @@
         <input type="tel" placeholder="Contact Number" required />
         <select required>
           <option value="">Select Service</option>
-          <option>Company Secretarial Services</option>
-          <option>Income Tax Services</option>
-          <option>GST Services</option>
+          <option>Company Registration</option>
+          <option>Firm Registration</option>
+          <option>PF/ESI/Trade License</option>
+          <option>PAN/TAN Assistance</option>
+          <option>Income Tax Filing</option>
+          <option>TDS Filing</option>
+          <option>GST Registration</option>
+          <option>GST Return Filing</option>
+          <option>Tax Advisory</option>
         </select>
         <textarea rows="4" placeholder="Additional Message"></textarea>
         <button type="submit">Send Message</button>
@@ -212,11 +227,15 @@
     <p>📞 Vikash: +91 85399 79271</p>
     <p>📧 email.vikashpathak@gmail.com</p>
     <p>Bangalore, Karnataka, India</p>
-    <p>🌐 <a href="#" style="color: #00c6ff; text-decoration: underline;">Visit Our Facebook Page</a></p>
+    <p>🌐 <a href="https://www.facebook.com/people/Digicafe/61556608129739/" style="color: #00c6ff; text-decoration: underline;">Visit Our Facebook Page</a></p>
   </section>
 
   <footer>
     <p>&copy; 2025 Digicafe | Contact: +91-8539979271 | Email: email.vikashpathak@gmail.com</p>
   </footer>
+
+  <a class="whatsapp-button" href="https://wa.me/918539979271" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="Chat with us">
+  </a>
 </body>
 </html>
