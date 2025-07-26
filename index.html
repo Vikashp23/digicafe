@@ -1,257 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digicafe - Your Trusted Partner</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('your-background-image.jpg') no-repeat center center/cover;
-      color: #fff;
-    }
-    header {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      text-align: center;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-    }
-    .logo img {
-      height: 50px;
-    }
-    .logo h1 {
-      margin: 0;
-      font-size: 36px;
-      color: #00c6ff;
-    }
-    header p {
-      font-size: 18px;
-      color: #fff;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: rgba(0, 0, 0, 0.9);
-      padding: 10px;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-    }
-    nav li {
-      position: relative;
-      margin: 0 15px;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav li:hover > ul {
-      display: block;
-    }
-    nav li ul {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #333;
-      padding: 10px;
-      border-radius: 4px;
-      min-width: 220px;
-      z-index: 9999;
-    }
-    nav li ul li {
-      margin: 0;
-      padding: 6px 12px;
-      white-space: nowrap;
-    }
-    nav li ul li a {
-      color: #fff;
-    }
-    nav li ul li ul {
-      left: 100%;
-      top: 0;
-    }
-    .main {
-      display: flex;
-      justify-content: space-between;
-      padding: 40px;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-    .main .text-block {
-      width: 60%;
-    }
-    .main .text-block h2 {
-      font-size: 28px;
-      color: #00c6ff;
-    }
-    .main .text-block ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .main .text-block ul li {
-      margin-bottom: 10px;
-    }
-    .main .form-block {
-      width: 35%;
-      background-color: #fff;
-      color: #000;
-      padding: 20px;
-      border-radius: 8px;
-    }
-    .main .form-block h3 {
-      margin-top: 0;
-    }
-    .form-block input, .form-block select, .form-block textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .form-block button {
-      background-color: #00c6ff;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 15px;
-      font-size: 14px;
-    }
-    .facebook-section {
-      padding: 40px;
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-    .facebook-section h2 {
-      color: #00c6ff;
-    }
-    .facebook-section p {
-      margin: 10px 0;
-    }
-    .facebook-section a {
-      color: #00c6ff;
-      text-decoration: underline;
-    }
-    .social-icons {
-      margin-top: 20px;
-    }
-    .social-icons a {
-      margin: 0 10px;
-      color: #00c6ff;
-      font-size: 24px;
-    }
-    .whatsapp-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-    .whatsapp-button img {
-      height: 50px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Digicafe - Our Service, Your Solutions. We offer Company Secretarial, Income Tax, GST, Bookkeeping, and more!">
+    <title>Digicafe - Our Service, Your Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+        }
+        .services {
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 15px;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .contact-info {
+            margin-top: 15px;
+        }
+        .price-card {
+            background-color: #fefefe;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .price-card h3 {
+            margin-top: 0;
+        }
+        .add-to-cart {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-to-cart:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Digicafe Logo" />
-      <h1>Digicafe</h1>
-    </div>
-    <p>Your Service, Our Solutions</p>
-  </header>
 
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li>
-        <a href="#">Our Services</a>
-        <ul>
-          <li><a href="#">Company Secretarial Services</a></li>
-          <li><a href="#">Income Tax Services</a></li>
-          <li><a href="#">GST Services</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
+    <header>
+        <h1>Welcome to Digicafe</h1>
+        <p>Your Service, Our Solutions</p>
+    </header>
 
-  <section class="main">
-    <div class="text-block">
-      <h2>About Digicafe</h2>
-      <p>We Digicafe is a group of Tax Enthusiasts and Tax Experts in India with a passion to provide full-fledged consultancy and taxation services. Our services include direct and indirect taxation, registration services, bookkeeping, income tax filing, business setup, and more.</p>
-      <h3>Services Overview</h3>
-      <ul>
-        <li>✅ Company Registration (Private, Public, LLP, Trusts)</li>
-        <li>✅ Firm Registration, PF/ESI/Trade License</li>
-        <li>✅ PAN & TAN Assistance</li>
-        <li>✅ Income Tax Returns & TDS Filing</li>
-        <li>✅ GST Registration, Return Filing, and Advisory</li>
-        <li>✅ Tax Refunds and Record Maintenance</li>
-        <li>✅ Digital Signature Certificates</li>
-      </ul>
-    </div>
-    <div class="form-block">
-      <h3>Talk to an Expert</h3>
-      <form action="https://formsubmit.co/email.vikashpathak@gmail.com" method="POST">
-        <input type="text" name="name" placeholder="Your Full Name" required />
-        <input type="email" name="email" placeholder="Your Email id" required />
-        <input type="text" name="city" placeholder="City" />
-        <input type="tel" name="phone" placeholder="Contact Number" required />
-        <select name="service" required>
-          <option value="">Select Service</option>
-          <option>Company Registration</option>
-          <option>Firm Registration</option>
-          <option>PF/ESI/Trade License</option>
-          <option>PAN/TAN Assistance</option>
-          <option>Income Tax Filing</option>
-          <option>TDS Filing</option>
-          <option>GST Registration</option>
-          <option>GST Return Filing</option>
-          <option>Tax Advisory</option>
-        </select>
-        <textarea name="message" rows="4" placeholder="Additional Message"></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  </section>
+    <nav>
+        <a href="#company-services">Company Services</a>
+        <a href="#income-tax-services">Income Tax</a>
+        <a href="#gst-services">GST</a>
+        <a href="#aadhaar-services">Aadhaar</a>
+        <a href="#bookkeeping-services">Bookkeeping</a>
+        <a href="#digital-signature">Digital Signatures</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-  <section class="facebook-section">
-    <h2>📣 Connect With Us on Facebook</h2>
-    <p><strong>Company, GST & ID services made easy!</strong></p>
-    <p>✅ ROC, GST, MCA Docs</p>
-    <p>✅ Aadhaar/PAN Help</p>
-    <p>📞 Vikash: +91 85399 79271</p>
-    <p>📧 email.vikashpathak@gmail.com</p>
-    <p>Bangalore, Karnataka, India</p>
-    <p>🌐 <a href="https://www.facebook.com/Cafedigital23" target="_blank">Visit Our Facebook Page</a></p>
-    <div class="social-icons">
-      <a href="https://www.facebook.com/pathakvikash92/" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.linkedin.com/in/vikashpathak2306/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    </div>
-  </section>
+    <!-- Sample Service Tab with Pricing and Add to Cart -->
+    <section id="company-services" class="services">
+        <h2>Company Services</h2>
 
-  <footer>
-    <p>&copy; 2025 Digicafe | Contact: +91-8539979271 | Email: email.vikashpathak@gmail.com</p>
-  </footer>
+        <div class="price-card">
+            <h3>Company Registration</h3>
+            <p>Complete legal compliance for new company setup.</p>
+            <p><strong>Price:</strong> ₹9,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
 
-  <a class="whatsapp-button" href="https://wa.me/918539979271" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="Chat with us">
-  </a>
+        <div class="price-card">
+            <h3>Firm Registration</h3>
+            <p>Get your partnership firm registered legally.</p>
+            <p><strong>Price:</strong> ₹7,499</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="price-card">
+            <h3>PF Registration</h3>
+            <p>Secure your employee's retirement with PF registration.</p>
+            <p><strong>Price:</strong> ₹6,499</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="services">
+        <h2>Contact Us</h2>
+        <p>If you have any queries or would like to avail of our services, please reach out to us:</p>
+        <div class="contact-info">
+            <p><strong>Mr. Vikash Pathak</strong></p>
+            <p>Email: <a href="mailto:email.vikashpathak@gmail.com">email.vikashpathak@gmail.com</a></p>
+            <p>Phone: +91-8539979271</p>
+            <p>Facebook Page: <a href="https://www.facebook.com/Cafedigital23" target="_blank">Cafe Digital</a></p>
+            <p>Facebook (Personal): <a href="https://www.facebook.com/pathakvikash92/" target="_blank">Vikash Pathak</a></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/vikashpathak2306/" target="_blank">Vikash Pathak</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Digicafe | All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
