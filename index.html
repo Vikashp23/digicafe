@@ -3,34 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DigiCafe Services - Income Tax, GST, Business Registration, DSC, Trademark & Compliance Services across India. WhatsApp support: 7488355129" />
+  <meta name="description" content="DigiCafe Services - Income Tax, GST, Business Registration, DSC, Trademark & Compliance Services across India. WhatsApp: 7488355129" />
   <title>DigiCafe Services | Income Tax • GST • Business • Compliance</title>
 
   <style>
     :root{
       --bg:#0b1020;
       --card:#101a34;
-      --muted:#c8d1ff;
       --text:#eef1ff;
-      --soft:#1a2852;
-      --accent:#5eead4;
-      --accent2:#60a5fa;
-      --warning:#fbbf24;
-      --ok:#34d399;
-      --danger:#fb7185;
+      --muted:rgba(238,241,255,.74);
       --line:rgba(255,255,255,.12);
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --radius: 18px;
+      --ok:#34d399;
     }
 
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.28), transparent 60%),
-                  radial-gradient(900px 500px at 80% 0%, rgba(94,234,212,.18), transparent 55%),
-                  radial-gradient(900px 600px at 50% 110%, rgba(251,191,36,.12), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.28), transparent 60%),
+        radial-gradient(900px 500px at 80% 0%, rgba(94,234,212,.18), transparent 55%),
+        radial-gradient(900px 600px at 50% 110%, rgba(251,191,36,.10), transparent 55%),
+        var(--bg);
       color: var(--text);
       line-height:1.45;
     }
@@ -38,55 +34,46 @@
     a{color:inherit; text-decoration:none}
     .container{max-width:1120px; margin:0 auto; padding:0 18px}
 
-    /* Top bar */
+    /* Topbar */
     .topbar{
       position:sticky; top:0; z-index:50;
-      background: rgba(11,16,32,.72);
+      background: rgba(11,16,32,.78);
       backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
     .topbar-inner{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
+      padding:14px 0; gap:14px;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 180px;
-    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:180px}
     .logo{
       width:38px; height:38px; border-radius:12px;
       background: linear-gradient(135deg, rgba(94,234,212,.9), rgba(96,165,250,.9));
       box-shadow: 0 10px 25px rgba(96,165,250,.22);
     }
-    .brand h1{
-      font-size:16px; margin:0; letter-spacing:.6px;
-    }
-    .brand p{
-      margin:2px 0 0; font-size:12px; color: rgba(238,241,255,.72);
-    }
+    .brand h1{font-size:16px; margin:0; letter-spacing:.6px}
+    .brand p{margin:2px 0 0; font-size:12px; color: rgba(238,241,255,.72)}
 
-    nav{
-      display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
-    }
+    nav{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
     nav a{
       font-size:13px;
       padding:8px 10px;
       border:1px solid transparent;
       border-radius:12px;
-      color: rgba(238,241,255,.84);
+      color: rgba(238,241,255,.86);
     }
-    nav a:hover{
-      border-color: var(--line);
-      background: rgba(255,255,255,.04);
-    }
+    nav a:hover{border-color: var(--line); background: rgba(255,255,255,.04)}
 
     .cta-row{
       display:flex; gap:10px; align-items:center; justify-content:flex-end;
-      flex-wrap:wrap;
-      min-width: 250px;
+      flex-wrap:wrap; min-width:250px;
     }
-
+    .pill{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      color: rgba(238,241,255,.75);
+      background: rgba(255,255,255,.04);
+    }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
@@ -95,7 +82,7 @@
       border:1px solid var(--line);
       background: rgba(255,255,255,.05);
       color: var(--text);
-      font-weight:600;
+      font-weight:700;
       font-size:13px;
       cursor:pointer;
       transition: transform .08s ease, background .2s ease, border-color .2s ease;
@@ -108,51 +95,89 @@
       border-color: rgba(94,234,212,.35);
       background: linear-gradient(135deg, rgba(94,234,212,.18), rgba(96,165,250,.12));
     }
-    .pill{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      color: rgba(238,241,255,.75);
+
+    /* Updates Bar (Ticker) */
+    .updates{
+      border-bottom:1px solid var(--line);
       background: rgba(255,255,255,.04);
     }
+    .updates-inner{
+      display:flex; gap:12px; align-items:center; padding:10px 0;
+    }
+    .badge{
+      font-size:12px; font-weight:900; letter-spacing:.3px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      white-space:nowrap;
+    }
+    .ticker{
+      overflow:hidden;
+      flex:1;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.10);
+    }
+    .ticker-track{
+      display:inline-flex;
+      gap:18px;
+      padding:10px 14px;
+      white-space:nowrap;
+      will-change: transform;
+      animation: scroll 26s linear infinite;
+      color: rgba(238,241,255,.86);
+      font-size:13px;
+    }
+    .dot{
+      display:inline-block;
+      width:6px; height:6px; border-radius:50%;
+      background: rgba(94,234,212,.9);
+      margin: 0 6px 1px;
+    }
+    @keyframes scroll{
+      0%{transform: translateX(0)}
+      100%{transform: translateX(-50%)}
+    }
+    /* Duplicate trick for seamless loop */
+    .ticker-track span{display:inline-flex; align-items:center}
 
     /* Hero */
-    .hero{
-      padding:52px 0 24px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:18px;
-      align-items:stretch;
-    }
+    .hero{padding:46px 0 18px}
+    .hero-grid{display:grid; grid-template-columns: 1.25fr .75fr; gap:18px; align-items:stretch}
     .hero-card{
       background: linear-gradient(180deg, rgba(16,26,52,.95), rgba(16,26,52,.70));
       border:1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding:28px;
-      overflow:hidden;
       position:relative;
+      overflow:hidden;
     }
     .hero-card:before{
       content:"";
       position:absolute; inset:-120px -120px auto auto;
       width:240px; height:240px; border-radius:50%;
       background: radial-gradient(circle at 30% 30%, rgba(94,234,212,.22), transparent 60%);
-      filter: blur(0px);
     }
-    .hero h2{
-      margin:0 0 10px;
-      font-size:36px;
-      letter-spacing: .6px;
-      line-height:1.12;
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(94,234,212,.25);
+      background: rgba(94,234,212,.08);
+      font-size:12px;
+      font-weight:900;
+      margin-bottom:10px;
     }
-    .hero .sub{
-      margin:0 0 16px;
-      color: rgba(238,241,255,.78);
-      font-size:15px;
+    .hero h2{margin:0 0 10px; font-size:36px; letter-spacing:.6px; line-height:1.12}
+    .sub{margin:0 0 16px; color: var(--muted); font-size:15px}
+    .chips{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: rgba(238,241,255,.80);
     }
     .hero ul{
       margin: 14px 0 0;
@@ -182,15 +207,15 @@
       gap:12px;
     }
     .quick-card h3{margin:0; font-size:16px}
-    .quick-card p{margin:0; color: rgba(238,241,255,.75); font-size:13px}
-    .quick-card .kv{
+    .quick-card p{margin:0; color: var(--muted); font-size:13px}
+    .kv{
       display:grid; grid-template-columns: 90px 1fr; gap:8px 10px;
       padding-top:6px;
       border-top:1px dashed rgba(255,255,255,.14);
       margin-top:2px;
       font-size:13px;
     }
-    .kv div{color: rgba(238,241,255,.8)}
+    .kv div{color: rgba(238,241,255,.82)}
     .kv b{color: var(--text)}
     .note{
       font-size:12px;
@@ -207,40 +232,19 @@
       display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
       margin-bottom:14px;
     }
-    .section-title h3{
-      margin:0;
-      font-size:22px;
-      letter-spacing:.3px;
-    }
-    .section-title p{
-      margin:0;
-      color: rgba(238,241,255,.72);
-      font-size:13px;
-    }
+    .section-title h3{margin:0; font-size:22px; letter-spacing:.3px}
+    .section-title p{margin:0; color: var(--muted); font-size:13px}
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
+    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
     .card{
-      background: rgba(16,26,52,.7);
+      background: rgba(16,26,52,.70);
       border:1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding:18px;
     }
     .card h4{margin:0 0 6px; font-size:16px}
-    .card p{margin:0 0 10px; color: rgba(238,241,255,.72); font-size:13px}
-    .chips{display:flex; gap:8px; flex-wrap:wrap}
-    .chip{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: rgba(238,241,255,.78);
-    }
+    .card p{margin:0 0 10px; color: var(--muted); font-size:13px}
 
     /* Tables */
     .table-wrap{
@@ -253,7 +257,7 @@
     table{
       width:100%;
       border-collapse: collapse;
-      min-width: 820px;
+      min-width: 760px;
     }
     th, td{
       padding:12px 12px;
@@ -273,54 +277,21 @@
     }
     tr:hover td{background: rgba(255,255,255,.03)}
     .price{
-      font-weight:800;
+      font-weight:900;
       color: rgba(238,241,255,.96);
       white-space:nowrap;
     }
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(94,234,212,.25);
-      background: rgba(94,234,212,.08);
-      color: rgba(238,241,255,.9);
-      font-size:12px;
-      font-weight:700;
-    }
-    .tag.warn{
-      border-color: rgba(251,191,36,.35);
-      background: rgba(251,191,36,.08);
-    }
+    .small{font-size:12px; color: rgba(238,241,255,.65)}
 
-    /* Docs required */
-    .two-col{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-    }
-    .list{
-      margin:0;
-      padding-left:18px;
-      color: rgba(238,241,255,.82);
-      font-size:13px;
-    }
+    /* Two column */
+    .two-col{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    .list{margin:0; padding-left:18px; color: rgba(238,241,255,.82); font-size:13px}
     .list li{margin:8px 0}
 
     /* Form */
-    .form{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    .field{
-      display:flex; flex-direction:column; gap:6px;
-    }
-    .field label{
-      font-size:12px;
-      color: rgba(238,241,255,.76);
-    }
+    .form{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    .field{display:flex; flex-direction:column; gap:6px}
+    .field label{font-size:12px; color: rgba(238,241,255,.76)}
     .field input, .field select, .field textarea{
       padding:12px 12px;
       border-radius:14px;
@@ -337,10 +308,6 @@
       align-items:center; justify-content:space-between;
       padding-top:4px;
     }
-    .small{
-      font-size:12px;
-      color: rgba(238,241,255,.65);
-    }
 
     /* Footer */
     footer{
@@ -355,29 +322,20 @@
       gap:14px;
       align-items:start;
     }
-    .foot p{margin:6px 0; color: rgba(238,241,255,.72); font-size:13px}
-    .foot b{color: var(--text)}
     .links{display:flex; gap:10px; flex-wrap:wrap}
 
     /* WhatsApp floating */
     .wa-float{
-      position:fixed;
-      right:16px; bottom:16px;
-      z-index:80;
-      display:flex; flex-direction:column; gap:10px;
-      align-items:flex-end;
+      position:fixed; right:16px; bottom:16px; z-index:80;
+      display:flex; flex-direction:column; gap:10px; align-items:flex-end;
     }
     .wa-btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:12px 14px;
-      border-radius:999px;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px; border-radius:999px;
       border:1px solid rgba(94,234,212,.35);
       background: linear-gradient(135deg, rgba(94,234,212,.18), rgba(96,165,250,.14));
       box-shadow: 0 18px 40px rgba(0,0,0,.35);
-      font-weight:800;
-      font-size:13px;
+      font-weight:900; font-size:13px;
     }
     .wa-dot{
       width:10px; height:10px; border-radius:50%;
@@ -385,19 +343,22 @@
       box-shadow: 0 0 0 6px rgba(52,211,153,.12);
     }
 
-    /* Responsive */
     @media (max-width: 980px){
+      .topbar-inner{align-items:flex-start}
       .hero-grid{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
       .two-col{grid-template-columns:1fr}
       .form{grid-template-columns:1fr}
       .cta-row{justify-content:flex-start}
       nav{justify-content:flex-start}
+      .hero ul{grid-template-columns: 1fr}
+      .ticker-track{animation-duration: 34s;}
     }
   </style>
 </head>
 
 <body>
+
   <!-- Topbar -->
   <div class="topbar">
     <div class="container">
@@ -415,6 +376,7 @@
           <a href="#itr-pricing">ITR Pricing</a>
           <a href="#business-pricing">Business Pricing</a>
           <a href="#documents">Documents</a>
+          <a href="#partner">Partner With Us</a>
           <a href="#client-form">Client Form</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -427,16 +389,43 @@
     </div>
   </div>
 
+  <!-- Latest Updates / News -->
+  <div class="updates" aria-label="Latest Updates">
+    <div class="container">
+      <div class="updates-inner">
+        <span class="badge">🔔 Latest Updates</span>
+
+        <div class="ticker" role="region" aria-label="Compliance Updates Ticker">
+          <div class="ticker-track" id="tickerTrack">
+            <span>✅ FY 2025–26 (AY 2026–27): ITR due date — Salaried: 31 July | Non-audit business/profession: 31 August <span class="dot"></span></span>
+            <span>✅ Before ITR filing: match Form 26AS + AIS + TIS to avoid mismatch notices/refund delays <span class="dot"></span></span>
+            <span>✅ GST (from July 2025): GSTR-3B liability is system-locked; corrections via GSTR-1A before filing <span class="dot"></span></span>
+            <span>✅ MCA (effective 31 Mar 2026): Director KYC moved to once in 3 years (instead of yearly) <span class="dot"></span></span>
+
+            <!-- Duplicate for seamless loop -->
+            <span>✅ FY 2025–26 (AY 2026–27): ITR due date — Salaried: 31 July | Non-audit business/profession: 31 August <span class="dot"></span></span>
+            <span>✅ Before ITR filing: match Form 26AS + AIS + TIS to avoid mismatch notices/refund delays <span class="dot"></span></span>
+            <span>✅ GST (from July 2025): GSTR-3B liability is system-locked; corrections via GSTR-1A before filing <span class="dot"></span></span>
+            <span>✅ MCA (effective 31 Mar 2026): Director KYC moved to once in 3 years (instead of yearly) <span class="dot"></span></span>
+          </div>
+        </div>
+
+        <a class="btn primary" href="https://wa.me/917488355129?text=Hello%20DigiCafe%2C%20please%20share%20latest%20ITR%2FGST%20documents%20checklist." target="_blank" rel="noopener">
+          Get Checklist
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Hero -->
   <header class="hero">
     <div class="container">
       <div class="hero-grid">
         <div class="hero-card">
           <span class="tag">Ensuring Compliance & Accuracy</span>
-          <h2>One-Stop Solution for<br/>Income Tax, GST & Business Services</h2>
+          <h2>DIGICAFE<br/>One-Stop Solution for Tax & Business Services</h2>
           <p class="sub">
-            Serving Individuals, Startups & MSMEs across India with fast processing, trusted guidance,
-            and WhatsApp support.
+            Serving Individuals, Startups & MSMEs across India — WhatsApp support, fast processing, trusted guidance.
           </p>
 
           <div class="chips" style="margin:14px 0 6px;">
@@ -449,10 +438,10 @@
           </div>
 
           <ul>
-            <li>✅ Genuine guidance & transparent process</li>
-            <li>✅ Quick checklist of required documents</li>
-            <li>✅ Suitable for salaried, business & professionals</li>
-            <li>✅ PAN India online service support</li>
+            <li>✅ Clear checklist & document guidance</li>
+            <li>✅ Form 26AS / AIS / TIS verification support</li>
+            <li>✅ GST reconciliation & ITC assistance</li>
+            <li>✅ PAN India online service</li>
           </ul>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
@@ -474,10 +463,10 @@
           </div>
 
           <div class="note">
-            <b>Note:</b> For security, payment details can be shared privately on WhatsApp after confirming service scope.
+            <b>Note:</b> Please do not share OTP publicly. Share documents only on verified WhatsApp/email.
           </div>
 
-          <a class="btn primary" href="https://wa.me/917488355129" target="_blank" rel="noopener">Get Free Checklist</a>
+          <a class="btn primary" href="https://wa.me/917488355129?text=Hello%20DigiCafe%2C%20I%20need%20help%20with%20ITR%20%2F%20GST%20services.%20Please%20guide%20me." target="_blank" rel="noopener">Start on WhatsApp</a>
           <a class="btn" href="#documents">See Required Docs</a>
         </aside>
       </div>
@@ -512,14 +501,14 @@
           <div class="chips">
             <span class="chip">GST Registration</span>
             <span class="chip">GSTR-1 / 3B</span>
-            <span class="chip">Annual Return</span>
+            <span class="chip">ITC Reco (2B)</span>
             <span class="chip">Notice Reply</span>
           </div>
         </div>
 
         <div class="card">
-          <h4>Business & Company</h4>
-          <p>Private Limited, LLP, proprietorship support with ROC compliances.</p>
+          <h4>Company & Business</h4>
+          <p>Pvt Ltd / LLP setup support and MCA compliances.</p>
           <div class="chips">
             <span class="chip">Pvt Ltd</span>
             <span class="chip">LLP</span>
@@ -561,15 +550,14 @@
     </div>
   </section>
 
-  <!-- ITR Pricing -->
+  <!-- ITR Pricing (TOTAL ONLY) -->
   <section id="itr-pricing">
     <div class="container">
       <div class="section-title">
         <div>
-          <h3>Income Tax Return (ITR) Filing – Pricing</h3>
-          <p>Fixed and transparent pricing. GST extra as applicable.</p>
+          <h3>Income Tax Return (ITR) Filing – Total Fees</h3>
+          <p>Only total fees shown (Digicafe + supervision included). GST extra as applicable.</p>
         </div>
-        <span class="tag warn">Fees are fixed & non-negotiable</span>
       </div>
 
       <div class="table-wrap" role="region" aria-label="ITR Pricing Table">
@@ -577,52 +565,36 @@
           <thead>
             <tr>
               <th>Applicability</th>
-              <th>Digicafe Cost (INR)</th>
-              <th>Supervision Fee (INR)</th>
-              <th>Estimated Total (INR)</th>
+              <th>Total Fees (INR)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Salaried individuals & pensioners (total income up to ₹50 lakh)</td>
-              <td class="price">₹3,999</td>
-              <td class="price">₹2,000</td>
               <td class="price">₹5,999</td>
             </tr>
             <tr>
               <td>Individuals & HUFs with capital gains / multiple house properties / foreign income</td>
-              <td class="price">₹4,999</td>
-              <td class="price">₹2,500</td>
               <td class="price">₹7,499</td>
             </tr>
             <tr>
-              <td>Professionals, freelancers, or individuals with business income</td>
-              <td class="price">₹6,999</td>
-              <td class="price">₹3,000</td>
+              <td>Professionals / freelancers / individuals with business income</td>
               <td class="price">₹9,999</td>
             </tr>
             <tr>
               <td>Presumptive scheme (44AD, 44ADA, 44AE) – Individuals/HUFs/Firms</td>
-              <td class="price">₹4,999</td>
-              <td class="price">₹2,000</td>
               <td class="price">₹6,999</td>
             </tr>
             <tr>
               <td>Partnership firms, LLPs, and AOPs</td>
-              <td class="price">₹8,999</td>
-              <td class="price">₹3,500</td>
               <td class="price">₹12,499</td>
             </tr>
             <tr>
               <td>Companies (other than those claiming exemption under Section 11)</td>
-              <td class="price">₹12,999</td>
-              <td class="price">₹4,000</td>
               <td class="price">₹16,999</td>
             </tr>
             <tr>
               <td>Trusts / political parties / NGOs (Sections 139(4A) to 139(4D))</td>
-              <td class="price">₹10,999</td>
-              <td class="price">₹3,500</td>
               <td class="price">₹14,499</td>
             </tr>
           </tbody>
@@ -635,13 +607,13 @@
     </div>
   </section>
 
-  <!-- Business Pricing -->
+  <!-- Business Pricing (TOTAL ONLY) -->
   <section id="business-pricing">
     <div class="container">
       <div class="section-title">
         <div>
-          <h3>Other Business & Tax Services – Pricing</h3>
-          <p>Quick, compliant and document-supported processing.</p>
+          <h3>Other Business & Tax Services – Total Fees</h3>
+          <p>Only total fees shown (Digicafe + supervision included).</p>
         </div>
       </div>
 
@@ -650,101 +622,118 @@
           <thead>
             <tr>
               <th>Service</th>
-              <th>Digicafe Cost (INR)</th>
-              <th>Supervision Fee (INR)</th>
               <th>Total Fees (INR)</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>PAN Registration</td>
-              <td class="price">₹1,999</td>
-              <td class="price">₹1,000</td>
-              <td class="price">₹2,999</td>
-            </tr>
-            <tr>
-              <td>TAN Registration</td>
-              <td class="price">₹2,499</td>
-              <td class="price">₹1,200</td>
-              <td class="price">₹3,699</td>
-            </tr>
-            <tr>
-              <td>GST Registration</td>
-              <td class="price">₹5,499</td>
-              <td class="price">₹2,500</td>
-              <td class="price">₹7,999</td>
-            </tr>
-            <tr>
-              <td>Private Limited Company Registration</td>
-              <td class="price">₹6,899</td>
-              <td class="price">₹2,999</td>
-              <td class="price">₹9,898</td>
-            </tr>
-            <tr>
-              <td>LLP Registration</td>
-              <td class="price">₹14,499</td>
-              <td class="price">₹3,500</td>
-              <td class="price">₹17,999</td>
-            </tr>
-            <tr>
-              <td>Director Appointment / Resignation</td>
-              <td class="price">₹5,500</td>
-              <td class="price">₹1,500</td>
-              <td class="price">₹7,000</td>
-            </tr>
-            <tr>
-              <td>Director KYC (DIR-3)</td>
-              <td class="price">₹3,000</td>
-              <td class="price">₹1,000</td>
-              <td class="price">₹4,000</td>
-            </tr>
-            <tr>
-              <td><b>Bookkeeping Services (Yearly)</b></td>
-              <td class="price">₹19,899</td>
-              <td class="price">—</td>
-              <td class="price">₹19,899</td>
-            </tr>
+            <tr><td>PAN Registration</td><td class="price">₹2,999</td></tr>
+            <tr><td>TAN Registration</td><td class="price">₹3,699</td></tr>
+            <tr><td>GST Registration</td><td class="price">₹7,999</td></tr>
+            <tr><td>Private Limited Company Registration</td><td class="price">₹9,898</td></tr>
+            <tr><td>LLP Registration</td><td class="price">₹17,999</td></tr>
+            <tr><td>Director Appointment / Resignation</td><td class="price">₹7,000</td></tr>
+            <tr><td>Director KYC (DIR-3)</td><td class="price">₹4,000</td></tr>
+            <tr><td><b>Bookkeeping Services (Yearly)</b></td><td class="price">₹19,899</td></tr>
           </tbody>
         </table>
       </div>
 
       <p class="small" style="margin-top:10px;">
-        Bookkeeping includes accounting software subscription, GST & ITC reconciliation, financial statements,
-        and MIS reporting.
+        Bookkeeping includes accounting software subscription, GST & ITC reconciliation, financial statements, and MIS reporting.
       </p>
     </div>
   </section>
 
-  <!-- Documents Required -->
+  <!-- Documents (Updated + Expanded) -->
   <section id="documents">
     <div class="container">
       <div class="section-title">
         <div>
-          <h3>Documents Required</h3>
-          <p>Keep these ready to ensure faster processing.</p>
+          <h3>Required Documents (Updated Checklists)</h3>
+          <p>Keep these ready for faster processing and fewer follow-ups.</p>
         </div>
       </div>
 
       <div class="two-col">
         <div class="card">
-          <h4>For ITR Filing</h4>
+          <h4>ITR Filing – Latest Checklist</h4>
           <ul class="list">
-            <li><b>Salaried:</b> Form 16, salary slips, bank statements, investment proofs, rent details</li>
-            <li><b>Business/Profession:</b> financial statements, bank statements, GST returns, TDS details</li>
-            <li><b>Capital Gains:</b> stock statements, sale deeds, capital gain calculations</li>
-            <li><b>Companies/Firms:</b> balance sheet, P&L, tax audit report (if applicable)</li>
+            <li><b>Basic:</b> PAN, Aadhaar, mobile/email, bank account details (IFSC)</li>
+            <li><b>Income:</b> Form 16 (salary), salary slips, pension statement, interest certificates (FD/SB)</li>
+            <li><b>Mandatory verification:</b> Form 26AS + AIS + TIS (for TDS, income & reporting match)</li>
+            <li><b>Bank:</b> bank statements (all accounts) for the FY</li>
+            <li><b>Deductions:</b> LIC/PPF/ELSS, mediclaim (80D), donations (80G), education loan interest (80E), etc.</li>
+            <li><b>House property:</b> rent received/paid, home loan interest certificate, municipal tax receipts</li>
+            <li><b>Capital gains:</b> stock/MF statement, contract notes, property sale/purchase deed & dates</li>
+            <li><b>Business/Profession:</b> P&L/Balance Sheet, GST returns, TDS details, expense proofs (as needed)</li>
+            <li><b>Foreign income/assets:</b> details if applicable</li>
+          </ul>
+          <p class="small">Tip: If AIS has wrong entries, feedback can be submitted before final filing.</p>
+        </div>
+
+        <div class="card">
+          <h4>GST – Registration + Returns</h4>
+          <ul class="list">
+            <li><b>Registration:</b> PAN, Aadhaar, photo, mobile/email, bank proof, address proof (electricity bill/lease/NOC)</li>
+            <li><b>Returns:</b> sales invoices, purchase invoices, credit/debit notes, e-invoice/e-way bill details (if applicable)</li>
+            <li><b>ITC control:</b> GSTR-2B matching + purchase register reconciliation</li>
+            <li><b>Payments:</b> challans, RCM details (if applicable)</li>
+            <li><b>Important:</b> From July 2025, GSTR-3B outward liability is system-locked; corrections via GSTR-1A before filing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top:14px;">
+        <div class="card">
+          <h4>Class 3 DSC – Documents</h4>
+          <ul class="list">
+            <li><b>Individual DSC:</b> PAN, Aadhaar Offline XML, photo, mobile number, email</li>
+            <li><b>Organisation DSC (if applicable):</b> authorization/organisation proof + signatory PAN/Aadhaar + address proof</li>
+            <li><b>Note:</b> Token support available (if required)</li>
           </ul>
         </div>
 
         <div class="card">
-          <h4>Common Document Checklists</h4>
+          <h4>MCA / Director Compliance (DIR-3 KYC)</h4>
           <ul class="list">
-            <li><b>PAN:</b> photo & signature, Aadhaar, mobile (Aadhaar-linked), email</li>
-            <li><b>Driving Licence:</b> photo & signature, Aadhaar, mobile/email, PAN, blood group, 10th proof</li>
-            <li><b>Digital Signature (DSC):</b> photo & signature, PAN, Aadhaar (XML), mobile & email</li>
-            <li><b>IRCTC e-ticket:</b> Aadhaar (XML), mobile & email</li>
+            <li>DIN details, PAN, Aadhaar, email & mobile (OTP verification)</li>
+            <li>Any required address proof as per MCA filing</li>
+            <li><b>Update:</b> Effective 31 March 2026, Director KYC compliance moved to once in 3 years (instead of annual)</li>
           </ul>
-          <p class="small">Document submission can be done via WhatsApp or email based on your preference.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner With Us -->
+  <section id="partner">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Partner With DigiCafe</h3>
+          <p>For CA/CS/Advocates/Tax Practitioners — expand services, deliver faster, earn more.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h4>What You Get</h4>
+          <ul class="list">
+            <li>✅ Back-end support for ITR / GST / DSC / Registrations</li>
+            <li>✅ Standard process + checklist system</li>
+            <li>✅ Faster turnaround & tracking support</li>
+            <li>✅ Suitable for referrals and outsourcing</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Start Partnership</h4>
+          <p>Message us on WhatsApp. We’ll share partner onboarding details and the latest service sheet.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+            <a class="btn primary" href="https://wa.me/917488355129?text=Hello%20DigiCafe%2C%20I%20want%20to%20partner%20with%20you.%20Please%20share%20details." target="_blank" rel="noopener">WhatsApp Now</a>
+            <a class="btn" href="mailto:vikashpathak.mgmt@gmail.com">Email</a>
+          </div>
+          <p class="small" style="margin-top:10px;">Owner: Vikash Pathak • WhatsApp: 7488355129</p>
         </div>
       </div>
     </div>
@@ -812,8 +801,8 @@
           </div>
 
           <div class="field" style="grid-column:1/-1;">
-            <label for="message">Notes (PAN/GSTIN details optional)</label>
-            <textarea id="message" name="message" placeholder="Write briefly: income type, GSTIN (if any), due date, notices, etc."></textarea>
+            <label for="message">Notes (PAN/GSTIN optional)</label>
+            <textarea id="message" name="message" placeholder="Write briefly: income type, GSTIN (if any), due date, notice details, etc."></textarea>
           </div>
 
           <div class="form-actions">
@@ -849,22 +838,20 @@
             <a class="btn" href="mailto:vikashpathak.mgmt@gmail.com">Email Us</a>
           </div>
 
-          <p class="small" style="margin-top:10px;">
-            Tip: Keep PAN, Aadhaar, bank statement and income details ready for faster work.
-          </p>
+          <p class="small" style="margin-top:10px;">Tip: Keep PAN, Aadhaar, bank statement and income details ready for faster work.</p>
         </div>
 
         <div class="card">
           <h4>Why DigiCafe?</h4>
           <ul class="list">
-            <li>✅ Transparent pricing & proper document checklist</li>
+            <li>✅ Transparent pricing (total fees shown)</li>
             <li>✅ Quick WhatsApp support</li>
             <li>✅ Services for salaried, business, professionals & MSMEs</li>
             <li>✅ PAN India online processing</li>
           </ul>
 
           <div class="note" style="margin-top:10px;">
-            <b>Important:</b> Please do not share OTPs publicly. Share documents only on verified WhatsApp or email.
+            <b>Important:</b> Never share OTP or passwords. We will ask only for required documents.
           </div>
         </div>
       </div>
@@ -875,18 +862,18 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div class="foot">
+        <div>
           <h3 style="margin:0 0 8px;">DigiCafe Services</h3>
-          <p>Our Service, Your Solutions.</p>
+          <p class="small" style="margin:6px 0; color: rgba(238,241,255,.72);">Our Service, Your Solutions.</p>
           <p class="small">© <span id="year"></span> DigiCafe. All rights reserved.</p>
         </div>
-        <div class="foot">
-          <p><b>WhatsApp:</b> <a href="https://wa.me/917488355129" target="_blank" rel="noopener">+91 7488355129</a></p>
-          <p><b>Email:</b> <a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
+        <div>
+          <p class="small" style="margin:6px 0;"><b>WhatsApp:</b> <a href="https://wa.me/917488355129" target="_blank" rel="noopener">+91 7488355129</a></p>
+          <p class="small" style="margin:6px 0;"><b>Email:</b> <a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
           <div class="links" style="margin-top:10px;">
             <a class="btn" href="#services">Services</a>
             <a class="btn" href="#itr-pricing">Pricing</a>
-            <a class="btn primary" href="https://wa.me/917488355129" target="_blank" rel="noopener">Get Quote</a>
+            <a class="btn primary" href="https://wa.me/917488355129?text=Hello%20DigiCafe%2C%20I%20need%20a%20quote%20for%20services." target="_blank" rel="noopener">Get Quote</a>
           </div>
         </div>
       </div>
@@ -902,15 +889,14 @@
   </div>
 
   <script>
-    // Update year
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Send form details to WhatsApp
     const leadForm = document.getElementById("leadForm");
     leadForm.addEventListener("submit", function(e){
       e.preventDefault();
-
       const data = new FormData(leadForm);
+
       const msg =
 `Hello DigiCafe,
 I want to enquire for: ${data.get("service")}
@@ -922,7 +908,7 @@ Financial Year: ${data.get("fy") || "-"}
 Business Type: ${data.get("businessType") || "-"}
 Notes: ${data.get("message") || "-"}
 
-Please guide me with next steps & document list.`;
+Please guide me with next steps & latest document list.`;
 
       const wa = "https://wa.me/917488355129?text=" + encodeURIComponent(msg);
       window.open(wa, "_blank");
@@ -930,3 +916,5 @@ Please guide me with next steps & document list.`;
   </script>
 </body>
 </html>
+```0
+
