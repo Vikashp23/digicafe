@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DigiCafe Services — Our Service, Your Solution. Income Tax, GST, Business Registration, DSC, Trademark, Bookkeeping." />
+  <meta name="description" content="DigiCafe Services — Our Service, Your Solution. Income Tax, GST, Business Registration, DSC, Trademark, Bookkeeping. Student Corner: Bihar/Jharkhand/Karnataka." />
   <title>DigiCafe Services | Our Service, Your Solution</title>
 
   <style>
     :root{
       --bg:#0b1020;
-      --card:#101a34;
-      --soft:#1a2852;
       --text:#eef1ff;
       --muted:rgba(238,241,255,.74);
       --line:rgba(255,255,255,.12);
@@ -48,7 +46,7 @@
       display:flex; align-items:center; justify-content:space-between;
       padding:14px 0; gap:14px;
     }
-    .brand{display:flex; align-items:center; gap:12px; min-width:220px}
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
     .logo{
       width:38px; height:38px; border-radius:12px;
       background: linear-gradient(135deg, rgba(94,234,212,.9), rgba(96,165,250,.9));
@@ -56,6 +54,7 @@
     }
     .brand h1{font-size:16px; margin:0; letter-spacing:.6px}
     .brand p{margin:2px 0 0; font-size:12px; color: rgba(238,241,255,.72)}
+
     nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
     nav a{
       font-size:13px;
@@ -282,7 +281,6 @@
     .list{margin:0; padding-left:18px; color: rgba(238,241,255,.84); font-size:13px}
     .list li{margin:8px 0}
 
-    /* Form */
     .form{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
     .field{display:flex; flex-direction:column; gap:6px}
     .field label{font-size:12px; color: rgba(238,241,255,.78)}
@@ -303,7 +301,6 @@
       padding-top:4px;
     }
 
-    /* Footer */
     footer{
       padding:28px 0 54px;
       border-top:1px solid var(--line);
@@ -318,7 +315,6 @@
     }
     .links{display:flex; gap:10px; flex-wrap:wrap}
 
-    /* WhatsApp floating */
     .wa-float{
       position:fixed; right:16px; bottom:16px; z-index:80;
       display:flex; flex-direction:column; gap:10px; align-items:flex-end;
@@ -352,11 +348,11 @@
 </head>
 
 <body>
+  <!-- CONSTANT -->
+  <!-- WhatsApp Group Link -->
+  <!-- https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p -->
 
-  <!-- WhatsApp group link constant -->
-  <!-- Replace everywhere with this group link -->
-  <!-- Group link: https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p -->
-
+  <!-- TOP BAR -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-inner">
@@ -373,8 +369,11 @@
           <a href="#itr-pricing">ITR Fees</a>
           <a href="#business-pricing">Business Fees</a>
           <a href="#documents">Documents</a>
-          <a href="#news">Student Corner</a>
-          <a href="#partner">Partner With Us</a>
+          <a href="#students">Student Corner</a>
+          <a href="#student-bihar">Bihar</a>
+          <a href="#student-jharkhand">Jharkhand</a>
+          <a href="#student-karnataka">Karnataka</a>
+          <a href="#partner">Partner</a>
           <a href="#client-form">Client Form</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -387,22 +386,23 @@
     </div>
   </div>
 
+  <!-- TICKER -->
   <div class="updates" aria-label="Latest Updates">
     <div class="container">
       <div class="updates-inner">
         <span class="badge">🔔 Latest Updates</span>
 
-        <div class="ticker" role="region" aria-label="Compliance Updates Ticker">
+        <div class="ticker" role="region" aria-label="Updates Ticker">
           <div class="ticker-track">
-            <span>✅ ITR filing: match Form 26AS + AIS + TIS before filing for smoother processing <span class="dot"></span></span>
-            <span>✅ GST: keep invoice & ITC (2B) reconciliation updated to avoid mismatches <span class="dot"></span></span>
-            <span>✅ MCA: Director KYC / DIN compliance support available <span class="dot"></span></span>
-            <span>✅ Student Corner: Bihar • Jharkhand • Karnataka policy + govt vacancies with clickable links <span class="dot"></span></span>
+            <span>✅ ITR: Match Form 26AS + AIS + TIS before filing <span class="dot"></span></span>
+            <span>✅ GST: Keep GSTR-2B reconciliation updated <span class="dot"></span></span>
+            <span>✅ MCA: Director KYC / DIN support available <span class="dot"></span></span>
+            <span>✅ Student Corner: Bihar • Jharkhand • Karnataka Jobs/Admit/Result/College Links <span class="dot"></span></span>
 
-            <span>✅ ITR filing: match Form 26AS + AIS + TIS before filing for smoother processing <span class="dot"></span></span>
-            <span>✅ GST: keep invoice & ITC (2B) reconciliation updated to avoid mismatches <span class="dot"></span></span>
-            <span>✅ MCA: Director KYC / DIN compliance support available <span class="dot"></span></span>
-            <span>✅ Student Corner: Bihar • Jharkhand • Karnataka policy + govt vacancies with clickable links <span class="dot"></span></span>
+            <span>✅ ITR: Match Form 26AS + AIS + TIS before filing <span class="dot"></span></span>
+            <span>✅ GST: Keep GSTR-2B reconciliation updated <span class="dot"></span></span>
+            <span>✅ MCA: Director KYC / DIN support available <span class="dot"></span></span>
+            <span>✅ Student Corner: Bihar • Jharkhand • Karnataka Jobs/Admit/Result/College Links <span class="dot"></span></span>
           </div>
         </div>
 
@@ -413,6 +413,7 @@
     </div>
   </div>
 
+  <!-- HERO -->
   <header class="hero">
     <div class="container">
       <div class="hero-grid">
@@ -422,7 +423,7 @@
           <p class="tagline">Our Service, Your Solution</p>
           <p class="sub">
             One-stop solution for Income Tax, GST, Business Registration & Compliance services.
-            Serving Individuals, Startups & MSMEs across India with fast processing and support.
+            Serving Individuals, Startups & MSMEs across India.
           </p>
 
           <div class="chips" style="margin:14px 0 6px;">
@@ -438,19 +439,19 @@
             <li>✅ Transparent fees (total shown)</li>
             <li>✅ Proper document checklist</li>
             <li>✅ Fast processing & guidance</li>
-            <li>✅ PAN India online service</li>
+            <li>✅ Student Corner for jobs/admit/results</li>
           </ul>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
             <a class="btn primary" href="#client-form">Fill Client Form</a>
             <a class="btn" href="#itr-pricing">View Fees</a>
-            <a class="btn" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join Group</a>
+            <a class="btn" href="#students">Student Corner</a>
           </div>
         </div>
 
         <aside class="quick-card">
           <h3>Quick Contact</h3>
-          <p>For updates & discussions, join our WhatsApp group.</p>
+          <p>For updates & student/job alerts, join our WhatsApp group.</p>
 
           <div class="kv">
             <div><b>Owner</b></div><div>Vikash Pathak</div>
@@ -459,16 +460,20 @@
           </div>
 
           <div class="note">
-            <b>Note:</b> For service requests, please fill the client form below and then join the group.
+            <b>How to get quick response:</b><br/>
+            1) Fill Client Form<br/>
+            2) Join WhatsApp Group<br/>
+            3) Post “SERVICE REQUEST”
           </div>
 
           <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
-          <a class="btn" href="#client-form">Fill Client Form</a>
+          <a class="btn" href="#services">View Services</a>
         </aside>
       </div>
     </div>
   </header>
 
+  <!-- SERVICES -->
   <section id="services">
     <div class="container">
       <div class="section-title">
@@ -545,12 +550,13 @@
     </div>
   </section>
 
+  <!-- ITR PRICING -->
   <section id="itr-pricing">
     <div class="container">
       <div class="section-title">
         <div>
           <h3>ITR Filing — Total Fees</h3>
-          <p>Only total fees shown. GST extra as applicable.</p>
+          <p>Only total fees shown (Digicafe + supervision included). GST extra as applicable.</p>
         </div>
       </div>
 
@@ -573,18 +579,20 @@
           </tbody>
         </table>
       </div>
+
       <p class="small" style="margin-top:10px;">
         Additional charges may apply for complex cases, late filings, audits, amendments, or extensive reconciliations.
       </p>
     </div>
   </section>
 
+  <!-- BUSINESS PRICING -->
   <section id="business-pricing">
     <div class="container">
       <div class="section-title">
         <div>
           <h3>Business & Tax Services — Total Fees</h3>
-          <p>Only total fees shown.</p>
+          <p>Only total fees shown (Digicafe + supervision included).</p>
         </div>
       </div>
 
@@ -611,6 +619,7 @@
     </div>
   </section>
 
+  <!-- DOCUMENTS -->
   <section id="documents">
     <div class="container">
       <div class="section-title">
@@ -618,7 +627,7 @@
           <h3>Required Documents</h3>
           <p>Keep these ready for faster processing.</p>
         </div>
-        <a class="btn" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join Group for Checklist</a>
+        <a class="btn" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join Group for Updates</a>
       </div>
 
       <div class="two-col">
@@ -644,40 +653,310 @@
             <li><b>ITC:</b> GSTR-2B matching + purchase register reconciliation</li>
             <li><b>Payments:</b> challans, RCM details (if applicable)</li>
           </ul>
+          <p class="small">Tip: Maintain clean invoice data + 2B matching for smoother GST compliance.</p>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top:14px;">
+        <div class="card">
+          <h4>Class 3 DSC — Documents</h4>
+          <ul class="list">
+            <li><b>Individual:</b> PAN, Aadhaar Offline XML, photo, mobile number, email</li>
+            <li><b>Organisation (if applicable):</b> authorization/organisation proof + signatory KYC</li>
+            <li><b>Support:</b> Token support available if required</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Common Quick Checklists</h4>
+          <ul class="list">
+            <li><b>PAN:</b> photo & signature, Aadhaar, mobile (Aadhaar-linked), email</li>
+            <li><b>Driving Licence:</b> photo/sign, Aadhaar, PAN, blood group proof, 10th proof</li>
+            <li><b>IRCTC e-ticket:</b> Aadhaar (XML), mobile & email</li>
+            <li><b>MCA/DIN:</b> DIN, PAN, Aadhaar, email/mobile (OTP)</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="news">
+  <!-- STUDENT CORNER (STATE-WISE PAGES + COLLEGE SEARCH BUTTONS) -->
+  <section id="students">
     <div class="container">
       <div class="section-title">
         <div>
-          <h3>Student Corner: News & Opportunities</h3>
-          <p>Policy updates + job/vacancy alerts (Bihar • Jharkhand • Karnataka). Click to open links.</p>
+          <h3>Student Corner (State-wise)</h3>
+          <p>Jobs • College/Admissions • Results • Admit Card • Scholarships (Bihar / Jharkhand / Karnataka).</p>
         </div>
         <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">
-          Join Group for Alerts
+          Join WhatsApp Group (Updates)
         </a>
       </div>
 
       <div class="card">
-        <h4>📌 Student Support</h4>
-        <p class="small">Students can join the group and ask about forms, documents, and latest vacancies.</p>
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+        <h4>Choose Your State</h4>
+        <p class="small">Click your state to open dedicated links.</p>
+        <div class="links" style="margin-top:10px;">
+          <a class="btn primary" href="#student-bihar">Bihar</a>
+          <a class="btn primary" href="#student-jharkhand">Jharkhand</a>
+          <a class="btn primary" href="#student-karnataka">Karnataka</a>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px;">
+        <h4>🇮🇳 All-India Quick Links (Common)</h4>
+        <p class="small">Useful for every student.</p>
+        <div class="links" style="margin-top:10px;">
+          <a class="btn" href="https://www.ncs.gov.in/" target="_blank" rel="noopener">NCS Job Portal</a>
+          <a class="btn" href="https://ssc.nic.in/" target="_blank" rel="noopener">SSC</a>
+          <a class="btn" href="https://www.upsc.gov.in/" target="_blank" rel="noopener">UPSC</a>
+          <a class="btn" href="https://www.rrbcdg.gov.in/" target="_blank" rel="noopener">Railway (RRB)</a>
+          <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA</a>
+          <a class="btn" href="https://results.gov.in/" target="_blank" rel="noopener">results.gov.in</a>
+          <a class="btn" href="https://scholarships.gov.in/" target="_blank" rel="noopener">NSP Scholarships</a>
+          <a class="btn" href="https://nad.digilocker.gov.in/" target="_blank" rel="noopener">DigiLocker / NAD</a>
+          <a class="btn" href="https://uidai.gov.in/" target="_blank" rel="noopener">Aadhaar (UIDAI)</a>
+        </div>
+
+        <div class="note" style="margin-top:10px;">
+          Need help? Join the group and post <b>STUDENT HELP</b> with your state + requirement.
+        </div>
+      </div>
+
+      <!-- ===== BIHAR ===== -->
+      <div id="student-bihar" class="card" style="margin-top:14px;">
+        <div class="section-title" style="margin-bottom:10px;">
+          <div>
+            <h3 style="margin:0;">📍 Bihar Student Page</h3>
+            <p style="margin:0;" class="small">Jobs • Admissions • Results • Admit Card • Scholarships</p>
+          </div>
+          <a class="btn" href="#students">Back</a>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h4>🏛️ Bihar Govt Jobs</h4>
+            <p>Official recruitment portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://www.bpsc.bih.nic.in/" target="_blank" rel="noopener">BPSC</a>
+              <a class="btn" href="https://bceceboard.bihar.gov.in/" target="_blank" rel="noopener">BCECEB</a>
+              <a class="btn" href="https://csbc.bih.nic.in/" target="_blank" rel="noopener">CSBC (Police)</a>
+              <a class="btn" href="https://state.bihar.gov.in/" target="_blank" rel="noopener">Bihar Govt Portal</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🎓 Bihar Admissions / Counselling</h4>
+            <p>Important portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://bceceboard.bihar.gov.in/" target="_blank" rel="noopener">BCECEB Counselling</a>
+              <a class="btn" href="https://education.bihar.gov.in/" target="_blank" rel="noopener">Bihar Education Dept</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>📄 Bihar Results</h4>
+            <p>Boards/university results.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://secondary.biharboardonline.com/" target="_blank" rel="noopener">BSEB (10th/12th)</a>
+              <a class="btn" href="https://results.gov.in/" target="_blank" rel="noopener">results.gov.in</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🪪 Bihar Admit Card</h4>
+            <p>Admit card portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://www.bpsc.bih.nic.in/" target="_blank" rel="noopener">BPSC Admit</a>
+              <a class="btn" href="https://csbc.bih.nic.in/" target="_blank" rel="noopener">CSBC Admit</a>
+              <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA Admit</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🎯 Bihar Scholarships</h4>
+            <p>Scholarship portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://scholarships.gov.in/" target="_blank" rel="noopener">NSP (National)</a>
+              <a class="btn" href="https://state.bihar.gov.in/" target="_blank" rel="noopener">Bihar Govt Portal</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🏫 Search Bihar College Website</h4>
+            <p>Find official college websites only.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn primary" href="https://www.google.com/search?q=official+college+website+in+Bihar" target="_blank" rel="noopener">Search Bihar Colleges</a>
+            </div>
+            <div class="note" style="margin-top:10px;">
+              Tip: Prefer websites ending with <b>.gov.in</b> / <b>.ac.in</b> for authenticity.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== JHARKHAND ===== -->
+      <div id="student-jharkhand" class="card" style="margin-top:14px;">
+        <div class="section-title" style="margin-bottom:10px;">
+          <div>
+            <h3 style="margin:0;">📍 Jharkhand Student Page</h3>
+            <p style="margin:0;" class="small">Jobs • Admissions • Results • Admit Card • Scholarships</p>
+          </div>
+          <a class="btn" href="#students">Back</a>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h4>🏛️ Jharkhand Govt Jobs</h4>
+            <p>Official recruitment portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://jpsc.gov.in/" target="_blank" rel="noopener">JPSC</a>
+              <a class="btn" href="https://jssc.nic.in/" target="_blank" rel="noopener">JSSC</a>
+              <a class="btn" href="https://jceceb.jharkhand.gov.in/" target="_blank" rel="noopener">JCECEB</a>
+              <a class="btn" href="https://www.jharkhand.gov.in/" target="_blank" rel="noopener">Jharkhand Govt Portal</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🎓 Jharkhand Admissions / Counselling</h4>
+            <p>Important portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://jceceb.jharkhand.gov.in/" target="_blank" rel="noopener">JCECEB Counselling</a>
+              <a class="btn" href="https://jac.jharkhand.gov.in/" target="_blank" rel="noopener">JAC Board</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>📄 Jharkhand Results</h4>
+            <p>Board/university results.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://jac.jharkhand.gov.in/" target="_blank" rel="noopener">JAC Official</a>
+              <a class="btn" href="https://results.gov.in/" target="_blank" rel="noopener">results.gov.in</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🪪 Jharkhand Admit Card</h4>
+            <p>Admit card portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://jpsc.gov.in/" target="_blank" rel="noopener">JPSC Admit</a>
+              <a class="btn" href="https://jssc.nic.in/" target="_blank" rel="noopener">JSSC Admit</a>
+              <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA Admit</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🎯 Jharkhand Scholarships</h4>
+            <p>Scholarship portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://scholarships.gov.in/" target="_blank" rel="noopener">NSP (National)</a>
+              <a class="btn" href="https://ekalyan.cgg.gov.in/" target="_blank" rel="noopener">e-Kalyan (JH)</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🏫 Search Jharkhand College Website</h4>
+            <p>Find official college websites only.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn primary" href="https://www.google.com/search?q=official+college+website+in+Jharkhand" target="_blank" rel="noopener">Search Jharkhand Colleges</a>
+            </div>
+            <div class="note" style="margin-top:10px;">
+              Tip: Prefer websites ending with <b>.gov.in</b> / <b>.ac.in</b> for authenticity.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== KARNATAKA ===== -->
+      <div id="student-karnataka" class="card" style="margin-top:14px;">
+        <div class="section-title" style="margin-bottom:10px;">
+          <div>
+            <h3 style="margin:0;">📍 Karnataka Student Page</h3>
+            <p style="margin:0;" class="small">Jobs • Admissions • Results • Admit Card • Scholarships</p>
+          </div>
+          <a class="btn" href="#students">Back</a>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h4>🏛️ Karnataka Govt Jobs</h4>
+            <p>Official recruitment portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://kpsc.kar.nic.in/" target="_blank" rel="noopener">KPSC</a>
+              <a class="btn" href="https://cetonline.karnataka.gov.in/kea/" target="_blank" rel="noopener">KEA</a>
+              <a class="btn" href="https://www.karnataka.gov.in/" target="_blank" rel="noopener">Karnataka Govt Portal</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🎓 Karnataka Admissions / Counselling</h4>
+            <p>Important portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://cetonline.karnataka.gov.in/kea/" target="_blank" rel="noopener">KEA Counselling</a>
+              <a class="btn" href="https://www.ugc.gov.in/" target="_blank" rel="noopener">UGC</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>📄 Karnataka Results</h4>
+            <p>Board/university results.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://kseab.karnataka.gov.in/" target="_blank" rel="noopener">KSEAB (SSLC/PUC)</a>
+              <a class="btn" href="https://results.gov.in/" target="_blank" rel="noopener">results.gov.in</a>
+              <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA Results</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🪪 Karnataka Admit Card</h4>
+            <p>Admit card portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://kpsc.kar.nic.in/" target="_blank" rel="noopener">KPSC Admit</a>
+              <a class="btn" href="https://cetonline.karnataka.gov.in/kea/" target="_blank" rel="noopener">KEA Admit</a>
+              <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA Admit</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🎯 Karnataka Scholarships</h4>
+            <p>Scholarship portals.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn" href="https://scholarships.gov.in/" target="_blank" rel="noopener">NSP (National)</a>
+              <a class="btn" href="https://ssp.postmatric.karnataka.gov.in/" target="_blank" rel="noopener">SSP Karnataka</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>🏫 Search Karnataka College Website</h4>
+            <p>Find official college websites only.</p>
+            <div class="links" style="margin-top:10px;">
+              <a class="btn primary" href="https://www.google.com/search?q=official+college+website+in+Karnataka" target="_blank" rel="noopener">Search Karnataka Colleges</a>
+            </div>
+            <div class="note" style="margin-top:10px;">
+              Tip: Prefer websites ending with <b>.gov.in</b> / <b>.ac.in</b> for authenticity.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px;">
+        <h4>✅ DigiCafe Student Help</h4>
+        <p class="small">We assist in: online form fill, document upload, correction, payment issues, print/scan guidance (as per availability).</p>
+        <div class="links" style="margin-top:10px;">
           <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
-          <a class="btn" href="#client-form">Fill Student / Service Form</a>
+          <a class="btn" href="#client-form">Submit Request Form</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- PARTNER -->
   <section id="partner">
     <div class="container">
       <div class="section-title">
         <div>
           <h3>Partner With DigiCafe</h3>
-          <p>For CA/CS/Advocates/Tax Practitioners — expand services, deliver faster, earn more.</p>
+          <p>For CA/CS/Advocates/Tax Practitioners — expand services, deliver faster.</p>
         </div>
       </div>
 
@@ -694,8 +973,8 @@
 
         <div class="card">
           <h4>Start Partnership</h4>
-          <p>Join our WhatsApp group and message “PARTNER” in the group.</p>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+          <p>Join WhatsApp group and post: <b>PARTNER</b></p>
+          <div class="links" style="margin-top:10px;">
             <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
             <a class="btn" href="mailto:vikashpathak.mgmt@gmail.com">Email</a>
           </div>
@@ -705,40 +984,37 @@
     </div>
   </section>
 
+  <!-- CLIENT FORM -->
   <section id="client-form">
     <div class="container">
       <div class="section-title">
         <div>
           <h3>DigiCafe Client Information Form</h3>
-          <p>Fill your details and then join WhatsApp group for faster response.</p>
+          <p>Fill details and then join WhatsApp group for faster response.</p>
         </div>
       </div>
 
       <div class="card">
-        <form class="form" id="leadForm">
+        <form class="form">
           <div class="field">
-            <label for="fullname">Full Name</label>
-            <input id="fullname" name="fullname" placeholder="Your full name" required />
+            <label>Full Name</label>
+            <input placeholder="Your full name" />
           </div>
-
           <div class="field">
-            <label for="mobile">Mobile Number</label>
-            <input id="mobile" name="mobile" placeholder="10-digit number" required />
+            <label>Mobile Number</label>
+            <input placeholder="10-digit number" />
           </div>
-
           <div class="field">
-            <label for="email">Email (optional)</label>
-            <input id="email" name="email" placeholder="you@example.com" />
+            <label>Email (optional)</label>
+            <input placeholder="you@example.com" />
           </div>
-
           <div class="field">
-            <label for="fy">Financial Year</label>
-            <input id="fy" name="fy" placeholder="e.g., 2025-26" />
+            <label>Financial Year</label>
+            <input placeholder="e.g., 2025-26" />
           </div>
-
           <div class="field">
-            <label for="service">Service Needed</label>
-            <select id="service" name="service" required>
+            <label>Service Needed</label>
+            <select>
               <option value="">Select</option>
               <option>ITR Filing</option>
               <option>GST Registration</option>
@@ -753,10 +1029,9 @@
               <option>Other</option>
             </select>
           </div>
-
           <div class="field">
-            <label for="businessType">Type of Business (optional)</label>
-            <select id="businessType" name="businessType">
+            <label>Type of Business (optional)</label>
+            <select>
               <option value="">Select</option>
               <option>Sole Proprietor</option>
               <option>Partnership</option>
@@ -767,13 +1042,13 @@
           </div>
 
           <div class="field" style="grid-column:1/-1;">
-            <label for="message">Notes</label>
-            <textarea id="message" name="message" placeholder="Write briefly: income type, GSTIN (if any), due date, notice details, etc."></textarea>
+            <label>Notes</label>
+            <textarea placeholder="Write briefly: income type, GSTIN (if any), due date, notice details, etc."></textarea>
           </div>
 
           <div class="form-actions">
             <span class="small">
-              Note: WhatsApp group invite link can’t auto-send your form message. After joining the group, please post “SERVICE REQUEST” and we’ll respond.
+              Note: Group invite link can’t auto-send your form message. After joining the group, post “SERVICE REQUEST” with your name & service.
             </span>
             <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
           </div>
@@ -782,6 +1057,7 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="section-title">
@@ -808,21 +1084,22 @@
         </div>
 
         <div class="card">
-          <h4>How to get quick response?</h4>
+          <h4>Quick Response Steps</h4>
           <ul class="list">
-            <li>1) Fill the client form</li>
-            <li>2) Join WhatsApp group</li>
+            <li>1) Fill the Client Form</li>
+            <li>2) Join WhatsApp Group</li>
             <li>3) Post “SERVICE REQUEST” with your name & service</li>
           </ul>
 
           <div class="note" style="margin-top:10px;">
-            <b>Important:</b> Never share OTP or passwords. We will ask only for required documents.
+            <b>Important:</b> Never share OTP or passwords publicly.
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -835,7 +1112,7 @@
           <p class="small" style="margin:6px 0;"><b>Email:</b> <a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
           <div class="links" style="margin-top:10px;">
             <a class="btn" href="#services">Services</a>
-            <a class="btn" href="#client-form">Client Form</a>
+            <a class="btn" href="#students">Student Corner</a>
             <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
           </div>
         </div>
@@ -843,7 +1120,7 @@
     </div>
   </footer>
 
-  <!-- Floating WhatsApp Group Button -->
+  <!-- Floating Group Button -->
   <div class="wa-float" aria-label="WhatsApp floating button">
     <a class="wa-btn" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">
       <span class="wa-dot" aria-hidden="true"></span>
