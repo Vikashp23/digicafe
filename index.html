@@ -3,79 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DigiCafe Services — Our Service, Your Solution. Income Tax, GST, Business Registration, DSC, Trademark, Bookkeeping. Student Corner: Bihar/Jharkhand/Karnataka." />
-  <title>DigiCafe Services | Our Service, Your Solution</title>
+  <meta name="description" content="Vikash Pathak — Senior Executive (Accounts & Reconciliation) | R2R | Reconciliations | Month-End Close" />
+  <title>Vikash Pathak | Portfolio</title>
+
+  <!-- Open Graph (nice preview when shared on WhatsApp/LinkedIn) -->
+  <meta property="og:title" content="Vikash Pathak | Portfolio" />
+  <meta property="og:description" content="Senior Executive (Accounts & Reconciliation) • R2R • Reconciliations • Month-End Close" />
+  <meta property="og:type" content="website" />
 
   <style>
     :root{
       --bg:#0b1020;
       --text:#eef1ff;
-      --muted:rgba(238,241,255,.74);
+      --muted:rgba(238,241,255,.72);
       --line:rgba(255,255,255,.12);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-      --ok:#34d399;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+      --radius:18px;
       --accentA: rgba(94,234,212,.18);
-      --accentB: rgba(96,165,250,.12);
+      --accentB: rgba(96,165,250,.14);
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.28), transparent 60%),
+        radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.26), transparent 60%),
         radial-gradient(900px 500px at 80% 0%, rgba(94,234,212,.18), transparent 55%),
         radial-gradient(900px 600px at 50% 110%, rgba(251,191,36,.10), transparent 55%),
         var(--bg);
-      color: var(--text);
-      line-height:1.45;
+      color:var(--text);
+      line-height:1.5;
     }
-
     a{color:inherit; text-decoration:none}
-    .container{max-width:1140px; margin:0 auto; padding:0 18px}
+    .container{max-width:1100px; margin:0 auto; padding:0 18px}
 
     .topbar{
       position:sticky; top:0; z-index:50;
-      background: rgba(11,16,32,.80);
+      background: rgba(11,16,32,.82);
       backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
     .topbar-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:14px;
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      flex-wrap:wrap;
     }
-    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
-    .logo{
-      width:38px; height:38px; border-radius:12px;
+    .brand{display:flex; align-items:center; gap:12px}
+    .avatar-mini{
+      width:40px; height:40px; border-radius:14px;
       background: linear-gradient(135deg, rgba(94,234,212,.9), rgba(96,165,250,.9));
-      box-shadow: 0 10px 25px rgba(96,165,250,.22);
+      box-shadow: 0 14px 34px rgba(96,165,250,.22);
     }
-    .brand h1{font-size:16px; margin:0; letter-spacing:.6px}
-    .brand p{margin:2px 0 0; font-size:12px; color: rgba(238,241,255,.72)}
-
-    nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+    .brand h1{margin:0; font-size:16px; letter-spacing:.4px}
+    .brand p{margin:2px 0 0; font-size:12px; color: rgba(238,241,255,.70)}
+    nav{display:flex; gap:8px; flex-wrap:wrap}
     nav a{
       font-size:13px;
       padding:8px 10px;
-      border:1px solid transparent;
       border-radius:12px;
+      border:1px solid transparent;
       color: rgba(238,241,255,.88);
     }
     nav a:hover{border-color: var(--line); background: rgba(255,255,255,.04)}
-
-    .cta-row{
-      display:flex; gap:10px; align-items:center; justify-content:flex-end;
-      flex-wrap:wrap; min-width:260px;
-    }
-    .pill{
-      font-size:12px; padding:6px 10px; border-radius:999px;
-      border:1px solid var(--line);
-      color: rgba(238,241,255,.78);
-      background: rgba(255,255,255,.04);
-      white-space:nowrap;
-    }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
@@ -91,71 +81,32 @@
       user-select:none;
       white-space:nowrap;
     }
-    .btn:hover{background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2)}
+    .btn:hover{background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20)}
     .btn:active{transform: translateY(1px)}
     .btn.primary{
       border-color: rgba(94,234,212,.35);
       background: linear-gradient(135deg, var(--accentA), var(--accentB));
     }
 
-    .updates{
-      border-bottom:1px solid var(--line);
-      background: rgba(255,255,255,.04);
+    header{padding:42px 0 14px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      align-items:stretch;
     }
-    .updates-inner{
-      display:flex; gap:12px; align-items:center; padding:10px 0;
-    }
-    .badge{
-      font-size:12px; font-weight:900;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      white-space:nowrap;
-    }
-    .ticker{
-      overflow:hidden;
-      flex:1;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.10);
-    }
-    .ticker-track{
-      display:inline-flex;
-      gap:18px;
-      padding:10px 14px;
-      white-space:nowrap;
-      will-change: transform;
-      animation: scroll 28s linear infinite;
-      color: rgba(238,241,255,.88);
-      font-size:13px;
-    }
-    .dot{
-      display:inline-block;
-      width:6px; height:6px; border-radius:50%;
-      background: rgba(94,234,212,.9);
-      margin: 0 6px 1px;
-    }
-    @keyframes scroll{
-      0%{transform: translateX(0)}
-      100%{transform: translateX(-50%)}
-    }
-
-    .hero{padding:44px 0 18px}
-    .hero-grid{display:grid; grid-template-columns: 1.25fr .75fr; gap:18px; align-items:stretch}
-    .hero-card{
-      background: linear-gradient(180deg, rgba(16,26,52,.95), rgba(16,26,52,.70));
+    .card{
+      background: rgba(16,26,52,.72);
       border:1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding:28px;
-      position:relative;
-      overflow:hidden;
+      padding:18px;
     }
-    .hero-card:before{
+    .hero-main{padding:26px; position:relative; overflow:hidden}
+    .hero-main:before{
       content:"";
-      position:absolute; inset:-120px -120px auto auto;
-      width:240px; height:240px; border-radius:50%;
+      position:absolute; inset:-140px -140px auto auto;
+      width:260px; height:260px; border-radius:50%;
       background: radial-gradient(circle at 30% 30%, rgba(94,234,212,.22), transparent 60%);
     }
     .tag{
@@ -164,64 +115,56 @@
       border-radius:999px;
       border:1px solid rgba(94,234,212,.25);
       background: rgba(94,234,212,.08);
-      font-size:12px;
-      font-weight:900;
+      font-size:12px; font-weight:900;
       margin-bottom:10px;
     }
-    .hero h2{margin:0 0 10px; font-size:36px; letter-spacing:.6px; line-height:1.12}
-    .sub{margin:0 0 12px; color: var(--muted); font-size:15px}
-    .tagline{
-      margin:0 0 14px;
-      font-weight:900;
-      letter-spacing:.4px;
-      color: rgba(238,241,255,.92);
-    }
-    .chips{display:flex; gap:8px; flex-wrap:wrap}
+    .name{margin:0 0 6px; font-size:34px; letter-spacing:.4px; line-height:1.15}
+    .role{margin:0 0 10px; color: rgba(238,241,255,.88); font-weight:900}
+    .summary{margin:0; color: var(--muted); font-size:14px; max-width:62ch}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
     .chip{
       font-size:12px; padding:6px 10px; border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.04);
       color: rgba(238,241,255,.82);
     }
-    .hero ul{
-      margin: 14px 0 0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
-    .hero li{
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: rgba(238,241,255,.88);
-      font-size:13px;
-    }
 
-    .quick-card{
-      background: linear-gradient(180deg, rgba(26,40,82,.70), rgba(16,26,52,.55));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:22px;
+    .profile-card{
       display:flex;
       flex-direction:column;
       gap:12px;
+      padding:18px;
     }
-    .quick-card h3{margin:0; font-size:16px}
-    .quick-card p{margin:0; color: var(--muted); font-size:13px}
+    .profile-photo{
+      width:100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 20px;
+      border:1px solid rgba(255,255,255,.14);
+      overflow:hidden;
+      background: rgba(255,255,255,.04);
+      position:relative;
+    }
+    .profile-photo img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display:block;
+    }
     .kv{
-      display:grid; grid-template-columns: 90px 1fr; gap:8px 10px;
-      padding-top:6px;
-      border-top:1px dashed rgba(255,255,255,.14);
-      margin-top:2px;
+      display:grid;
+      grid-template-columns: 92px 1fr;
+      gap:8px 10px;
       font-size:13px;
+      border-top:1px dashed rgba(255,255,255,.16);
+      padding-top:12px;
+      margin-top:6px;
     }
-    .kv div{color: rgba(238,241,255,.82)}
     .kv b{color: var(--text)}
+    .kv div{color: rgba(238,241,255,.82)}
+    .small{font-size:12px; color: rgba(238,241,255,.66)}
     .note{
+      margin-top:8px;
       font-size:12px;
       color: rgba(238,241,255,.68);
       padding:10px 12px;
@@ -230,903 +173,310 @@
       background: rgba(255,255,255,.03);
     }
 
-    section{padding:28px 0}
+    section{padding:18px 0}
     .section-title{
       display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
-      margin-bottom:14px;
+      margin: 0 0 12px;
     }
-    .section-title h3{margin:0; font-size:22px; letter-spacing:.3px}
+    .section-title h2{margin:0; font-size:20px; letter-spacing:.3px}
     .section-title p{margin:0; color: var(--muted); font-size:13px}
 
-    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
-    .card{
-      background: rgba(16,26,52,.72);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:18px;
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
     }
-    .card h4{margin:0 0 6px; font-size:16px}
-    .card p{margin:0 0 10px; color: var(--muted); font-size:13px}
+    ul{margin:0; padding-left:18px}
+    li{margin:8px 0; color: rgba(238,241,255,.86); font-size:13px}
 
-    .table-wrap{
-      overflow:auto;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(16,26,52,.6);
-      box-shadow: var(--shadow);
-    }
-    table{width:100%; border-collapse: collapse; min-width: 720px;}
-    th, td{
-      padding:12px 12px;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      text-align:left;
-      font-size:13px;
-      vertical-align:top;
-    }
-    th{
-      position:sticky; top:0;
-      background: rgba(11,16,32,.92);
-      border-bottom:1px solid rgba(255,255,255,.18);
-      font-size:12px;
-      letter-spacing:.4px;
-      text-transform: uppercase;
-      color: rgba(238,241,255,.75);
-    }
-    tr:hover td{background: rgba(255,255,255,.03)}
-    .price{font-weight:900; color: rgba(238,241,255,.96); white-space:nowrap}
-    .small{font-size:12px; color: rgba(238,241,255,.65)}
-
-    .two-col{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
-    .list{margin:0; padding-left:18px; color: rgba(238,241,255,.84); font-size:13px}
-    .list li{margin:8px 0}
-
-    .form{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
-    .field{display:flex; flex-direction:column; gap:6px}
-    .field label{font-size:12px; color: rgba(238,241,255,.78)}
-    .field input, .field select, .field textarea{
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      outline:none;
-      font-size:13px;
-    }
-    .field textarea{min-height:110px; grid-column: 1/-1; resize:vertical}
-    .form-actions{
-      grid-column:1/-1;
-      display:flex; gap:10px; flex-wrap:wrap;
-      align-items:center; justify-content:space-between;
-      padding-top:4px;
-    }
+    .timeline{display:flex; flex-direction:column; gap:14px}
+    .job h3{margin:0; font-size:16px}
+    .job .meta{margin:4px 0 10px; color: rgba(238,241,255,.70); font-size:12px}
+    .job .meta span{display:inline-block; margin-right:10px}
 
     footer{
-      padding:28px 0 54px;
+      padding:28px 0 50px;
       border-top:1px solid var(--line);
+      margin-top:10px;
       background: rgba(0,0,0,.10);
-      margin-top: 18px;
-    }
-    .footer-grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:14px;
-      align-items:start;
-    }
-    .links{display:flex; gap:10px; flex-wrap:wrap}
-
-    .wa-float{
-      position:fixed; right:16px; bottom:16px; z-index:80;
-      display:flex; flex-direction:column; gap:10px; align-items:flex-end;
-    }
-    .wa-btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:12px 14px; border-radius:999px;
-      border:1px solid rgba(94,234,212,.35);
-      background: linear-gradient(135deg, var(--accentA), rgba(96,165,250,.14));
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
-      font-weight:900; font-size:13px;
-    }
-    .wa-dot{
-      width:10px; height:10px; border-radius:50%;
-      background: var(--ok);
-      box-shadow: 0 0 0 6px rgba(52,211,153,.12);
     }
 
     @media (max-width: 980px){
-      .hero-grid{grid-template-columns:1fr}
+      .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
-      .two-col{grid-template-columns:1fr}
-      .form{grid-template-columns:1fr}
-      .cta-row{justify-content:flex-start}
-      nav{justify-content:flex-start}
-      .hero ul{grid-template-columns: 1fr}
-      .ticker-track{animation-duration: 36s;}
-      table{min-width: 560px;}
     }
   </style>
 </head>
 
 <body>
-  <!-- CONSTANT -->
-  <!-- WhatsApp Group Link -->
-  <!-- https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p -->
+  <!-- EDIT THESE IF NEEDED -->
+  <!-- PHOTO FILE: profile.png (same folder as index.html) -->
+  <!-- LINKEDIN: https://www.linkedin.com/in/vikashpathak2306/ -->
 
-  <!-- TOP BAR -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-inner">
         <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
+          <div class="avatar-mini" aria-hidden="true"></div>
           <div>
-            <h1>DIGICAFE SERVICES</h1>
-            <p>Our Service, Your Solution</p>
+            <h1>Vikash Pathak</h1>
+            <p>Senior Executive — Accounts & Reconciliation</p>
           </div>
         </div>
 
         <nav aria-label="Primary navigation">
-          <a href="#services">Services</a>
-          <a href="#itr-pricing">ITR Fees</a>
-          <a href="#business-pricing">Business Fees</a>
-          <a href="#documents">Documents</a>
-          <a href="#students">Student Corner</a>
-          <a href="#student-bihar">Bihar</a>
-          <a href="#student-jharkhand">Jharkhand</a>
-          <a href="#student-karnataka">Karnataka</a>
-          <a href="#partner">Partner</a>
-          <a href="#client-form">Client Form</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#certifications">Certifications</a>
           <a href="#contact">Contact</a>
         </nav>
 
-        <div class="cta-row">
-          <span class="pill">PAN India • Online Support</span>
-          <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="https://www.linkedin.com/in/vikashpathak2306/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn primary" href="#contact">Hire / Contact</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TICKER -->
-  <div class="updates" aria-label="Latest Updates">
+  <header id="about">
     <div class="container">
-      <div class="updates-inner">
-        <span class="badge">🔔 Latest Updates</span>
-
-        <div class="ticker" role="region" aria-label="Updates Ticker">
-          <div class="ticker-track">
-            <span>✅ ITR: Match Form 26AS + AIS + TIS before filing <span class="dot"></span></span>
-            <span>✅ GST: Keep GSTR-2B reconciliation updated <span class="dot"></span></span>
-            <span>✅ MCA: Director KYC / DIN support available <span class="dot"></span></span>
-            <span>✅ Student Corner: Bihar • Jharkhand • Karnataka Jobs/Admit/Result/College Links <span class="dot"></span></span>
-
-            <span>✅ ITR: Match Form 26AS + AIS + TIS before filing <span class="dot"></span></span>
-            <span>✅ GST: Keep GSTR-2B reconciliation updated <span class="dot"></span></span>
-            <span>✅ MCA: Director KYC / DIN support available <span class="dot"></span></span>
-            <span>✅ Student Corner: Bihar • Jharkhand • Karnataka Jobs/Admit/Result/College Links <span class="dot"></span></span>
-          </div>
-        </div>
-
-        <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">
-          Join for Updates
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-card">
-          <span class="tag">Ensuring Compliance & Accuracy</span>
-          <h2>DIGICAFE</h2>
-          <p class="tagline">Our Service, Your Solution</p>
-          <p class="sub">
-            One-stop solution for Income Tax, GST, Business Registration & Compliance services.
-            Serving Individuals, Startups & MSMEs across India.
+      <div class="hero">
+        <div class="card hero-main">
+          <span class="tag">Open to opportunities</span>
+          <h2 class="name">Vikash Pathak</h2>
+          <p class="role">Senior Executive (Accounts & Reconciliation) | R2R | Month-End Close</p>
+          <p class="summary">
+            Accounts & Finance professional with 6+ years of experience in Record-to-Report (R2R),
+            focusing on Balance Sheet & Bank Reconciliations, month-end journals, and audit-ready processes.
+            Currently working in Accounts & Reconciliation at Ebix Travels. 1
           </p>
 
-          <div class="chips" style="margin:14px 0 6px;">
-            <span class="chip">ITR Filing</span>
-            <span class="chip">GST Registration & Returns</span>
-            <span class="chip">DSC (Class 3)</span>
-            <span class="chip">Company / LLP</span>
-            <span class="chip">Trademark</span>
-            <span class="chip">Bookkeeping</span>
+          <div class="chips" aria-label="Highlights">
+            <span class="chip">Balance Sheet Reconciliation</span>
+            <span class="chip">Sub-ledger to GL Reco</span>
+            <span class="chip">Bank Reconciliation</span>
+            <span class="chip">Month-End Close</span>
+            <span class="chip">Intercompany</span>
+            <span class="chip">Audit Support</span>
           </div>
 
-          <ul>
-            <li>✅ Transparent fees (total shown)</li>
-            <li>✅ Proper document checklist</li>
-            <li>✅ Fast processing & guidance</li>
-            <li>✅ Student Corner for jobs/admit/results</li>
-          </ul>
-
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
-            <a class="btn primary" href="#client-form">Fill Client Form</a>
-            <a class="btn" href="#itr-pricing">View Fees</a>
-            <a class="btn" href="#students">Student Corner</a>
+            <a class="btn primary" href="mailto:email.vikashpathak@gmail.com?subject=Opportunity%20for%20Accounts%20%26%20Finance%20Role">Email Me</a>
+            <a class="btn" href="tel:+917488356129">Call</a>
+            <a class="btn" href="https://www.linkedin.com/in/vikashpathak2306/" target="_blank" rel="noopener">View LinkedIn</a>
           </div>
         </div>
 
-        <aside class="quick-card">
-          <h3>Quick Contact</h3>
-          <p>For updates & student/job alerts, join our WhatsApp group.</p>
+        <aside class="card profile-card">
+          <div class="profile-photo" aria-label="Profile photo">
+            <!-- Put your uploaded image in the same folder and name it: profile.png -->
+            <img src="profile.png" alt="Vikash Pathak portrait" />
+          </div>
+
+          <div>
+            <h3 style="margin:0 0 4px;">Quick Info</h3>
+            <p class="small" style="margin:0;">Professional portfolio & contact details.</p>
+          </div>
 
           <div class="kv">
-            <div><b>Owner</b></div><div>Vikash Pathak</div>
-            <div><b>Email</b></div><div><a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></div>
-            <div><b>Hours</b></div><div>Mon–Sat • 10 AM – 8 PM</div>
+            <div><b>Location</b></div><div>Bengaluru, Karnataka</div>
+            <div><b>Phone</b></div><div><a href="tel:+917488356129">+91-7488356129</a></div>
+            <div><b>Email</b></div><div><a href="mailto:email.vikashpathak@gmail.com">email.vikashpathak@gmail.com</a></div>
+            <div><b>LinkedIn</b></div><div><a href="https://www.linkedin.com/in/vikashpathak2306/" target="_blank" rel="noopener">vikashpathak2306</a></div>
           </div>
 
           <div class="note">
-            <b>How to get quick response:</b><br/>
-            1) Fill Client Form<br/>
-            2) Join WhatsApp Group<br/>
-            3) Post “SERVICE REQUEST”
+            <b>Tip:</b> If you want, I can also make a “resume-style” PDF button + add your achievements section (with numbers).
           </div>
-
-          <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
-          <a class="btn" href="#services">View Services</a>
         </aside>
       </div>
     </div>
   </header>
 
-  <!-- SERVICES -->
-  <section id="services">
+  <section id="skills">
     <div class="container">
       <div class="section-title">
         <div>
-          <h3>Our Services</h3>
-          <p>Digital, business & compliance services in one place.</p>
+          <h2>Core Competencies</h2>
+          <p>Skills I use in R2R and compliance-driven environments.</p>
         </div>
       </div>
 
       <div class="grid">
         <div class="card">
-          <h4>Income Tax (ITR)</h4>
-          <p>Accurate ITR filing with deductions and compliance checks.</p>
-          <div class="chips">
-            <span class="chip">Salaried</span>
-            <span class="chip">Business</span>
-            <span class="chip">Professional</span>
-            <span class="chip">Capital Gains</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h4>GST Services</h4>
-          <p>GST registration, returns, notice reply, amendments.</p>
-          <div class="chips">
-            <span class="chip">GST Registration</span>
-            <span class="chip">GSTR-1 / 3B</span>
-            <span class="chip">ITC (2B) Reco</span>
-            <span class="chip">Notice Reply</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h4>Company & Business</h4>
-          <p>Pvt Ltd / LLP registration and ROC/MCA support.</p>
-          <div class="chips">
-            <span class="chip">Pvt Ltd</span>
-            <span class="chip">LLP</span>
-            <span class="chip">DIN KYC</span>
-            <span class="chip">Director Changes</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h4>Digital Signature (DSC)</h4>
-          <p>Class 3 DSC for MCA, GST, I-Tax, tenders and more.</p>
-          <div class="chips">
-            <span class="chip">New / Renewal</span>
-            <span class="chip">Token Support</span>
-            <span class="chip">MCA / DGCA</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h4>Trademark Services</h4>
-          <p>Registration, reply/objection, renewal, tracking.</p>
-          <div class="chips">
-            <span class="chip">Registration</span>
-            <span class="chip">Reply / Objection</span>
-            <span class="chip">Renewal</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h4>Bookkeeping & MIS</h4>
-          <p>Accounting + reconciliation + statements + reporting support.</p>
-          <div class="chips">
-            <span class="chip">Bank Reco</span>
-            <span class="chip">ITC Reco</span>
-            <span class="chip">MIS</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ITR PRICING -->
-  <section id="itr-pricing">
-    <div class="container">
-      <div class="section-title">
-        <div>
-          <h3>ITR Filing — Total Fees</h3>
-          <p>Only total fees shown (Digicafe + supervision included). GST extra as applicable.</p>
-        </div>
-      </div>
-
-      <div class="table-wrap" role="region" aria-label="ITR Fees Table">
-        <table>
-          <thead>
-            <tr>
-              <th>Applicability</th>
-              <th>Total Fees (INR)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Salaried individuals & pensioners (total income up to ₹50 lakh)</td><td class="price">₹5,999</td></tr>
-            <tr><td>Individuals & HUFs with capital gains / multiple house properties / foreign income</td><td class="price">₹7,499</td></tr>
-            <tr><td>Professionals / freelancers / individuals with business income</td><td class="price">₹9,999</td></tr>
-            <tr><td>Presumptive scheme (44AD, 44ADA, 44AE) — Individuals/HUFs/Firms</td><td class="price">₹6,999</td></tr>
-            <tr><td>Partnership firms, LLPs, and AOPs</td><td class="price">₹12,499</td></tr>
-            <tr><td>Companies (other than those claiming exemption under Section 11)</td><td class="price">₹16,999</td></tr>
-            <tr><td>Trusts / political parties / NGOs (Sections 139(4A) to 139(4D))</td><td class="price">₹14,499</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="small" style="margin-top:10px;">
-        Additional charges may apply for complex cases, late filings, audits, amendments, or extensive reconciliations.
-      </p>
-    </div>
-  </section>
-
-  <!-- BUSINESS PRICING -->
-  <section id="business-pricing">
-    <div class="container">
-      <div class="section-title">
-        <div>
-          <h3>Business & Tax Services — Total Fees</h3>
-          <p>Only total fees shown (Digicafe + supervision included).</p>
-        </div>
-      </div>
-
-      <div class="table-wrap" role="region" aria-label="Business Fees Table">
-        <table>
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th>Total Fees (INR)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>PAN Registration</td><td class="price">₹2,999</td></tr>
-            <tr><td>TAN Registration</td><td class="price">₹3,699</td></tr>
-            <tr><td>GST Registration</td><td class="price">₹7,999</td></tr>
-            <tr><td>Private Limited Company Registration</td><td class="price">₹9,898</td></tr>
-            <tr><td>LLP Registration</td><td class="price">₹17,999</td></tr>
-            <tr><td>Director Appointment / Resignation</td><td class="price">₹7,000</td></tr>
-            <tr><td>Director KYC (DIR-3)</td><td class="price">₹4,000</td></tr>
-            <tr><td><b>Bookkeeping Services (Yearly)</b></td><td class="price">₹19,899</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- DOCUMENTS -->
-  <section id="documents">
-    <div class="container">
-      <div class="section-title">
-        <div>
-          <h3>Required Documents</h3>
-          <p>Keep these ready for faster processing.</p>
-        </div>
-        <a class="btn" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join Group for Updates</a>
-      </div>
-
-      <div class="two-col">
-        <div class="card">
-          <h4>ITR Filing — Checklist</h4>
-          <ul class="list">
-            <li><b>Basic:</b> PAN, Aadhaar, mobile/email, bank account details (IFSC)</li>
-            <li><b>Income:</b> Form 16 (salary), salary slips, pension statement, interest certificates</li>
-            <li><b>Verification:</b> Form 26AS + AIS + TIS (TDS/income matching)</li>
-            <li><b>Bank:</b> bank statements (all accounts) for the FY</li>
-            <li><b>Deductions:</b> LIC/PPF/ELSS, mediclaim (80D), donations (80G), etc.</li>
-            <li><b>House property:</b> rent details, home loan interest certificate, municipal tax receipts</li>
-            <li><b>Capital gains:</b> stock/MF statement, contract notes, property deed & dates</li>
-            <li><b>Business/profession:</b> P&L/Balance Sheet, GST returns, TDS details (as applicable)</li>
+          <h3 style="margin:0 0 8px;">Reconciliation & Analysis</h3>
+          <ul>
+            <li>Balance Sheet Reconciliation</li>
+            <li>Sub-Ledger to GL Reconciliation</li>
+            <li>Bank Reconciliation</li>
+            <li>Intercompany mismatch resolution</li>
           </ul>
         </div>
 
         <div class="card">
-          <h4>GST — Registration + Returns</h4>
-          <ul class="list">
-            <li><b>Registration:</b> PAN, Aadhaar, photo, mobile/email, bank proof, address proof (bill/lease/NOC)</li>
-            <li><b>Returns:</b> sales invoices, purchase invoices, credit/debit notes</li>
-            <li><b>ITC:</b> GSTR-2B matching + purchase register reconciliation</li>
-            <li><b>Payments:</b> challans, RCM details (if applicable)</li>
-          </ul>
-          <p class="small">Tip: Maintain clean invoice data + 2B matching for smoother GST compliance.</p>
-        </div>
-      </div>
-
-      <div class="two-col" style="margin-top:14px;">
-        <div class="card">
-          <h4>Class 3 DSC — Documents</h4>
-          <ul class="list">
-            <li><b>Individual:</b> PAN, Aadhaar Offline XML, photo, mobile number, email</li>
-            <li><b>Organisation (if applicable):</b> authorization/organisation proof + signatory KYC</li>
-            <li><b>Support:</b> Token support available if required</li>
+          <h3 style="margin:0 0 8px;">Close & Reporting</h3>
+          <ul>
+            <li>Month-End Close & Journal Entries</li>
+            <li>Accruals & Reclassifications</li>
+            <li>MIS reporting & dashboards</li>
+            <li>Settlement & daily transaction monitoring</li>
           </ul>
         </div>
 
         <div class="card">
-          <h4>Common Quick Checklists</h4>
-          <ul class="list">
-            <li><b>PAN:</b> photo & signature, Aadhaar, mobile (Aadhaar-linked), email</li>
-            <li><b>Driving Licence:</b> photo/sign, Aadhaar, PAN, blood group proof, 10th proof</li>
-            <li><b>IRCTC e-ticket:</b> Aadhaar (XML), mobile & email</li>
-            <li><b>MCA/DIN:</b> DIN, PAN, Aadhaar, email/mobile (OTP)</li>
+          <h3 style="margin:0 0 8px;">Tools & Governance</h3>
+          <ul>
+            <li>Advanced Excel (Pivot, VLOOKUP)</li>
+            <li>Tally ERP / Tally Prime</li>
+            <li>SOP documentation</li>
+            <li>Audit support & documentation</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STUDENT CORNER (STATE-WISE PAGES + COLLEGE SEARCH BUTTONS) -->
-  <section id="students">
+  <section id="experience">
     <div class="container">
       <div class="section-title">
         <div>
-          <h3>Student Corner (State-wise)</h3>
-          <p>Jobs • College/Admissions • Results • Admit Card • Scholarships (Bihar / Jharkhand / Karnataka).</p>
-        </div>
-        <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">
-          Join WhatsApp Group (Updates)
-        </a>
-      </div>
-
-      <div class="card">
-        <h4>Choose Your State</h4>
-        <p class="small">Click your state to open dedicated links.</p>
-        <div class="links" style="margin-top:10px;">
-          <a class="btn primary" href="#student-bihar">Bihar</a>
-          <a class="btn primary" href="#student-jharkhand">Jharkhand</a>
-          <a class="btn primary" href="#student-karnataka">Karnataka</a>
+          <h2>Professional Experience</h2>
+          <p>Key roles and responsibilities.</p>
         </div>
       </div>
 
-      <div class="card" style="margin-top:14px;">
-        <h4>🇮🇳 All-India Quick Links (Common)</h4>
-        <p class="small">Useful for every student.</p>
-        <div class="links" style="margin-top:10px;">
-          <a class="btn" href="https://www.ncs.gov.in/" target="_blank" rel="noopener">NCS Job Portal</a>
-          <a class="btn" href="https://ssc.nic.in/" target="_blank" rel="noopener">SSC</a>
-          <a class="btn" href="https://www.upsc.gov.in/" target="_blank" rel="noopener">UPSC</a>
-          <a class="btn" href="https://www.rrbcdg.gov.in/" target="_blank" rel="noopener">Railway (RRB)</a>
-          <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA</a>
-          <a class="btn" href="https://results.gov.in/" target="_blank" rel="noopener">results.gov.in</a>
-          <a class="btn" href="https://scholarships.gov.in/" target="_blank" rel="noopener">NSP Scholarships</a>
-          <a class="btn" href="https://nad.digilocker.gov.in/" target="_blank" rel="noopener">DigiLocker / NAD</a>
-          <a class="btn" href="https://uidai.gov.in/" target="_blank" rel="noopener">Aadhaar (UIDAI)</a>
-        </div>
-
-        <div class="note" style="margin-top:10px;">
-          Need help? Join the group and post <b>STUDENT HELP</b> with your state + requirement.
-        </div>
-      </div>
-
-      <!-- ===== BIHAR ===== -->
-      <div id="student-bihar" class="card" style="margin-top:14px;">
-        <div class="section-title" style="margin-bottom:10px;">
-          <div>
-            <h3 style="margin:0;">📍 Bihar Student Page</h3>
-            <p style="margin:0;" class="small">Jobs • Admissions • Results • Admit Card • Scholarships</p>
+      <div class="timeline">
+        <div class="card job">
+          <h3>Senior Accounts Executive</h3>
+          <div class="meta">
+            <span><b>Ebix Travels Pvt. Ltd. (Via.com)</b></span>
+            <span>Jan 2020 – Present</span>
           </div>
-          <a class="btn" href="#students">Back</a>
-        </div>
-
-        <div class="grid">
-          <div class="card">
-            <h4>🏛️ Bihar Govt Jobs</h4>
-            <p>Official recruitment portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://www.bpsc.bih.nic.in/" target="_blank" rel="noopener">BPSC</a>
-              <a class="btn" href="https://bceceboard.bihar.gov.in/" target="_blank" rel="noopener">BCECEB</a>
-              <a class="btn" href="https://csbc.bih.nic.in/" target="_blank" rel="noopener">CSBC (Police)</a>
-              <a class="btn" href="https://state.bihar.gov.in/" target="_blank" rel="noopener">Bihar Govt Portal</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🎓 Bihar Admissions / Counselling</h4>
-            <p>Important portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://bceceboard.bihar.gov.in/" target="_blank" rel="noopener">BCECEB Counselling</a>
-              <a class="btn" href="https://education.bihar.gov.in/" target="_blank" rel="noopener">Bihar Education Dept</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>📄 Bihar Results</h4>
-            <p>Boards/university results.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://secondary.biharboardonline.com/" target="_blank" rel="noopener">BSEB (10th/12th)</a>
-              <a class="btn" href="https://results.gov.in/" target="_blank" rel="noopener">results.gov.in</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🪪 Bihar Admit Card</h4>
-            <p>Admit card portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://www.bpsc.bih.nic.in/" target="_blank" rel="noopener">BPSC Admit</a>
-              <a class="btn" href="https://csbc.bih.nic.in/" target="_blank" rel="noopener">CSBC Admit</a>
-              <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA Admit</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🎯 Bihar Scholarships</h4>
-            <p>Scholarship portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://scholarships.gov.in/" target="_blank" rel="noopener">NSP (National)</a>
-              <a class="btn" href="https://state.bihar.gov.in/" target="_blank" rel="noopener">Bihar Govt Portal</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🏫 Search Bihar College Website</h4>
-            <p>Find official college websites only.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn primary" href="https://www.google.com/search?q=official+college+website+in+Bihar" target="_blank" rel="noopener">Search Bihar Colleges</a>
-            </div>
-            <div class="note" style="margin-top:10px;">
-              Tip: Prefer websites ending with <b>.gov.in</b> / <b>.ac.in</b> for authenticity.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== JHARKHAND ===== -->
-      <div id="student-jharkhand" class="card" style="margin-top:14px;">
-        <div class="section-title" style="margin-bottom:10px;">
-          <div>
-            <h3 style="margin:0;">📍 Jharkhand Student Page</h3>
-            <p style="margin:0;" class="small">Jobs • Admissions • Results • Admit Card • Scholarships</p>
-          </div>
-          <a class="btn" href="#students">Back</a>
-        </div>
-
-        <div class="grid">
-          <div class="card">
-            <h4>🏛️ Jharkhand Govt Jobs</h4>
-            <p>Official recruitment portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://jpsc.gov.in/" target="_blank" rel="noopener">JPSC</a>
-              <a class="btn" href="https://jssc.nic.in/" target="_blank" rel="noopener">JSSC</a>
-              <a class="btn" href="https://jceceb.jharkhand.gov.in/" target="_blank" rel="noopener">JCECEB</a>
-              <a class="btn" href="https://www.jharkhand.gov.in/" target="_blank" rel="noopener">Jharkhand Govt Portal</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🎓 Jharkhand Admissions / Counselling</h4>
-            <p>Important portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://jceceb.jharkhand.gov.in/" target="_blank" rel="noopener">JCECEB Counselling</a>
-              <a class="btn" href="https://jac.jharkhand.gov.in/" target="_blank" rel="noopener">JAC Board</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>📄 Jharkhand Results</h4>
-            <p>Board/university results.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://jac.jharkhand.gov.in/" target="_blank" rel="noopener">JAC Official</a>
-              <a class="btn" href="https://results.gov.in/" target="_blank" rel="noopener">results.gov.in</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🪪 Jharkhand Admit Card</h4>
-            <p>Admit card portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://jpsc.gov.in/" target="_blank" rel="noopener">JPSC Admit</a>
-              <a class="btn" href="https://jssc.nic.in/" target="_blank" rel="noopener">JSSC Admit</a>
-              <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA Admit</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🎯 Jharkhand Scholarships</h4>
-            <p>Scholarship portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://scholarships.gov.in/" target="_blank" rel="noopener">NSP (National)</a>
-              <a class="btn" href="https://ekalyan.cgg.gov.in/" target="_blank" rel="noopener">e-Kalyan (JH)</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🏫 Search Jharkhand College Website</h4>
-            <p>Find official college websites only.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn primary" href="https://www.google.com/search?q=official+college+website+in+Jharkhand" target="_blank" rel="noopener">Search Jharkhand Colleges</a>
-            </div>
-            <div class="note" style="margin-top:10px;">
-              Tip: Prefer websites ending with <b>.gov.in</b> / <b>.ac.in</b> for authenticity.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== KARNATAKA ===== -->
-      <div id="student-karnataka" class="card" style="margin-top:14px;">
-        <div class="section-title" style="margin-bottom:10px;">
-          <div>
-            <h3 style="margin:0;">📍 Karnataka Student Page</h3>
-            <p style="margin:0;" class="small">Jobs • Admissions • Results • Admit Card • Scholarships</p>
-          </div>
-          <a class="btn" href="#students">Back</a>
-        </div>
-
-        <div class="grid">
-          <div class="card">
-            <h4>🏛️ Karnataka Govt Jobs</h4>
-            <p>Official recruitment portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://kpsc.kar.nic.in/" target="_blank" rel="noopener">KPSC</a>
-              <a class="btn" href="https://cetonline.karnataka.gov.in/kea/" target="_blank" rel="noopener">KEA</a>
-              <a class="btn" href="https://www.karnataka.gov.in/" target="_blank" rel="noopener">Karnataka Govt Portal</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🎓 Karnataka Admissions / Counselling</h4>
-            <p>Important portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://cetonline.karnataka.gov.in/kea/" target="_blank" rel="noopener">KEA Counselling</a>
-              <a class="btn" href="https://www.ugc.gov.in/" target="_blank" rel="noopener">UGC</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>📄 Karnataka Results</h4>
-            <p>Board/university results.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://kseab.karnataka.gov.in/" target="_blank" rel="noopener">KSEAB (SSLC/PUC)</a>
-              <a class="btn" href="https://results.gov.in/" target="_blank" rel="noopener">results.gov.in</a>
-              <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA Results</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🪪 Karnataka Admit Card</h4>
-            <p>Admit card portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://kpsc.kar.nic.in/" target="_blank" rel="noopener">KPSC Admit</a>
-              <a class="btn" href="https://cetonline.karnataka.gov.in/kea/" target="_blank" rel="noopener">KEA Admit</a>
-              <a class="btn" href="https://nta.ac.in/" target="_blank" rel="noopener">NTA Admit</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🎯 Karnataka Scholarships</h4>
-            <p>Scholarship portals.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn" href="https://scholarships.gov.in/" target="_blank" rel="noopener">NSP (National)</a>
-              <a class="btn" href="https://ssp.postmatric.karnataka.gov.in/" target="_blank" rel="noopener">SSP Karnataka</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>🏫 Search Karnataka College Website</h4>
-            <p>Find official college websites only.</p>
-            <div class="links" style="margin-top:10px;">
-              <a class="btn primary" href="https://www.google.com/search?q=official+college+website+in+Karnataka" target="_blank" rel="noopener">Search Karnataka Colleges</a>
-            </div>
-            <div class="note" style="margin-top:10px;">
-              Tip: Prefer websites ending with <b>.gov.in</b> / <b>.ac.in</b> for authenticity.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:14px;">
-        <h4>✅ DigiCafe Student Help</h4>
-        <p class="small">We assist in: online form fill, document upload, correction, payment issues, print/scan guidance (as per availability).</p>
-        <div class="links" style="margin-top:10px;">
-          <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
-          <a class="btn" href="#client-form">Submit Request Form</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PARTNER -->
-  <section id="partner">
-    <div class="container">
-      <div class="section-title">
-        <div>
-          <h3>Partner With DigiCafe</h3>
-          <p>For CA/CS/Advocates/Tax Practitioners — expand services, deliver faster.</p>
-        </div>
-      </div>
-
-      <div class="two-col">
-        <div class="card">
-          <h4>Why Partner With Us?</h4>
-          <ul class="list">
-            <li>✅ Back-end support for ITR / GST / DSC / Registrations</li>
-            <li>✅ Standard process + checklist system</li>
-            <li>✅ Faster turnaround & tracking support</li>
-            <li>✅ Suitable for referrals and outsourcing</li>
+          <ul>
+            <li>Balance Sheet and bank reconciliations; timely closure of open items.</li>
+            <li>Month-end journals, accruals, and reclassifications.</li>
+            <li>Refund processing and payment updates with accurate accounting.</li>
+            <li>Intercompany coordination and mismatch resolution.</li>
+            <li>Audit support and process documentation.</li>
           </ul>
         </div>
 
-        <div class="card">
-          <h4>Start Partnership</h4>
-          <p>Join WhatsApp group and post: <b>PARTNER</b></p>
-          <div class="links" style="margin-top:10px;">
-            <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
-            <a class="btn" href="mailto:vikashpathak.mgmt@gmail.com">Email</a>
+        <div class="card job">
+          <h3>Operations Manager – Compliance & Registration</h3>
+          <div class="meta">
+            <span><b>Kautilya Corporate Solutions Pvt. Ltd. / CS Kant Sanat & Associates</b></span>
+            <span>Aug 2018 – Jan 2020</span>
           </div>
-          <p class="small" style="margin-top:10px;"><b>Tagline:</b> Our Service, Your Solution</p>
+          <ul>
+            <li>GST/TDS compliance support for clients; documentation and coordination.</li>
+            <li>Assisted with reconciliations and reporting schedules.</li>
+          </ul>
+        </div>
+
+        <div class="card job">
+          <h3>Assistant Auditor</h3>
+          <div class="meta">
+            <span><b>A.K. Sinha & Co.</b></span>
+            <span>Apr 2018 – Jul 2018</span>
+          </div>
+          <ul>
+            <li>Supported statutory/internal audit work and report preparation.</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CLIENT FORM -->
-  <section id="client-form">
+  <section id="education">
     <div class="container">
       <div class="section-title">
         <div>
-          <h3>DigiCafe Client Information Form</h3>
-          <p>Fill details and then join WhatsApp group for faster response.</p>
+          <h2>Education</h2>
+          <p>Academic background.</p>
         </div>
       </div>
 
-      <div class="card">
-        <form class="form">
-          <div class="field">
-            <label>Full Name</label>
-            <input placeholder="Your full name" />
-          </div>
-          <div class="field">
-            <label>Mobile Number</label>
-            <input placeholder="10-digit number" />
-          </div>
-          <div class="field">
-            <label>Email (optional)</label>
-            <input placeholder="you@example.com" />
-          </div>
-          <div class="field">
-            <label>Financial Year</label>
-            <input placeholder="e.g., 2025-26" />
-          </div>
-          <div class="field">
-            <label>Service Needed</label>
-            <select>
-              <option value="">Select</option>
-              <option>ITR Filing</option>
-              <option>GST Registration</option>
-              <option>GST Return Filing</option>
-              <option>GST Notice Reply</option>
-              <option>PAN / TAN</option>
-              <option>DSC (Digital Signature)</option>
-              <option>Trademark</option>
-              <option>Pvt Ltd / LLP Registration</option>
-              <option>Bookkeeping</option>
-              <option>Student: Govt Form Fill</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Type of Business (optional)</label>
-            <select>
-              <option value="">Select</option>
-              <option>Sole Proprietor</option>
-              <option>Partnership</option>
-              <option>LLP</option>
-              <option>Private Limited</option>
-              <option>Others</option>
-            </select>
-          </div>
-
-          <div class="field" style="grid-column:1/-1;">
-            <label>Notes</label>
-            <textarea placeholder="Write briefly: income type, GSTIN (if any), due date, notice details, etc."></textarea>
-          </div>
-
-          <div class="form-actions">
-            <span class="small">
-              Note: Group invite link can’t auto-send your form message. After joining the group, post “SERVICE REQUEST” with your name & service.
-            </span>
-            <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
-          </div>
-        </form>
+      <div class="grid">
+        <div class="card">
+          <h3 style="margin:0 0 6px;">Master of Commerce (M.Com)</h3>
+          <p class="small">IGNOU</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 6px;">BBM (Honours)</h3>
+          <p class="small">Magadh University</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 6px;">12th & 10th (CBSE)</h3>
+          <p class="small">Senior Secondary & Secondary</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <section id="certifications">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Certifications</h2>
+          <p>Professional learning and courses.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3 style="margin:0 0 6px;">Tax Pro Professional Course</h3>
+          <p class="small">Itaa Education Pvt. Ltd.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 6px;">Business Skills & Financial Accounting</h3>
+          <p class="small">NIIT</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 6px;">Certificate in Financial Accounting</h3>
+          <p class="small">Horizon Institute</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
     <div class="container">
       <div class="section-title">
         <div>
-          <h3>Contact DigiCafe</h3>
-          <p>Fast response & genuine guidance.</p>
+          <h2>Contact</h2>
+          <p>Let’s connect for roles, interviews, or collaborations.</p>
         </div>
       </div>
 
-      <div class="two-col">
-        <div class="card">
-          <h4>Business Details</h4>
-          <p><b>Owner:</b> Vikash Pathak</p>
-          <p><b>Location:</b> India (Online Services Available)</p>
-          <p><b>Email:</b> <a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
-          <p><b>Working Hours:</b> Monday – Saturday | 10 AM – 8 PM</p>
+      <div class="grid">
+        <div class="card" style="grid-column:1/-1;">
+          <h3 style="margin:0 0 10px;">Get in touch</h3>
+          <p class="small" style="margin:0 0 14px;">Email is the fastest way. You can also connect on LinkedIn.</p>
 
-          <div class="links" style="margin-top:10px;">
-            <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
-            <a class="btn" href="mailto:vikashpathak.mgmt@gmail.com">Email Us</a>
-          </div>
-
-          <p class="small" style="margin-top:10px;"><b>Tagline:</b> Our Service, Your Solution</p>
-        </div>
-
-        <div class="card">
-          <h4>Quick Response Steps</h4>
-          <ul class="list">
-            <li>1) Fill the Client Form</li>
-            <li>2) Join WhatsApp Group</li>
-            <li>3) Post “SERVICE REQUEST” with your name & service</li>
-          </ul>
-
-          <div class="note" style="margin-top:10px;">
-            <b>Important:</b> Never share OTP or passwords publicly.
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="mailto:email.vikashpathak@gmail.com?subject=Interview%20Opportunity%20-%20Accounts%20%26%20Finance">Email</a>
+            <a class="btn" href="tel:+917488356129">Call</a>
+            <a class="btn" href="https://www.linkedin.com/in/vikashpathak2306/" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
-      <div class="footer-grid">
+      <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center;">
         <div>
-          <h3 style="margin:0 0 8px;">DigiCafe Services</h3>
-          <p class="small" style="margin:6px 0; color: rgba(238,241,255,.72);"><b>Our Service, Your Solution</b></p>
-          <p class="small">© <span id="year"></span> DigiCafe. All rights reserved.</p>
+          <b>Vikash Pathak</b><br/>
+          <span class="small">Senior Executive — Accounts & Reconciliation</span>
         </div>
-        <div>
-          <p class="small" style="margin:6px 0;"><b>Email:</b> <a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
-          <div class="links" style="margin-top:10px;">
-            <a class="btn" href="#services">Services</a>
-            <a class="btn" href="#students">Student Corner</a>
-            <a class="btn primary" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">Join WhatsApp Group</a>
-          </div>
-        </div>
+        <div class="small">© <span id="year"></span> • Portfolio</div>
       </div>
     </div>
   </footer>
-
-  <!-- Floating Group Button -->
-  <div class="wa-float" aria-label="WhatsApp floating button">
-    <a class="wa-btn" href="https://chat.whatsapp.com/JQC055yJrSCCQZiDotWT4p" target="_blank" rel="noopener">
-      <span class="wa-dot" aria-hidden="true"></span>
-      Join WhatsApp Group
-    </a>
-  </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
