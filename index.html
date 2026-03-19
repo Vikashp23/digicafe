@@ -10,21 +10,23 @@
     :root{
       --bg:#0b1020;
       --card:#101a34;
+      --soft:#142045;
       --text:#eef1ff;
       --muted:rgba(238,241,255,.72);
       --line:rgba(255,255,255,.12);
-      --shadow:0 14px 40px rgba(0,0,0,.35);
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
       --radius:18px;
-      --accentA:rgba(94,234,212,.18);
-      --accentB:rgba(96,165,250,.14);
+      --accentA: rgba(94,234,212,.18);
+      --accentB: rgba(96,165,250,.14);
       --ok:#34d399;
+      --warn:#fbbf24;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
         radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.26), transparent 60%),
         radial-gradient(900px 500px at 80% 0%, rgba(94,234,212,.18), transparent 55%),
@@ -39,8 +41,8 @@
 
     .topbar{
       position:sticky; top:0; z-index:50;
-      background:rgba(11,16,32,.84);
-      backdrop-filter:blur(10px);
+      background: rgba(11,16,32,.84);
+      backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
     .topbar-inner{
@@ -54,99 +56,101 @@
       object-fit:contain;
       border-radius:12px;
       display:block;
-      background:transparent;
+      background: transparent;
       box-shadow:none;
       flex-shrink:0;
     }
     .brand h1{margin:0; font-size:16px; letter-spacing:.6px}
-    .brand p{margin:2px 0 0; font-size:12px; color:rgba(238,241,255,.72)}
-
+    .brand p{margin:2px 0 0; font-size:12px; color: rgba(238,241,255,.72)}
     nav{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
     nav a{
       font-size:13px; padding:8px 10px; border-radius:12px;
       border:1px solid transparent;
-      color:rgba(238,241,255,.88);
+      color: rgba(238,241,255,.88);
     }
-    nav a:hover{border-color:var(--line); background:rgba(255,255,255,.04)}
-
+    nav a:hover{border-color: var(--line); background: rgba(255,255,255,.04)}
     .pill{
       font-size:12px; padding:6px 10px; border-radius:999px;
       border:1px solid var(--line);
-      color:rgba(238,241,255,.78);
-      background:rgba(255,255,255,.04);
+      color: rgba(238,241,255,.78);
+      background: rgba(255,255,255,.04);
       white-space:nowrap;
     }
-
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      gap:10px; padding:10px 14px; border-radius:14px;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:14px;
       border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      font-weight:800; font-size:13px;
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-weight:800;
+      font-size:13px;
       cursor:pointer;
-      transition:transform .08s ease, background .2s ease, border-color .2s ease;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
       user-select:none;
       white-space:nowrap;
     }
-    .btn:hover{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.20)}
-    .btn:active{transform:translateY(1px)}
+    .btn:hover{background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20)}
+    .btn:active{transform: translateY(1px)}
     .btn.primary{
-      border-color:rgba(94,234,212,.35);
-      background:linear-gradient(135deg, var(--accentA), var(--accentB));
+      border-color: rgba(94,234,212,.35);
+      background: linear-gradient(135deg, var(--accentA), var(--accentB));
     }
 
     .updates{
       border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.04);
+      background: rgba(255,255,255,.04);
     }
     .updates-inner{
       display:flex; gap:12px; align-items:center; padding:10px 0;
     }
     .badge{
       font-size:12px; font-weight:900;
-      padding:6px 10px; border-radius:999px;
+      padding:6px 10px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
+      background: rgba(255,255,255,.04);
       white-space:nowrap;
     }
     .ticker{
       overflow:hidden; flex:1;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.10);
+      background: rgba(0,0,0,.10);
     }
     .ticker-track{
-      display:inline-flex; gap:18px; padding:10px 14px;
+      display:inline-flex; gap:18px;
+      padding:10px 14px;
       white-space:nowrap;
-      will-change:transform;
-      animation:scroll 28s linear infinite;
-      color:rgba(238,241,255,.88);
+      will-change: transform;
+      animation: scroll 28s linear infinite;
+      color: rgba(238,241,255,.88);
       font-size:13px;
     }
     .dot{
       display:inline-block; width:6px; height:6px; border-radius:50%;
-      background:rgba(94,234,212,.9);
-      margin:0 6px 1px;
+      background: rgba(94,234,212,.9);
+      margin: 0 6px 1px;
     }
     @keyframes scroll{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-50%)}
+      0%{transform: translateX(0)}
+      100%{transform: translateX(-50%)}
     }
 
     header{padding:44px 0 12px}
     .hero{
       display:grid;
-      grid-template-columns:1.25fr .75fr;
+      grid-template-columns: 1.25fr .75fr;
       gap:14px;
       align-items:stretch;
     }
     section{padding:26px 0}
     .card{
-      background:rgba(16,26,52,.72);
+      background: rgba(16,26,52,.72);
       border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       padding:18px;
     }
     .hero-main{padding:26px; position:relative; overflow:hidden}
@@ -154,30 +158,29 @@
       content:"";
       position:absolute; inset:-140px -140px auto auto;
       width:260px; height:260px; border-radius:50%;
-      background:radial-gradient(circle at 30% 30%, rgba(94,234,212,.22), transparent 60%);
+      background: radial-gradient(circle at 30% 30%, rgba(94,234,212,.22), transparent 60%);
     }
     .tag{
       display:inline-flex; align-items:center; gap:8px;
       padding:6px 10px; border-radius:999px;
       border:1px solid rgba(94,234,212,.25);
-      background:rgba(94,234,212,.08);
+      background: rgba(94,234,212,.08);
       font-size:12px; font-weight:900;
       margin-bottom:10px;
     }
     .hero h2{margin:0 0 8px; font-size:36px; letter-spacing:.6px; line-height:1.12}
     .tagline{margin:0 0 10px; font-weight:900; letter-spacing:.4px}
-    .sub{margin:0; color:var(--muted); font-size:14px; max-width:70ch}
-
+    .sub{margin:0; color: var(--muted); font-size:14px; max-width:70ch}
     .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
     .chip{
       font-size:12px; padding:6px 10px; border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      color:rgba(238,241,255,.82);
+      background: rgba(255,255,255,.04);
+      color: rgba(238,241,255,.82);
     }
 
     .quick .kv{
-      display:grid; grid-template-columns:92px 1fr;
+      display:grid; grid-template-columns: 92px 1fr;
       gap:8px 10px;
       border-top:1px dashed rgba(255,255,255,.16);
       padding-top:12px; margin-top:12px;
@@ -185,15 +188,14 @@
     }
     .quick .kv b{color:var(--text)}
     .quick .kv div{color:rgba(238,241,255,.82)}
-
     .note{
       margin-top:12px;
       font-size:12px;
-      color:rgba(238,241,255,.68);
+      color: rgba(238,241,255,.68);
       padding:10px 12px;
       border-radius:14px;
       border:1px dashed rgba(255,255,255,.18);
-      background:rgba(255,255,255,.03);
+      background: rgba(255,255,255,.03);
     }
 
     .section-title{
@@ -201,22 +203,22 @@
       margin-bottom:12px;
     }
     .section-title h3{margin:0; font-size:22px; letter-spacing:.3px}
-    .section-title p{margin:0; color:var(--muted); font-size:13px}
+    .section-title p{margin:0; color: var(--muted); font-size:13px}
 
-    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
-    .two-col{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    .two-col{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
     .list{margin:0; padding-left:18px}
-    .list li{margin:8px 0; color:rgba(238,241,255,.86); font-size:13px}
+    .list li{margin:8px 0; color: rgba(238,241,255,.86); font-size:13px}
 
-    .form{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .form{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
     .field{display:flex; flex-direction:column; gap:6px}
-    .field label{font-size:12px; color:rgba(238,241,255,.78)}
+    .field label{font-size:12px; color: rgba(238,241,255,.78)}
     .field input, .field select, .field textarea{
       padding:12px 12px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
       outline:none;
       font-size:13px;
     }
@@ -233,15 +235,15 @@
     }
     .field input::placeholder,
     .field textarea::placeholder{
-      color:rgba(238,241,255,.55);
+      color: rgba(238,241,255,.55);
     }
     .field input:focus,
     .field select:focus,
     .field textarea:focus{
-      border-color:rgba(96,165,250,.5);
-      box-shadow:0 0 0 3px rgba(96,165,250,.12);
+      border-color: rgba(96,165,250,.5);
+      box-shadow: 0 0 0 3px rgba(96,165,250,.12);
     }
-    .field textarea{min-height:120px; grid-column:1/-1; resize:vertical}
+    .field textarea{min-height:120px; grid-column: 1/-1; resize:vertical}
     .form-actions{
       grid-column:1/-1;
       display:flex; gap:10px; flex-wrap:wrap;
@@ -249,32 +251,19 @@
       padding-top:4px;
     }
 
-    #ads .grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:18px;
-    }
-    #ads .card{padding:12px}
-    #ads img{
-      width:100%;
-      height:auto;
-      display:block;
-      border-radius:12px;
-    }
-
     footer{
       padding:28px 0 54px;
       border-top:1px solid var(--line);
-      background:rgba(0,0,0,.10);
-      margin-top:14px;
+      background: rgba(0,0,0,.10);
+      margin-top: 14px;
     }
     .footer-grid{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns: 1.1fr .9fr;
       gap:14px;
       align-items:start;
     }
-    .small{font-size:12px; color:rgba(238,241,255,.68)}
+    .small{font-size:12px; color: rgba(238,241,255,.68)}
     .links{display:flex; gap:10px; flex-wrap:wrap}
 
     .wa-float{
@@ -285,14 +274,14 @@
       display:inline-flex; align-items:center; gap:10px;
       padding:12px 14px; border-radius:999px;
       border:1px solid rgba(94,234,212,.35);
-      background:linear-gradient(135deg, var(--accentA), rgba(96,165,250,.14));
-      box-shadow:0 18px 40px rgba(0,0,0,.35);
+      background: linear-gradient(135deg, var(--accentA), rgba(96,165,250,.14));
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
       font-weight:900; font-size:13px;
     }
     .wa-dot{
       width:10px; height:10px; border-radius:50%;
-      background:var(--ok);
-      box-shadow:0 0 0 6px rgba(52,211,153,.12);
+      background: var(--ok);
+      box-shadow: 0 0 0 6px rgba(52,211,153,.12);
     }
 
     @media (max-width: 980px){
@@ -300,7 +289,6 @@
       .grid{grid-template-columns:1fr}
       .two-col{grid-template-columns:1fr}
       .form{grid-template-columns:1fr}
-      #ads .grid{grid-template-columns:1fr}
       nav{justify-content:flex-start}
       .ticker-track{animation-duration:36s}
     }
@@ -316,6 +304,7 @@
     <div class="container">
       <div class="topbar-inner">
         <div class="brand">
+          <a href="#" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
           <img src="digicafe-logo.png" alt="DigiCafe Logo" class="logo" />
           <div>
             <h1>DIGICAFE</h1>
@@ -324,18 +313,19 @@
         </div>
 
         <nav aria-label="Primary navigation">
+          <a href="#">Home</a>
           <a href="#services">Services</a>
           <a href="#pricing">Pricing</a>
           <a href="#how">How it works</a>
           <a href="#documents">Documents</a>
           <a href="#partner">Partner</a>
           <a href="#lead">Get Help</a>
-          <a href="#ads">Ads</a>
           <a href="#contact">Contact</a>
         </nav>
 
         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
           <span class="pill">PAN India • Online Services</span>
+          
         </div>
       </div>
     </div>
@@ -345,6 +335,7 @@
     <div class="container">
       <div class="updates-inner">
         <span class="badge">🔔 Updates</span>
+
         <div class="ticker" role="region" aria-label="Updates Ticker">
           <div class="ticker-track">
             <span>✅ Company registration, firm registration and compliance support available <span class="dot"></span></span>
@@ -358,6 +349,8 @@
             <span>✅ All services are supervised by expert CA / CS / Tax Consultant <span class="dot"></span></span>
           </div>
         </div>
+
+        
       </div>
     </div>
   </div>
@@ -409,14 +402,13 @@
           </div>
 
           <div class="links" style="margin-top:12px;">
+            
             <a class="btn" href="#documents">Document List</a>
           </div>
         </aside>
       </div>
     </div>
-  </header>
-
-  <section id="about">
+    <section id="about">
     <div class="container">
       <div class="section-title">
         <div>
@@ -442,6 +434,7 @@
       </div>
     </div>
   </section>
+</header>
 
   <section id="services">
     <div class="container">
@@ -536,6 +529,7 @@
       </div>
 
       <div class="two-col">
+
         <div class="card">
           <h4>Company Secretarial Services</h4>
           <ul class="list">
@@ -584,6 +578,7 @@
             <li>DSC (Class 3 - 2 Years) — ₹1,500</li>
           </ul>
         </div>
+
       </div>
 
       <div class="note">
@@ -706,6 +701,7 @@
           <h4 style="margin:0 0 8px;">Start Partnership</h4>
           <p class="small" style="margin:0 0 10px;">Chat on WhatsApp and send: <b>PARTNER</b></p>
           <div class="links">
+            
             <a class="btn" href="mailto:vikashpathak.mgmt@gmail.com">Email</a>
           </div>
           <div class="note"><b>Tagline:</b> Our Service, Your Solution</div>
@@ -730,17 +726,14 @@
             <label>Full Name</label>
             <input placeholder="Your name" required />
           </div>
-
           <div class="field">
             <label>Mobile Number</label>
             <input placeholder="10-digit number" required />
           </div>
-
           <div class="field">
             <label>Email (optional)</label>
             <input placeholder="you@example.com" />
           </div>
-
           <div class="field">
             <label>Service Needed</label>
             <select required>
@@ -757,6 +750,7 @@
               <option>Other</option>
             </select>
           </div>
+          
 
           <div class="field">
             <label>Deadline (optional)</label>
@@ -789,30 +783,13 @@
       </div>
 
       <div class="grid">
-        <div class="card">
-          <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20GST%20Registration" target="_blank" rel="noopener">
-            <img src="ad1.png" alt="" />
-          </a>
-        </div>
-
-        <div class="card">
-          <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Income%20Tax%20Filing" target="_blank" rel="noopener">
-            <img src="ad2.png" alt="" />
-          </a>
-        </div>
-
-        <div class="card">
-          <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Company%20or%20LLP%20Registration" target="_blank" rel="noopener">
-            <img src="ad3.png" alt="" />
-          </a>
-        </div>
-
-        <div class="card">
-          <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Udyam%20or%20MSME%20Registration" target="_blank" rel="noopener">
-            <img src="ad4.png" alt="" />
-          </a>
-        </div>
+        <div class="card"><img src="ad1.png" style="width:100%;border-radius:12px;" alt=""/></div>
+        <div class="card"><img src="ad2.png" style="width:100%;border-radius:12px;" alt=""/></div>
+        <div class="card"><img src="ad3.png" style="width:100%;border-radius:12px;" alt=""/></div>
+        <div class="card"><img src="ad4.png" style="width:100%;border-radius:12px;" alt=""/></div>
       </div>
+
+      
     </div>
   </section>
 
@@ -830,13 +807,14 @@
           <h4 style="margin:0 0 8px;">Business Details</h4>
           <p style="margin:0 0 6px;"><b>Owner:</b> Vikash Pathak</p>
           <p style="margin:0 0 6px;"><b>Address:</b> J 1301 Kolte Patil Raaga, Kannuru, Bangalore 560077</p>
-          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=J+1301+Kolte+Patil+Raaga+Kannuru+Bangalore+560077" target="_blank" rel="noopener">View on Google Maps</a>
-          <p style="margin:10px 0 6px;"><b>Location:</b> India (Online Services Available)</p>
-          <p style="margin:0 0 6px;"><b>Mobile:</b> +91 85399 79271</p>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=J+1301+Kolte+Patil+Raaga+Kannuru+Bangalore+560077" target="_blank">View on Google Maps</a>
+          <p style="margin:0 0 6px;"><b>Location:</b> India (Online Services Available)</p>
+          <p style="margin:0 0 6px;"><b>Mobile:</b> <span>+91 85399 79271</span></p>
           <p style="margin:0 0 6px;"><b>Email:</b> <a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
           <p style="margin:0 0 6px;"><b>Working Hours:</b> Mon–Sat | 10 AM – 8 PM</p>
 
           <div class="links" style="margin-top:10px;">
+            
             <a class="btn" href="#lead">Request Help</a>
           </div>
 
@@ -869,7 +847,6 @@
           <p class="small" style="margin:6px 0;"><b>Our Service, Your Solution</b></p>
           <p class="small">© <span id="year"></span> DigiCafe. All rights reserved.</p>
         </div>
-
         <div>
           <p class="small" style="margin:6px 0;"><b>Address:</b> J 1301 Kolte Patil Raaga, Kannuru, Bangalore 560077</p>
           <p class="small" style="margin:6px 0;"><b>Mobile:</b> +91 85399 79271</p>
@@ -877,6 +854,7 @@
           <div class="links" style="margin-top:10px;">
             <a class="btn" href="#services">Services</a>
             <a class="btn" href="#pricing">Pricing</a>
+            
           </div>
         </div>
       </div>
@@ -892,20 +870,19 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
     function sendMail(e){
-      e.preventDefault();
+    e.preventDefault();
 
-      const name = document.querySelector('input[placeholder="Your name"]').value.trim();
-      const mobile = document.querySelector('input[placeholder="10-digit number"]').value.trim();
-      const email = document.querySelector('input[placeholder="you@example.com"]').value.trim() || 'Not provided';
-      const service = document.querySelector('select').value.trim();
-      const deadline = document.querySelector('input[placeholder="e.g., Today / This week / Date"]').value.trim() || 'Not specified';
-      const notes = document.querySelector('textarea').value.trim() || 'No additional notes';
+    const name = document.querySelector('input[placeholder="Your name"]').value.trim();
+    const mobile = document.querySelector('input[placeholder="10-digit number"]').value.trim();
+    const email = document.querySelector('input[placeholder="you@example.com"]').value.trim() || 'Not provided';
+    const service = document.querySelector('select').value.trim();
+    const deadline = document.querySelector('input[placeholder="e.g., Today / This week / Date"]').value.trim() || 'Not specified';
+    const notes = document.querySelector('textarea').value.trim() || 'No additional notes';
 
-      const subject = encodeURIComponent(`Service Request | ${service} | ${name}`);
+    const subject = encodeURIComponent(`Service Request | ${service} | ${name}`);
 
-      const body = encodeURIComponent(
+    const body = encodeURIComponent(
 `Hello DigiCafe,
 
 Please find my service request details below.
@@ -928,10 +905,10 @@ Please contact me regarding this request.
 
 Regards,
 ${name}`
-      );
+    );
 
-      window.location.href = `mailto:vikashpathak.mgmt@gmail.com?subject=${subject}&body=${body}`;
-    }
-  </script>
+    window.location.href = `mailto:vikashpathak.mgmt@gmail.com?subject=${subject}&body=${body}`;
+  }
+</script>
 </body>
 </html>
