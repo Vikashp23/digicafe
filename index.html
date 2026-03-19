@@ -1,36 +1,937 @@
-<section id="ads">
-  <div class="container">
-    <div class="section-title">
-      <div>
-        <h3>Our Advertisements</h3>
-        <p>Explore DigiCafe promotional creatives.</p>
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DigiCafe Services — Our Service, Your Solution. Income Tax, GST, DSC, Trademark, Company/LLP, PAN/TAN." />
+  <title>DigiCafe Services | Our Service, Your Solution</title>
 
-    <div class="grid">
-      <div class="card">
-        <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20GST%20Registration" target="_blank" rel="noopener">
-          <img src="ad1.png" alt="" style="width:100%; border-radius:12px; display:block;" />
-        </a>
-      </div>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#101a34;
+      --text:#eef1ff;
+      --muted:rgba(238,241,255,.72);
+      --line:rgba(255,255,255,.12);
+      --shadow:0 14px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --accentA:rgba(94,234,212,.18);
+      --accentB:rgba(96,165,250,.14);
+      --ok:#34d399;
+    }
 
-      <div class="card">
-        <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Income%20Tax%20Filing" target="_blank" rel="noopener">
-          <img src="ad2.png" alt="" style="width:100%; border-radius:12px; display:block;" />
-        </a>
-      </div>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.26), transparent 60%),
+        radial-gradient(900px 500px at 80% 0%, rgba(94,234,212,.18), transparent 55%),
+        radial-gradient(900px 600px at 50% 110%, rgba(251,191,36,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
 
-      <div class="card">
-        <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Company%20or%20LLP%20Registration" target="_blank" rel="noopener">
-          <img src="ad3.png" alt="" style="width:100%; border-radius:12px; display:block;" />
-        </a>
-      </div>
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1180px; margin:0 auto; padding:0 18px}
 
-      <div class="card">
-        <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Udyam%20or%20MSME%20Registration" target="_blank" rel="noopener">
-          <img src="ad4.png" alt="" style="width:100%; border-radius:12px; display:block;" />
-        </a>
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:rgba(11,16,32,.84);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      padding:14px 0; flex-wrap:wrap;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
+    .logo{
+      width:72px;
+      height:72px;
+      object-fit:contain;
+      border-radius:12px;
+      display:block;
+      background:transparent;
+      box-shadow:none;
+      flex-shrink:0;
+    }
+    .brand h1{margin:0; font-size:16px; letter-spacing:.6px}
+    .brand p{margin:2px 0 0; font-size:12px; color:rgba(238,241,255,.72)}
+
+    nav{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
+    nav a{
+      font-size:13px; padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+      color:rgba(238,241,255,.88);
+    }
+    nav a:hover{border-color:var(--line); background:rgba(255,255,255,.04)}
+
+    .pill{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      color:rgba(238,241,255,.78);
+      background:rgba(255,255,255,.04);
+      white-space:nowrap;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px; padding:10px 14px; border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:800; font-size:13px;
+      cursor:pointer;
+      transition:transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.20)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      border-color:rgba(94,234,212,.35);
+      background:linear-gradient(135deg, var(--accentA), var(--accentB));
+    }
+
+    .updates{
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+    }
+    .updates-inner{
+      display:flex; gap:12px; align-items:center; padding:10px 0;
+    }
+    .badge{
+      font-size:12px; font-weight:900;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      white-space:nowrap;
+    }
+    .ticker{
+      overflow:hidden; flex:1;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.10);
+    }
+    .ticker-track{
+      display:inline-flex; gap:18px; padding:10px 14px;
+      white-space:nowrap;
+      will-change:transform;
+      animation:scroll 28s linear infinite;
+      color:rgba(238,241,255,.88);
+      font-size:13px;
+    }
+    .dot{
+      display:inline-block; width:6px; height:6px; border-radius:50%;
+      background:rgba(94,234,212,.9);
+      margin:0 6px 1px;
+    }
+    @keyframes scroll{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+
+    header{padding:44px 0 12px}
+    .hero{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    section{padding:26px 0}
+    .card{
+      background:rgba(16,26,52,.72);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    .hero-main{padding:26px; position:relative; overflow:hidden}
+    .hero-main:before{
+      content:"";
+      position:absolute; inset:-140px -140px auto auto;
+      width:260px; height:260px; border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(94,234,212,.22), transparent 60%);
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(94,234,212,.25);
+      background:rgba(94,234,212,.08);
+      font-size:12px; font-weight:900;
+      margin-bottom:10px;
+    }
+    .hero h2{margin:0 0 8px; font-size:36px; letter-spacing:.6px; line-height:1.12}
+    .tagline{margin:0 0 10px; font-weight:900; letter-spacing:.4px}
+    .sub{margin:0; color:var(--muted); font-size:14px; max-width:70ch}
+
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
+    .chip{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      color:rgba(238,241,255,.82);
+    }
+
+    .quick .kv{
+      display:grid; grid-template-columns:92px 1fr;
+      gap:8px 10px;
+      border-top:1px dashed rgba(255,255,255,.16);
+      padding-top:12px; margin-top:12px;
+      font-size:13px;
+    }
+    .quick .kv b{color:var(--text)}
+    .quick .kv div{color:rgba(238,241,255,.82)}
+
+    .note{
+      margin-top:12px;
+      font-size:12px;
+      color:rgba(238,241,255,.68);
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(255,255,255,.18);
+      background:rgba(255,255,255,.03);
+    }
+
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin-bottom:12px;
+    }
+    .section-title h3{margin:0; font-size:22px; letter-spacing:.3px}
+    .section-title p{margin:0; color:var(--muted); font-size:13px}
+
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .two-col{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .list{margin:0; padding-left:18px}
+    .list li{margin:8px 0; color:rgba(238,241,255,.86); font-size:13px}
+
+    .form{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .field{display:flex; flex-direction:column; gap:6px}
+    .field label{font-size:12px; color:rgba(238,241,255,.78)}
+    .field input, .field select, .field textarea{
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
+      font-size:13px;
+    }
+    .field select{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      background-color:#16213f;
+      color:#eef1ff;
+    }
+    .field select option{
+      background:#16213f;
+      color:#eef1ff;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder{
+      color:rgba(238,241,255,.55);
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 3px rgba(96,165,250,.12);
+    }
+    .field textarea{min-height:120px; grid-column:1/-1; resize:vertical}
+    .form-actions{
+      grid-column:1/-1;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      padding-top:4px;
+    }
+
+    #ads .grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+    #ads .card{padding:12px}
+    #ads img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+    }
+
+    footer{
+      padding:28px 0 54px;
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.10);
+      margin-top:14px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+      align-items:start;
+    }
+    .small{font-size:12px; color:rgba(238,241,255,.68)}
+    .links{display:flex; gap:10px; flex-wrap:wrap}
+
+    .wa-float{
+      position:fixed; right:16px; bottom:16px; z-index:80;
+      display:flex; flex-direction:column; gap:10px; align-items:flex-end;
+    }
+    .wa-btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px; border-radius:999px;
+      border:1px solid rgba(94,234,212,.35);
+      background:linear-gradient(135deg, var(--accentA), rgba(96,165,250,.14));
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+      font-weight:900; font-size:13px;
+    }
+    .wa-dot{
+      width:10px; height:10px; border-radius:50%;
+      background:var(--ok);
+      box-shadow:0 0 0 6px rgba(52,211,153,.12);
+    }
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      .form{grid-template-columns:1fr}
+      #ads .grid{grid-template-columns:1fr}
+      nav{justify-content:flex-start}
+      .ticker-track{animation-duration:36s}
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const WA_CHAT = "https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20your%20services";
+  </script>
+
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <img src="digicafe-logo.png" alt="DigiCafe Logo" class="logo" />
+          <div>
+            <h1>DIGICAFE</h1>
+            <p>Our Service, Your Solution</p>
+          </div>
+        </div>
+
+        <nav aria-label="Primary navigation">
+          <a href="#services">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#how">How it works</a>
+          <a href="#documents">Documents</a>
+          <a href="#partner">Partner</a>
+          <a href="#lead">Get Help</a>
+          <a href="#ads">Ads</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <span class="pill">PAN India • Online Services</span>
+        </div>
       </div>
     </div>
   </div>
-</section>
+
+  <div class="updates" aria-label="Latest Updates">
+    <div class="container">
+      <div class="updates-inner">
+        <span class="badge">🔔 Updates</span>
+        <div class="ticker" role="region" aria-label="Updates Ticker">
+          <div class="ticker-track">
+            <span>✅ Company registration, firm registration and compliance support available <span class="dot"></span></span>
+            <span>✅ Income Tax: PAN, TAN, ITR, TDS returns and tax planning support <span class="dot"></span></span>
+            <span>✅ GST: Registration, return filing and compliance support available <span class="dot"></span></span>
+            <span>✅ All services are supervised by expert CA / CS / Tax Consultant <span class="dot"></span></span>
+
+            <span>✅ Company registration, firm registration and compliance support available <span class="dot"></span></span>
+            <span>✅ Income Tax: PAN, TAN, ITR, TDS returns and tax planning support <span class="dot"></span></span>
+            <span>✅ GST: Registration, return filing and compliance support available <span class="dot"></span></span>
+            <span>✅ All services are supervised by expert CA / CS / Tax Consultant <span class="dot"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="hero">
+        <div class="card hero-main">
+          <span class="tag">Fast • Trusted • Online Support</span>
+          <h2>DIGICAFE</h2>
+          <p class="tagline">Our Service, Your Solution</p>
+          <p class="sub">
+            DigiCafe is a group of tax enthusiasts and experienced professionals in India offering consultancy and taxation support for individuals, startups, firms and companies. We help with direct taxation, indirect taxation, registration services, bookkeeping support and business compliance guidance.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Company Secretarial Services</span>
+            <span class="chip">Income Tax</span>
+            <span class="chip">GST</span>
+            <span class="chip">Business Registration</span>
+            <span class="chip">Bookkeeping Support</span>
+            <span class="chip">PAN / TAN</span>
+            <span class="chip">Transparent Pricing</span>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+            <a class="btn primary" href="#lead">Get Assistance</a>
+            <a class="btn" href="#services">View Services</a>
+            <a class="btn" href="#pricing">View Pricing</a>
+            <a class="btn" href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20your%20services" target="_blank" rel="noopener">Chat Now</a>
+          </div>
+        </div>
+
+        <aside class="card quick">
+          <h3 style="margin:0 0 6px;">Quick Contact</h3>
+          <p class="small" style="margin:0;">Owner: <b>Vikash Pathak</b></p>
+
+          <div class="kv">
+            <div><b>Location</b></div><div>India (Online Services)</div>
+            <div><b>Email</b></div><div><a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></div>
+            <div><b>Hours</b></div><div>Mon–Sat • 10 AM – 8 PM</div>
+          </div>
+
+          <div class="note">
+            <b>Quick Steps:</b><br/>
+            1) Fill the request form<br/>
+            2) Chat on WhatsApp<br/>
+            3) Send your name + service
+          </div>
+
+          <div class="links" style="margin-top:12px;">
+            <a class="btn" href="#documents">Document List</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>About DigiCafe</h3>
+          <p>Our Service, Your Solution</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h4 style="margin:0 0 8px;">Who We Are</h4>
+          <p style="margin:0; color:var(--muted); font-size:14px;">
+            We, DigiCafe, are a group of tax enthusiasts and tax experts in India with a passion to provide full-fledged consultancy and taxation services. Our consultancy includes direct taxation, indirect taxation, registration services, bookkeeping for corporate and non-corporate sectors.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 8px;">What We Do</h4>
+          <p style="margin:0; color:var(--muted); font-size:14px;">
+            We take care of tax return filing, business setup support, maintenance of books of accounts and guidance in different aspects of your business. All major services are supervised by expert CA, CS and tax consultants.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Our Services</h3>
+          <p>Professional support for individuals, startups & MSMEs.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h4 style="margin:0 0 6px;">✅ Company Secretarial Services</h4>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:13px;">Business registration and legal setup support for startups, firms and organisations.</p>
+          <ul class="list">
+            <li>Company Registration</li>
+            <li>Firm / Partnership Registration</li>
+            <li>ESI Registration</li>
+            <li>Provident Fund (PF) Registration</li>
+            <li>Trust Registration</li>
+            <li>Trade License Support</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 6px;">✅ Income Tax Services</h4>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:13px;">Complete tax support for individuals, professionals and businesses.</p>
+          <ul class="list">
+            <li>Getting PAN</li>
+            <li>Getting TAN</li>
+            <li>Filing of IT Returns</li>
+            <li>e-Filing of TDS Returns</li>
+            <li>Tax Refund Support</li>
+            <li>Consultancy on Tax Planning & Savings</li>
+            <li>Maintenance of IT Records</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 6px;">✅ GST Services</h4>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:13px;">Registration, return preparation and regular compliance assistance.</p>
+          <ul class="list">
+            <li>Obtaining GST Registration</li>
+            <li>Preparation of GST Returns</li>
+            <li>Online Monthly / Yearly GST e-Filing</li>
+            <li>Preparation of Necessary Forms & Registers</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 6px;">✅ Digital Signature (DSC)</h4>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:13px;">Class 3 DSC for individual and organisation use cases.</p>
+          <ul class="list">
+            <li>New DSC / Renewal</li>
+            <li>Token support</li>
+            <li>MCA, GST, Income Tax, Tender usage</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 6px;">✅ Trademark & Business Support</h4>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:13px;">Support for brand protection and business compliance coordination.</p>
+          <ul class="list">
+            <li>Trademark Registration</li>
+            <li>Reply / Objection support</li>
+            <li>Renewal / Status Tracking</li>
+            <li>Bookkeeping and compliance coordination</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 6px;">✅ Other Digital Services</h4>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:13px;">Quick support for common registrations and online documentation.</p>
+          <ul class="list">
+            <li>PAN / TAN</li>
+            <li>Udyam / MSME</li>
+            <li>Government portal support</li>
+            <li>Online documentation assistance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Pricing</h3>
+          <p>Transparent pricing for all DigiCafe services.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h4>Company Secretarial Services</h4>
+          <ul class="list">
+            <li>Company Registration — ₹9,999</li>
+            <li>Firm Registration — ₹7,499</li>
+            <li>ESI Registration — ₹5,999</li>
+            <li>PF Registration — ₹6,499</li>
+            <li>Trust Registration — ₹12,499</li>
+            <li>Trade License — ₹4,999</li>
+            <li>Director Appointment/Resignation — ₹4,000</li>
+            <li>Director KYC — ₹2,000</li>
+            <li>Annual Filing — ₹8,000</li>
+            <li>P&L + Balance Sheet — Price on Request</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Income Tax Services</h4>
+          <ul class="list">
+            <li>PAN — ₹1,999</li>
+            <li>TAN — ₹2,499</li>
+            <li>ITR Filing — ₹3,999</li>
+            <li>TDS Return — ₹2,999</li>
+            <li>Tax Refund — ₹2,499</li>
+            <li>Tax Planning — ₹6,499</li>
+            <li>IT Record Maintenance — ₹3,499</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>GST Services</h4>
+          <ul class="list">
+            <li>GST Registration — ₹5,999</li>
+            <li>GST Return (Monthly) — ₹4,999</li>
+            <li>GST Return (Yearly) — ₹49,999</li>
+            <li>GST Forms & Registers — ₹3,499</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Other Services</h4>
+          <ul class="list">
+            <li>Aadhaar Update — ₹1,499</li>
+            <li>FSSAI License — ₹1,500</li>
+            <li>Bookkeeping — ₹3,499/month</li>
+            <li>DSC (Class 3 - 2 Years) — ₹1,500</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note">
+        <b>Note:</b> Prices may vary based on complexity, urgency, government fees, and documentation requirements.
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>How DigiCafe Works</h3>
+          <p>Simple, clear steps for faster processing.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h4 style="margin:0 0 6px;">1) Share Requirement</h4>
+          <p style="margin:0; color:var(--muted); font-size:13px;">Fill the request form and mention service & deadline.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin:0 0 6px;">2) Submit Documents</h4>
+          <p style="margin:0; color:var(--muted); font-size:13px;">Use the checklist below to keep documents ready.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin:0 0 6px;">3) Track & Complete</h4>
+          <p style="margin:0; color:var(--muted); font-size:13px;">Chat on WhatsApp for updates and quick guidance.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <b>Safety note:</b> Never share OTP or passwords in public messages. We ask only required documents.
+      </div>
+    </div>
+  </section>
+
+  <section id="documents">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Required Documents (Checklists)</h3>
+          <p>Keep ready for faster processing.</p>
+        </div>
+        <a class="btn primary" href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20your%20services" target="_blank" rel="noopener">Chat Now</a>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h4 style="margin:0 0 8px;">Income Tax (ITR) Checklist</h4>
+          <ul class="list">
+            <li><b>Basic:</b> PAN, Aadhaar, mobile/email, bank details (IFSC)</li>
+            <li><b>Verification:</b> Form 26AS + AIS + TIS (TDS/income matching)</li>
+            <li><b>Salaried:</b> Form 16, salary slips, rent details (if any)</li>
+            <li><b>Other income:</b> bank interest certificate, FD interest, etc.</li>
+            <li><b>Deductions:</b> 80C/80D proofs, donations (80G) if applicable</li>
+            <li><b>Capital gains:</b> stock/MF statement, contract notes; property sale deed</li>
+            <li><b>Business:</b> P&L/Balance Sheet, bank statements, GST & TDS details (if any)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 8px;">GST Checklist</h4>
+          <ul class="list">
+            <li><b>Registration:</b> PAN, Aadhaar, photo, mobile/email, bank proof</li>
+            <li><b>Business proof:</b> address proof (bill/lease/NOC), nature of business</li>
+            <li><b>Returns:</b> sales & purchase invoices, debit/credit notes</li>
+            <li><b>ITC:</b> GSTR-2B reconciliation + purchase register</li>
+            <li><b>Notice reply:</b> notice copy + supporting invoices/statements</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top:14px;">
+        <div class="card">
+          <h4 style="margin:0 0 8px;">DSC (Digital Signature) Checklist</h4>
+          <ul class="list">
+            <li>Photo + Signature</li>
+            <li>PAN</li>
+            <li>Aadhaar Card</li>
+            <li>Mobile number + Email address</li>
+            <li><b>Organisation DSC:</b> authorization/proof (if applicable)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 8px;">Quick Digital Services</h4>
+          <ul class="list">
+            <li><b>PAN:</b> photo/sign, Aadhaar, Aadhaar-linked mobile, email</li>
+            <li><b>Driving Licence:</b> photo/sign, Aadhaar, PAN, blood group proof, 10th proof</li>
+            <li><b>IRCTC e-ticket:</b> Aadhaar Card, PAN Card, mobile & email</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="partner">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Partner With DigiCafe</h3>
+          <p>For CA/CS/Advocates/Tax Practitioners — outsource tasks & deliver faster.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h4 style="margin:0 0 8px;">Why Partner With Us?</h4>
+          <ul class="list">
+            <li>Back-end support for ITR / GST / DSC / Registrations</li>
+            <li>Standard checklist-based processing</li>
+            <li>Quick coordination & updates</li>
+            <li>Suitable for referrals and outsourcing</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 8px;">Start Partnership</h4>
+          <p class="small" style="margin:0 0 10px;">Chat on WhatsApp and send: <b>PARTNER</b></p>
+          <div class="links">
+            <a class="btn" href="mailto:vikashpathak.mgmt@gmail.com">Email</a>
+          </div>
+          <div class="note"><b>Tagline:</b> Our Service, Your Solution</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lead">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Request Help</h3>
+          <p>Fill the form below and send a structured request by email.</p>
+        </div>
+        <a class="btn primary" href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20your%20services" target="_blank" rel="noopener">Chat Now</a>
+      </div>
+
+      <div class="card">
+        <form class="form" onsubmit="sendMail(event)">
+          <div class="field">
+            <label>Full Name</label>
+            <input placeholder="Your name" required />
+          </div>
+
+          <div class="field">
+            <label>Mobile Number</label>
+            <input placeholder="10-digit number" required />
+          </div>
+
+          <div class="field">
+            <label>Email (optional)</label>
+            <input placeholder="you@example.com" />
+          </div>
+
+          <div class="field">
+            <label>Service Needed</label>
+            <select required>
+              <option value="">Select</option>
+              <option>ITR Filing</option>
+              <option>GST Registration</option>
+              <option>GST Return Filing</option>
+              <option>GST Notice Reply</option>
+              <option>DSC (New/Renewal)</option>
+              <option>PAN / TAN</option>
+              <option>Trademark</option>
+              <option>Company / LLP</option>
+              <option>Udyam / MSME</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Deadline (optional)</label>
+            <input placeholder="e.g., Today / This week / Date" />
+          </div>
+
+          <div class="field" style="grid-column:1/-1;">
+            <label>Notes</label>
+            <textarea placeholder="Write briefly: GSTIN/PAN (optional), income type, notice details, or service requirement."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <span class="small">
+              Your request will open a structured email draft to DigiCafe.
+            </span>
+            <button type="submit" class="btn primary">Submit Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="ads">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Our Advertisements</h3>
+          <p>Explore DigiCafe promotional creatives.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20GST%20Registration" target="_blank" rel="noopener">
+            <img src="ad1.png" alt="" />
+          </a>
+        </div>
+
+        <div class="card">
+          <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Income%20Tax%20Filing" target="_blank" rel="noopener">
+            <img src="ad2.png" alt="" />
+          </a>
+        </div>
+
+        <div class="card">
+          <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Company%20or%20LLP%20Registration" target="_blank" rel="noopener">
+            <img src="ad3.png" alt="" />
+          </a>
+        </div>
+
+        <div class="card">
+          <a href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20Udyam%20or%20MSME%20Registration" target="_blank" rel="noopener">
+            <img src="ad4.png" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Contact DigiCafe</h3>
+          <p>Fast response & genuine guidance.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h4 style="margin:0 0 8px;">Business Details</h4>
+          <p style="margin:0 0 6px;"><b>Owner:</b> Vikash Pathak</p>
+          <p style="margin:0 0 6px;"><b>Address:</b> J 1301 Kolte Patil Raaga, Kannuru, Bangalore 560077</p>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=J+1301+Kolte+Patil+Raaga+Kannuru+Bangalore+560077" target="_blank" rel="noopener">View on Google Maps</a>
+          <p style="margin:10px 0 6px;"><b>Location:</b> India (Online Services Available)</p>
+          <p style="margin:0 0 6px;"><b>Mobile:</b> +91 85399 79271</p>
+          <p style="margin:0 0 6px;"><b>Email:</b> <a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
+          <p style="margin:0 0 6px;"><b>Working Hours:</b> Mon–Sat | 10 AM – 8 PM</p>
+
+          <div class="links" style="margin-top:10px;">
+            <a class="btn" href="#lead">Request Help</a>
+          </div>
+
+          <div class="note">
+            <b>Our Service, Your Solution</b><br/>
+            Pricing is shared transparently before work starts.
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 8px;">FAQ</h4>
+          <ul class="list">
+            <li><b>Do you provide online service?</b> Yes, PAN India online support.</li>
+            <li><b>Do you need OTP?</b> OTP may be required for verification — never share OTP publicly.</li>
+            <li><b>How fast is processing?</b> Depends on service and document readiness.</li>
+          </ul>
+          <div class="note">
+            For fastest response: Click WhatsApp → send your requirement.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 style="margin:0 0 8px;">DigiCafe Services</h3>
+          <p class="small" style="margin:6px 0;"><b>Our Service, Your Solution</b></p>
+          <p class="small">© <span id="year"></span> DigiCafe. All rights reserved.</p>
+        </div>
+
+        <div>
+          <p class="small" style="margin:6px 0;"><b>Address:</b> J 1301 Kolte Patil Raaga, Kannuru, Bangalore 560077</p>
+          <p class="small" style="margin:6px 0;"><b>Mobile:</b> +91 85399 79271</p>
+          <p class="small" style="margin:6px 0;"><b>Email:</b> <a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
+          <div class="links" style="margin-top:10px;">
+            <a class="btn" href="#services">Services</a>
+            <a class="btn" href="#pricing">Pricing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="wa-float" aria-label="WhatsApp floating button">
+    <a class="wa-btn" href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20your%20services" target="_blank" rel="noopener">
+      <span class="wa-dot" aria-hidden="true"></span>
+      Chat on WhatsApp
+    </a>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function sendMail(e){
+      e.preventDefault();
+
+      const name = document.querySelector('input[placeholder="Your name"]').value.trim();
+      const mobile = document.querySelector('input[placeholder="10-digit number"]').value.trim();
+      const email = document.querySelector('input[placeholder="you@example.com"]').value.trim() || 'Not provided';
+      const service = document.querySelector('select').value.trim();
+      const deadline = document.querySelector('input[placeholder="e.g., Today / This week / Date"]').value.trim() || 'Not specified';
+      const notes = document.querySelector('textarea').value.trim() || 'No additional notes';
+
+      const subject = encodeURIComponent(`Service Request | ${service} | ${name}`);
+
+      const body = encodeURIComponent(
+`Hello DigiCafe,
+
+Please find my service request details below.
+
+---------------------------------
+SERVICE REQUEST DETAILS
+---------------------------------
+Full Name       : ${name}
+Mobile Number   : ${mobile}
+Email ID        : ${email}
+Service Needed  : ${service}
+Preferred Time  : ${deadline}
+
+Additional Notes:
+${notes}
+
+---------------------------------
+Please contact me regarding this request.
+---------------------------------
+
+Regards,
+${name}`
+      );
+
+      window.location.href = `mailto:vikashpathak.mgmt@gmail.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
