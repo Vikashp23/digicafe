@@ -51,9 +51,14 @@
     }
     .brand{display:flex; align-items:center; gap:12px; min-width:240px}
     .logo{
-      width:40px; height:40px; border-radius:14px;
-      background: linear-gradient(135deg, rgba(94,234,212,.95), rgba(96,165,250,.95));
-      box-shadow: 0 14px 34px rgba(96,165,250,.22);
+      width:72px;
+      height:72px;
+      object-fit:contain;
+      border-radius:12px;
+      display:block;
+      background: transparent;
+      box-shadow:none;
+      flex-shrink:0;
     }
     .brand h1{margin:0; font-size:16px; letter-spacing:.6px}
     .brand p{margin:2px 0 0; font-size:12px; color: rgba(238,241,255,.72)}
@@ -217,6 +222,27 @@
       outline:none;
       font-size:13px;
     }
+    .field select{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      background-color:#16213f;
+      color:#eef1ff;
+    }
+    .field select option{
+      background:#16213f;
+      color:#eef1ff;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder{
+      color: rgba(238,241,255,.55);
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color: rgba(96,165,250,.5);
+      box-shadow: 0 0 0 3px rgba(96,165,250,.12);
+    }
     .field textarea{min-height:120px; grid-column: 1/-1; resize:vertical}
     .form-actions{
       grid-column:1/-1;
@@ -278,7 +304,7 @@
     <div class="container">
       <div class="topbar-inner">
         <div class="brand">
-          <img src="digicafe-logo.png" alt="DigiCafe Logo" class="logo" style="width:120px;height:auto;border-radius:10px;background:none;" />
+          <img src="digicafe-logo.png" alt="DigiCafe Logo" class="logo" />
           <div>
             <h1>DIGICAFE</h1>
             <p>Our Service, Your Solution</p>
@@ -369,8 +395,8 @@
           <div class="note">
             <b>Quick Steps:</b><br/>
             1) Fill the request form<br/>
-            2) Join WhatsApp group<br/>
-            3) Post “SERVICE REQUEST” + your name
+            2) Chat on WhatsApp<br/>
+            3) Send your name + service
           </div>
 
           <div class="links" style="margin-top:12px;">
@@ -579,7 +605,7 @@
         </div>
         <div class="card">
           <h4 style="margin:0 0 6px;">3) Track & Complete</h4>
-          <p style="margin:0; color:var(--muted); font-size:13px;">Join WhatsApp group for updates and quick guidance.</p>
+          <p style="margin:0; color:var(--muted); font-size:13px;">Chat on WhatsApp for updates and quick guidance.</p>
         </div>
       </div>
 
@@ -671,7 +697,7 @@
 
         <div class="card">
           <h4 style="margin:0 0 8px;">Start Partnership</h4>
-          <p class="small" style="margin:0 0 10px;">Join the group and post: <b>PARTNER</b></p>
+          <p class="small" style="margin:0 0 10px;">Chat on WhatsApp and send: <b>PARTNER</b></p>
           <div class="links">
             
             <a class="btn" href="mailto:vikashpathak.mgmt@gmail.com">Email</a>
@@ -687,7 +713,7 @@
       <div class="section-title">
         <div>
           <h3>Request Help</h3>
-          <p>Fill details. After joining the group, post “SERVICE REQUEST”.</p>
+          <p>Fill details. Then chat on WhatsApp with your requirement.</p>
         </div>
         <a class="btn primary" href="https://wa.me/918539979271?text=Hi%20Digicafe,%20I%20need%20help%20with%20your%20services" target="_blank" rel="noopener">Chat Now</a>
       </div>
@@ -736,11 +762,33 @@
 
           <div class="form-actions">
             <span class="small">
-              Note: WhatsApp group invite link cannot auto-send your message. After joining, post “SERVICE REQUEST” with your name & service.
+              Note: WhatsApp button opens a direct chat with a ready message. You can edit it before sending.
             </span>
             
           </div>
         </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="ads">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Our Advertisements</h3>
+          <p>Explore DigiCafe promotional creatives.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card"><img src="ad1.png" style="width:100%;border-radius:12px;" alt="Ad 1"/></div>
+        <div class="card"><img src="ad2.png" style="width:100%;border-radius:12px;" alt="Ad 2"/></div>
+        <div class="card"><img src="ad3.png" style="width:100%;border-radius:12px;" alt="Ad 3"/></div>
+        <div class="card"><img src="ad4.png" style="width:100%;border-radius:12px;" alt="Ad 4"/></div>
+      </div>
+
+      <div class="note">
+        Tip: Replace ad1.png, ad2.png etc. with your actual image file names.
       </div>
     </div>
   </section>
@@ -784,7 +832,7 @@
             <li><b>How fast is processing?</b> Depends on service and document readiness.</li>
           </ul>
           <div class="note">
-            For fastest response: Join group → Post “SERVICE REQUEST”.
+            For fastest response: Click WhatsApp → send your requirement.
           </div>
         </div>
       </div>
