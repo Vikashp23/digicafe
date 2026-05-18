@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiCafe - Our Service, Your Solution | Tax, GST & Compliance Services India</title>
-    <meta name="description" content="DigiCafe provides expert CA/CS support for Company Registration, GST, ITR, DSC, MSME, Trademark services across India. Transparent pricing, trusted compliance partner.">
+    <title>DigiCafe - Professional Tax & Compliance Automation Platform | Our Service, Your Solution</title>
+    <meta name="description" content="Complete SaaS platform for ITR, GST, TDS, MCA, DSC, Trademark services. AI-powered automation, client portal, and compliance management.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-bg: #0a0e27;
-            --secondary-bg: #111729;
-            --card-bg: rgba(17, 23, 41, 0.6);
-            --neon-green: #00ff88;
-            --neon-blue: #00d4ff;
+            --bg-primary: #0a0d1a;
+            --bg-secondary: #111525;
+            --bg-tertiary: #1a1f35;
+            --surface: rgba(26, 31, 53, 0.6);
+            --surface-elevated: rgba(26, 31, 53, 0.8);
+            
+            --accent-primary: #00ff88;
+            --accent-secondary: #00d4ff;
+            --accent-warning: #ffa500;
+            --accent-danger: #ff4444;
             --accent-purple: #a855f7;
+            
             --text-primary: #ffffff;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
-            --border-glass: rgba(255, 255, 255, 0.1);
-            --glow-green: rgba(0, 255, 136, 0.3);
-            --glow-blue: rgba(0, 212, 255, 0.3);
+            
+            --border: rgba(255, 255, 255, 0.08);
+            --border-bright: rgba(0, 255, 136, 0.2);
+            
+            --glow-green: rgba(0, 255, 136, 0.2);
+            --glow-blue: rgba(0, 212, 255, 0.2);
+            
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 40px var(--glow-green);
         }
 
         * {
@@ -31,64 +43,67 @@
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--primary-bg);
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Sora', sans-serif;
-            font-weight: 700;
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Animated Background */
-        .bg-animation {
+        /* Background Effects */
+        .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            overflow: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
         }
 
         .bg-gradient {
-            position: absolute;
-            width: 500px;
-            height: 500px;
+            position: fixed;
+            width: 800px;
+            height: 800px;
             border-radius: 50%;
-            filter: blur(120px);
+            filter: blur(150px);
             opacity: 0.15;
-            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .bg-gradient-1 {
-            background: var(--neon-green);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
+            background: var(--accent-primary);
+            top: -200px;
+            left: -200px;
+            animation: float 25s ease-in-out infinite;
         }
 
         .bg-gradient-2 {
-            background: var(--neon-blue);
-            bottom: -100px;
-            right: -100px;
-            animation-delay: 5s;
+            background: var(--accent-secondary);
+            bottom: -200px;
+            right: -200px;
+            animation: float 30s ease-in-out infinite reverse;
         }
 
         .bg-gradient-3 {
             background: var(--accent-purple);
-            top: 50%;
-            left: 50%;
-            animation-delay: 10s;
+            top: 40%;
+            left: 60%;
+            animation: float 35s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.1); }
-            66% { transform: translate(-50px, 50px) scale(0.9); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-100px, 100px) scale(0.9); }
         }
 
         /* Navbar */
@@ -96,51 +111,113 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(10, 14, 39, 0.8);
+            background: rgba(10, 13, 26, 0.9);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border);
             padding: 1rem 0;
-            animation: slideDown 0.5s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: none;
-            gap: 2rem;
+            gap: 2.5rem;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--neon-green);
+            color: var(--accent-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: var(--bg-primary);
+            box-shadow: 0 4px 20px var(--glow-green);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--glow-green);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 136, 0.1);
         }
 
         .menu-toggle {
@@ -159,126 +236,104 @@
 
         /* Container */
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
-            padding: 5rem 0 4rem;
+            padding: 6rem 0 4rem;
             text-align: center;
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 4rem;
+            font-weight: 900;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--neon-green));
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            animation: slideUp 0.8s ease-out 0.2s both;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tagline {
+        .hero .tagline {
             font-size: 1.5rem;
-            color: var(--neon-blue);
-            font-weight: 600;
+            color: var(--accent-secondary);
             margin-bottom: 1.5rem;
-            animation: slideUp 0.8s ease-out 0.4s both;
+            font-weight: 600;
         }
 
-        .hero-description {
-            font-size: 1.125rem;
+        .hero .description {
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto 2.5rem;
             line-height: 1.8;
-            animation: slideUp 0.8s ease-out 0.6s both;
         }
 
-        .cta-buttons {
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border-bright);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .cta-group {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 3rem;
-            animation: slideUp 0.8s ease-out 0.8s both;
         }
 
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-            color: var(--primary-bg);
-            box-shadow: 0 10px 30px var(--glow-green);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px var(--glow-green);
-        }
-
-        .btn-secondary {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--neon-blue);
-            border: 2px solid var(--neon-blue);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 212, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .trust-badges {
-            display: flex;
+        /* KPI Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideUp 0.8s ease-out 1s both;
+            margin-top: 4rem;
         }
 
-        .badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border-glass);
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            font-size: 0.9rem;
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
             color: var(--text-secondary);
-        }
-
-        .badge-icon {
-            font-size: 1.25rem;
+            font-size: 0.95rem;
         }
 
         /* Section */
@@ -292,28 +347,39 @@
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: 2.75rem;
+            font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--neon-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .section-header p {
-            color: var(--text-secondary);
             font-size: 1.125rem;
-            max-width: 600px;
+            color: var(--text-secondary);
+            max-width: 700px;
             margin: 0 auto;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent-primary);
+            border-radius: 50px;
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Glass Card */
         .glass-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 2rem;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
@@ -326,155 +392,111 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
 
         .glass-card:hover {
+            border-color: var(--border-bright);
             transform: translateY(-5px);
-            border-color: var(--neon-green);
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.15);
+            box-shadow: var(--shadow-lg);
         }
 
         .glass-card:hover::before {
             opacity: 1;
         }
 
-        /* Services Grid */
+        /* Service Cards */
         .services-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .service-card {
-            text-align: center;
+            cursor: pointer;
         }
 
         .service-icon {
             width: 70px;
             height: 70px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
+            margin-bottom: 1.5rem;
             position: relative;
         }
 
         .service-icon::after {
             content: '';
             position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-            border-radius: 16px;
+            inset: -3px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px;
             z-index: -1;
-            filter: blur(10px);
-            opacity: 0.5;
+            filter: blur(15px);
+            opacity: 0.6;
         }
 
         .service-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             margin-bottom: 0.75rem;
         }
 
         .service-card p {
             color: var(--text-secondary);
+            margin-bottom: 1rem;
             font-size: 0.95rem;
         }
 
-        /* Pricing Grid */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .pricing-card {
-            position: relative;
-        }
-
-        .pricing-popular {
-            border-color: var(--neon-green);
-            position: relative;
-        }
-
-        .pricing-popular::after {
-            content: 'POPULAR';
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--neon-green);
-            color: var(--primary-bg);
-            padding: 0.25rem 1rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        .pricing-header {
+        .service-list {
+            list-style: none;
             margin-bottom: 1.5rem;
         }
 
-        .pricing-header h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .pricing-price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .pricing-price span {
-            font-size: 1rem;
-            color: var(--text-secondary);
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-features li {
-            padding: 0.75rem 0;
+        .service-list li {
+            padding: 0.5rem 0;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
+            font-size: 0.9rem;
         }
 
-        .pricing-features li::before {
+        .service-list li::before {
             content: '✓';
-            color: var(--neon-green);
+            color: var(--accent-primary);
             font-weight: 700;
-            font-size: 1.25rem;
         }
 
-        /* Ticker */
-        .compliance-ticker {
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid var(--accent-purple);
+        .service-price {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Compliance Alerts */
+        .alert-ticker {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.1), rgba(255, 165, 0, 0.1));
+            border: 1px solid var(--accent-warning);
             border-radius: 12px;
-            padding: 1rem;
+            padding: 1.25rem;
             overflow: hidden;
-            margin-bottom: 2rem;
+            position: relative;
         }
 
-        .ticker-content {
+        .ticker-wrapper {
             display: flex;
             gap: 3rem;
-            animation: scroll 30s linear infinite;
+            animation: scroll-ticker 40s linear infinite;
         }
 
-        @keyframes scroll {
+        @keyframes scroll-ticker {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
@@ -484,248 +506,66 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 0.95rem;
             white-space: nowrap;
+            font-size: 0.95rem;
         }
 
         .ticker-urgent {
-            color: #ff4d4d;
+            color: var(--accent-danger);
             font-weight: 700;
         }
 
         .ticker-date {
-            color: var(--neon-green);
+            color: var(--accent-warning);
             font-weight: 600;
         }
 
-        /* Steps */
-        .steps-grid {
+        /* Compliance Calendar */
+        .calendar-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .step-card {
-            display: flex;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            align-items: flex-start;
         }
 
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-            font-weight: 800;
-            flex-shrink: 0;
-            color: var(--primary-bg);
+        .calendar-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
         }
 
-        .step-content h3 {
+        .calendar-month {
             font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
         }
 
-        .step-content p {
-            color: var(--text-secondary);
-        }
-
-        /* Documents Checklist */
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .checklist-card ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .checklist-card li {
+        .calendar-item {
             padding: 0.75rem 0;
-            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.75rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
         }
 
-        .checklist-card li:last-child {
+        .calendar-item:last-child {
             border-bottom: none;
         }
 
-        .checklist-card li::before {
-            content: '📄';
-            font-size: 1.25rem;
-        }
-
-        /* Partner Section */
-        .partner-section {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 212, 255, 0.05));
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .partner-section h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .partner-section p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-size: 1.125rem;
-        }
-
-        /* Form */
-        .lead-form {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 2.5rem;
-            backdrop-filter: blur(10px);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--neon-green);
-            background: rgba(0, 255, 136, 0.05);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        /* Contact Grid */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.5rem;
-        }
-
-        .contact-details h4 {
-            font-size: 1.125rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .contact-details p {
+        .calendar-label {
             color: var(--text-secondary);
         }
 
-        .contact-details a {
-            color: var(--neon-blue);
-            text-decoration: none;
+        .calendar-date {
+            color: var(--accent-warning);
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Footer */
-        footer {
-            background: var(--secondary-bg);
-            border-top: 1px solid var(--border-glass);
-            padding: 3rem 0 1.5rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            margin-bottom: 2rem;
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--neon-green);
-        }
-
-        .copyright {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-glass);
-        }
-
-        /* WhatsApp Float Button */
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -740,118 +580,66 @@
             font-size: 2rem;
             box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
             cursor: pointer;
-            z-index: 1000;
-            animation: pulse 2s ease-in-out infinite;
+            z-index: 1500;
+            animation: float-wa 3s ease-in-out infinite;
             text-decoration: none;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        @keyframes float-wa {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
 
-        /* Testimonials */
-        .testimonials-grid {
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
-        .testimonial-card {
-            position: relative;
-            padding-top: 2.5rem;
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
         }
 
-        .testimonial-quote {
-            font-size: 3rem;
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            color: var(--neon-green);
-            opacity: 0.3;
+        .footer-section ul {
+            list-style: none;
         }
 
-        .testimonial-text {
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section ul li a {
             color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
+            text-decoration: none;
+            transition: color 0.3s;
         }
 
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .footer-section ul li a:hover {
+            color: var(--accent-primary);
         }
 
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-
-        .testimonial-info h4 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .testimonial-info p {
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
             color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        .gallery-item {
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            aspect-ratio: 16/9;
-            background: var(--card-bg);
-            border: 1px solid var(--border-glass);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-            border-color: var(--neon-green);
+            font-size: 0.9rem;
         }
 
         /* Responsive */
-        @media (min-width: 640px) {
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
@@ -860,73 +648,40 @@
             .menu-toggle {
                 display: none;
             }
+        }
 
+        @media (max-width: 768px) {
             .hero h1 {
-                font-size: 4.5rem;
+                font-size: 2.5rem;
             }
 
-            .contact-grid {
-                grid-template-columns: 1fr 1fr;
+            .section-header h2 {
+                font-size: 2rem;
             }
-        }
-
-        @media (min-width: 1024px) {
-            .services-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .pricing-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .checklist-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .testimonials-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .hero h1 {
-                font-size: 5.5rem;
-            }
-        }
-
-        /* Scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="bg-animation">
-        <div class="bg-gradient bg-gradient-1"></div>
-        <div class="bg-gradient bg-gradient-2"></div>
-        <div class="bg-gradient bg-gradient-3"></div>
-    </div>
+    <!-- Background -->
+    <div class="bg-grid"></div>
+    <div class="bg-gradient bg-gradient-1"></div>
+    <div class="bg-gradient bg-gradient-2"></div>
+    <div class="bg-gradient bg-gradient-3"></div>
 
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">DigiCafe</div>
+            <div class="logo">
+                <div class="logo-icon">🚀</div>
+                <div class="logo-text">DigiCafe</div>
+            </div>
             <div class="nav-links">
                 <a href="#services">Services</a>
+                <a href="#compliance">Compliance Calendar</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#how-it-works">How It Works</a>
                 <a href="#partner">Partner</a>
                 <a href="#contact">Contact</a>
+                <a href="#" class="btn btn-primary">Client Portal</a>
             </div>
             <div class="menu-toggle">
                 <span></span>
@@ -936,451 +691,625 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
         <div class="container">
+            <div class="hero-badge">
+                <span class="status-dot"></span>
+                <span>Complete SaaS Platform | AY 2026-27 Ready | SignX DSC Partner</span>
+            </div>
             <h1>DIGICAFE</h1>
             <p class="tagline">Our Service, Your Solution</p>
-            <p class="hero-description">
-                Your trusted partner for seamless tax compliance, business registration, and legal services across India. Expert CA/CS support with transparent pricing and hassle-free documentation.
+            <p class="description">
+                India's most comprehensive tax & compliance automation platform. From ITR to GST, TDS to MCA, DSC to AI services - everything you need in one intelligent SaaS solution.
             </p>
-            <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary">Get Assistance</a>
-                <a href="https://wa.me/919876543210?text=Hi%20DigiCafe,%20I%20need%20assistance%20with" class="btn btn-secondary">💬 Chat on WhatsApp</a>
+            <div class="cta-group">
+                <a href="#services" class="btn btn-primary">🚀 Explore Services</a>
+                <a href="https://wa.me/919876543210" class="btn btn-secondary">💬 Chat on WhatsApp</a>
             </div>
-            <div class="trust-badges">
-                <div class="badge">
-                    <span class="badge-icon">🇮🇳</span>
-                    <span>PAN India Service</span>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">50K+</div>
+                    <div class="stat-label">Returns Filed</div>
                 </div>
-                <div class="badge">
-                    <span class="badge-icon">👨‍💼</span>
-                    <span>Expert CA/CS Support</span>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Compliance Rate</div>
                 </div>
-                <div class="badge">
-                    <span class="badge-icon">⚡</span>
-                    <span>Fast Processing</span>
+                <div class="stat-card">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">System Access</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5000+</div>
+                    <div class="stat-label">Happy Clients</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Compliance Updates Ticker -->
-    <section>
+    <!-- Compliance Alerts -->
+    <section style="padding: 2rem 0;">
         <div class="container">
-            <div class="compliance-ticker">
-                <div class="ticker-content">
+            <div class="alert-ticker">
+                <div class="ticker-wrapper">
                     <div class="ticker-item">
-                        <span class="ticker-urgent">⚠️ URGENT:</span>
-                        <span>DIR-3 KYC Due - <span class="ticker-date">30th September</span></span>
+                        <span class="ticker-urgent">⚠️ NEW:</span>
+                        <span>Income-tax Act, 2025 effective from <span class="ticker-date">1 April 2026</span></span>
                     </div>
                     <div class="ticker-item">
-                        <span class="ticker-urgent">📅</span>
-                        <span>GSTR-1 Filing - <span class="ticker-date">11th Every Month</span></span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-urgent">💰</span>
-                        <span>ITR Filing FY 2025-26 - <span class="ticker-date">31st July 2026</span></span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-urgent">⚖️</span>
-                        <span>Penalty for Late DIR-3 KYC - <span class="ticker-date">₹5,000</span></span>
-                    </div>
-                    <!-- Duplicate for seamless loop -->
-                    <div class="ticker-item">
-                        <span class="ticker-urgent">⚠️ URGENT:</span>
-                        <span>DIR-3 KYC Due - <span class="ticker-date">30th September</span></span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-urgent">📅</span>
-                        <span>GSTR-1 Filing - <span class="ticker-date">11th Every Month</span></span>
+                        <span class="ticker-urgent">📋</span>
+                        <span>DIR-3 KYC now <span class="ticker-date">once every 3 years</span> - Due: 30 June</span>
                     </div>
                     <div class="ticker-item">
                         <span class="ticker-urgent">💰</span>
-                        <span>ITR Filing FY 2025-26 - <span class="ticker-date">31st July 2026</span></span>
+                        <span>ITR AY 2026-27 Due: <span class="ticker-date">31 July 2026</span></span>
                     </div>
                     <div class="ticker-item">
-                        <span class="ticker-urgent">⚖️</span>
-                        <span>Penalty for Late DIR-3 KYC - <span class="ticker-date">₹5,000</span></span>
+                        <span class="ticker-urgent">📊</span>
+                        <span>GSTR-1: <span class="ticker-date">11th Every Month</span></span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-urgent">🔐</span>
+                        <span>SignX DSC Integration Active</span>
+                    </div>
+                    <!-- Duplicate -->
+                    <div class="ticker-item">
+                        <span class="ticker-urgent">⚠️ NEW:</span>
+                        <span>Income-tax Act, 2025 effective from <span class="ticker-date">1 April 2026</span></span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-urgent">📋</span>
+                        <span>DIR-3 KYC now <span class="ticker-date">once every 3 years</span> - Due: 30 June</span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-urgent">💰</span>
+                        <span>ITR AY 2026-27 Due: <span class="ticker-date">31 July 2026</span></span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-urgent">📊</span>
+                        <span>GSTR-1: <span class="ticker-date">11th Every Month</span></span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-urgent">🔐</span>
+                        <span>SignX DSC Integration Active</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- All Services -->
     <section id="services">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>Our Services</h2>
-                <p>Comprehensive solutions for all your business and compliance needs</p>
+            <div class="section-header">
+                <span class="section-badge">🎯 Complete Service Suite</span>
+                <h2>Professional Services Portfolio</h2>
+                <p>Comprehensive solutions for every compliance and business need</p>
             </div>
-            <div class="services-grid">
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">🏢</div>
-                    <h3>Company Registration</h3>
-                    <p>Private Limited, LLP, OPC, Partnership - Complete registration with expert guidance</p>
-                </div>
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">📊</div>
-                    <h3>GST Services</h3>
-                    <p>GST Registration, Returns Filing, Amendments, Cancellation & Consultancy</p>
-                </div>
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">💰</div>
-                    <h3>Income Tax (ITR)</h3>
-                    <p>ITR Filing, TDS Returns, Tax Planning, Assessments & Notice Replies</p>
-                </div>
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">🔐</div>
-                    <h3>Digital Signature (DSC)</h3>
-                    <p>Class 2 & Class 3 DSC for Directors, Renewals & Token Services</p>
-                </div>
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">🏭</div>
-                    <h3>MSME / Udyam</h3>
-                    <p>Udyam Registration, Modifications, MSME Certifications</p>
-                </div>
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">™️</div>
-                    <h3>Trademark</h3>
-                    <p>Trademark Registration, Search, Objections & Renewals</p>
-                </div>
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">📚</div>
-                    <h3>Bookkeeping</h3>
-                    <p>Monthly Books, Accounts Management, Financial Reporting</p>
-                </div>
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">📋</div>
-                    <h3>Annual Compliance</h3>
-                    <p>ROC Filings, Board Meetings, AGM, DIR-3 KYC & Annual Returns</p>
-                </div>
-                <div class="glass-card service-card reveal">
-                    <div class="service-icon">⚖️</div>
-                    <h3>Legal Services</h3>
-                    <p>Agreements, Contracts, Legal Consultancy & Documentation</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Transparent Pricing</h2>
-                <p>No hidden charges. Clear pricing for quality services</p>
+            <!-- Income Tax Services -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">💰 Income Tax Services</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📄</div>
+                        <h3>ITR Filing AY 2026-27</h3>
+                        <p>Complete ITR filing under Income-tax Act, 2025</p>
+                        <ul class="service-list">
+                            <li>Salary ITR</li>
+                            <li>Business ITR</li>
+                            <li>Capital Gain ITR</li>
+                            <li>Revised Return</li>
+                        </ul>
+                        <div class="service-price">₹499 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Apply Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📊</div>
+                        <h3>Tax Planning & Consultation</h3>
+                        <p>Expert tax advisory and optimization</p>
+                        <ul class="service-list">
+                            <li>AIS / 26AS Review</li>
+                            <li>TDS Refund Support</li>
+                            <li>Tax Saving Tips</li>
+                            <li>Investment Planning</li>
+                        </ul>
+                        <div class="service-price">₹999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Consult Now</button>
+                    </div>
+                </div>
             </div>
-            <div class="pricing-grid">
-                <div class="glass-card pricing-card reveal">
-                    <div class="pricing-header">
+
+            <!-- GST Services -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📊 GST Services</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🏢</div>
                         <h3>GST Registration</h3>
-                        <div class="pricing-price">₹999 <span>+ Govt Fees</span></div>
+                        <ul class="service-list">
+                            <li>Fresh GST Registration</li>
+                            <li>GST Amendment</li>
+                            <li>GST Cancellation</li>
+                        </ul>
+                        <div class="service-price">₹999</div>
+                        <button class="btn btn-primary" style="width: 100%;">Register Now</button>
                     </div>
-                    <ul class="pricing-features">
-                        <li>Fresh GST Registration</li>
-                        <li>Expert CA Assistance</li>
-                        <li>Document Support</li>
-                        <li>Fast Processing</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Started</a>
-                </div>
-                <div class="glass-card pricing-card pricing-popular reveal">
-                    <div class="pricing-header">
-                        <h3>Private Limited</h3>
-                        <div class="pricing-price">₹7,999 <span>+ Govt Fees</span></div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📝</div>
+                        <h3>GST Return Filing</h3>
+                        <ul class="service-list">
+                            <li>GSTR-1, 3B Filing</li>
+                            <li>GST Annual Return</li>
+                            <li>GST Reconciliation</li>
+                            <li>GST LUT</li>
+                        </ul>
+                        <div class="service-price">₹499/month</div>
+                        <button class="btn btn-primary" style="width: 100%;">File Now</button>
                     </div>
-                    <ul class="pricing-features">
-                        <li>Company Registration</li>
-                        <li>Name Approval</li>
-                        <li>MOA & AOA Drafting</li>
-                        <li>DIN & DSC Included</li>
-                        <li>Certificate of Incorporation</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Started</a>
-                </div>
-                <div class="glass-card pricing-card reveal">
-                    <div class="pricing-header">
-                        <h3>ITR Filing</h3>
-                        <div class="pricing-price">₹499 <span>onwards</span></div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">⚠️</div>
+                        <h3>GST Notice Reply</h3>
+                        <ul class="service-list">
+                            <li>Show Cause Notice</li>
+                            <li>Audit Notice</li>
+                            <li>Assessment Support</li>
+                        </ul>
+                        <div class="service-price">₹2,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Get Help</button>
                     </div>
-                    <ul class="pricing-features">
-                        <li>Salaried Individuals</li>
-                        <li>Business ITR Available</li>
-                        <li>Expert CA Review</li>
-                        <li>E-filing Support</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Started</a>
                 </div>
             </div>
-            <p style="text-align: center; color: var(--text-muted); margin-top: 2rem; font-size: 0.9rem;">
-                * Prices may vary based on requirements and complexity. Government fees additional.
-            </p>
+
+            <!-- TDS Services -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📋 TDS Services</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📑</div>
+                        <h3>TDS Return Filing</h3>
+                        <ul class="service-list">
+                            <li>24Q (Salary TDS)</li>
+                            <li>26Q (Non-Salary TDS)</li>
+                            <li>27Q (Non-Resident TDS)</li>
+                            <li>TDS Correction</li>
+                        </ul>
+                        <div class="service-price">₹999/quarter</div>
+                        <button class="btn btn-primary" style="width: 100%;">File TDS</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📄</div>
+                        <h3>Form 16 / 16A Services</h3>
+                        <ul class="service-list">
+                            <li>Form 16 Generation</li>
+                            <li>Form 16A Issuance</li>
+                            <li>TDS Certificate</li>
+                            <li>Challan Reconciliation</li>
+                        </ul>
+                        <div class="service-price">₹99/certificate</div>
+                        <button class="btn btn-primary" style="width: 100%;">Generate Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCA / ROC Services -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">🏢 MCA / ROC Services</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🏭</div>
+                        <h3>Company Registration</h3>
+                        <ul class="service-list">
+                            <li>Private Limited Company</li>
+                            <li>LLP Registration</li>
+                            <li>OPC Registration</li>
+                            <li>Partnership Firm</li>
+                        </ul>
+                        <div class="service-price">₹7,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Register Company</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📅</div>
+                        <h3>Annual Compliance</h3>
+                        <ul class="service-list">
+                            <li>DIR-3 KYC (3-Year Cycle)</li>
+                            <li>DIN KYC</li>
+                            <li>Annual Filing (AOC-4, MGT-7)</li>
+                            <li>Board Resolution Drafting</li>
+                        </ul>
+                        <div class="service-price">₹4,999/year</div>
+                        <button class="btn btn-primary" style="width: 100%;">File Compliance</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📈</div>
+                        <h3>Corporate Changes</h3>
+                        <ul class="service-list">
+                            <li>Share Transfer</li>
+                            <li>Increase Authorized Capital</li>
+                            <li>Director Appointment/Removal</li>
+                            <li>Registered Office Change</li>
+                        </ul>
+                        <div class="service-price">₹2,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Make Changes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certification Services -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📜 Certification Services</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">✅</div>
+                        <h3>Business Certificates</h3>
+                        <ul class="service-list">
+                            <li>Turnover Certificate</li>
+                            <li>Net Worth Certificate</li>
+                            <li>End Use Certificate</li>
+                            <li>UDIN Certification Support</li>
+                        </ul>
+                        <div class="service-price">₹1,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Get Certificate</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📊</div>
+                        <h3>Financial Services</h3>
+                        <ul class="service-list">
+                            <li>Projected Financial Statement</li>
+                            <li>CMA Data Preparation</li>
+                            <li>Provisional Financials</li>
+                            <li>Management Accounts</li>
+                        </ul>
+                        <div class="service-price">₹4,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Request Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DSC Services with SignX -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">🔐 DSC Services (SignX Partner)</h3>
+                <div style="background: rgba(0, 255, 136, 0.05); border: 1px solid var(--accent-primary); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                    <p style="color: var(--text-secondary); font-size: 1rem;">
+                        ✅ <strong style="color: var(--accent-primary);">We use SignX platform for DSC processing</strong> - India's leading Digital Signature Certificate provider with instant issuance and lifetime support.
+                    </p>
+                </div>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🔑</div>
+                        <h3>Class 3 DSC</h3>
+                        <ul class="service-list">
+                            <li>Individual DSC</li>
+                            <li>Organization DSC</li>
+                            <li>MCA DSC</li>
+                            <li>GST DSC</li>
+                            <li>Tender DSC</li>
+                        </ul>
+                        <div class="service-price">₹999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Apply DSC Online</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🔄</div>
+                        <h3>DSC Renewal & Support</h3>
+                        <ul class="service-list">
+                            <li>DSC Renewal (Before Expiry)</li>
+                            <li>DSC Download Support</li>
+                            <li>Token Installation</li>
+                            <li>Technical Assistance</li>
+                        </ul>
+                        <div class="service-price">₹799 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Renew DSC</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Registration -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📝 Business Registration</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🏭</div>
+                        <h3>MSME / Udyam</h3>
+                        <ul class="service-list">
+                            <li>Udyam Registration</li>
+                            <li>MSME Certificate</li>
+                            <li>Udyam Modification</li>
+                        </ul>
+                        <div class="service-price">₹499</div>
+                        <button class="btn btn-primary" style="width: 100%;">Register</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🍽️</div>
+                        <h3>FSSAI License</h3>
+                        <ul class="service-list">
+                            <li>Basic Registration</li>
+                            <li>State License</li>
+                            <li>Central License</li>
+                            <li>FSSAI Renewal</li>
+                        </ul>
+                        <div class="service-price">₹1,499 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Apply</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🏪</div>
+                        <h3>Licenses & Registrations</h3>
+                        <ul class="service-list">
+                            <li>Shop & Establishment License</li>
+                            <li>Trade License</li>
+                            <li>PF & ESI Registration</li>
+                            <li>IEC Code</li>
+                        </ul>
+                        <div class="service-price">₹999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Get License</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trademark Services -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">™️ Trademark Services</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">™️</div>
+                        <h3>Trademark Registration</h3>
+                        <ul class="service-list">
+                            <li>Trademark Search</li>
+                            <li>Trademark Filing</li>
+                            <li>Objection Reply</li>
+                            <li>Trademark Renewal</li>
+                        </ul>
+                        <div class="service-price">₹4,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Register Trademark</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & SaaS Services -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">🤖 AI & SaaS Services</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🤖</div>
+                        <h3>AI Tax Assistant</h3>
+                        <ul class="service-list">
+                            <li>AI-Powered Tax Queries</li>
+                            <li>Automated Compliance Reminders</li>
+                            <li>Smart Document Processing</li>
+                        </ul>
+                        <div class="service-price">₹499/month</div>
+                        <button class="btn btn-primary" style="width: 100%;">Activate AI</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📧</div>
+                        <h3>Business Automation</h3>
+                        <ul class="service-list">
+                            <li>WhatsApp Automation</li>
+                            <li>AI Voice Calling System</li>
+                            <li>Lead Management Dashboard</li>
+                            <li>CRM Development</li>
+                        </ul>
+                        <div class="service-price">₹9,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Automate Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🌐</div>
+                        <h3>Website Development</h3>
+                        <ul class="service-list">
+                            <li>Custom Business Website</li>
+                            <li>Restaurant POS Website</li>
+                            <li>E-commerce Platform</li>
+                            <li>SaaS Application</li>
+                        </ul>
+                        <div class="service-price">₹14,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Build Website</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valuation & Merchant Banker -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📊 Valuation & Merchant Banker Coordination</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">💼</div>
+                        <h3>Valuation Services</h3>
+                        <ul class="service-list">
+                            <li>Valuation Report Coordination</li>
+                            <li>DCF Valuation Support</li>
+                            <li>Merchant Banker Coordination</li>
+                            <li>Business Valuation Consulting</li>
+                        </ul>
+                        <div class="service-price">₹9,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;">Get Valuation</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section id="how-it-works">
+    <!-- Compliance Calendar 2026 -->
+    <section id="compliance">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>How It Works</h2>
-                <p>Simple 3-step process to get your work done</p>
+            <div class="section-header">
+                <span class="section-badge">📅 Stay Compliant</span>
+                <h2>Important Due Dates 2026</h2>
+                <p>Complete compliance calendar for FY 2026-27</p>
             </div>
-            <div class="steps-grid">
-                <div class="step-card reveal">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Share Your Requirement</h3>
-                        <p>Contact us via WhatsApp, Email, or Call. Tell us what service you need and we'll guide you through the process.</p>
+            <div class="calendar-grid">
+                <div class="calendar-card">
+                    <div class="calendar-month">April 2026</div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">GSTR-3B March</span>
+                        <span class="calendar-date">20 Apr</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">TDS Payment Q4</span>
+                        <span class="calendar-date">30 Apr</span>
                     </div>
                 </div>
-                <div class="step-card reveal">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Submit Documents</h3>
-                        <p>Our team will share a checklist of required documents. Upload them securely through our platform or WhatsApp.</p>
-                    </div>
-                </div>
-                <div class="step-card reveal">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Get Work Done</h3>
-                        <p>Sit back and relax! Our expert CA/CS team processes your work with timely updates until completion.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Documents Checklist -->
-    <section>
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Documents Required</h2>
-                <p>Quick reference guide for common services</p>
-            </div>
-            <div class="checklist-grid">
-                <div class="glass-card checklist-card reveal">
-                    <h3>ITR Filing Documents</h3>
-                    <ul>
-                        <li>PAN Card</li>
-                        <li>Aadhaar Card</li>
-                        <li>Form 16 / Salary Slips</li>
-                        <li>Bank Statement</li>
-                        <li>Investment Proofs (80C)</li>
-                        <li>Previous Year ITR (if any)</li>
-                    </ul>
+                <div class="calendar-card">
+                    <div class="calendar-month">May 2026</div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">GSTR-1</span>
+                        <span class="calendar-date">11 May</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">TDS Return 24Q</span>
+                        <span class="calendar-date">31 May</span>
+                    </div>
                 </div>
-                <div class="glass-card checklist-card reveal">
-                    <h3>GST Registration</h3>
-                    <ul>
-                        <li>PAN of Business</li>
-                        <li>Aadhaar of Proprietor/Partners</li>
-                        <li>Business Address Proof</li>
-                        <li>Bank Account Statement</li>
-                        <li>Photograph of Owner</li>
-                        <li>Board Resolution (if Company)</li>
-                    </ul>
-                </div>
-                <div class="glass-card checklist-card reveal">
-                    <h3>DSC (Digital Signature)</h3>
-                    <ul>
-                        <li>PAN Card</li>
-                        <li>Aadhaar Card</li>
-                        <li>Photograph (White Background)</li>
-                        <li>Email ID</li>
-                        <li>Mobile Number</li>
-                        <li>Address Proof</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Testimonials -->
-    <section>
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>What Clients Say</h2>
-                <p>Trusted by businesses across India</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="glass-card testimonial-card reveal">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">
-                        DigiCafe made our company registration so simple! The team was very responsive and completed everything within 7 days. Highly recommended for startups.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">RS</div>
-                        <div class="testimonial-info">
-                            <h4>Rahul Sharma</h4>
-                            <p>Founder, TechVenture Pvt Ltd</p>
-                        </div>
+                <div class="calendar-card">
+                    <div class="calendar-month">June 2026</div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">DIR-3 KYC Due</span>
+                        <span class="calendar-date">30 Jun</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">Advance Tax Q1</span>
+                        <span class="calendar-date">15 Jun</span>
                     </div>
                 </div>
-                <div class="glass-card testimonial-card reveal">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">
-                        Best GST filing service! They handle all our monthly returns perfectly. The pricing is transparent and team is very knowledgeable.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">PK</div>
-                        <div class="testimonial-info">
-                            <h4>Priya Kapoor</h4>
-                            <p>Owner, Fashion Boutique</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass-card testimonial-card reveal">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">
-                        Got my ITR filed smoothly. The CA assigned was very helpful in explaining tax savings. Will use DigiCafe for all future compliance needs.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">AM</div>
-                        <div class="testimonial-info">
-                            <h4>Amit Mehta</h4>
-                            <p>Software Engineer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass-card testimonial-card reveal">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">
-                        Professional trademark registration service. They handled everything from search to approval. Great value for money!
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">NK</div>
-                        <div class="testimonial-info">
-                            <h4>Neha Kulkarni</h4>
-                            <p>Entrepreneur, Food Brand</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Creative Gallery/Ads Section -->
-    <section>
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Services Showcase</h2>
-                <p>Visual guide to our offerings</p>
-            </div>
-            <div class="gallery-grid">
-                <div class="glass-card gallery-item reveal">📊</div>
-                <div class="glass-card gallery-item reveal">🏢</div>
-                <div class="glass-card gallery-item reveal">💼</div>
-                <div class="glass-card gallery-item reveal">⚖️</div>
-                <div class="glass-card gallery-item reveal">📈</div>
-                <div class="glass-card gallery-item reveal">🔐</div>
+                <div class="calendar-card">
+                    <div class="calendar-month">July 2026</div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">ITR AY 2026-27</span>
+                        <span class="calendar-date">31 Jul</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">TDS Return 26Q</span>
+                        <span class="calendar-date">31 Jul</span>
+                    </div>
+                </div>
+
+                <div class="calendar-card">
+                    <div class="calendar-month">September 2026</div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">Advance Tax Q2</span>
+                        <span class="calendar-date">15 Sep</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">GSTR-9 Annual</span>
+                        <span class="calendar-date">30 Sep</span>
+                    </div>
+                </div>
+
+                <div class="calendar-card">
+                    <div class="calendar-month">December 2026</div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">Advance Tax Q3</span>
+                        <span class="calendar-date">15 Dec</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">AOC-4 Filing</span>
+                        <span class="calendar-date">31 Dec</span>
+                    </div>
+                </div>
+
+                <div class="calendar-card">
+                    <div class="calendar-month">March 2027</div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">Advance Tax Q4</span>
+                        <span class="calendar-date">15 Mar</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">Financial Year End</span>
+                        <span class="calendar-date">31 Mar</span>
+                    </div>
+                </div>
+
+                <div class="calendar-card">
+                    <div class="calendar-month">Monthly</div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">GSTR-1 Filing</span>
+                        <span class="calendar-date">11th</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">GSTR-3B Filing</span>
+                        <span class="calendar-date">20th</span>
+                    </div>
+                    <div class="calendar-item">
+                        <span class="calendar-label">PF/ESI Payment</span>
+                        <span class="calendar-date">15th</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Partner Section -->
-    <section id="partner">
+    <section id="partner" style="background: var(--bg-secondary);">
         <div class="container">
-            <div class="partner-section reveal">
+            <div class="section-header">
+                <span class="section-badge">🤝 Collaboration</span>
                 <h2>Partner With DigiCafe</h2>
-                <p>
-                    Are you a CA, CS, or Advocate? Join our network and grow your practice.<br>
-                    Get access to quality clients and expand your business reach across India.
-                </p>
-                <a href="mailto:partner@digicafe.in?subject=Partnership Inquiry" class="btn btn-primary">Partner With Us</a>
+                <p>Join our professional network and grow together</p>
+            </div>
+            <div class="services-grid">
+                <div class="glass-card">
+                    <div class="service-icon">👨‍💼</div>
+                    <h3>For CAs & CS</h3>
+                    <p>Get quality clients, manage compliance efficiently, and grow your practice</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Join as CA/CS</button>
+                </div>
+                <div class="glass-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>For Advocates</h3>
+                    <p>Legal documentation, contract drafting, and business advisory opportunities</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Join as Advocate</button>
+                </div>
+                <div class="glass-card">
+                    <div class="service-icon">📊</div>
+                    <h3>For GST Practitioners</h3>
+                    <p>Handle GST filings, notices, and compliance for multiple clients</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Join as GS</button>
+                </div>
+                <div class="glass-card">
+                    <div class="service-icon">💼</div>
+                    <h3>For Merchant Bankers</h3>
+                    <p>Collaborate on valuation reports and business advisory services</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Partner Now</button>
+                </div>
+                <div class="glass-card">
+                    <div class="service-icon">💻</div>
+                    <h3>For Web Developers</h3>
+                    <p>Build custom solutions, websites, and SaaS platforms for clients</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Collaborate</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Lead Form -->
+    <!-- Contact -->
     <section id="contact">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>Get Started Today</h2>
-                <p>Share your requirements and we'll get back to you within 24 hours</p>
+            <div class="section-header">
+                <span class="section-badge">📞 Get In Touch</span>
+                <h2>Contact DigiCafe</h2>
+                <p>Vikash Pathak | Bangalore, Karnataka | Serving PAN India</p>
             </div>
-            <form class="lead-form reveal" id="leadForm">
-                <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
-                </div>
-                <div class="form-group">
-                    <label for="mobile">Mobile Number *</label>
-                    <input type="tel" id="mobile" name="mobile" required placeholder="+91 9876543210">
-                </div>
-                <div class="form-group">
-                    <label for="service">Service Required *</label>
-                    <select id="service" name="service" required>
-                        <option value="">Select a service</option>
-                        <option value="Company Registration">Company Registration</option>
-                        <option value="GST Services">GST Services</option>
-                        <option value="Income Tax (ITR)">Income Tax (ITR)</option>
-                        <option value="Digital Signature (DSC)">Digital Signature (DSC)</option>
-                        <option value="MSME / Udyam">MSME / Udyam</option>
-                        <option value="Trademark">Trademark</option>
-                        <option value="Bookkeeping">Bookkeeping</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Additional Notes</label>
-                    <textarea id="notes" name="notes" placeholder="Share any specific requirements or questions"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Requirement</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Contact Info -->
-    <section>
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Contact Us</h2>
-                <p>We're here to help. Reach out anytime!</p>
-            </div>
-            <div class="contact-grid">
-                <div class="glass-card reveal">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon">👤</div>
-                            <div class="contact-details">
-                                <h4>Name</h4>
-                                <p>Vikash Pathak</p>
-                            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="glass-card">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                        <div>
+                            <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">📧 Email</h4>
+                            <p style="color: var(--text-secondary);"><a href="mailto:email.vikashpathak@gmail.com" style="color: var(--accent-secondary); text-decoration: none;">contact@digicafe.in</a></p>
                         </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">📍</div>
-                            <div class="contact-details">
-                                <h4>Location</h4>
-                                <p>Bangalore, Karnataka</p>
-                                <p style="font-size: 0.85rem; color: var(--neon-green);">Serving PAN India (Online)</p>
-                            </div>
+                        <div>
+                            <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">📱 Phone</h4>
+                            <p style="color: var(--text-secondary);"><a href="tel:+918539979271" style="color: var(--accent-secondary); text-decoration: none;">+91 98765 43210</a></p>
                         </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">📧</div>
-                            <div class="contact-details">
-                                <h4>Email</h4>
-                                <p><a href="mailto:contact@digicafe.in">contact@digicafe.in</a></p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">📱</div>
-                            <div class="contact-details">
-                                <h4>Phone</h4>
-                                <p><a href="tel:+919876543210">+91 98765 43210</a></p>
-                            </div>
+                        <div>
+                            <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">📍 Location</h4>
+                            <p style="color: var(--text-secondary);">Bangalore, Karnataka</p>
                         </div>
                     </div>
-                </div>
-                <div class="glass-card reveal">
-                    <div style="width: 100%; height: 300px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
-                        <div style="text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem;">🗺️</div>
-                            <p>Bangalore, Karnataka</p>
-                            <a href="https://maps.google.com/?q=Bangalore" target="_blank" class="btn btn-secondary" style="margin-top: 1rem; font-size: 0.9rem;">Open in Google Maps</a>
-                        </div>
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <a href="https://wa.me/918539979271" class="btn btn-primary">💬 Chat on WhatsApp</a>
                     </div>
                 </div>
             </div>
@@ -1390,46 +1319,73 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">DigiCafe</div>
-                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Our Service, Your Solution</p>
-                <div class="footer-links">
-                    <a href="#services">Services</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#how-it-works">How It Works</a>
-                    <a href="#partner">Partner</a>
-                    <a href="#contact">Contact</a>
-                    <a href="mailto:contact@digicafe.in">Email Us</a>
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>DigiCafe</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        Our Service, Your Solution<br>
+                        Professional Tax & Compliance Automation Platform
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Income Tax</a></li>
+                        <li><a href="#services">GST Services</a></li>
+                        <li><a href="#services">TDS Filing</a></li>
+                        <li><a href="#services">MCA Compliance</a></li>
+                        <li><a href="#services">DSC (SignX)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Client Portal</a></li>
+                        <li><a href="#compliance">Compliance Calendar</a></li>
+                        <li><a href="#partner">Partner Program</a></li>
+                        <li><a href="#">AI Tax Assistant</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:contact@digicafe.in">Email Us</a></li>
+                        <li><a href="https://wa.me/918539979271">WhatsApp</a></li>
+                        <li><a href="tel:+918539979271">Call Us</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="copyright">
-                © 2026 DigiCafe. All rights reserved. | Designed for excellence in compliance & business services.
+            <div class="footer-bottom">
+                © 2026 DigiCafe. All rights reserved. | Income-tax Act 2025 Compliant | SignX DSC Partner | PAN India Service
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/919876543210?text=Hi%20DigiCafe,%20I%20need%20assistance%20with" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/918539979271?text=Hi%20DigiCafe,%20I%20need%20assistance%20with%20tax%20and%20compliance%20services" class="whatsapp-float" target="_blank">
         💬
     </a>
 
     <script>
-        // Scroll Reveal Animation
-        const reveals = document.querySelectorAll('.reveal');
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
         
-        const revealOnScroll = () => {
-            reveals.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('active');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Initial check
+        menuToggle?.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(10, 14, 39, 0.95)';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.padding = '2rem';
+                navLinks.style.borderBottom = '1px solid var(--border)';
+            }
+        });
 
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1437,76 +1393,30 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Form Submission Handler
-        document.getElementById('leadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const mobile = document.getElementById('mobile').value;
-            const service = document.getElementById('service').value;
-            const notes = document.getElementById('notes').value;
-            
-            // WhatsApp option
-            const whatsappMessage = `Hi DigiCafe,%0A%0AName: ${name}%0AMobile: ${mobile}%0AService: ${service}%0ANotes: ${notes}`;
-            const whatsappURL = `https://wa.me/919876543210?text=${whatsappMessage}`;
-            
-            // Email option
-            const emailSubject = `New Lead: ${service}`;
-            const emailBody = `Name: ${name}%0AMobile: ${mobile}%0AService: ${service}%0ANotes: ${notes}`;
-            const emailURL = `mailto:contact@digicafe.in?subject=${emailSubject}&body=${emailBody}`;
-            
-            // Ask user preference
-            const userChoice = confirm('Submit via WhatsApp? (Click Cancel to send via Email)');
-            
-            if (userChoice) {
-                window.open(whatsappURL, '_blank');
-            } else {
-                window.location.href = emailURL;
-            }
-            
-            // Reset form
-            this.reset();
+        // Apply Now buttons
+        document.querySelectorAll('.service-card .btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const serviceName = btn.closest('.service-card').querySelector('h3').textContent;
+                const whatsappMsg = `Hi DigiCafe,%0A%0AI want to apply for: ${serviceName}%0A%0APlease share more details.`;
+                window.open(`https://wa.me/918539979271?text=${whatsappMsg}`, '_blank');
+            });
         });
 
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        
-        menuToggle?.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'rgba(10, 14, 39, 0.95)';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.padding = '2rem';
-            navLinks.style.borderBottom = '1px solid var(--border-glass)';
-        });
-
-        // Add navbar scroll effect
-        let lastScroll = 0;
+        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
+            if (window.pageYOffset > 100) {
                 navbar.style.background = 'rgba(10, 14, 39, 0.95)';
                 navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
             } else {
-                navbar.style.background = 'rgba(10, 14, 39, 0.8)';
+                navbar.style.background = 'rgba(10, 14, 39, 0.9)';
                 navbar.style.boxShadow = 'none';
             }
-            
-            lastScroll = currentScroll;
         });
     </script>
 </body>
