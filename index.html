@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiCafe - Professional Tax & Compliance Automation Platform | Our Service, Your Solution</title>
-    <meta name="description" content="Complete SaaS platform for ITR, GST, TDS, MCA, DSC, Trademark services. AI-powered automation, client portal, and compliance management.">
+    <title>DigiCafe Compliance & Digital Solutions - Professional Tax & Compliance Platform</title>
+    <meta name="description" content="Complete SaaS platform for ITR, GST, TDS, MCA, DSC, and Trademark services. Premium digital process and compliance management.">
+    
+    <meta property="og:title" content="DigiCafe Compliance & Digital Solutions">
+    <meta property="og:description" content="India's premier futuristic tax, compliance, and document management platform. Government Registered MSME Enterprise.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://digicafe.in">
+    <meta property="og:image" content="https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/rocket/default/24px.svg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         :root {
             --bg-primary: #0a0d1a;
@@ -40,6 +50,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -52,6 +63,48 @@
 
         .mono {
             font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Loading Screen Animation Overlay */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-primary);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-primary);
+            border-bottom-color: var(--accent-secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0 { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Background Effects */
@@ -115,6 +168,7 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -185,14 +239,16 @@
             width: 100%;
         }
 
+        /* Premium Buttons */
         .btn {
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             border: none;
             cursor: pointer;
@@ -208,6 +264,7 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px var(--glow-green);
+            filter: brightness(1.1);
         }
 
         .btn-secondary {
@@ -218,20 +275,32 @@
 
         .btn-secondary:hover {
             background: rgba(0, 255, 136, 0.1);
+            transform: translateY(-2px);
         }
 
         .menu-toggle {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
             cursor: pointer;
+            padding: 5px;
         }
 
         .menu-toggle span {
             width: 25px;
             height: 2px;
             background: var(--text-primary);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         /* Container */
@@ -308,7 +377,7 @@
             margin-bottom: 3rem;
         }
 
-        /* KPI Stats */
+        /* Realtime Stats Section */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -318,11 +387,14 @@
 
         .stat-card {
             text-align: center;
-            padding: 1.5rem;
+            padding: 2rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.03);
         }
 
         .stat-value {
-            font-size: 2.5rem;
+            font-size: 2.75rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             -webkit-background-clip: text;
@@ -334,9 +406,11 @@
         .stat-label {
             color: var(--text-secondary);
             font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* Section */
+        /* Sections spacing */
         section {
             padding: 5rem 0;
         }
@@ -373,14 +447,14 @@
             letter-spacing: 1px;
         }
 
-        /* Glass Card */
+        /* Glass Card Framework */
         .glass-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 2rem;
             backdrop-filter: blur(20px);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -407,7 +481,7 @@
             opacity: 1;
         }
 
-        /* Service Cards */
+        /* Service Configurations */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -480,7 +554,120 @@
             margin-bottom: 1rem;
         }
 
-        /* Compliance Alerts */
+        /* MSME Section Styles */
+        .msme-section {
+            background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .msme-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 992px) {
+            .msme-container {
+                grid-template-columns: 1.2fr 1.8fr;
+            }
+        }
+
+        .msme-meta-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .msme-detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .msme-detail-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .msme-detail-val {
+            color: #ffffff;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .msme-services-tag-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .msme-tag {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .msme-tag:hover {
+            border-color: var(--accent-primary);
+            color: #ffffff;
+            transform: scale(1.02);
+        }
+
+        .msme-badge-premium {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            font-weight: 700;
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Why Choose DigiCafe Layout */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .why-card {
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .why-card-icon {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .why-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .why-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Compliance Alerts ticker */
         .alert-ticker {
             background: linear-gradient(135deg, rgba(255, 68, 68, 0.1), rgba(255, 165, 0, 0.1));
             border: 1px solid var(--accent-warning);
@@ -565,7 +752,128 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* WhatsApp Float */
+        /* Modern Contact Grid */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .contact-layout {
+                grid-template-columns: 1.2fr 1.8fr;
+            }
+        }
+
+        .contact-info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: rgba(255,255,255,0.01);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .contact-meta-item i {
+            color: var(--accent-secondary);
+            margin-top: 3px;
+        }
+
+        .contact-meta-item h4 {
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-meta-item p, .contact-meta-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        /* High Tech Form controls */
+        .contact-form-wrapper {
+            background: var(--surface-elevated);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .form-full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-control {
+            background: rgba(10, 13, 26, 0.6);
+            border: 1px solid var(--border);
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.15);
+        }
+
+        select.form-control option {
+            background: var(--bg-secondary);
+            color: #ffffff;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #151a30;
+            border-radius: 10px;
+            border: 1px dashed var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            gap: 0.5rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Floating elements */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -577,12 +885,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
             box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
             cursor: pointer;
             z-index: 1500;
             animation: float-wa 3s ease-in-out infinite;
             text-decoration: none;
+            color: white;
         }
 
         @keyframes float-wa {
@@ -592,9 +900,10 @@
 
         .whatsapp-float:hover {
             transform: scale(1.1);
+            filter: brightness(1.1);
         }
 
-        /* Footer */
+        /* Footer architecture */
         footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border);
@@ -609,8 +918,16 @@
         }
 
         .footer-section h4 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             color: var(--accent-primary);
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         .footer-section ul {
@@ -625,10 +942,26 @@
             color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.95rem;
         }
 
         .footer-section ul li a:hover {
             color: var(--accent-primary);
+        }
+
+        .footer-contact-list {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-contact-list div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         .footer-bottom {
@@ -637,9 +970,10 @@
             border-top: 1px solid var(--border);
             color: var(--text-muted);
             font-size: 0.9rem;
+            line-height: 1.7;
         }
 
-        /* Responsive */
+        /* Responsive Breakpoints Rules */
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
@@ -652,38 +986,63 @@
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.75rem;
             }
 
             .section-header h2 {
                 font-size: 2rem;
             }
+
+            .nav-links.open-mobile {
+                display: flex !important;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 14, 39, 0.98);
+                backdrop-filter: blur(25px);
+                flex-direction: column;
+                padding: 2.5rem 1.5rem;
+                gap: 1.75rem;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+                animation: slideDown 0.3s ease forwards;
+            }
+
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Background -->
+
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
     <div class="bg-grid"></div>
     <div class="bg-gradient bg-gradient-1"></div>
     <div class="bg-gradient bg-gradient-2"></div>
     <div class="bg-gradient bg-gradient-3"></div>
 
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-icon">🚀</div>
                 <div class="logo-text">DigiCafe</div>
             </div>
-            <div class="nav-links">
+            <div class="nav-links" id="navbarLinks">
                 <a href="#services">Services</a>
+                <a href="#msme">MSME Credentials</a>
+                <a href="#why-choose">Why DigiCafe</a>
                 <a href="#compliance">Compliance Calendar</a>
-                <a href="#pricing">Pricing</a>
                 <a href="#partner">Partner</a>
                 <a href="#contact">Contact</a>
                 <a href="#" class="btn btn-primary">Client Portal</a>
             </div>
-            <div class="menu-toggle">
+            <div class="menu-toggle" id="mobileMenuBtn">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -691,45 +1050,43 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero">
         <div class="container">
             <div class="hero-badge">
                 <span class="status-dot"></span>
-                <span>Complete SaaS Platform | AY 2026-27 Ready | SignX DSC Partner</span>
+                <span>MSME Registered | Tax & Compliance Experts | SignX DSC Partner | PAN India Services</span>
             </div>
             <h1>DIGICAFE</h1>
             <p class="tagline">Our Service, Your Solution</p>
             <p class="description">
-                India's most comprehensive tax & compliance automation platform. From ITR to GST, TDS to MCA, DSC to AI services - everything you need in one intelligent SaaS solution.
+                India's most comprehensive tax & compliance verification platform. From ITR to GST, TDS to MCA, and DSC services - everything you need in one intelligent solution.
             </p>
             <div class="cta-group">
                 <a href="#services" class="btn btn-primary">🚀 Explore Services</a>
-                <a href="https://wa.me/919876543210" class="btn btn-secondary">💬 Chat on WhatsApp</a>
+                <a href="https://wa.me/917483356129" class="btn btn-secondary" target="_blank"><i data-lucide="message-square"></i> Chat on WhatsApp</a>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value">50K+</div>
-                    <div class="stat-label">Returns Filed</div>
+                    <div class="stat-value dynamic-count" data-target="500">0</div>
+                    <div class="stat-label">Clients Served</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value dynamic-count" data-target="100">0</div>
+                    <div class="stat-label">Compliance Projects</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">100%</div>
-                    <div class="stat-label">Compliance Rate</div>
+                    <div class="stat-label">Digital Process</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">24/7</div>
-                    <div class="stat-label">System Access</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">5000+</div>
-                    <div class="stat-label">Happy Clients</div>
+                    <div class="stat-value">PAN</div>
+                    <div class="stat-label">India Services</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Compliance Alerts -->
     <section style="padding: 2rem 0;">
         <div class="container">
             <div class="alert-ticker">
@@ -754,7 +1111,6 @@
                         <span class="ticker-urgent">🔐</span>
                         <span>SignX DSC Integration Active</span>
                     </div>
-                    <!-- Duplicate -->
                     <div class="ticker-item">
                         <span class="ticker-urgent">⚠️ NEW:</span>
                         <span>Income-tax Act, 2025 effective from <span class="ticker-date">1 April 2026</span></span>
@@ -780,8 +1136,98 @@
         </div>
     </section>
 
-    <!-- All Services -->
-    <section id="services">
+    <section id="msme" class="msme-section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">🏆 Corporate Credentials</span>
+                <h2>MSME Registered Enterprise</h2>
+                <p>Officially recognized entity by the Ministry of Micro, Small and Medium Enterprises, Government of India.</p>
+            </div>
+            
+            <div class="msme-container">
+                <div class="glass-card msme-meta-box">
+                    <div class="msme-badge-premium">
+                        <i data-lucide="shield-check"></i> ✓ Government Recognized MSME
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Business Name</span>
+                        <span class="msme-detail-val">DIGICAFE COMPLIANCE & DIGITAL SOLUTIONS</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Enterprise Type</span>
+                        <span class="msme-detail-val">Micro Enterprise</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Location</span>
+                        <span class="msme-detail-val">Bengaluru, Karnataka</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Status</span>
+                        <span class="msme-detail-val" style="color: var(--accent-primary);">Active / Verified</span>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; color: var(--accent-secondary);">
+                        <i data-lucide="layers"></i> Registered Scope of Operational Services
+                    </h3>
+                    <div class="msme-services-tag-grid">
+                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Income Tax Filing</div>
+                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> GST Compliance</div>
+                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> TDS Filing</div>
+                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> MCA Compliance</div>
+                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Digital Signature Services</div>
+                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Trademark Registration</div>
+                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Business Registration</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-choose" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">🛡️ Excellence Guaranteed</span>
+                <h2>Why Choose DigiCafe</h2>
+                <p>Engineered for speed, built on reliability, tailored for modern operations.</p>
+            </div>
+            <div class="why-grid">
+                <div class="glass-card why-card">
+                    <div class="why-card-icon"><i data-lucide="zap" size="32"></i></div>
+                    <h3>⚡ Fast Processing</h3>
+                    <p>Automated cloud workflows maximize validation speeds to secure swift turnaround cycles.</p>
+                </div>
+                <div class="glass-card why-card">
+                    <div class="why-card-icon"><i data-lucide="award" size="32"></i></div>
+                    <h3>🏆 MSME Registered</h3>
+                    <p>Fully compliant corporate operational entity recognized officially under central government regulations.</p>
+                </div>
+                <div class="glass-card why-card">
+                    <div class="why-card-icon"><i data-lucide="phone-call" size="32"></i></div>
+                    <h3>📱 WhatsApp Support</h3>
+                    <p>Direct communication pipeline link with operations for real-time ticket resolutions.</p>
+                </div>
+                <div class="glass-card why-card">
+                    <div class="why-card-icon"><i data-lucide="globe" size="32"></i></div>
+                    <h3>🌎 PAN India Services</h3>
+                    <p>Seamless processing workflows servicing businesses effortlessly across all Indian states and union territories.</p>
+                </div>
+                <div class="glass-card why-card">
+                    <div class="why-card-icon"><i data-lucide="lock" size="32"></i></div>
+                    <h3>🔒 Secure Documentation</h3>
+                    <p>Advanced high-grade modern vault parameters secure complete information compartmentalization.</p>
+                </div>
+                <div class="glass-card why-card">
+                    <div class="why-card-icon"><i data-lucide="cpu" size="32"></i></div>
+                    <h3>💡 Technology Driven Solutions</h3>
+                    <p>Harnessing automated tracking configurations and intuitive user interfaces for perfect operational precision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">🎯 Complete Service Suite</span>
@@ -789,7 +1235,6 @@
                 <p>Comprehensive solutions for every compliance and business need</p>
             </div>
 
-            <!-- Income Tax Services -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">💰 Income Tax Services</h3>
                 <div class="services-grid">
@@ -822,7 +1267,6 @@
                 </div>
             </div>
 
-            <!-- GST Services -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📊 GST Services</h3>
                 <div class="services-grid">
@@ -863,7 +1307,6 @@
                 </div>
             </div>
 
-            <!-- TDS Services -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📋 TDS Services</h3>
                 <div class="services-grid">
@@ -894,7 +1337,6 @@
                 </div>
             </div>
 
-            <!-- MCA / ROC Services -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">🏢 MCA / ROC Services</h3>
                 <div class="services-grid">
@@ -937,7 +1379,6 @@
                 </div>
             </div>
 
-            <!-- Certification Services -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📜 Certification Services</h3>
                 <div class="services-grid">
@@ -968,7 +1409,6 @@
                 </div>
             </div>
 
-            <!-- DSC Services with SignX -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">🔐 DSC Services (SignX Partner)</h3>
                 <div style="background: rgba(0, 255, 136, 0.05); border: 1px solid var(--accent-primary); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
@@ -1005,7 +1445,6 @@
                 </div>
             </div>
 
-            <!-- Business Registration -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📝 Business Registration</h3>
                 <div class="services-grid">
@@ -1047,7 +1486,6 @@
                 </div>
             </div>
 
-            <!-- Trademark Services -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">™️ Trademark Services</h3>
                 <div class="services-grid">
@@ -1066,49 +1504,6 @@
                 </div>
             </div>
 
-            <!-- AI & SaaS Services -->
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">🤖 AI & SaaS Services</h3>
-                <div class="services-grid">
-                    <div class="glass-card service-card">
-                        <div class="service-icon">🤖</div>
-                        <h3>AI Tax Assistant</h3>
-                        <ul class="service-list">
-                            <li>AI-Powered Tax Queries</li>
-                            <li>Automated Compliance Reminders</li>
-                            <li>Smart Document Processing</li>
-                        </ul>
-                        <div class="service-price">₹499/month</div>
-                        <button class="btn btn-primary" style="width: 100%;">Activate AI</button>
-                    </div>
-                    <div class="glass-card service-card">
-                        <div class="service-icon">📧</div>
-                        <h3>Business Automation</h3>
-                        <ul class="service-list">
-                            <li>WhatsApp Automation</li>
-                            <li>AI Voice Calling System</li>
-                            <li>Lead Management Dashboard</li>
-                            <li>CRM Development</li>
-                        </ul>
-                        <div class="service-price">₹9,999 onwards</div>
-                        <button class="btn btn-primary" style="width: 100%;">Automate Now</button>
-                    </div>
-                    <div class="glass-card service-card">
-                        <div class="service-icon">🌐</div>
-                        <h3>Website Development</h3>
-                        <ul class="service-list">
-                            <li>Custom Business Website</li>
-                            <li>Restaurant POS Website</li>
-                            <li>E-commerce Platform</li>
-                            <li>SaaS Application</li>
-                        </ul>
-                        <div class="service-price">₹14,999 onwards</div>
-                        <button class="btn btn-primary" style="width: 100%;">Build Website</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Valuation & Merchant Banker -->
             <div style="margin-bottom: 4rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📊 Valuation & Merchant Banker Coordination</h3>
                 <div class="services-grid">
@@ -1129,8 +1524,7 @@
         </div>
     </section>
 
-    <!-- Compliance Calendar 2026 -->
-    <section id="compliance">
+    <section id="compliance" class="reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">📅 Stay Compliant</span>
@@ -1241,8 +1635,7 @@
         </div>
     </section>
 
-    <!-- Partner Section -->
-    <section id="partner" style="background: var(--bg-secondary);">
+    <section id="partner" style="background: var(--bg-secondary);" class="reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">🤝 Collaboration</span>
@@ -1266,7 +1659,7 @@
                     <div class="service-icon">📊</div>
                     <h3>For GST Practitioners</h3>
                     <p>Handle GST filings, notices, and compliance for multiple clients</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Join as GS</button>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Join as GSTP</button>
                 </div>
                 <div class="glass-card">
                     <div class="service-icon">💼</div>
@@ -1274,148 +1667,250 @@
                     <p>Collaborate on valuation reports and business advisory services</p>
                     <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Partner Now</button>
                 </div>
-                <div class="glass-card">
-                    <div class="service-icon">💻</div>
-                    <h3>For Web Developers</h3>
-                    <p>Build custom solutions, websites, and SaaS platforms for clients</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Collaborate</button>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">📞 Get In Touch</span>
                 <h2>Contact DigiCafe</h2>
-                <p>Vikash Pathak | Bangalore, Karnataka | Serving PAN India</p>
+                <p>Founder: Vikash Pathak | Serving PAN India</p>
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="glass-card">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+            
+            <div class="contact-layout">
+                <div class="contact-info-panel">
+                    <div class="glass-card contact-meta-item">
+                        <i data-lucide="mail" size="24"></i>
                         <div>
-                            <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">📧 Email</h4>
-                            <p style="color: var(--text-secondary);"><a href="mailto:email.vikashpathak@gmail.com" style="color: var(--accent-secondary); text-decoration: none;">contact@digicafe.in</a></p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">📱 Phone</h4>
-                            <p style="color: var(--text-secondary);"><a href="tel:+918539979271" style="color: var(--accent-secondary); text-decoration: none;">+91 8539979271</a></p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">📍 Location</h4>
-                            <p style="color: var(--text-secondary);">Bangalore, Karnataka</p>
+                            <h4>Email Address</h4>
+                            <p><a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
                         </div>
                     </div>
-                    <div style="margin-top: 2rem; text-align: center;">
-                        <a href="https://wa.me/918539979271" class="btn btn-primary">💬 Chat on WhatsApp</a>
+                    <div class="glass-card contact-meta-item">
+                        <i data-lucide="phone" size="24"></i>
+                        <div>
+                            <h4>Phone Line</h4>
+                            <p><a href="tel:+917483356129">+91 7483356129</a></p>
+                        </div>
                     </div>
+                    <div class="glass-card contact-meta-item">
+                        <i data-lucide="map-pin" size="24"></i>
+                        <div>
+                            <h4>Operational Base</h4>
+                            <p>Bengaluru, Karnataka, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="map-placeholder">
+                        <i data-lucide="map" size="32"></i>
+                        <span style="font-weight:600; color:#fff;">Google Maps Terminal</span>
+                        <span>Bengaluru, Karnataka Operations Zone</span>
+                    </div>
+
+                    <a href="https://wa.me/917483356129" class="btn btn-primary" target="_blank" style="width: 100%;">
+                        <i data-lucide="message-square"></i> Connect via WhatsApp Directly
+                    </a>
+                </div>
+
+                <div class="glass-card contact-form-wrapper">
+                    <h3 style="margin-bottom: 1.5rem; color:var(--accent-primary);">Secure Communication Terminal</h3>
+                    <form id="whatsappSubmissionForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="formName">Full Name / Corporate Title</label>
+                                <input type="text" id="formName" class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formMobile">Mobile Contact Number</label>
+                                <input type="tel" id="formMobile" class="form-control" placeholder="+91 XXXXX XXXXX" required>
+                            </div>
+                            <div class="form-group form-full-width">
+                                <label for="formEmail">Email Terminal Address</label>
+                                <input type="email" id="formEmail" class="form-control" placeholder="client@domain.com" required>
+                            </div>
+                            <div class="form-group form-full-width">
+                                <label for="formService">Compliance Service Required</label>
+                                <select id="formService" class="form-control" required>
+                                    <option value="" disabled selected>Select an operational suite...</option>
+                                    <option value="Income Tax Filing">Income Tax Filing</option>
+                                    <option value="GST Compliance">GST Compliance</option>
+                                    <option value="TDS Filing">TDS Filing</option>
+                                    <option value="MCA Compliance">MCA Compliance</option>
+                                    <option value="Digital Signature Services">Digital Signature Services</option>
+                                    <option value="Trademark Registration">Trademark Registration</option>
+                                    <option value="Business Registration">Business Registration</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-full-width">
+                                <label for="formMessage">Operational Requirement Brief</label>
+                                <textarea id="formMessage" class="form-control" placeholder="Elaborate details regarding your project requirements..." required></textarea>
+                            </div>
+                            <div class="form-full-width" style="margin-top: 0.5rem;">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                    <i data-lucide="navigation"></i> Dispatch to Verification Agent via WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4>DigiCafe</h4>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        Our Service, Your Solution<br>
-                        Professional Tax & Compliance Automation Platform
-                    </p>
+                    <h4 style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight:800;">DIGICAFE COMPLIANCE & DIGITAL SOLUTIONS</h4>
+                    <p style="margin-bottom: 1rem; font-style: italic;">Our Service, Your Solution</p>
+                    <div class="footer-contact-list">
+                        <div><i data-lucide="mail" size="16"></i> vikashpathak.mgmt@gmail.com</div>
+                        <div><i data-lucide="phone" size="16"></i> +91 7483356129</div>
+                        <div><i data-lucide="map-pin" size="16"></i> Bengaluru, Karnataka</div>
+                    </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Services</h4>
+                    <h4>Services Portfolio</h4>
                     <ul>
-                        <li><a href="#services">Income Tax</a></li>
-                        <li><a href="#services">GST Services</a></li>
-                        <li><a href="#services">TDS Filing</a></li>
-                        <li><a href="#services">MCA Compliance</a></li>
-                        <li><a href="#services">DSC (SignX)</a></li>
+                        <li><a href="#services">Income Tax Solutions</a></li>
+                        <li><a href="#services">GST Portals</a></li>
+                        <li><a href="#services">TDS Filing Infrastructure</a></li>
+                        <li><a href="#services">MCA Corporate Filings</a></li>
+                        <li><a href="#services">DSC (SignX Engine Integration)</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Platform</h4>
+                    <h4>Operational Platform</h4>
                     <ul>
-                        <li><a href="#">Client Portal</a></li>
-                        <li><a href="#compliance">Compliance Calendar</a></li>
-                        <li><a href="#partner">Partner Program</a></li>
-                        <li><a href="#">AI Tax Assistant</a></li>
+                        <li><a href="#">Client SaaS Portal</a></li>
+                        <li><a href="#compliance">Compliance Matrix</a></li>
+                        <li><a href="#partner">Joint Venture Program</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="mailto:email.vikashpathak@gmail.com">Email Us</a></li>
-                        <li><a href="https://wa.me/918539979271">WhatsApp</a></li>
-                        <li><a href="tel:+918539979271">Call Us</a></li>
-                    </ul>
+                    <h4>Credentials</h4>
+                    <div style="border-left: 2px solid var(--accent-primary); padding-left: 1rem; margin-top: 0.5rem;">
+                        <p style="color:#fff; font-weight:600;">MSME Registered Enterprise</p>
+                        <p style="font-size:0.85rem; margin-top:0.25rem;">Government Verified Micro-Class Professional Entity Operations.</p>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                © 2026 DigiCafe. All rights reserved. | Income-tax Act 2025 Compliant | SignX DSC Partner | PAN India Service
+                © 2026 DigiCafe Compliance & Digital Solutions. All Rights Reserved.<br>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Income-tax Act 2025 Compliant | SignX DSC Partner Network | PAN India Service Nodes</span>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/918539979271?text=Hi%20DigiCafe,%20I%20need%20assistance%20with%20tax%20and%20compliance%20services" class="whatsapp-float" target="_blank">
-        💬
+    <a href="https://wa.me/917483356129?text=Hi%20DigiCafe,%20I%20need%20assistance%20with%20tax%20and%20compliance%20services" class="whatsapp-float" target="_blank" aria-label="Connect via WhatsApp">
+        <i data-lucide="message-circle" size="32"></i>
     </a>
 
     <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        
-        menuToggle?.addEventListener('click', () => {
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.display = 'none';
-            } else {
-                navLinks.style.display = 'flex';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'rgba(10, 14, 39, 0.95)';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.padding = '2rem';
-                navLinks.style.borderBottom = '1px solid var(--border)';
-            }
+        // Preloader Exit Engine
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+            setTimeout(initCounters, 200);
         });
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Lucide SVG Dynamic Render Trigger
+        lucide.createIcons();
+
+        // Mobile Menu Navigation Animation Overlay
+        const menuToggleBtn = document.getElementById('mobileMenuBtn');
+        const navbarLinksWrapper = document.getElementById('navbarLinks');
+        
+        menuToggleBtn?.addEventListener('click', () => {
+            menuToggleBtn.classList.toggle('open');
+            navbarLinksWrapper.classList.toggle('open-mobile');
+        });
+
+        // Close mobile dropdown links upon click execution
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggleBtn.classList.remove('open');
+                navbarLinksWrapper.classList.remove('open-mobile');
+            });
+        });
+
+        // Interactive Animated Numeric Counter Engine
+        function initCounters() {
+            const counters = document.querySelectorAll('.dynamic-count');
+            counters.forEach(counter => {
+                const targetValue = parseInt(counter.getAttribute('data-target'));
+                let currentCount = 0;
+                const incrementSpeed = Math.ceil(targetValue / 40); 
+                
+                const updateCounter = () => {
+                    currentCount += incrementSpeed;
+                    if (currentCount >= targetValue) {
+                        counter.textContent = targetValue + '+';
+                    } else {
+                        counter.textContent = currentCount + '+';
+                        requestAnimationFrame(updateCounter);
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // Scroll Reveal Intersection Observer Execution Loop
+        const scrollRevealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
             });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            scrollRevealObserver.observe(element);
         });
 
-        // Apply Now buttons
+        // Service Module Context Action Redirection Layout 
         document.querySelectorAll('.service-card .btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const serviceName = btn.closest('.service-card').querySelector('h3').textContent;
-                const whatsappMsg = `Hi DigiCafe,%0A%0AI want to apply for: ${serviceName}%0A%0APlease share more details.`;
-                window.open(`https://wa.me/918539979271?text=${whatsappMsg}`, '_blank');
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const serviceHeadline = btn.closest('.service-card').querySelector('h3').textContent;
+                const encodedWhatsappText = `Hi DigiCafe Team,%0A%0AI wish to apply directly for the service: *${serviceHeadline}*.%0APlease guide me through the document dispatch process.`;
+                window.open(`https://wa.me/917483356129?text=${encodedWhatsappText}`, '_blank');
             });
         });
 
-        // Navbar scroll effect
+        // Interactive Contact Form Prefilled Data Parsing Strategy
+        const formTerminal = document.getElementById('whatsappSubmissionForm');
+        formTerminal?.addEventListener('submit', (event) => {
+            event.preventDefault();
+            
+            const clientName = document.getElementById('formName').value.trim();
+            const clientMobile = document.getElementById('formMobile').value.trim();
+            const clientEmail = document.getElementById('formEmail').value.trim();
+            const assignedService = document.getElementById('formService').value;
+            const messagePayload = document.getElementById('formMessage').value.trim();
+
+            const finalStructuredText = `*DigiCafe Secure Terminal Lead*%0A%0A` +
+                                        `*Client Name:* ${clientName}%0A` +
+                                        `*Contact Line:* ${clientMobile}%0A` +
+                                        `*Email Address:* ${clientEmail}%0A` +
+                                        `*Service Selected:* ${assignedService}%0A%0A` +
+                                        `*Operational Brief:*%0A${messagePayload}`;
+
+            window.open(`https://wa.me/917483356129?text=${finalStructuredText}`, '_blank');
+        });
+
+        // Dynamic Sticky Navigation UI Optimization
         window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.pageYOffset > 100) {
-                navbar.style.background = 'rgba(10, 14, 39, 0.95)';
-                navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+            const navbarElement = document.querySelector('.navbar');
+            if (window.pageYOffset > 80) {
+                navbarElement.style.padding = '0.7rem 0';
+                navbarElement.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.4)';
             } else {
-                navbar.style.background = 'rgba(10, 14, 39, 0.9)';
-                navbar.style.boxShadow = 'none';
+                navbarElement.style.padding = '1rem 0';
+                navbarElement.style.boxShadow = 'none';
             }
         });
     </script>
