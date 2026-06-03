@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiCafe – Client Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDK (v9 compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
+    <style>
+        :root {
+            --bg:        #0a0d1a;
+            --bg2:       #111525;
+            --bg3:       #1a1f35;
+            --surface:   rgba(26,31,53,0.6);
+            --green:     #00ff88;
+            --blue:      #00d4ff;
+            --warn:      #ffa500;
+            --danger:    #ff4444;
+            --purple:    #a855f7;
+            --txt:       #ffffff;
+            --txt2:      #94a3b8;
+            --txt3:      #64748b;
+            --border:    rgba(255,255,255,0.08);
+            --borderG:   rgba(0,255,136,0.25);
+            --glowG:     rgba(0,255,136,0.2);
+            --shadow:    0 20px 60px rgba(0,0,0,0.5);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Outfit',sans-serif;
+            background:var(--bg);
+            color:var(--txt);
+            min-height:100vh;
+            overflow-x:hidden;
+        }
+        .mono { font-family:'JetBrains Mono',monospace; }
+
+        /* ── BG ── */
+        .bg-grid {
+            position:fixed; inset:0; z-index:-2;
+            background-image:
+                linear-gradient(rgba(0,255,136,.03) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(0,255,136,.03) 1px,transparent 1px);
+            background-size:50px 50px;
+        }
+        .blob {
+            position:fixed; border-radius:50%;
+            filter:blur(140px); opacity:.15; pointer-events:none; z-index:-1;
+        }
+        .blob1 { width:600px;height:600px;background:var(--green);top:-150px;left:-150px;animation:blob 20s ease-in-out infinite; }
+        .blob2 { width:600px;height:600px;background:var(--blue);bottom:-150px;right:-150px;animation:blob 25s ease-in-out infinite reverse; }
+        @keyframes blob {
+            0%,100%{transform:translate(0,0) scale(1);}
+            50%{transform:translate(60px,-60px) scale(1.1);}
+        }
+
+        /* ── UTILS ── */
+        .hidden   { display:none!important; }
+        .flex     { display:flex; }
+        .col      { flex-direction:column; }
+        .center   { align-items:center; justify-content:center; }
+        .gap1     { gap:1rem; }
+        .gap2     { gap:1.5rem; }
+        .w100     { width:100%; }
+        .mt1      { margin-top:1rem; }
+        .mt2      { margin-top:2rem; }
+        .mb1      { margin-bottom:1rem; }
+        .txt2     { color:var(--txt2); }
+        .txt3     { color:var(--txt3); }
+        .bold     { font-weight:700; }
+        .small    { font-size:.875rem; }
+        .xsmall   { font-size:.8rem; }
+        .green    { color:var(--green); }
+        .blue     { color:var(--blue); }
+        .warn     { color:var(--warn); }
+        .danger   { color:var(--danger); }
+        .mono     { font-family:'JetBrains Mono',monospace; }
+
+        /* ── CARD ── */
+        .card {
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:16px;
+            padding:2rem;
+            backdrop-filter:blur(20px);
+            transition:border-color .3s,transform .3s,box-shadow .3s;
+            position:relative; overflow:hidden;
+        }
+        .card::before {
+            content:'';position:absolute;inset:0 0 auto 0;height:1px;
+            background:linear-gradient(90deg,transparent,var(--green),transparent);
+            opacity:0;transition:opacity .3s;
+        }
+        .card:hover { border-color:var(--borderG); transform:translateY(-3px); box-shadow:var(--shadow); }
+        .card:hover::before { opacity:1; }
+        .card-glow { border-color:var(--borderG); box-shadow:0 0 40px var(--glowG); }
+
+        /* ── BUTTONS ── */
+        .btn {
+            padding:.75rem 1.5rem; border-radius:8px; font-weight:600;
+            font-family:'Outfit',sans-serif; font-size:.95rem;
+            border:none; cursor:pointer; transition:all .25s;
+            display:inline-flex; align-items:center; gap:.5rem;
+            text-decoration:none;
+        }
+        .btn-primary {
+            background:linear-gradient(135deg,var(--green),var(--blue));
+            color:var(--bg); box-shadow:0 4px 20px var(--glowG);
+        }
+        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px var(--glowG); }
+        .btn-outline {
+            background:transparent; color:var(--green);
+            border:1px solid var(--green);
+        }
+        .btn-outline:hover { background:rgba(0,255,136,.1); }
+        .btn-danger { background:var(--danger); color:#fff; }
+        .btn-wa { background:linear-gradient(135deg,#25d366,#128c7e); color:#fff; }
+        .btn-sm { padding:.5rem 1rem; font-size:.85rem; }
+        .btn-xs { padding:.35rem .8rem; font-size:.8rem; }
+        .btn:disabled { opacity:.5; cursor:not-allowed; }
+
+        /* ── FORM ── */
+        .form-group { margin-bottom:1.25rem; }
+        .form-group label { display:block; font-size:.875rem; color:var(--txt2); font-weight:500; margin-bottom:.4rem; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width:100%; padding:.875rem 1rem;
+            background:var(--bg3); border:1px solid var(--border);
+            border-radius:8px; color:var(--txt);
+            font-family:'Outfit',sans-serif; font-size:.95rem;
+            transition:border-color .3s,box-shadow .3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline:none; border-color:var(--green);
+            box-shadow:0 0 0 3px rgba(0,255,136,.12);
+        }
+        .form-group textarea { resize:vertical; min-height:100px; }
+        .form-hint { font-size:.8rem; color:var(--txt3); margin-top:.35rem; }
+        .form-err  { font-size:.8rem; color:var(--danger); margin-top:.35rem; display:none; }
+        .form-err.show { display:block; }
+        .form-row  { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.25rem; }
+
+        /* ── OTP BOXES ── */
+        .otp-row { display:flex; gap:.75rem; justify-content:center; margin:1.5rem 0; }
+        .otp-box {
+            width:56px; height:60px; text-align:center; font-size:1.6rem; font-weight:700;
+            background:var(--bg3); border:2px solid var(--border); border-radius:10px;
+            color:var(--txt); transition:border-color .3s;
+        }
+        .otp-box:focus { outline:none; border-color:var(--green); box-shadow:0 0 0 3px rgba(0,255,136,.12); }
+
+        /* ── BADGE / STATUS ── */
+        .badge {
+            display:inline-block; padding:.3rem .85rem; border-radius:50px;
+            font-size:.8rem; font-weight:600;
+        }
+        .badge-green   { background:rgba(0,255,136,.15);  color:var(--green); }
+        .badge-blue    { background:rgba(0,212,255,.15);  color:var(--blue);  }
+        .badge-warn    { background:rgba(255,165,0,.15);  color:var(--warn);  }
+        .badge-danger  { background:rgba(255,68,68,.15);  color:var(--danger);}
+        .badge-purple  { background:rgba(168,85,247,.15); color:var(--purple);}
+
+        /* ── ALERT ── */
+        .alert {
+            padding:1rem 1.25rem; border-radius:8px; font-size:.9rem;
+            display:flex; align-items:flex-start; gap:.75rem; margin-bottom:1.25rem;
+        }
+        .alert-info    { background:rgba(0,212,255,.08);  border:1px solid var(--blue);   color:var(--blue);  }
+        .alert-success { background:rgba(0,255,136,.08);  border:1px solid var(--green);  color:var(--green); }
+        .alert-warn    { background:rgba(255,165,0,.08);  border:1px solid var(--warn);   color:var(--warn);  }
+        .alert-danger  { background:rgba(255,68,68,.08);  border:1px solid var(--danger); color:var(--danger);}
+
+        /* ── PROGRESS ── */
+        .progress { height:6px; background:var(--bg3); border-radius:50px; overflow:hidden; }
+        .progress-fill { height:100%; border-radius:50px; background:linear-gradient(135deg,var(--green),var(--blue)); transition:width .4s; }
+
+        /* ── TABLE ── */
+        .tbl-wrap { overflow-x:auto; }
+        table { width:100%; border-collapse:collapse; }
+        thead { border-bottom:1px solid var(--border); }
+        th { padding:.875rem 1rem; text-align:left; color:var(--txt2); font-size:.8rem; text-transform:uppercase; letter-spacing:.5px; font-weight:600; }
+        td { padding:.875rem 1rem; border-bottom:1px solid var(--border); font-size:.9rem; }
+        tr:last-child td { border-bottom:none; }
+        tr:hover td { background:rgba(0,255,136,.02); }
+
+        /* ── NAV ── */
+        .topbar {
+            background:rgba(10,13,26,.92); backdrop-filter:blur(20px);
+            border-bottom:1px solid var(--border);
+            padding:.875rem 2rem; position:sticky; top:0; z-index:200;
+            display:flex; justify-content:space-between; align-items:center;
+        }
+        .logo-wrap { display:flex; align-items:center; gap:.75rem; }
+        .logo-box {
+            width:38px; height:38px;
+            background:linear-gradient(135deg,var(--green),var(--blue));
+            border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+        }
+        .logo-name {
+            font-size:1.25rem; font-weight:800;
+            background:linear-gradient(135deg,var(--green),var(--blue));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .nav-right { display:flex; align-items:center; gap:1rem; }
+        .user-pill {
+            display:flex; align-items:center; gap:.75rem;
+            padding:.5rem 1rem; background:var(--surface);
+            border:1px solid var(--border); border-radius:8px;
+            cursor:pointer; transition:border-color .3s;
+        }
+        .user-pill:hover { border-color:var(--green); }
+        .user-ava {
+            width:34px; height:34px; border-radius:50%;
+            background:linear-gradient(135deg,var(--green),var(--blue));
+            display:flex; align-items:center; justify-content:center;
+            font-weight:700; font-size:.9rem; color:var(--bg); flex-shrink:0;
+        }
+
+        /* ── SIDEBAR DASHBOARD ── */
+        .dash-layout { display:flex; min-height:calc(100vh - 62px); }
+        .sidebar {
+            width:240px; background:var(--bg2); border-right:1px solid var(--border);
+            padding:1.5rem 0; flex-shrink:0;
+            position:sticky; top:62px; height:calc(100vh - 62px); overflow-y:auto;
+        }
+        .menu-item {
+            display:flex; align-items:center; gap:.875rem;
+            padding:.875rem 1.5rem; color:var(--txt2); font-weight:500; font-size:.95rem;
+            cursor:pointer; transition:all .25s; border-right:3px solid transparent;
+            user-select:none;
+        }
+        .menu-item:hover { color:var(--txt); background:rgba(255,255,255,.02); }
+        .menu-item.active { color:var(--green); background:rgba(0,255,136,.06); border-right-color:var(--green); }
+        .menu-icon { font-size:1.2rem; width:24px; text-align:center; }
+        .menu-badge { margin-left:auto; background:var(--danger); border-radius:50px; font-size:.7rem; font-weight:700; padding:.15rem .5rem; }
+        .dash-content { flex:1; padding:2rem; overflow-y:auto; }
+
+        /* ── AUTH SCREENS ── */
+        .auth-screen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem; }
+        .auth-box { max-width:440px; width:100%; }
+        .auth-logo { text-align:center; margin-bottom:2rem; }
+        .auth-logo .logo-box { width:56px; height:56px; font-size:1.75rem; margin:0 auto .75rem; }
+        .auth-logo h2 { font-size:1.75rem; font-weight:800; background:linear-gradient(135deg,var(--green),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .auth-logo p { color:var(--txt2); margin-top:.25rem; }
+        .divider { text-align:center; color:var(--txt3); position:relative; margin:1.25rem 0; }
+        .divider::before,.divider::after { content:''; position:absolute; top:50%; width:42%; height:1px; background:var(--border); }
+        .divider::before { left:0; } .divider::after { right:0; }
+
+        /* ── FILE UPLOAD ── */
+        .drop-zone {
+            border:2px dashed var(--border); border-radius:12px;
+            padding:2.5rem 2rem; text-align:center; cursor:pointer;
+            transition:border-color .3s,background .3s;
+        }
+        .drop-zone:hover,.drop-zone.over { border-color:var(--green); background:rgba(0,255,136,.03); }
+        .drop-zone .drop-icon { font-size:2.5rem; margin-bottom:.75rem; }
+        .file-pill {
+            display:flex; justify-content:space-between; align-items:center;
+            padding:.875rem 1rem; background:var(--bg3);
+            border:1px solid var(--border); border-radius:8px; margin-bottom:.5rem;
+            font-size:.875rem;
+        }
+        .file-pill-left { display:flex; align-items:center; gap:.75rem; }
+
+        /* ── STAT MINI ── */
+        .stat-mini { padding:1.5rem; }
+        .stat-mini .sm-icon { font-size:2rem; margin-bottom:.75rem; }
+        .stat-mini .sm-val { font-size:2rem; font-weight:800; color:var(--green); margin-bottom:.25rem; }
+        .stat-mini .sm-lbl { color:var(--txt2); font-size:.875rem; }
+
+        /* ── FLOATING WA ── */
+        .wa-float {
+            position:fixed; bottom:28px; right:28px; z-index:300;
+            width:58px; height:58px; border-radius:50%;
+            background:linear-gradient(135deg,#25d366,#128c7e);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.8rem; box-shadow:0 10px 30px rgba(37,211,102,.4);
+            text-decoration:none; color:#fff;
+            animation:floatwa 3s ease-in-out infinite;
+        }
+        @keyframes floatwa { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+        /* ── TOAST ── */
+        #toast {
+            position:fixed; top:80px; right:24px; z-index:9999;
+            min-width:280px; max-width:360px;
+            padding:1rem 1.25rem; border-radius:10px;
+            display:flex; align-items:center; gap:.75rem;
+            font-size:.9rem; font-weight:500;
+            transform:translateX(120%); transition:transform .35s cubic-bezier(.4,0,.2,1);
+            box-shadow:0 10px 40px rgba(0,0,0,.4);
+        }
+        #toast.show { transform:translateX(0); }
+        #toast.t-success { background:#0e2b1f; border:1px solid var(--green); color:var(--green); }
+        #toast.t-info    { background:#0b1e2e; border:1px solid var(--blue);  color:var(--blue);  }
+        #toast.t-warn    { background:#2b1e00; border:1px solid var(--warn);  color:var(--warn);  }
+        #toast.t-danger  { background:#2b0000; border:1px solid var(--danger);color:var(--danger);}
+
+        /* ── LOADING SPINNER ── */
+        .spin { display:inline-block; width:18px; height:18px; border:2px solid rgba(255,255,255,.2); border-radius:50%; border-top-color:var(--green); animation:spin .8s linear infinite; }
+        @keyframes spin { to{transform:rotate(360deg);} }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:768px){
+            .sidebar { display:none; }
+            .dash-content { padding:1rem; }
+            .topbar { padding:.875rem 1rem; }
+            .form-row { grid-template-columns:1fr; }
+            .otp-box { width:44px; height:50px; font-size:1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div id="toast"></div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 1 — LOGIN
+═══════════════════════════════════════ -->
+<div id="screen-login" class="auth-screen">
+    <div class="auth-box">
+        <div class="auth-logo">
+            <div class="logo-box">🚀</div>
+            <h2>DigiCafe Portal</h2>
+            <p>Sign in to your compliance dashboard</p>
+        </div>
+        <div class="card card-glow">
+            <div class="alert alert-info small">
+                <span>ℹ️</span>
+                <span>Use your registered <strong>Email</strong> and <strong>Password</strong>. New client? <a href="#" onclick="showScreen('screen-signup')" style="color:var(--green);">Register here →</a></span>
+            </div>
+            <form id="loginForm" onsubmit="doEmailLogin(event)">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com" autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPass" required placeholder="Your password" autocomplete="current-password">
+                    <div class="form-err" id="loginErr"></div>
+                </div>
+                <button type="submit" class="btn btn-primary w100" id="loginBtn">🔐 Sign In</button>
+            </form>
+            <div class="divider small">OR</div>
+            <button class="btn btn-outline w100" onclick="showScreen('screen-phone')">📱 Login with Mobile OTP</button>
+            <p class="small txt2 mt1" style="text-align:center;">
+                Don't have an account? <a href="#" onclick="showScreen('screen-signup')" style="color:var(--green);">Create Account</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 2 — SIGNUP
+═══════════════════════════════════════ -->
+<div id="screen-signup" class="auth-screen hidden">
+    <div class="auth-box" style="max-width:520px;">
+        <div class="auth-logo">
+            <div class="logo-box">🚀</div>
+            <h2>Create Account</h2>
+            <p>Join DigiCafe for seamless compliance</p>
+        </div>
+        <div class="card card-glow">
+            <form id="signupForm" onsubmit="doSignup(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="suName" required placeholder="As per PAN">
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number *</label>
+                        <input type="tel" id="suMobile" required placeholder="10-digit mobile" maxlength="10" pattern="[0-9]{10}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" id="suEmail" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>PAN Number *</label>
+                        <input type="text" id="suPAN" required placeholder="AAAAA1234A" maxlength="10" style="text-transform:uppercase;" oninput="this.value=this.value.toUpperCase()">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Password *</label>
+                        <input type="password" id="suPass" required placeholder="Min 6 characters" minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password *</label>
+                        <input type="password" id="suPass2" required placeholder="Repeat password" minlength="6">
+                    </div>
+                </div>
+                <div class="form-err" id="signupErr"></div>
+                <button type="submit" class="btn btn-primary w100" id="signupBtn">🚀 Create Account</button>
+            </form>
+            <p class="small txt2 mt1" style="text-align:center;">
+                Already registered? <a href="#" onclick="showScreen('screen-login')" style="color:var(--green);">Sign In</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 3 — PHONE OTP
+═══════════════════════════════════════ -->
+<div id="screen-phone" class="auth-screen hidden">
+    <div class="auth-box">
+        <div class="auth-logo">
+            <div class="logo-box">📱</div>
+            <h2>Mobile OTP</h2>
+            <p>Login with your registered mobile number</p>
+        </div>
+        <div class="card card-glow" id="phoneStep1">
+            <div class="form-group">
+                <label>Mobile Number</label>
+                <input type="tel" id="phoneNum" placeholder="10-digit number" maxlength="10" pattern="[0-9]{10}">
+                <div class="form-hint">We'll send a 6-digit OTP via SMS</div>
+            </div>
+            <div id="recaptcha-container"></div>
+            <button class="btn btn-primary w100" onclick="sendOTP()">📨 Send OTP</button>
+            <p class="small txt2 mt1" style="text-align:center;">
+                <a href="#" onclick="showScreen('screen-login')" style="color:var(--green);">← Back to Email Login</a>
+            </p>
+        </div>
+        <div class="card card-glow hidden" id="phoneStep2">
+            <p class="small txt2 mb1">Enter the 6-digit OTP sent to <strong id="displayPhone"></strong></p>
+            <div class="otp-row">
+                <input class="otp-box" maxlength="1" id="o1" oninput="otpNext(this,'o2')">
+                <input class="otp-box" maxlength="1" id="o2" oninput="otpNext(this,'o3')" onkeydown="otpBack(event,'o1')">
+                <input class="otp-box" maxlength="1" id="o3" oninput="otpNext(this,'o4')" onkeydown="otpBack(event,'o2')">
+                <input class="otp-box" maxlength="1" id="o4" oninput="otpNext(this,'o5')" onkeydown="otpBack(event,'o3')">
+                <input class="otp-box" maxlength="1" id="o5" oninput="otpNext(this,'o6')" onkeydown="otpBack(event,'o4')">
+                <input class="otp-box" maxlength="1" id="o6" oninput="otpAuto()"           onkeydown="otpBack(event,'o5')">
+            </div>
+            <button class="btn btn-primary w100" onclick="verifyOTP()" id="verifyBtn">✅ Verify OTP</button>
+            <p class="small txt2 mt1" style="text-align:center;">
+                Didn't receive? <a href="#" onclick="resendOTP()" style="color:var(--green);">Resend OTP</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 4 — DASHBOARD (authenticated)
+═══════════════════════════════════════ -->
+<div id="screen-dashboard" class="hidden">
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="logo-wrap">
+            <div class="logo-box">🚀</div>
+            <span class="logo-name">DigiCafe</span>
+            <span class="badge badge-green small" style="margin-left:.5rem;">Client Portal</span>
+        </div>
+        <div class="nav-right">
+            <a href="https://wa.me/918539979271" target="_blank" class="btn btn-wa btn-sm">💬 WhatsApp Support</a>
+            <div class="user-pill" onclick="toggleUserMenu()">
+                <div class="user-ava" id="userAva">VP</div>
+                <div>
+                    <div class="bold small" id="userNameTop">Loading…</div>
+                    <div class="xsmall txt3" id="userPANTop">PAN: —</div>
+                </div>
+                <span style="font-size:.8rem; color:var(--txt3);">▼</span>
+            </div>
+            <button class="btn btn-sm" style="background:rgba(255,68,68,.1);color:var(--danger);border:1px solid var(--danger);" onclick="doLogout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Layout -->
+    <div class="dash-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="menu-item active" onclick="showTab('tab-home',this)">
+                <span class="menu-icon">🏠</span> Dashboard
+            </div>
+            <div class="menu-item" onclick="showTab('tab-services',this)">
+                <span class="menu-icon">📋</span> My Services
+            </div>
+            <div class="menu-item" onclick="showTab('tab-upload',this)">
+                <span class="menu-icon">📤</span> Upload Docs
+            </div>
+            <div class="menu-item" onclick="showTab('tab-docs',this)">
+                <span class="menu-icon">📁</span> My Documents
+            </div>
+            <div class="menu-item" onclick="showTab('tab-calendar',this)">
+                <span class="menu-icon">📅</span> Due Dates
+            </div>
+            <div class="menu-item" onclick="showTab('tab-profile',this)">
+                <span class="menu-icon">👤</span> My Profile
+            </div>
+            <div style="padding:1.5rem; margin-top:1rem; border-top:1px solid var(--border);">
+                <a href="https://wa.me/918539979271?text=Hi%20DigiCafe!%20I%20need%20help%20with%20my%20compliance." target="_blank" class="btn btn-wa w100 btn-sm" style="justify-content:center;">💬 Talk to Vikash</a>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <div class="dash-content">
+
+            <!-- ── TAB: HOME ── -->
+            <div id="tab-home">
+                <h1 style="font-size:2rem; font-weight:800; margin-bottom:.5rem;">
+                    Welcome back, <span id="greetName" style="background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Client</span>! 👋
+                </h1>
+                <p class="txt2 mb1">Here's your compliance status at a glance.</p>
+
+                <!-- Alert bar -->
+                <div class="alert alert-warn mb1">
+                    <span>⚠️</span>
+                    <div>
+                        <strong>Upcoming:</strong> ITR AY 2026-27 due <strong>31 July 2026</strong> &nbsp;|&nbsp;
+                        DIR-3 KYC due <strong>30 June 2026</strong> &nbsp;|&nbsp;
+                        GSTR-1 due <strong>11 June 2026</strong>
+                    </div>
+                </div>
+
+                <!-- Stats row -->
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.25rem;margin-bottom:1.75rem;">
+                    <div class="card stat-mini">
+                        <div class="sm-icon">📄</div>
+                        <div class="sm-val" id="statITR">—</div>
+                        <div class="sm-lbl">ITR Status</div>
+                    </div>
+                    <div class="card stat-mini">
+                        <div class="sm-icon">📊</div>
+                        <div class="sm-val" id="statGST">—</div>
+                        <div class="sm-lbl">GST Returns</div>
+                    </div>
+                    <div class="card stat-mini">
+                        <div class="sm-icon">📋</div>
+                        <div class="sm-val" id="statTDS">—</div>
+                        <div class="sm-lbl">TDS Certs</div>
+                    </div>
+                    <div class="card stat-mini">
+                        <div class="sm-icon">📁</div>
+                        <div class="sm-val" id="statDocs">0</div>
+                        <div class="sm-lbl">Documents</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card mb1">
+                    <h3 class="green mb1" style="font-size:1.1rem;">⚡ Quick Actions</h3>
+                    <div style="display:flex;flex-wrap:wrap;gap:.875rem;">
+                        <a href="https://forms.gle/CHBbbXnQAPbzAUG48" target="_blank" class="btn btn-primary btn-sm" style="background:linear-gradient(135deg,var(--green),var(--blue));">📝 Quick Service Form (Google)</a>
+                        <button class="btn btn-outline btn-sm" onclick="showTab('tab-services',null)">📋 Apply in Portal</button>
+                        <button class="btn btn-outline btn-sm" onclick="showTab('tab-upload',null)">📤 Upload Docs</button>
+                        <button class="btn btn-outline btn-sm" onclick="showTab('tab-docs',null)">📁 View Documents</button>
+                        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe!%20I%20have%20a%20query." target="_blank" class="btn btn-wa btn-sm">💬 Ask on WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+                        <h3 class="green" style="font-size:1.1rem;">🕑 Recent Activity</h3>
+                    </div>
+                    <div id="recentActivity">
+                        <div class="tbl-wrap">
+                            <table>
+                                <thead><tr><th>Date</th><th>Service</th><th>Status</th><th>Action</th></tr></thead>
+                                <tbody id="activityBody">
+                                    <tr><td colspan="4" class="txt3" style="text-align:center;padding:2rem;">No activity yet. Apply for a service to get started.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /tab-home -->
+
+            <!-- ── TAB: SERVICES ── -->
+            <div id="tab-services" class="hidden">
+                <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">Apply for a Service</h2>
+                <p class="txt2 mb1">Select a service and submit your request. We'll contact you within 24 hours.</p>
+
+                <div style="padding:1.25rem; background:linear-gradient(135deg,rgba(0,255,136,0.08),rgba(0,212,255,0.08)); border:1px solid var(--borderG); border-radius:12px; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; gap:1rem;">
+                    <div>
+                        <div class="bold green">⚡ Quick Option — Use Google Form</div>
+                        <div class="small txt2" style="margin-top:.25rem;">Fast, simple, and instant. Fill and submit in seconds.</div>
+                    </div>
+                    <a href="https://forms.gle/CHBbbXnQAPbzAUG48" target="_blank" class="btn btn-primary btn-sm">📝 Open Form</a>
+                </div>
+
+                <div class="card mb1">
+                    <h3 class="green mb1" style="font-size:1.1rem;">📝 New Service Request</h3>
+                    <form id="serviceForm" onsubmit="submitServiceRequest(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Service Category *</label>
+                                <select id="svcCategory" required onchange="updateSubServices()">
+                                    <option value="">Select category…</option>
+                                    <option value="Income Tax">💰 Income Tax (ITR)</option>
+                                    <option value="GST">📊 GST Services</option>
+                                    <option value="TDS">📋 TDS Services</option>
+                                    <option value="MCA / ROC">🏢 MCA / ROC</option>
+                                    <option value="DSC">🔐 DSC Services</option>
+                                    <option value="Trademark">™️ Trademark</option>
+                                    <option value="Business Registration">📝 Business Registration</option>
+                                    <option value="EPFO">🤝 EPFO / PF Services</option>
+                                    <option value="Certification">📜 Certificates</option>
+                                    <option value="AI / SaaS">🤖 AI & SaaS Services</option>
+                                    <option value="Other">🔧 Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Specific Service *</label>
+                                <select id="svcSpecific" required>
+                                    <option value="">Select category first…</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Assessment / Financial Year</label>
+                            <select id="svcAY">
+                                <option value="AY 2026-27">AY 2026-27 (FY 2025-26)</option>
+                                <option value="AY 2025-26">AY 2025-26 (FY 2024-25)</option>
+                                <option value="N/A">Not Applicable</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Details / Notes</label>
+                            <textarea id="svcNotes" placeholder="Describe your requirement in brief…"></textarea>
+                        </div>
+                        <div style="display:flex;gap:1rem;">
+                            <button type="submit" class="btn btn-primary">📨 Submit Request</button>
+                            <a id="svcWA" href="#" target="_blank" class="btn btn-wa">💬 WhatsApp Instead</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Past requests -->
+                <div class="card">
+                    <h3 class="green mb1" style="font-size:1.1rem;">📋 My Service Requests</h3>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead><tr><th>Date</th><th>Service</th><th>AY</th><th>Status</th></tr></thead>
+                            <tbody id="requestsBody">
+                                <tr><td colspan="4" class="txt3" style="text-align:center;padding:2rem;">No requests yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- /tab-services -->
+
+            <!-- ── TAB: UPLOAD ── -->
+            <div id="tab-upload" class="hidden">
+                <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">Upload Documents</h2>
+                <p class="txt2 mb1">Securely upload documents for your compliance work.</p>
+
+                <div class="card mb1">
+                    <div class="form-group">
+                        <label>Document Category</label>
+                        <select id="uploadCategory">
+                            <option value="ITR">📄 ITR Documents</option>
+                            <option value="GST">📊 GST Documents</option>
+                            <option value="TDS">📋 TDS / Form 16</option>
+                            <option value="MCA">🏢 MCA / ROC</option>
+                            <option value="DSC">🔐 DSC Documents</option>
+                            <option value="Identity">🪪 PAN / Aadhaar</option>
+                            <option value="Bank">🏦 Bank Documents</option>
+                            <option value="Other">📁 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+                        <div class="drop-icon">📁</div>
+                        <p class="bold">Click to select or drag & drop files</p>
+                        <p class="small txt3 mt1">PDF, JPG, PNG, XLSX — Max 10 MB each</p>
+                    </div>
+                    <input type="file" id="fileInput" multiple hidden onchange="handleFiles(event.target.files)">
+
+                    <div id="fileQueue" class="mt1"></div>
+                    <button class="btn btn-primary mt1" onclick="uploadAllFiles()" id="uploadBtn" style="display:none;">☁️ Upload to Cloud</button>
+                </div>
+
+                <!-- Checklist -->
+                <div class="card">
+                    <h3 class="green mb1" style="font-size:1.1rem;">📋 Document Checklist</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+                        <div style="padding:1rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;">
+                            <div class="bold small mb1">📄 ITR Filing</div>
+                            <div class="xsmall txt2" style="line-height:1.8;">PAN · Aadhaar · Form 16<br>Bank Statement · 80C Proofs</div>
+                        </div>
+                        <div style="padding:1rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;">
+                            <div class="bold small mb1">📊 GST Registration</div>
+                            <div class="xsmall txt2" style="line-height:1.8;">PAN · Aadhaar · Address Proof<br>Bank Statement · Photo</div>
+                        </div>
+                        <div style="padding:1rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;">
+                            <div class="bold small mb1">🔐 DSC Services</div>
+                            <div class="xsmall txt2" style="line-height:1.8;">PAN · Aadhaar · Photo<br>Email · Mobile</div>
+                        </div>
+                        <div style="padding:1rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;">
+                            <div class="bold small mb1">🏢 Company Reg.</div>
+                            <div class="xsmall txt2" style="line-height:1.8;">PAN · Aadhaar of all Directors<br>Address Proof · Utility Bill</div>
+                        </div>
+                        <div style="padding:1rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;">
+                            <div class="bold small mb1">🤝 EPFO / PF</div>
+                            <div class="xsmall txt2" style="line-height:1.8;">PAN · Aadhaar · Salary Proof<br>Bank Account · Employee Details</div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /tab-upload -->
+
+            <!-- ── TAB: DOCUMENTS ── -->
+            <div id="tab-docs" class="hidden">
+                <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">My Documents</h2>
+                <p class="txt2 mb1">All your uploaded files in one secure vault.</p>
+                <div class="card">
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead><tr><th>File Name</th><th>Category</th><th>Uploaded</th><th>Size</th><th>Action</th></tr></thead>
+                            <tbody id="docsBody">
+                                <tr><td colspan="5" class="txt3" style="text-align:center;padding:2rem;">No documents uploaded yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- /tab-docs -->
+
+            <!-- ── TAB: CALENDAR ── -->
+            <div id="tab-calendar" class="hidden">
+                <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">Due Dates 2026</h2>
+                <p class="txt2 mb1">Stay compliant — never miss a deadline.</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;" id="calGrid"></div>
+            </div><!-- /tab-calendar -->
+
+            <!-- ── TAB: PROFILE ── -->
+            <div id="tab-profile" class="hidden">
+                <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">My Profile</h2>
+                <p class="txt2 mb1">Your account information.</p>
+                <div style="display:grid;grid-template-columns:1fr 2fr;gap:1.5rem;">
+                    <div class="card" style="text-align:center;">
+                        <div style="width:90px;height:90px;margin:0 auto 1rem;background:linear-gradient(135deg,var(--green),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:800;color:var(--bg);" id="profileAva">VP</div>
+                        <div class="bold" id="profileName">—</div>
+                        <div class="small txt3 mt1" id="profilePAN">PAN: —</div>
+                        <span class="badge badge-green mt1">Verified Client</span>
+                    </div>
+                    <div class="card">
+                        <h3 class="green mb1" style="font-size:1.1rem;">Account Details</h3>
+                        <form onsubmit="updateProfile(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" id="profName" placeholder="Full name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mobile</label>
+                                    <input type="tel" id="profMobile" placeholder="+91 XXXXXXXXXX">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="profEmail" placeholder="Email" readonly style="opacity:.6;">
+                                    <div class="form-hint">Email cannot be changed</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>PAN Number</label>
+                                    <input type="text" id="profPAN" placeholder="PAN" readonly style="opacity:.6;">
+                                    <div class="form-hint">PAN cannot be changed</div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">💾 Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /tab-profile -->
+
+        </div><!-- /dash-content -->
+    </div><!-- /dash-layout -->
+</div><!-- /screen-dashboard -->
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/918539979271?text=Hi%20DigiCafe!%20I%20need%20assistance." class="wa-float" target="_blank">💬</a>
+
+<script>
+/* ═══════════════════════════════════
+   FIREBASE CONFIG
+   ↓↓↓ PASTE YOUR CONFIG HERE ↓↓↓
+═══════════════════════════════════ */
+const firebaseConfig = {
+    apiKey:            "PASTE_YOUR_API_KEY",
+    authDomain:        "PASTE_YOUR_AUTH_DOMAIN",
+    projectId:         "PASTE_YOUR_PROJECT_ID",
+    storageBucket:     "PASTE_YOUR_STORAGE_BUCKET",
+    messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+    appId:             "PASTE_YOUR_APP_ID"
+};
+
+/* ───────── INIT ───────── */
+firebase.initializeApp(firebaseConfig);
+const auth    = firebase.auth();
+const db      = firebase.firestore();
+const storage = firebase.storage();
+
+let currentUser  = null;
+let confirmResult = null;
+let pendingFiles  = [];
+
+/* ───────── AUTH STATE ───────── */
+auth.onAuthStateChanged(async user => {
+    if (user) {
+        currentUser = user;
+        const snap = await db.collection('clients').doc(user.uid).get();
+        const data = snap.exists ? snap.data() : {};
+        populateDashboard(user, data);
+        showScreen('screen-dashboard');
+    } else {
+        currentUser = null;
+        showScreen('screen-login');
+    }
+});
+
+/* ───────── SCREEN ROUTER ───────── */
+function showScreen(id) {
+    ['screen-login','screen-signup','screen-phone','screen-dashboard'].forEach(s => {
+        document.getElementById(s).classList.add('hidden');
+    });
+    document.getElementById(id).classList.remove('hidden');
+}
+
+/* ───────── EMAIL LOGIN ───────── */
+async function doEmailLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    const err = document.getElementById('loginErr');
+    err.classList.remove('show');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Signing in…';
+    try {
+        await auth.signInWithEmailAndPassword(
+            document.getElementById('loginEmail').value.trim(),
+            document.getElementById('loginPass').value
+        );
+        // onAuthStateChanged handles redirect
+    } catch(ex) {
+        err.textContent = friendlyError(ex.code);
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.innerHTML = '🔐 Sign In';
+    }
+}
+
+/* ───────── SIGNUP ───────── */
+async function doSignup(e) {
+    e.preventDefault();
+    const btn = document.getElementById('signupBtn');
+    const err = document.getElementById('signupErr');
+    const name    = document.getElementById('suName').value.trim();
+    const mobile  = document.getElementById('suMobile').value.trim();
+    const email   = document.getElementById('suEmail').value.trim();
+    const pan     = document.getElementById('suPAN').value.trim().toUpperCase();
+    const pass    = document.getElementById('suPass').value;
+    const pass2   = document.getElementById('suPass2').value;
+
+    if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan)) {
+        err.textContent = 'Invalid PAN format. Example: ABCDE1234F';
+        err.classList.add('show'); return;
+    }
+    if (pass !== pass2) {
+        err.textContent = 'Passwords do not match.';
+        err.classList.add('show'); return;
+    }
+
+    err.classList.remove('show');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Creating account…';
+
+    try {
+        const cred = await auth.createUserWithEmailAndPassword(email, pass);
+        await cred.user.updateProfile({ displayName: name });
+        await db.collection('clients').doc(cred.user.uid).set({
+            name, email, mobile, pan,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            itrStatus:'Pending', gstStatus:'—', tdsCerts: 0
+        });
+        toast('Account created! Welcome to DigiCafe 🎉', 'success');
+        // onAuthStateChanged handles redirect
+    } catch(ex) {
+        err.textContent = friendlyError(ex.code);
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.innerHTML = '🚀 Create Account';
+    }
+}
+
+/* ───────── PHONE OTP ───────── */
+function sendOTP() {
+    const num = document.getElementById('phoneNum').value.trim();
+    if (!/^[6-9]\d{9}$/.test(num)) { toast('Enter valid 10-digit mobile','warn'); return; }
+
+    if (!window.recaptchaVerifier) {
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { size:'invisible' });
+    }
+
+    document.getElementById('displayPhone').textContent = '+91 ' + num;
+    auth.signInWithPhoneNumber('+91' + num, window.recaptchaVerifier)
+        .then(result => {
+            confirmResult = result;
+            document.getElementById('phoneStep1').classList.add('hidden');
+            document.getElementById('phoneStep2').classList.remove('hidden');
+            document.getElementById('o1').focus();
+            toast('OTP sent!','success');
+        })
+        .catch(err => { toast('Failed: ' + err.message,'danger'); });
+}
+
+function otpNext(el, nextId) {
+    if (el.value.length === 1) document.getElementById(nextId)?.focus();
+}
+function otpBack(e, prevId) {
+    if (e.key === 'Backspace' && e.target.value === '') document.getElementById(prevId)?.focus();
+}
+function otpAuto() {
+    const code = ['o1','o2','o3','o4','o5','o6'].map(id => document.getElementById(id).value).join('');
+    if (code.length === 6) verifyOTP();
+}
+
+async function verifyOTP() {
+    const code = ['o1','o2','o3','o4','o5','o6'].map(id => document.getElementById(id).value).join('');
+    if (code.length < 6) { toast('Enter all 6 digits','warn'); return; }
+    const btn = document.getElementById('verifyBtn');
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Verifying…';
+    try {
+        await confirmResult.confirm(code);
+        toast('Mobile verified! Welcome 🎉','success');
+    } catch(ex) {
+        toast('Wrong OTP. Try again.','danger');
+        btn.disabled = false; btn.innerHTML = '✅ Verify OTP';
+    }
+}
+function resendOTP() {
+    document.getElementById('phoneStep1').classList.remove('hidden');
+    document.getElementById('phoneStep2').classList.add('hidden');
+    ['o1','o2','o3','o4','o5','o6'].forEach(id => document.getElementById(id).value = '');
+    toast('Enter number again to resend OTP','info');
+}
+
+/* ───────── LOGOUT ───────── */
+async function doLogout() {
+    await auth.signOut();
+    toast('Logged out','info');
+}
+
+/* ───────── POPULATE DASHBOARD ───────── */
+function populateDashboard(user, data) {
+    const name = data.name || user.displayName || user.email?.split('@')[0] || 'Client';
+    const pan  = data.pan  || '—';
+    const ini  = name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+
+    document.getElementById('greetName').textContent   = name.split(' ')[0];
+    document.getElementById('userNameTop').textContent = name;
+    document.getElementById('userPANTop').textContent  = 'PAN: ' + pan;
+    document.getElementById('userAva').textContent     = ini;
+    document.getElementById('profileAva').textContent  = ini;
+    document.getElementById('profileName').textContent = name;
+    document.getElementById('profilePAN').textContent  = 'PAN: ' + pan;
+    document.getElementById('profName').value   = name;
+    document.getElementById('profEmail').value  = user.email || '';
+    document.getElementById('profMobile').value = data.mobile || '';
+    document.getElementById('profPAN').value    = pan;
+
+    document.getElementById('statITR').textContent  = data.itrStatus || 'Pending';
+    document.getElementById('statGST').textContent  = data.gstStatus || '—';
+    document.getElementById('statTDS').textContent  = data.tdsCerts  || '0';
+
+    loadUserDocs();
+    loadServiceRequests();
+    buildCalendar();
+}
+
+/* ───────── TABS ───────── */
+function showTab(id, el) {
+    document.querySelectorAll('.dash-content > div').forEach(d => d.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    if (el) {
+        document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+        el.classList.add('active');
+    }
+}
+
+/* ───────── SERVICE REQUEST ───────── */
+const svcMap = {
+    'Income Tax': ['ITR Filing (Salary)','ITR Filing (Business)','Capital Gains ITR','Revised Return','Tax Planning','AIS/26AS Review','TDS Refund'],
+    'GST': ['GST Registration','GSTR-1 Filing','GSTR-3B Filing','GST Notice Reply','GST Reconciliation','GST LUT','GST Cancellation'],
+    'TDS': ['TDS Return (24Q)','TDS Return (26Q)','Form 16 / 16A','TDS Correction','Challan Reconciliation'],
+    'MCA / ROC': ['Company Registration','LLP Registration','OPC Registration','DIR-3 KYC','Annual Filing (MGT-7)','AOC-4 Filing','Share Transfer'],
+    'DSC': ['Class 3 DSC (Individual)','Class 3 DSC (Organisation)','DSC Renewal','Tender DSC','GST DSC'],
+    'Trademark': ['Trademark Search','Trademark Filing','Objection Reply','Trademark Renewal'],
+    'Business Registration': ['MSME / Udyam','FSSAI Registration','Shop & Establishment','Trade License','PF & ESI','IEC Code'],
+    'EPFO': ['PF Account Opening (PRAN)','PF Contribution Return (ECR)','Form 10 / 10C (Transfer)','PF Advance / Withdrawal','PF Closure','EPF Audit & Reconciliation'],
+    'Certification': ['Turnover Certificate','Net Worth Certificate','End Use Certificate','CMA Data','Projected Financials'],
+    'AI / SaaS': ['AI Tax Assistant','WhatsApp Automation','Business Website','CRM Development','Lead Dashboard'],
+    'Other': ['General Consultation','Document Verification','Other']
+};
+
+function updateSubServices() {
+    const cat = document.getElementById('svcCategory').value;
+    const sel = document.getElementById('svcSpecific');
+    sel.innerHTML = '<option value="">Select service…</option>';
+    (svcMap[cat] || []).forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = opt.textContent = s;
+        sel.appendChild(opt);
+    });
+    const txt = encodeURIComponent(`Hi DigiCafe! I need: *${cat}*. Please guide me.`);
+    document.getElementById('svcWA').href = `https://wa.me/918539979271?text=${txt}`;
+}
+
+async function submitServiceRequest(e) {
+    e.preventDefault();
+    if (!currentUser) return;
+    const cat  = document.getElementById('svcCategory').value;
+    const spec = document.getElementById('svcSpecific').value;
+    const ay   = document.getElementById('svcAY').value;
+    const note = document.getElementById('svcNotes').value;
+
+    if (!cat || !spec) { toast('Please select service','warn'); return; }
+
+    await db.collection('clients').doc(currentUser.uid).collection('requests').add({
+        category: cat, service: spec, ay, notes: note,
+        status: 'Pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    // Also WhatsApp notify
+    const profData = (await db.collection('clients').doc(currentUser.uid).get()).data();
+    const msg = encodeURIComponent(`*DigiCafe New Request*\nClient: ${profData.name}\nPAN: ${profData.pan}\nMobile: ${profData.mobile}\nService: ${spec}\nAY: ${ay}\nNotes: ${note}`);
+    window.open(`https://wa.me/918539979271?text=${msg}`, '_blank');
+
+    toast('Request submitted! We\'ll contact you soon ✅','success');
+    document.getElementById('serviceForm').reset();
+    loadServiceRequests();
+}
+
+async function loadServiceRequests() {
+    if (!currentUser) return;
+    const snap = await db.collection('clients').doc(currentUser.uid).collection('requests').orderBy('createdAt','desc').limit(20).get();
+    const tbody = document.getElementById('requestsBody');
+    if (snap.empty) { tbody.innerHTML = '<tr><td colspan="4" class="txt3" style="text-align:center;padding:2rem;">No requests yet.</td></tr>'; return; }
+    tbody.innerHTML = snap.docs.map(d => {
+        const r = d.data();
+        const dt = r.createdAt?.toDate()?.toLocaleDateString('en-IN') || '—';
+        const sc = r.status==='Completed'?'badge-green':r.status==='Processing'?'badge-blue':'badge-warn';
+        return `<tr><td>${dt}</td><td>${r.service}</td><td>${r.ay}</td><td><span class="badge ${sc}">${r.status}</span></td></tr>`;
+    }).join('');
+    // Update activity tab too
+    document.getElementById('activityBody').innerHTML = tbody.innerHTML;
+}
+
+/* ───────── FILE UPLOAD ───────── */
+function dzOver(e)  { e.preventDefault(); document.getElementById('dropZone').classList.add('over'); }
+function dzLeave(e) { document.getElementById('dropZone').classList.remove('over'); }
+function dzDrop(e)  { e.preventDefault(); dzLeave(e); handleFiles(e.dataTransfer.files); }
+
+function handleFiles(files) {
+    [...files].forEach(f => {
+        if (f.size > 10*1024*1024) { toast(f.name+' exceeds 10MB','warn'); return; }
+        if (pendingFiles.find(p=>p.name===f.name)) return;
+        pendingFiles.push(f);
+    });
+    renderQueue();
+}
+
+function renderQueue() {
+    const q = document.getElementById('fileQueue');
+    const btn = document.getElementById('uploadBtn');
+    if (!pendingFiles.length) { q.innerHTML=''; btn.style.display='none'; return; }
+    btn.style.display='inline-flex';
+    q.innerHTML = pendingFiles.map((f,i) => `
+        <div class="file-pill">
+            <div class="file-pill-left">
+                <span>📄</span>
+                <div>
+                    <div class="small bold">${f.name}</div>
+                    <div class="xsmall txt3">${(f.size/1024).toFixed(1)} KB</div>
+                </div>
+            </div>
+            <button class="btn btn-xs" style="background:rgba(255,68,68,.1);color:var(--danger);border:1px solid var(--danger);" onclick="removeFile(${i})">✕ Remove</button>
+        </div>
+    `).join('');
+}
+
+function removeFile(i) { pendingFiles.splice(i,1); renderQueue(); }
+
+async function uploadAllFiles() {
+    if (!currentUser || !pendingFiles.length) return;
+    const cat = document.getElementById('uploadCategory').value;
+    const btn = document.getElementById('uploadBtn');
+    btn.disabled=true; btn.innerHTML='<span class="spin"></span> Uploading…';
+
+    for (const file of pendingFiles) {
+        const ref = storage.ref(`clients/${currentUser.uid}/${cat}/${Date.now()}_${file.name}`);
+        await ref.put(file);
+        const url = await ref.getDownloadURL();
+        await db.collection('clients').doc(currentUser.uid).collection('documents').add({
+            name: file.name, category: cat, url, size: file.size,
+            uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+    }
+
+    toast(`${pendingFiles.length} file(s) uploaded ✅`,'success');
+    pendingFiles=[];
+    renderQueue();
+    btn.disabled=false; btn.innerHTML='☁️ Upload to Cloud';
+    loadUserDocs();
+}
+
+async function loadUserDocs() {
+    if (!currentUser) return;
+    const snap = await db.collection('clients').doc(currentUser.uid).collection('documents').orderBy('uploadedAt','desc').get();
+    const tbody = document.getElementById('docsBody');
+    document.getElementById('statDocs').textContent = snap.size;
+    if (snap.empty) { tbody.innerHTML='<tr><td colspan="5" class="txt3" style="text-align:center;padding:2rem;">No documents yet.</td></tr>'; return; }
+    tbody.innerHTML = snap.docs.map(d => {
+        const f = d.data();
+        const dt = f.uploadedAt?.toDate()?.toLocaleDateString('en-IN') || '—';
+        const kb = ((f.size||0)/1024).toFixed(1)+' KB';
+        return `<tr>
+            <td>📄 ${f.name}</td>
+            <td><span class="badge badge-blue">${f.category}</span></td>
+            <td>${dt}</td><td>${kb}</td>
+            <td><a href="${f.url}" target="_blank" class="btn btn-outline btn-xs">⬇ Download</a></td>
+        </tr>`;
+    }).join('');
+}
+
+/* ───────── CALENDAR ───────── */
+function buildCalendar() {
+    const months = [
+        { m:'June 2026',  items:[{l:'DIR-3 KYC Due',d:'30 Jun',u:true},{l:'Advance Tax Q1',d:'15 Jun',u:false},{l:'GSTR-1 May',d:'11 Jun',u:false}] },
+        { m:'July 2026',  items:[{l:'ITR AY 2026-27 ⚠️',d:'31 Jul',u:true},{l:'TDS Return 26Q',d:'31 Jul',u:false},{l:'GSTR-3B June',d:'20 Jul',u:false}] },
+        { m:'August 2026',items:[{l:'GSTR-1 July',d:'11 Aug',u:false},{l:'GSTR-3B July',d:'20 Aug',u:false}] },
+        { m:'Sept 2026',  items:[{l:'Advance Tax Q2',d:'15 Sep',u:false},{l:'GSTR-9 Annual',d:'30 Sep',u:false}] },
+        { m:'Oct 2026',   items:[{l:'GSTR-1 Sept',d:'11 Oct',u:false},{l:'TDS Return Q2',d:'31 Oct',u:false}] },
+        { m:'Dec 2026',   items:[{l:'Advance Tax Q3',d:'15 Dec',u:false},{l:'AOC-4 Filing',d:'31 Dec',u:false}] },
+        { m:'Monthly',    items:[{l:'GSTR-1 Filing',d:'11th',u:false},{l:'GSTR-3B Filing',d:'20th',u:false},{l:'PF/ESI Payment',d:'15th',u:false}] },
+    ];
+    document.getElementById('calGrid').innerHTML = months.map(mo => `
+        <div class="card" style="padding:1.25rem;">
+            <div style="font-size:1.1rem;font-weight:700;color:var(--green);margin-bottom:.875rem;">${mo.m}</div>
+            ${mo.items.map(it => `
+                <div style="display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.875rem;">
+                    <span class="txt2">${it.l}</span>
+                    <span style="color:${it.u?'var(--danger)':'var(--warn)'};font-weight:600;font-family:'JetBrains Mono',monospace;">${it.d}</span>
+                </div>
+            `).join('')}
+        </div>
+    `).join('');
+}
+
+/* ───────── PROFILE UPDATE ───────── */
+async function updateProfile(e) {
+    e.preventDefault();
+    if (!currentUser) return;
+    const name   = document.getElementById('profName').value.trim();
+    const mobile = document.getElementById('profMobile').value.trim();
+    await db.collection('clients').doc(currentUser.uid).update({ name, mobile });
+    await currentUser.updateProfile({ displayName: name });
+    toast('Profile updated ✅','success');
+}
+
+/* ───────── TOAST ───────── */
+let toastTimer;
+function toast(msg, type='info') {
+    const t = document.getElementById('toast');
+    const icons = {success:'✅',info:'ℹ️',warn:'⚠️',danger:'❌'};
+    t.className = `show t-${type}`;
+    t.innerHTML = `<span>${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.className='', 3500);
+}
+
+/* ───────── HELPERS ───────── */
+function friendlyError(code) {
+    const map = {
+        'auth/user-not-found':'No account found with this email.',
+        'auth/wrong-password':'Incorrect password.',
+        'auth/email-already-in-use':'This email is already registered.',
+        'auth/too-many-requests':'Too many attempts. Try later.',
+        'auth/invalid-email':'Invalid email address.',
+    };
+    return map[code] || 'Something went wrong. Please try again.';
+}
+function toggleUserMenu() { /* extend if needed */ }
+</script>
+</body>
+</html>
