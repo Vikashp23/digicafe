@@ -312,7 +312,7 @@
 
         /* Hero */
         .hero {
-            padding: 6rem 0 4rem;
+            padding: 4rem 0 2.5rem;
             text-align: center;
             position: relative;
         }
@@ -382,7 +382,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            margin-top: 4rem;
+            margin-top: 2.5rem;
         }
 
         .stat-card {
@@ -412,12 +412,12 @@
 
         /* Sections spacing */
         section {
-            padding: 5rem 0;
+            padding: 3.5rem 0;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2.5rem;
         }
 
         .section-header h2 {
@@ -1030,7 +1030,8 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <div class="logo-icon">🚀</div>
+                <img src="https://raw.githubusercontent.com/vikashp23/digicafe/main/logo.png" alt="DigiCafe Logo" style="height:38px; width:auto; border-radius:6px;" onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';">
+                <div class="logo-icon" id="logoFallback" style="display:none;">🚀</div>
                 <div class="logo-text">DigiCafe</div>
             </div>
             <div class="nav-links" id="navbarLinks">
@@ -1040,7 +1041,7 @@
                 <a href="#compliance">Compliance Calendar</a>
                 <a href="#partner">Partner</a>
                 <a href="#contact">Contact</a>
-                <a href="#" class="btn btn-primary">Client Portal</a>
+                <a href="#" class="btn btn-primary" onclick="openPortalGuide(); return false;">🔐 Client Portal</a>
             </div>
             <div class="menu-toggle" id="mobileMenuBtn">
                 <span></span>
@@ -1063,7 +1064,7 @@
             </p>
             <div class="cta-group">
                 <a href="#services" class="btn btn-primary">🚀 Explore Services</a>
-                <a href="https://wa.me/917483356129" class="btn btn-secondary" target="_blank"><i data-lucide="message-square"></i> Chat on WhatsApp</a>
+                <a href="https://wa.me/918539979271" class="btn btn-secondary" target="_blank"><i data-lucide="message-square"></i> Chat on WhatsApp</a>
             </div>
 
             <div class="stats-grid">
@@ -1136,49 +1137,124 @@
         </div>
     </section>
 
-    <section id="msme" class="msme-section reveal">
+    <section id="msme" class="msme-section reveal" style="padding: 3rem 0;">
         <div class="container">
-            <div class="section-header">
-                <span class="section-badge">🏆 Corporate Credentials</span>
+            <div class="section-header" style="margin-bottom: 2.5rem;">
+                <span class="section-badge">🏛️ Government Registered</span>
                 <h2>MSME Registered Enterprise</h2>
-                <p>Officially recognized entity by the Ministry of Micro, Small and Medium Enterprises, Government of India.</p>
+                <p>Officially recognized by Ministry of Micro, Small and Medium Enterprises, Government of India.</p>
             </div>
-            
+
             <div class="msme-container">
+                <!-- Left: Key Details -->
                 <div class="glass-card msme-meta-box">
-                    <div class="msme-badge-premium">
-                        <i data-lucide="shield-check"></i> ✓ Government Recognized MSME
+                    <div class="msme-badge-premium" style="margin-bottom: 1rem;">
+                        <i data-lucide="shield-check"></i> ✓ UDYAM-KR-02-0041919 &nbsp;|&nbsp; Verified Active
                     </div>
                     <div class="msme-detail-row">
-                        <span class="msme-detail-label">Business Name</span>
-                        <span class="msme-detail-val">DIGICAFE COMPLIANCE & DIGITAL SOLUTIONS</span>
+                        <span class="msme-detail-label">Enterprise Name</span>
+                        <span class="msme-detail-val" style="font-size:0.85rem;">DIGICAFE COMPLIANCE &<br>DIGITAL SOLUTIONS</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Owner</span>
+                        <span class="msme-detail-val">Shri Vikash Pathak</span>
                     </div>
                     <div class="msme-detail-row">
                         <span class="msme-detail-label">Enterprise Type</span>
-                        <span class="msme-detail-val">Micro Enterprise</span>
+                        <span class="msme-detail-val" style="color:var(--accent-primary);">Micro Enterprise</span>
                     </div>
                     <div class="msme-detail-row">
-                        <span class="msme-detail-label">Location</span>
-                        <span class="msme-detail-val">Bengaluru, Karnataka</span>
+                        <span class="msme-detail-label">Major Activity</span>
+                        <span class="msme-detail-val">Services</span>
                     </div>
                     <div class="msme-detail-row">
-                        <span class="msme-detail-label">Status</span>
-                        <span class="msme-detail-val" style="color: var(--accent-primary);">Active / Verified</span>
+                        <span class="msme-detail-label">Organisation Type</span>
+                        <span class="msme-detail-val">Proprietary</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Udyam Reg. Date</span>
+                        <span class="msme-detail-val" style="font-family:'JetBrains Mono',monospace;">07/01/2023</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Incorporation Date</span>
+                        <span class="msme-detail-val" style="font-family:'JetBrains Mono',monospace;">01/08/2019</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">State / District</span>
+                        <span class="msme-detail-val">Karnataka &nbsp;|&nbsp; Bengaluru (Rural)</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">NIC Code</span>
+                        <span class="msme-detail-val" style="font-family:'JetBrains Mono',monospace; font-size:0.85rem;">64990 — Financial Services</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Classification AY 26-27</span>
+                        <span class="msme-detail-val" style="color:var(--accent-primary);">Micro &nbsp;✓&nbsp; 02/06/2026</span>
+                    </div>
+                    <div class="msme-detail-row">
+                        <span class="msme-detail-label">Bank</span>
+                        <span class="msme-detail-val" style="font-size:0.85rem;">ICICI Bank &nbsp;|&nbsp; ICIC0000002</span>
                     </div>
                 </div>
 
-                <div class="glass-card">
-                    <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; color: var(--accent-secondary);">
-                        <i data-lucide="layers"></i> Registered Scope of Operational Services
-                    </h3>
-                    <div class="msme-services-tag-grid">
-                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Income Tax Filing</div>
-                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> GST Compliance</div>
-                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> TDS Filing</div>
-                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> MCA Compliance</div>
-                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Digital Signature Services</div>
-                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Trademark Registration</div>
-                        <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Business Registration</div>
+                <!-- Right: NIC Scope + Portals -->
+                <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                    <div class="glass-card">
+                        <h3 style="margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; color: var(--accent-secondary); font-size:1.15rem;">
+                            <i data-lucide="layers"></i> Registered Scope of Services (NIC 64990)
+                        </h3>
+                        <div class="msme-services-tag-grid">
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Income Tax Filing</div>
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> GST Compliance</div>
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> TDS Filing</div>
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> MCA / ROC Services</div>
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Digital Signature (DSC)</div>
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Trademark Registration</div>
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Business Registration</div>
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Financial Advisory</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 style="margin-bottom: 1.25rem; color: var(--accent-secondary); font-size:1.1rem;">
+                            🌐 Government Portal Registrations
+                        </h3>
+                        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:0.75rem;">
+                            <div style="padding:0.75rem; background:rgba(0,255,136,0.05); border:1px solid var(--border-bright); border-radius:8px; font-size:0.9rem; color:var(--text-secondary);">
+                                ✅ GeM Portal — Interested
+                            </div>
+                            <div style="padding:0.75rem; background:rgba(0,255,136,0.05); border:1px solid var(--border-bright); border-radius:8px; font-size:0.9rem; color:var(--text-secondary);">
+                                ✅ TReDS Portal — Interested
+                            </div>
+                            <div style="padding:0.75rem; background:rgba(0,255,136,0.05); border:1px solid var(--border-bright); border-radius:8px; font-size:0.9rem; color:var(--text-secondary);">
+                                ✅ NCS Portal — Interested
+                            </div>
+                            <div style="padding:0.75rem; background:rgba(0,255,136,0.05); border:1px solid var(--border-bright); border-radius:8px; font-size:0.9rem; color:var(--text-secondary);">
+                                ✅ NSIC B2B Portal — Interested
+                            </div>
+                            <div style="padding:0.75rem; background:rgba(0,255,136,0.05); border:1px solid var(--border-bright); border-radius:8px; font-size:0.9rem; color:var(--text-secondary);">
+                                ✅ Skill India Digital — Interested
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card" style="background: linear-gradient(135deg, rgba(0,255,136,0.05), rgba(0,212,255,0.05)); border-color: var(--border-bright);">
+                        <div style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center;">
+                            <div>
+                                <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem;">MSME Classification FY 2026-27</div>
+                                <div style="font-size:1.5rem; font-weight:800; color:var(--accent-primary);">MICRO CLASS</div>
+                                <div style="font-size:0.85rem; color:var(--text-secondary);">Classified on: 02/06/2026</div>
+                            </div>
+                            <div style="flex:1; min-width:200px;">
+                                <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Udyam Registration Number</div>
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; color:#fff; background:rgba(0,0,0,0.3); padding:0.75rem 1rem; border-radius:8px; border:1px solid var(--border-bright); letter-spacing:1px;">
+                                    UDYAM-KR-02-0041919
+                                </div>
+                            </div>
+                            <a href="https://udyamregistration.gov.in" target="_blank" class="btn btn-secondary" style="white-space:nowrap;">
+                                🔗 Verify on Udyam Portal
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1227,16 +1303,16 @@
         </div>
     </section>
 
-    <section id="services" class="reveal">
+    <section id="services" class="reveal" style="padding-bottom: 1.5rem;">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" style="margin-bottom: 2rem;">
                 <span class="section-badge">🎯 Complete Service Suite</span>
                 <h2>Professional Services Portfolio</h2>
                 <p>Comprehensive solutions for every compliance and business need</p>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">💰 Income Tax Services</h3>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">💰 Income Tax Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">📄</div>
@@ -1267,8 +1343,8 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📊 GST Services</h3>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">📊 GST Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">🏢</div>
@@ -1307,8 +1383,8 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📋 TDS Services</h3>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">📋 TDS Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">📑</div>
@@ -1337,8 +1413,8 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">🏢 MCA / ROC Services</h3>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">🏢 MCA / ROC Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">🏭</div>
@@ -1379,8 +1455,8 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📜 Certification Services</h3>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">📜 Certification Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">✅</div>
@@ -1409,8 +1485,8 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">🔐 DSC Services (SignX Partner)</h3>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">🔐 DSC Services (SignX Partner)</h3>
                 <div style="background: rgba(0, 255, 136, 0.05); border: 1px solid var(--accent-primary); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
                     <p style="color: var(--text-secondary); font-size: 1rem;">
                         ✅ <strong style="color: var(--accent-primary);">We use SignX platform for DSC processing</strong> - India's leading Digital Signature Certificate provider with instant issuance and lifetime support.
@@ -1445,8 +1521,8 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📝 Business Registration</h3>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">📝 Business Registration</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">🏭</div>
@@ -1486,8 +1562,8 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">™️ Trademark Services</h3>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">™️ Trademark Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">™️</div>
@@ -1504,8 +1580,8 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--accent-primary);">📊 Valuation & Merchant Banker Coordination</h3>
+            <div style="margin-bottom: 0;">
+                <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--accent-primary);">📊 Valuation & Merchant Banker Coordination</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">💼</div>
@@ -1524,9 +1600,9 @@
         </div>
     </section>
 
-    <section id="compliance" class="reveal">
+    <section id="compliance" class="reveal" style="padding-top: 1.5rem;">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" style="margin-bottom: 1.5rem;">
                 <span class="section-badge">📅 Stay Compliant</span>
                 <h2>Important Due Dates 2026</h2>
                 <p>Complete compliance calendar for FY 2026-27</p>
@@ -1685,14 +1761,14 @@
                         <i data-lucide="mail" size="24"></i>
                         <div>
                             <h4>Email Address</h4>
-                            <p><a href="mailto:vikashpathak.mgmt@gmail.com">vikashpathak.mgmt@gmail.com</a></p>
+                            <p><a href="mailto:email.vikashpathak@gmail.com">email.vikashpathak@gmail.com</a></p>
                         </div>
                     </div>
                     <div class="glass-card contact-meta-item">
                         <i data-lucide="phone" size="24"></i>
                         <div>
                             <h4>Phone Line</h4>
-                            <p><a href="tel:+917483356129">+91 7483356129</a></p>
+                            <p><a href="tel:+918539979271">+91 8539979271</a></p>
                         </div>
                     </div>
                     <div class="glass-card contact-meta-item">
@@ -1709,7 +1785,7 @@
                         <span>Bengaluru, Karnataka Operations Zone</span>
                     </div>
 
-                    <a href="https://wa.me/917483356129" class="btn btn-primary" target="_blank" style="width: 100%;">
+                    <a href="https://wa.me/918539979271" class="btn btn-primary" target="_blank" style="width: 100%;">
                         <i data-lucide="message-square"></i> Connect via WhatsApp Directly
                     </a>
                 </div>
@@ -1766,8 +1842,8 @@
                     <h4 style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight:800;">DIGICAFE COMPLIANCE & DIGITAL SOLUTIONS</h4>
                     <p style="margin-bottom: 1rem; font-style: italic;">Our Service, Your Solution</p>
                     <div class="footer-contact-list">
-                        <div><i data-lucide="mail" size="16"></i> vikashpathak.mgmt@gmail.com</div>
-                        <div><i data-lucide="phone" size="16"></i> +91 7483356129</div>
+                        <div><i data-lucide="mail" size="16"></i> email.vikashpathak@gmail.com</div>
+                        <div><i data-lucide="phone" size="16"></i> +91 8539979271</div>
                         <div><i data-lucide="map-pin" size="16"></i> Bengaluru, Karnataka</div>
                     </div>
                 </div>
@@ -1804,11 +1880,120 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/917483356129?text=Hi%20DigiCafe,%20I%20need%20assistance%20with%20tax%20and%20compliance%20services" class="whatsapp-float" target="_blank" aria-label="Connect via WhatsApp">
+    <a href="https://wa.me/918539979271?text=Hi%20DigiCafe,%20I%20need%20assistance%20with%20tax%20and%20compliance%20services" class="whatsapp-float" target="_blank" aria-label="Connect via WhatsApp">
         <i data-lucide="message-circle" size="32"></i>
     </a>
 
+    <!-- ===== CLIENT PORTAL GUIDE MODAL ===== -->
+    <div id="portalModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:3000; align-items:center; justify-content:center; padding:1.5rem;">
+        <div style="background:var(--bg-secondary); border:1px solid var(--border-bright); border-radius:20px; max-width:680px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:0 0 60px rgba(0,255,136,0.2);">
+            
+            <!-- Header -->
+            <div style="padding:1.75rem 2rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; background:var(--bg-secondary); z-index:10;">
+                <div>
+                    <h2 style="font-size:1.5rem; font-weight:800; background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">🔐 DigiCafe Client Portal</h2>
+                    <p style="color:var(--text-muted); font-size:0.875rem; margin-top:0.25rem;">How to access your compliance dashboard</p>
+                </div>
+                <button onclick="closePortalGuide()" style="width:38px; height:38px; background:transparent; border:1px solid var(--border); border-radius:8px; color:var(--text-secondary); cursor:pointer; font-size:1.25rem; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff4444'; this.style.color='#ff4444';" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)';">×</button>
+            </div>
+
+            <!-- Body -->
+            <div style="padding:2rem;">
+
+                <!-- Status Banner -->
+                <div style="padding:1rem 1.25rem; background:rgba(255,165,0,0.1); border:1px solid var(--accent-warning); border-radius:10px; margin-bottom:1.75rem; display:flex; gap:0.75rem; align-items:flex-start;">
+                    <span style="font-size:1.5rem;">🚧</span>
+                    <div>
+                        <div style="font-weight:700; color:var(--accent-warning); margin-bottom:0.25rem;">Client Portal — Coming Soon</div>
+                        <div style="color:var(--text-secondary); font-size:0.9rem;">The self-service portal is currently under development. Until it goes live, you can access all services instantly through the options below.</div>
+                    </div>
+                </div>
+
+                <!-- Step by Step -->
+                <h3 style="color:var(--accent-primary); margin-bottom:1.25rem; font-size:1.1rem;">📋 How to Access Services Right Now</h3>
+
+                <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem;">
+                    <div style="display:flex; gap:1rem; align-items:flex-start; padding:1.25rem; background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:12px;">
+                        <div style="width:38px; height:38px; background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#0a0d1a; flex-shrink:0; font-size:1.1rem;">1</div>
+                        <div>
+                            <div style="font-weight:600; margin-bottom:0.25rem;">💬 WhatsApp DigiCafe Directly</div>
+                            <div style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.75rem;">Send your name, service needed, and PAN number on WhatsApp. Vikash will personally respond and guide you.</div>
+                            <a href="https://wa.me/918539979271?text=Hi%20DigiCafe!%20I%20need%20to%20access%20my%20client%20services.%20Please%20guide%20me." target="_blank" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.25rem; background:linear-gradient(135deg,#25d366,#128c7e); border-radius:8px; color:#fff; font-weight:600; text-decoration:none; font-size:0.9rem;">💬 Open WhatsApp Chat →</a>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:1rem; align-items:flex-start; padding:1.25rem; background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:12px;">
+                        <div style="width:38px; height:38px; background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#0a0d1a; flex-shrink:0; font-size:1.1rem;">2</div>
+                        <div>
+                            <div style="font-weight:600; margin-bottom:0.25rem;">📧 Email Your Requirements</div>
+                            <div style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.75rem;">Send details of service required, your PAN, and any documents to our email. Response within 24 hours.</div>
+                            <a href="mailto:email.vikashpathak@gmail.com?subject=Client%20Service%20Request&body=Name:%0APAN:%0AService%20Required:%0AMobile:%0A" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.25rem; background:rgba(0,212,255,0.1); border:1px solid var(--accent-secondary); border-radius:8px; color:var(--accent-secondary); font-weight:600; text-decoration:none; font-size:0.9rem;">📧 Send Email →</a>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:1rem; align-items:flex-start; padding:1.25rem; background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:12px;">
+                        <div style="width:38px; height:38px; background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#0a0d1a; flex-shrink:0; font-size:1.1rem;">3</div>
+                        <div>
+                            <div style="font-weight:600; margin-bottom:0.25rem;">📝 Fill the Contact Form Below</div>
+                            <div style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.75rem;">Use the contact form on this page. Select your service, enter details — it will auto-send to WhatsApp.</div>
+                            <button onclick="closePortalGuide(); document.getElementById('contact')?.scrollIntoView({behavior:'smooth'});" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.25rem; background:rgba(0,255,136,0.1); border:1px solid var(--accent-primary); border-radius:8px; color:var(--accent-primary); font-weight:600; cursor:pointer; font-size:0.9rem; font-family:inherit;">📝 Go to Contact Form →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Guide -->
+                <h3 style="color:var(--accent-primary); margin-bottom:1rem; font-size:1.1rem;">📁 Documents to Send for Common Services</h3>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:1rem; margin-bottom:2rem;">
+                    <div style="padding:1rem; background:var(--bg-tertiary); border:1px solid var(--border); border-radius:10px;">
+                        <div style="font-weight:700; color:#fff; margin-bottom:0.5rem; font-size:0.9rem;">📄 ITR Filing</div>
+                        <div style="color:var(--text-secondary); font-size:0.82rem; line-height:1.7;">PAN · Aadhaar · Form 16 · Bank Statement · Investment Proofs</div>
+                    </div>
+                    <div style="padding:1rem; background:var(--bg-tertiary); border:1px solid var(--border); border-radius:10px;">
+                        <div style="font-weight:700; color:#fff; margin-bottom:0.5rem; font-size:0.9rem;">📊 GST Services</div>
+                        <div style="color:var(--text-secondary); font-size:0.82rem; line-height:1.7;">PAN · Aadhaar · Address Proof · Bank Statement · Photo</div>
+                    </div>
+                    <div style="padding:1rem; background:var(--bg-tertiary); border:1px solid var(--border); border-radius:10px;">
+                        <div style="font-weight:700; color:#fff; margin-bottom:0.5rem; font-size:0.9rem;">🔐 DSC Services</div>
+                        <div style="color:var(--text-secondary); font-size:0.82rem; line-height:1.7;">PAN · Aadhaar · Photo · Email · Mobile No.</div>
+                    </div>
+                    <div style="padding:1rem; background:var(--bg-tertiary); border:1px solid var(--border); border-radius:10px;">
+                        <div style="font-weight:700; color:#fff; margin-bottom:0.5rem; font-size:0.9rem;">🏢 Company Reg.</div>
+                        <div style="color:var(--text-secondary); font-size:0.82rem; line-height:1.7;">PAN · Aadhaar · Address Proof · Utility Bill · Photo</div>
+                    </div>
+                </div>
+
+                <!-- Portal Coming Soon Note -->
+                <div style="padding:1.25rem; background:linear-gradient(135deg, rgba(0,255,136,0.05), rgba(0,212,255,0.05)); border:1px solid var(--border-bright); border-radius:12px; text-align:center;">
+                    <div style="font-size:1.5rem; margin-bottom:0.5rem;">🚀</div>
+                    <div style="font-weight:700; color:#fff; margin-bottom:0.25rem;">Full Self-Service Portal Launching Soon</div>
+                    <div style="color:var(--text-secondary); font-size:0.9rem;">Login · Upload Documents · Track Status · Download Certificates · View Due Dates</div>
+                    <div style="margin-top:1rem;">
+                        <a href="https://wa.me/918539979271?text=Hi!%20Please%20notify%20me%20when%20the%20DigiCafe%20Client%20Portal%20is%20live." target="_blank" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary)); border-radius:8px; color:#0a0d1a; font-weight:700; text-decoration:none; font-size:0.9rem;">🔔 Notify Me When Live</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Portal Modal
+        function openPortalGuide() {
+            const modal = document.getElementById('portalModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePortalGuide() {
+            document.getElementById('portalModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on backdrop click
+        document.getElementById('portalModal').addEventListener('click', function(e) {
+            if (e.target === this) closePortalGuide();
+        });
+
         // Preloader Exit Engine
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
@@ -1877,7 +2062,7 @@
                 e.stopPropagation();
                 const serviceHeadline = btn.closest('.service-card').querySelector('h3').textContent;
                 const encodedWhatsappText = `Hi DigiCafe Team,%0A%0AI wish to apply directly for the service: *${serviceHeadline}*.%0APlease guide me through the document dispatch process.`;
-                window.open(`https://wa.me/917483356129?text=${encodedWhatsappText}`, '_blank');
+                window.open(`https://wa.me/918539979271?text=${encodedWhatsappText}`, '_blank');
             });
         });
 
@@ -1899,7 +2084,7 @@
                                         `*Service Selected:* ${assignedService}%0A%0A` +
                                         `*Operational Brief:*%0A${messagePayload}`;
 
-            window.open(`https://wa.me/917483356129?text=${finalStructuredText}`, '_blank');
+            window.open(`https://wa.me/918539979271?text=${finalStructuredText}`, '_blank');
         });
 
         // Dynamic Sticky Navigation UI Optimization
