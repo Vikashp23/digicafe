@@ -208,7 +208,7 @@
 
         .nav-links {
             display: none;
-            gap: 2.5rem;
+            gap: 1.75rem;
             align-items: center;
         }
 
@@ -331,7 +331,7 @@
         .hero .tagline {
             font-size: 1.5rem;
             color: var(--accent-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.75rem;
             font-weight: 600;
         }
 
@@ -381,13 +381,13 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2.5rem;
         }
 
         .stat-card {
             text-align: center;
-            padding: 2rem;
+            padding: 0.75rem;
             border-radius: 12px;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.03);
@@ -417,7 +417,7 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .section-header h2 {
@@ -452,7 +452,7 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 0.75rem;
             backdrop-filter: blur(20px);
             transition: all 0.3s ease;
             position: relative;
@@ -485,7 +485,7 @@
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .service-card {
@@ -501,7 +501,7 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.75rem;
             position: relative;
         }
 
@@ -529,7 +529,7 @@
 
         .service-list {
             list-style: none;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .service-list li {
@@ -562,7 +562,7 @@
         .msme-container {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2.5rem;
+            gap: 1.75rem;
         }
 
         @media (min-width: 992px) {
@@ -581,7 +581,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
+            padding: 0.75rem;
             background: rgba(255,255,255,0.02);
             border-radius: 8px;
             border: 1px solid var(--border);
@@ -642,11 +642,11 @@
         .why-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .why-card {
-            padding: 2rem;
+            padding: 0.75rem;
             text-align: left;
         }
 
@@ -711,14 +711,14 @@
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .calendar-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 0.5rem;
             backdrop-filter: blur(10px);
         }
 
@@ -870,7 +870,7 @@
             color: var(--text-muted);
             gap: 0.5rem;
             text-align: center;
-            padding: 1rem;
+            padding: 0.75rem;
         }
 
         /* Floating elements */
@@ -918,7 +918,7 @@
         }
 
         .footer-section h4 {
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.75rem;
             color: var(--accent-primary);
             font-size: 1.15rem;
             text-transform: uppercase;
@@ -1014,6 +1014,81 @@
                 to { opacity: 1; transform: translateY(0); }
             }
         }
+        .service-tab {
+            padding: 0.6rem 1.25rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .service-tab:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            background: rgba(0,255,136,0.05);
+        }
+
+        .service-tab.active {
+            background: rgba(0,255,136,0.15);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .service-content {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .template-item {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .template-item.hidden {
+            display: none;
+        }
+
+        .template-tab {
+            padding: 0.6rem 1.25rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .template-tab:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            background: rgba(0,255,136,0.05);
+        }
+
+        .template-tab.active {
+            background: rgba(0,255,136,0.15);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            font-weight: 700;
+        }
+
     </style>
 </head>
 <body>
@@ -1036,9 +1111,11 @@
             </div>
             <div class="nav-links" id="navbarLinks">
                 <a href="#services">Services</a>
+                <a href="#about">About Vikash</a>
                 <a href="#msme">MSME Credentials</a>
                 <a href="#why-choose">Why DigiCafe</a>
                 <a href="#compliance">Compliance Calendar</a>
+                <a href="#templates">📥 Templates</a>
                 <a href="#partner">Partner</a>
                 <a href="#contact">Contact</a>
                 <a href="#" class="btn btn-primary" onclick="openPortalGuide(); return false;">🔐 Client Portal</a>
@@ -1137,9 +1214,9 @@
         </div>
     </section>
 
-    <section id="msme" class="msme-section reveal" style="padding: 3rem 0;">
+    <section id="msme" class="msme-section reveal" style="padding: 2rem 0;">
         <div class="container">
-            <div class="section-header" style="margin-bottom: 2.5rem;">
+            <div class="section-header" style="margin-bottom: 0.75rem;">
                 <span class="section-badge">🏛️ Government Registered</span>
                 <h2>MSME Registered Enterprise</h2>
                 <p>Officially recognized by Ministry of Micro, Small and Medium Enterprises, Government of India.</p>
@@ -1200,7 +1277,7 @@
                 <!-- Right: NIC Scope + Portals -->
                 <div style="display:flex; flex-direction:column; gap:1.5rem;">
                     <div class="glass-card">
-                        <h3 style="margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; color: var(--accent-secondary); font-size:1.15rem;">
+                        <h3 style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: var(--accent-secondary); font-size:1.15rem;">
                             <i data-lucide="layers"></i> Registered Scope of Services (NIC 64990)
                         </h3>
                         <div class="msme-services-tag-grid">
@@ -1211,12 +1288,13 @@
                             <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Digital Signature (DSC)</div>
                             <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Trademark Registration</div>
                             <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Business Registration</div>
+                            <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> PF / EPFO Services</div>
                             <div class="msme-tag"><i data-lucide="check-circle" size="16" style="color:var(--accent-primary)"></i> Financial Advisory</div>
                         </div>
                     </div>
 
                     <div class="glass-card">
-                        <h3 style="margin-bottom: 1.25rem; color: var(--accent-secondary); font-size:1.1rem;">
+                        <h3 style="margin-bottom: 0.75rem; color: var(--accent-secondary); font-size:1.1rem;">
                             🌐 Government Portal Registrations
                         </h3>
                         <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:0.75rem;">
@@ -1303,17 +1381,158 @@
         </div>
     </section>
 
-    <section id="services" class="reveal" style="padding-bottom: 1.5rem;">
+    <!-- ════════════════════════════════════════
+         ABOUT VIKASH PATHAK & DIGICAFE
+         ════════════════════════════════════════ -->
+    <section id="about" class="reveal" style="padding: 2rem 0;">
         <div class="container">
-            <div class="section-header" style="margin-bottom: 2rem;">
+            <div class="section-header" style="margin-bottom: 0.75rem;">
+                <span class="section-badge">👤 About the Founder</span>
+                <h2>Meet Vikash Pathak</h2>
+                <p>Senior Accounts Executive | Finance & Compliance Professional</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.75rem; align-items: center;">
+                <!-- Left: Founder Card -->
+                <div class="glass-card" style="text-align: center;">
+                    <div style="width: 140px; height: 140px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: 800;">VP</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.25rem;">Vikash Pathak</h3>
+                    <p style="color: var(--accent-primary); font-weight: 700; margin-bottom: 1rem; font-size: 0.95rem;">Senior Accounts Executive</p>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+                        Finance & Compliance Professional with <strong>6+ years</strong> of expertise in accounting operations, reconciliations, taxation support, and financial coordination.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <a href="https://wa.me/918539979271" target="_blank" class="btn btn-primary btn-sm">💬 Connect</a>
+                        <a href="mailto:email.vikashpathak@gmail.com" class="btn btn-outline btn-sm">📧 Email</a>
+                    </div>
+                </div>
+
+                <!-- Right: Expertise -->
+                <div>
+                    <h3 style="font-size: 1.4rem; color: var(--accent-primary); margin-bottom: 0.75rem;">Core Expertise</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="padding: 0.875rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;">
+                            <div class="bold small" style="color: var(--accent-primary); margin-bottom: 0.5rem;">💰 Financial Operations</div>
+                            <div class="xsmall txt2">Accounts Payable · Accounts Receivable · Bank Reconciliation · Payment Processing</div>
+                        </div>
+                        <div style="padding: 0.875rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;">
+                            <div class="bold small" style="color: var(--accent-secondary); margin-bottom: 0.5rem;">📊 Compliance</div>
+                            <div class="xsmall txt2">GST · TDS · Income Tax · MCA / ROC · MIS Reporting</div>
+                        </div>
+                        <div style="padding: 0.875rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;">
+                            <div class="bold small" style="color: var(--accent-purple); margin-bottom: 0.5rem;">🔧 Technical Skills</div>
+                            <div class="xsmall txt2">Advanced Excel · Financial Analysis · Google Workspace · GitHub Website Management</div>
+                        </div>
+                        <div style="padding: 0.875rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;">
+                            <div class="bold small" style="color: #ff6b6b; margin-bottom: 0.5rem;">🤖 Modern Tools</div>
+                            <div class="xsmall txt2">AI Productivity Tools · Business Automation · Digital Solutions</div>
+                        </div>
+                    </div>
+
+                    <h3 style="font-size: 1.4rem; color: var(--accent-secondary); margin-bottom: 0.75rem;">Why DigiCafe?</h3>
+                    <div style="padding: 1.25rem; background: rgba(0,255,136,0.05); border: 1px solid var(--border-bright); border-radius: 10px;">
+                        <p style="color: var(--text-secondary); line-height: 1.9; margin-bottom: 0;">
+                            With <strong>practical experience in real-world finance, taxation, and compliance</strong>, I created DigiCafe to help individuals, professionals, and businesses navigate complex regulations without stress. <strong>Every service is backed by hands-on expertise.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DigiCafe Services Overview -->
+            <div style="margin-top: 1.5rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--accent-primary);">🚀 What is DigiCafe?</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem; max-width: 800px;">
+                    DigiCafe is a comprehensive business services platform simplifying compliance, taxation, registrations, and documentation for every business stage.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+                    <div class="glass-card">
+                        <h4 style="color: var(--accent-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+                            <span>📋</span> Tax & Compliance
+                        </h4>
+                        <ul style="list-style: none;">
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ Income Tax (ITR) Filing</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ GST Registration & Returns</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ TDS Return Filing</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem;">✓ Tax Documentation</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card">
+                        <h4 style="color: var(--accent-secondary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+                            <span>🏢</span> Business Setup & MCA
+                        </h4>
+                        <ul style="list-style: none;">
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ Company Registration</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ MSME / Udyam Registration</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ LLP & OPC Formation</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem;">✓ ROC Compliance</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card">
+                        <h4 style="color: var(--accent-purple); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+                            <span>👨‍💼</span> HR & Labour Compliance
+                        </h4>
+                        <ul style="list-style: none;">
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ UAN & PF Services</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ ESI Compliance</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ Payroll Support</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem;">✓ Professional Tax (PT)</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card">
+                        <h4 style="color: var(--warn); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+                            <span>📜</span> Certifications & DSC
+                        </h4>
+                        <ul style="list-style: none;">
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ Turnover Certificate</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ Net Worth Certificate</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">✓ Digital Signature (DSC)</li>
+                            <li style="color: var(--text-secondary); font-size: 0.9rem;">✓ Business Documentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision & Tagline -->
+            <div style="margin-top: 0.75rem; padding: 1.25rem 1rem; background: linear-gradient(135deg, rgba(0,255,136,0.08), rgba(0,212,255,0.08)); border: 1px solid var(--border-bright); border-radius: 16px; text-align: center;">
+                <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.75rem;">
+                    <span style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Our Vision</span>
+                </h3>
+                <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 0.75rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    To simplify compliance, taxation, registrations, and business documentation through a professional, affordable, and customer-friendly approach.
+                </p>
+                <div style="font-size: 1.25rem; font-weight: 800; color: var(--accent-primary); padding: 0.75rem; background: rgba(0,255,136,0.1); border-radius: 10px; border: 1px solid var(--accent-primary);">
+                    ✨ Compliance Made Simple for Individuals, Professionals & Businesses ✨
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="reveal" style="padding: 1.5rem 0 1.5rem 0;">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 1.25rem;">
                 <span class="section-badge">🎯 Complete Service Suite</span>
                 <h2>Professional Services Portfolio</h2>
                 <p>Comprehensive solutions for every compliance and business need</p>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">💰 Income Tax Services</h3>
-                <div class="services-grid">
+            <!-- Service Tabs -->
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;">
+                <button class="service-tab active" onclick="switchService(this, 'itr')" style="padding: 0.6rem 1.25rem; background: rgba(0,255,136,0.15); border: 1px solid var(--accent-primary); border-radius: 8px; color: var(--accent-primary); font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: inherit;">💰 Income Tax</button>
+                <button class="service-tab" onclick="switchService(this, 'gst')" style="padding: 0.6rem 1.25rem; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">📊 GST</button>
+                <button class="service-tab" onclick="switchService(this, 'tds')" style="padding: 0.6rem 1.25rem; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">📋 TDS</button>
+                <button class="service-tab" onclick="switchService(this, 'mca')" style="padding: 0.6rem 1.25rem; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">🏢 MCA</button>
+                <button class="service-tab" onclick="switchService(this, 'dsc')" style="padding: 0.6rem 1.25rem; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">🔐 DSC</button>
+                <button class="service-tab" onclick="switchService(this, 'tm')" style="padding: 0.6rem 1.25rem; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">™️ Trademark</button>
+                <button class="service-tab" onclick="switchService(this, 'reg')" style="padding: 0.6rem 1.25rem; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">📝 Business Reg</button>
+                <button class="service-tab" onclick="switchService(this, 'hr')" style="padding: 0.6rem 1.25rem; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">👨‍💼 HR & Payroll</button>
+            </div>
+
+            <!-- Income Tax Tab -->
+            <div id="itr" class="service-content" style="display: block;">
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--accent-primary);">💰 Income Tax Services</h3>
+                    <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">📄</div>
                         <h3>ITR Filing AY 2026-27</h3>
@@ -1343,8 +1562,10 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">📊 GST Services</h3>
+            <!-- GST Tab -->
+            <div id="gst" class="service-content" style="display: none;">
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--accent-primary);">📊 GST Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">🏢</div>
@@ -1383,8 +1604,10 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">📋 TDS Services</h3>
+            <!-- TDS Tab -->
+            <div id="tds" class="service-content" style="display: none;">
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--accent-primary);">📋 TDS Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">📑</div>
@@ -1413,8 +1636,10 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">🏢 MCA / ROC Services</h3>
+            <!-- MCA Tab -->
+            <div id="mca" class="service-content" style="display: none;">
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--accent-primary);">🏢 MCA / ROC Services</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">🏭</div>
@@ -1487,7 +1712,7 @@
 
             <div style="margin-bottom: 2rem;">
                 <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">🔐 DSC Services (SignX Partner)</h3>
-                <div style="background: rgba(0, 255, 136, 0.05); border: 1px solid var(--accent-primary); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                <div style="background: rgba(0, 255, 136, 0.05); border: 1px solid var(--accent-primary); border-radius: 12px; padding: 0.75rem; margin-bottom: 2rem;">
                     <p style="color: var(--text-secondary); font-size: 1rem;">
                         ✅ <strong style="color: var(--accent-primary);">We use SignX platform for DSC processing</strong> - India's leading Digital Signature Certificate provider with instant issuance and lifetime support.
                     </p>
@@ -1563,7 +1788,84 @@
             </div>
 
             <div style="margin-bottom: 2rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">™️ Trademark Services</h3>
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">🤝 PF / EPFO Services</h3>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🤝</div>
+                        <h3>PF Account Setup</h3>
+                        <ul class="service-list">
+                            <li>PF Account Opening (PRAN)</li>
+                            <li>Employer Registration</li>
+                            <li>Employee Onboarding</li>
+                            <li>First Contribution Setup</li>
+                        </ul>
+                        <div class="service-price">₹2,999</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="whatsappService('PF Account Setup')">Apply Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📊</div>
+                        <h3>PF Returns & Filings</h3>
+                        <ul class="service-list">
+                            <li>Monthly ECR Filing</li>
+                            <li>Annual Return Filing</li>
+                            <li>Form 5-IF Filing</li>
+                            <li>Contribution Reconciliation</li>
+                        </ul>
+                        <div class="service-price">₹499/month</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="whatsappService('PF Returns & Filings')">Apply Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📄</div>
+                        <h3>PF Certificates & Forms</h3>
+                        <ul class="service-list">
+                            <li>Form 10 / 10C (Transfer)</li>
+                            <li>Form 6A Issuance</li>
+                            <li>PF Certificate Download</li>
+                            <li>Withdrawal Forms Assistance</li>
+                        </ul>
+                        <div class="service-price">₹299 per cert</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="whatsappService('PF Certificates & Forms')">Apply Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">💰</div>
+                        <h3>PF Advance & Withdrawal</h3>
+                        <ul class="service-list">
+                            <li>Advance Application (50%)</li>
+                            <li>Partial Withdrawal Guidance</li>
+                            <li>Full Withdrawal Processing</li>
+                            <li>Claim Filing Assistance</li>
+                        </ul>
+                        <div class="service-price">₹1,499</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="whatsappService('PF Advance & Withdrawal')">Apply Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🔄</div>
+                        <h3>PF Account Transfer</h3>
+                        <ul class="service-list">
+                            <li>Intra-State Transfer</li>
+                            <li>Inter-State Transfer</li>
+                            <li>Form 13 / 31 Filing</li>
+                            <li>Balance Verification</li>
+                        </ul>
+                        <div class="service-price">₹999</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="whatsappService('PF Account Transfer')">Apply Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📋</div>
+                        <h3>PF Audit & Reconciliation</h3>
+                        <ul class="service-list">
+                            <li>Annual PF Audit</li>
+                            <li>Contribution Audit</li>
+                            <li>Discrepancy Resolution</li>
+                            <li>Statutory Compliance Check</li>
+                        </ul>
+                        <div class="service-price">₹4,999 onwards</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="whatsappService('PF Audit & Reconciliation')">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">™️</div>
@@ -1581,7 +1883,7 @@
             </div>
 
             <div style="margin-bottom: 0;">
-                <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--accent-primary);">📊 Valuation & Merchant Banker Coordination</h3>
+                <h3 style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--accent-primary);">📊 Valuation & Merchant Banker Coordination</h3>
                 <div class="services-grid">
                     <div class="glass-card service-card">
                         <div class="service-icon">💼</div>
@@ -1597,12 +1899,144 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ════ HR & LABOUR COMPLIANCE ════ -->
+            <div style="margin-bottom: 0;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">👨‍💼 HR & Labour Compliance Services</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 0.75rem; font-size: 1.05rem;">Helping Employees, Startups & Businesses Stay Compliant — Complete EPF, ESI, PT & Payroll Support</p>
+
+                <!-- Employee Services -->
+                <h4 style="font-size: 1.4rem; margin: 1.75rem 0 1rem; color: #00d4ff;">👤 Employee Services</h4>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">👥</div>
+                        <h3>UAN & EPF Services</h3>
+                        <ul class="service-list">
+                            <li>✅ UAN Activation</li>
+                            <li>✅ Aadhaar Linking</li>
+                            <li>✅ PAN Linking</li>
+                            <li>✅ Bank Account Update</li>
+                            <li>✅ E-Nomination Filing</li>
+                        </ul>
+                        <div class="service-price">₹299–499</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openHRForm()">Apply Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">💼</div>
+                        <h3>PF Transfer & Withdrawal</h3>
+                        <ul class="service-list">
+                            <li>✅ EPF Transfer Claim</li>
+                            <li>✅ Withdrawal Application</li>
+                            <li>✅ Pension Withdrawal Assist.</li>
+                            <li>✅ Joint Declaration Support</li>
+                        </ul>
+                        <div class="service-price">₹799–999</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openHRForm()">Apply Now</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📋</div>
+                        <h3>PF Certificates & Forms</h3>
+                        <ul class="service-list">
+                            <li>✅ Statement of Account</li>
+                            <li>✅ Closure Certificate</li>
+                            <li>✅ NOC Issuance</li>
+                            <li>✅ Form 10 & 20 Assistance</li>
+                        </ul>
+                        <div class="service-price">₹299 per cert</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openHRForm()">Apply Now</button>
+                    </div>
+                </div>
+                <p class="form-hint" style="margin-top: 1rem; color: var(--text-secondary);">💡 Final fees may vary depending on complexity and documentation requirements.</p>
+
+                <!-- Employer Services -->
+                <h4 style="font-size: 1.4rem; margin: 2rem 0 1rem; color: #00d4ff;">🏢 Employer Services</h4>
+                <div class="services-grid">
+                    <div class="glass-card service-card">
+                        <div class="service-icon">📊</div>
+                        <h3>EPF / PF Compliance</h3>
+                        <ul class="service-list">
+                            <li>✅ EPF Registration Setup</li>
+                            <li>✅ Monthly PF Returns</li>
+                            <li>✅ Employee UAN Management</li>
+                            <li>✅ PF Compliance Guidance</li>
+                        </ul>
+                        <div class="service-price">Custom Pricing</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openHRForm()">Get Quote</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">⚕️</div>
+                        <h3>ESI Compliance</h3>
+                        <ul class="service-list">
+                            <li>✅ ESI Registration</li>
+                            <li>✅ Employee Enrollment</li>
+                            <li>✅ Monthly ESI Filing</li>
+                            <li>✅ Compliance Support</li>
+                        </ul>
+                        <div class="service-price">Custom Pricing</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openHRForm()">Get Quote</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">🏛️</div>
+                        <h3>Professional Tax (PT)</h3>
+                        <ul class="service-list">
+                            <li>✅ PT Registration</li>
+                            <li>✅ Monthly PT Filing</li>
+                            <li>✅ State Compliance</li>
+                            <li>✅ Return Preparation</li>
+                        </ul>
+                        <div class="service-price">Custom Pricing</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openHRForm()">Get Quote</button>
+                    </div>
+                    <div class="glass-card service-card">
+                        <div class="service-icon">💰</div>
+                        <h3>Payroll & Salary Support</h3>
+                        <ul class="service-list">
+                            <li>✅ Salary Sheet Preparation</li>
+                            <li>✅ Payroll Processing</li>
+                            <li>✅ Statutory Deduction Calc.</li>
+                            <li>✅ Compliance Tracking</li>
+                        </ul>
+                        <div class="service-price">Custom Pricing</div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openHRForm()">Get Quote</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="compliance" class="reveal" style="padding-top: 1.5rem;">
+    <!-- HR Modal with Google Form -->
+    <div id="hrModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:3000; overflow-y:auto; padding:2rem 0;">
+        <div style="max-width:700px; margin:0 auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding:0 2rem;">
+                <h2 style="font-size:1.5rem; font-weight:800; color:var(--accent-primary);">👨‍💼 HR Services Request Form</h2>
+                <button onclick="closeHRForm()" style="width:38px; height:38px; background:transparent; border:1px solid var(--border); border-radius:8px; color:var(--text-secondary); cursor:pointer; font-size:1.25rem;">×</button>
+            </div>
+            <!-- Embedded Google Form -->
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeVnVmXmPlRzAbCdEfG_example/viewform?embedded=true" 
+                    width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0" style="margin:0 auto; display:block; max-width:700px;">Loading…</iframe>
+            <!-- NOTE: Replace the form URL above with your actual form. To get embed URL:
+                 1. Open your Google Form: https://forms.gle/WAnmXUeq8qYpzNKW8
+                 2. Click Share > Copy Link
+                 3. Go to https://docs.google.com/forms/d/YOUR_FORM_ID/viewform?embedded=true
+                 4. Extract FORM_ID from the full URL and replace above
+            -->
+        </div>
+    </div>
+
+    <script>
+        function openHRForm() { document.getElementById('hrModal').style.display='block'; document.body.style.overflow='hidden'; }
+        function closeHRForm() { document.getElementById('hrModal').style.display='none'; document.body.style.overflow='auto'; }
+        document.getElementById('hrModal').addEventListener('click', function(e) {
+            if (e.target === this) closeHRForm();
+        });
+    </script>
+
+    <!-- ════════════════════════════════════════
+         DUE DATES & COMPLIANCE CALENDAR
+         ════════════════════════════════════════ -->
+    <section id="compliance" class="reveal" style="padding: 1.5rem 0;">
         <div class="container">
-            <div class="section-header" style="margin-bottom: 1.5rem;">
+            <div class="section-header" style="margin-bottom: 0.75rem;">
                 <span class="section-badge">📅 Stay Compliant</span>
                 <h2>Important Due Dates 2026</h2>
                 <p>Complete compliance calendar for FY 2026-27</p>
@@ -1711,6 +2145,192 @@
         </div>
     </section>
 
+    <!-- ════════════════════════════════════════
+         TEMPLATES & DOCUMENT DOWNLOADS
+         ════════════════════════════════════════ -->
+    <section id="templates" class="reveal" style="padding: 2rem 0;">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 1.5rem;">
+                <span class="section-badge">📥 Ready-to-Use Templates</span>
+                <h2>Templates & Format Downloads</h2>
+                <p>Ready-made documents, court papers, letters & compliance formats — Download & use instantly</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 2rem;">
+                <button class="template-tab active" onclick="filterTemplates('all')">📋 All Documents</button>
+                <button class="template-tab" onclick="filterTemplates('court')">⚖️ Court Papers</button>
+                <button class="template-tab" onclick="filterTemplates('letters')">✉️ Letters & Notices</button>
+                <button class="template-tab" onclick="filterTemplates('compliance')">🏢 Company Compliance</button>
+                <button class="template-tab" onclick="filterTemplates('gst')">📊 GST Formats</button>
+                <button class="template-tab" onclick="filterTemplates('hr')">👨‍💼 HR & Labour</button>
+            </div>
+
+            <!-- Templates Grid -->
+            <div class="templates-grid" id="templatesGrid">
+                
+                <!-- COURT PAPERS -->
+                <div class="template-item" data-category="court">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">⚖️</div>
+                        <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem; font-weight: 700;">Affidavit Format</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Legal affidavit template for court proceedings & statutory declarations</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Affidavit-Format.pdf')">⬇️ Download PDF</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="court">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">⚖️</div>
+                        <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem; font-weight: 700;">Power of Attorney</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Authorized power of attorney document for legal representation</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Power-of-Attorney.pdf')">⬇️ Download PDF</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="court">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">⚖️</div>
+                        <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem; font-weight: 700;">Notice Format</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Legal notice template under Code of Civil Procedure</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Legal-Notice.pdf')">⬇️ Download PDF</button>
+                    </div>
+                </div>
+
+                <!-- LETTERS & NOTICES -->
+                <div class="template-item" data-category="letters">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">✉️</div>
+                        <h4 style="color: var(--accent-secondary); margin-bottom: 0.5rem; font-weight: 700;">Business Letter Format</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Professional business letter template with company letterhead</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Business-Letter.docx')">⬇️ Download DOCX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="letters">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">✉️</div>
+                        <h4 style="color: var(--accent-secondary); margin-bottom: 0.5rem; font-weight: 700;">Complaint Letter</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Formal complaint letter for authority filing & grievances</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Complaint-Letter.docx')">⬇️ Download DOCX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="letters">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">✉️</div>
+                        <h4 style="color: var(--accent-secondary); margin-bottom: 0.5rem; font-weight: 700;">Resignation Letter</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Professional resignation letter template for employees</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Resignation-Letter.docx')">⬇️ Download DOCX</button>
+                    </div>
+                </div>
+
+                <!-- COMPANY COMPLIANCE -->
+                <div class="template-item" data-category="compliance">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏢</div>
+                        <h4 style="color: var(--accent-purple); margin-bottom: 0.5rem; font-weight: 700;">Board Resolution</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Board resolution format for company decisions & approvals</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Board-Resolution.docx')">⬇️ Download DOCX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="compliance">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏢</div>
+                        <h4 style="color: var(--accent-purple); margin-bottom: 0.5rem; font-weight: 700;">Company MOA/AOA</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Memorandum & Articles of Association template for companies</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('MOA-AOA.docx')">⬇️ Download DOCX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="compliance">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏢</div>
+                        <h4 style="color: var(--accent-purple); margin-bottom: 0.5rem; font-weight: 700;">Directors Declaration</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">DIR-3 KYC & Directors Declaration form template</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Directors-Declaration.pdf')">⬇️ Download PDF</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="compliance">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏢</div>
+                        <h4 style="color: var(--accent-purple); margin-bottom: 0.5rem; font-weight: 700;">Share Certificate</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Share certificate template for company share allotment</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Share-Certificate.docx')">⬇️ Download DOCX</button>
+                    </div>
+                </div>
+
+                <!-- GST FORMATS -->
+                <div class="template-item" data-category="gst">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">📊</div>
+                        <h4 style="color: var(--warn); margin-bottom: 0.5rem; font-weight: 700;">GST Invoice Format</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Standard GST compliant invoice template with all required fields</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('GST-Invoice.xlsx')">⬇️ Download XLSX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="gst">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">📊</div>
+                        <h4 style="color: var(--warn); margin-bottom: 0.5rem; font-weight: 700;">GSTR-1 Excel Format</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">GSTR-1 filing Excel template for outward supplies</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('GSTR-1-Template.xlsx')">⬇️ Download XLSX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="gst">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">📊</div>
+                        <h4 style="color: var(--warn); margin-bottom: 0.5rem; font-weight: 700;">GSTR-3B Format</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">GSTR-3B monthly return Excel format for GST compliance</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('GSTR-3B-Template.xlsx')">⬇️ Download XLSX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="gst">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">📊</div>
+                        <h4 style="color: var(--warn); margin-bottom: 0.5rem; font-weight: 700;">GST Reconciliation</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">GST reconciliation sheet for monthly audit & verification</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('GST-Reconciliation.xlsx')">⬇️ Download XLSX</button>
+                    </div>
+                </div>
+
+                <!-- HR & LABOUR -->
+                <div class="template-item" data-category="hr">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">👨‍💼</div>
+                        <h4 style="color: #ffa500; margin-bottom: 0.5rem; font-weight: 700;">Salary Sheet Format</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Excel salary sheet with salary structure & statutory deductions</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Salary-Sheet.xlsx')">⬇️ Download XLSX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="hr">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">👨‍💼</div>
+                        <h4 style="color: #ffa500; margin-bottom: 0.5rem; font-weight: 700;">Employment Contract</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Employee employment agreement & contract template</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Employment-Contract.docx')">⬇️ Download DOCX</button>
+                    </div>
+                </div>
+
+                <div class="template-item" data-category="hr">
+                    <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+                        <div style="font-size: 2rem; margin-bottom: 0.75rem;">👨‍💼</div>
+                        <h4 style="color: #ffa500; margin-bottom: 0.5rem; font-weight: 700;">Attendance Register</h4>
+                        <p class="small txt2" style="flex: 1; margin-bottom: 1rem;">Employee attendance & leave register for HR tracking</p>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;" onclick="downloadTemplate('Attendance-Register.xlsx')">⬇️ Download XLSX</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <section id="partner" style="background: var(--bg-secondary);" class="reveal">
         <div class="container">
             <div class="section-header">
@@ -1791,7 +2411,7 @@
                 </div>
 
                 <div class="glass-card contact-form-wrapper">
-                    <h3 style="margin-bottom: 1.5rem; color:var(--accent-primary);">Secure Communication Terminal</h3>
+                    <h3 style="margin-bottom: 0.75rem; color:var(--accent-primary);">Secure Communication Terminal</h3>
                     <form id="whatsappSubmissionForm">
                         <div class="form-grid">
                             <div class="form-group">
@@ -1855,6 +2475,8 @@
                         <li><a href="#services">TDS Filing Infrastructure</a></li>
                         <li><a href="#services">MCA Corporate Filings</a></li>
                         <li><a href="#services">DSC (SignX Engine Integration)</a></li>
+                        <li><a href="#services">HR & Labour Compliance</a></li>
+                        <li><a href="#templates">📥 Templates & Downloads</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -1874,8 +2496,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                © 2026 DigiCafe Compliance & Digital Solutions. All Rights Reserved.<br>
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Income-tax Act 2025 Compliant | SignX DSC Partner Network | PAN India Service Nodes</span>
+                © 2026 DigiCafe — <strong>Compliance Made Simple for Individuals, Professionals & Businesses</strong><br>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Tax · GST · TDS · EPF/ESI · PT · Payroll · MCA · DSC · Registrations | Government Verified MSME | PAN India Service</span>
             </div>
         </div>
     </footer>
@@ -1977,6 +2599,24 @@
     </div>
 
     <script>
+        // Service Tab Switcher
+        function switchService(btn, serviceId) {
+            // Hide all service contents
+            document.querySelectorAll('.service-content').forEach(el => el.style.display = 'none');
+            // Show selected service
+            document.getElementById(serviceId).style.display = 'block';
+            // Remove active class from all tabs
+            document.querySelectorAll('.service-tab').forEach(tab => {
+                tab.style.background = 'transparent';
+                tab.style.color = 'var(--text-secondary)';
+                tab.style.borderColor = 'var(--border)';
+            });
+            // Add active style to clicked tab
+            btn.style.background = 'rgba(0,255,136,0.1)';
+            btn.style.color = 'var(--accent-primary)';
+            btn.style.borderColor = 'var(--accent-primary)';
+        }
+
         // Portal Modal
         function openPortalGuide() {
             const modal = document.getElementById('portalModal');
@@ -2098,6 +2738,27 @@
                 navbarElement.style.boxShadow = 'none';
             }
         });
+
+        // ════ TEMPLATE FILTERING ════
+        function filterTemplates(category) {
+            document.querySelectorAll('.template-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.template-item').forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // ════ TEMPLATE DOWNLOAD ════
+        function downloadTemplate(filename) {
+            toast(`📥 Downloading: ${filename}`, 'success');
+            setTimeout(() => {
+                alert(`📥 ${filename}\n\nTo get templates:\n\n1. WhatsApp: +91 85399 79271\n2. Email: email.vikashpathak@gmail.com`);
+            }, 500);
+        }
     </script>
 </body>
 </html>
