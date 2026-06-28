@@ -249,10 +249,10 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     if (user) {
       console.log('✓ Firebase user:', user.email);
       // Update nav logout button to use firebaseSignOut
-      document.querySelectorAll('.side-nav a[onclick="showPage('home')"], .admin-nav a[onclick="showPage('home')"]').forEach(btn => {
-        btn.setAttribute('onclick', 'firebaseSignOut()');
-      });
-    }
+      document.querySelectorAll('.side-nav a, .admin-nav a').forEach(btn => {
+        if(btn.getAttribute('onclick') === "showPage('home')"){
+          btn.setAttribute('onclick', 'firebaseSignOut()');
+        }
   });
 
   window.firebaseSignOut = async function() {
@@ -878,11 +878,11 @@ function initRender(){
   const cats=[...new Set(news.map(n=>n.cat))];
   const catCont=document.getElementById('news-cats');
   if(catCont){
-    catCont.innerHTML='<button class="btn btn-primary btn-sm" onclick="filterNews('all',this)">All</button>'+cats.map(c=>`<button class="btn btn-ghost btn-sm" onclick="filterNews('${c}',this)">${c}</button>`).join('');
+    catCont.innerHTML='<button class="btn btn-primary btn-sm" onclick="filterNews(this,\'all\')" >All</button>'+cats.map(c=>`<button class="btn btn-ghost btn-sm" onclick="filterNews(this,'${c}')">${c}</button>`).join('');
   }
 }
 
-function filterNews(cat,btn){
+function filterNews(btn,cat){
   document.querySelectorAll('#news-cats button').forEach(b=>b.className='btn btn-ghost btn-sm');
   btn.className='btn btn-primary btn-sm';
   const cont=document.getElementById('news-full');
