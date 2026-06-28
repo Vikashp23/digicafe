@@ -175,6 +175,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   import {
     getAuth, GoogleAuthProvider,
     signInWithPopup, signInWithRedirect, getRedirectResult,
+    createUserWithEmailAndPassword, updateProfile,
     signOut, onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
@@ -258,6 +259,21 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     await signOut(auth);
     showToast('✓ Signed out');
     showPage('home');
+  };
+
+  window._firebaseRegister = async function(name, email, password) {
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(cred.user, { displayName: name });
+      handleUser(cred.user);
+      showToast('✓ Account created! Welcome, ' + name.split(' ')[0] + '!');
+    } catch(err) {
+      let msg = err.message || 'Registration failed';
+      if(err.code === 'auth/email-already-in-use') msg = 'Email already registered. Please log in.';
+      if(err.code === 'auth/weak-password') msg = 'Password too weak. Use 6+ characters.';
+      showToast('⚠ ' + msg);
+      throw err;
+    }
   };
 
   console.log("Firebase initialized successfully 🚀");
@@ -467,7 +483,27 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
         </div>
         <button type="submit" class="btn btn-primary btn-full" style="margin-bottom:1rem;padding:1rem"><i class="fas fa-sign-in-alt"></i> Log In</button>
       </form>
-      <div style="text-align:center;font-size:.8rem;color:var(--txt3)">Forgot password? <a href="#" style="color:var(--blue)">Reset</a></div>
+      <div id="login-forgot" style="text-align:center;font-size:.8rem;color:var(--txt3)">Forgot password? <a href="#" style="color:var(--blue)">Reset</a></div>
+      <!-- REGISTER FORM -->
+      <form id="register-form" style="display:none" onsubmit="return handleRegister(event)">
+        <div style="margin-bottom:1.1rem">
+          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Full Name</label>
+          <input type="text" id="reg-name" placeholder="Your full name" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
+        </div>
+        <div style="margin-bottom:1.1rem">
+          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Email Address</label>
+          <input type="email" id="reg-email" placeholder="you@example.com" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
+        </div>
+        <div style="margin-bottom:1.1rem">
+          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Password</label>
+          <input type="password" id="reg-password" placeholder="Min 6 characters" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
+        </div>
+        <div style="margin-bottom:1.1rem">
+          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Mobile Number</label>
+          <input type="tel" id="reg-phone" placeholder="+91 98765 43210" style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
+        </div>
+        <button type="submit" id="reg-btn" class="btn btn-primary btn-full" style="margin-bottom:1rem;padding:1rem"><i class="fas fa-user-plus"></i> Create Account</button>
+      </form>
       <div style="text-align:center;color:var(--txt3);font-size:.8rem;margin:1rem 0;position:relative">
         <span style="background:var(--bg2);padding:0 .5rem;position:relative;z-index:1">or</span>
         <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:var(--bdr);z-index:0"></div>
@@ -711,14 +747,55 @@ function showAdmin(s){
 
 // ═══ TABS ═══
 function switchTab(t){
-  document.querySelectorAll('.btn-tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.btn-tab').forEach(x=>{
+    x.style.background='none';
+    x.style.color='var(--txt2)';
+    x.classList.remove('active');
+  });
+  event.target.style.background='var(--blue)';
+  event.target.style.color='#fff';
   event.target.classList.add('active');
+  document.getElementById('login-form').style.display = t==='login' ? 'block' : 'none';
+  document.getElementById('register-form').style.display = t==='register' ? 'block' : 'none';
+  document.getElementById('login-forgot').style.display = t==='login' ? 'block' : 'none';
+  document.getElementById('login-divider').style.display = 'block';
+  document.getElementById('google-signin-btn').style.display = 'flex';
 }
 
 function handleLogin(e){
   e.preventDefault();
   showToast('✓ Login successful!');
   setTimeout(()=>showPage('dashboard'),1000);
+  return false;
+}
+
+function handleRegister(e){
+  e.preventDefault();
+  const btn = document.getElementById('reg-btn');
+  const name = document.getElementById('reg-name').value;
+  const email = document.getElementById('reg-email').value;
+  const password = document.getElementById('reg-password').value;
+  if(password.length < 6){ showToast('⚠ Password must be at least 6 characters'); return false; }
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+  // Use Firebase if available, else demo mode
+  if(window._firebaseRegister){
+    window._firebaseRegister(name, email, password).then(()=>{
+      btn.disabled=false; btn.innerHTML='<i class="fas fa-user-plus"></i> Create Account';
+    });
+  } else {
+    setTimeout(()=>{
+      showToast('✓ Account created! Welcome, '+name+'!');
+      const avatarEl=document.querySelector('.d-avatar');
+      const nameEl=document.querySelector('.d-uname');
+      const titleEl=document.querySelector('.d-title');
+      if(avatarEl) avatarEl.textContent=(name[0]+(name.split(' ')[1]?.[0]||'')).toUpperCase();
+      if(nameEl) nameEl.textContent=name;
+      if(titleEl) titleEl.textContent='Welcome, '+name.split(' ')[0]+'!';
+      setTimeout(()=>showPage('dashboard'),800);
+      btn.disabled=false; btn.innerHTML='<i class="fas fa-user-plus"></i> Create Account';
+    },1000);
+  }
   return false;
 }
 
@@ -778,7 +855,10 @@ function renderCourses(cont){
 }
 
 // ═══ INIT ═══
-window.addEventListener('DOMContentLoaded',()=>{
+function initRender(){
+  const ids = ['news-home','news-full','svc-home','svc-full','ai-home','ai-full','courses-home','courses-full','kb-grid','calc-grid'];
+  if(!ids.every(id=>document.getElementById(id))) { setTimeout(initRender,50); return; }
+
   renderNews(document.getElementById('news-home'));
   renderNews(document.getElementById('news-full'));
   renderServices(document.getElementById('svc-home'));
@@ -787,15 +867,41 @@ window.addEventListener('DOMContentLoaded',()=>{
   renderAI(document.getElementById('ai-full'));
   renderCourses(document.getElementById('courses-home'));
   renderCourses(document.getElementById('courses-full'));
-  
-  // KB Grid
+
   const kb=['Income Tax Library','GST Library','TDS Library','Company Law','LLP Compliance','Trademark Guide','MSME Registration','Bookkeeping SOP'];
   document.getElementById('kb-grid').innerHTML=kb.map(k=>`<div class="glass" style="padding:1.5rem;border-radius:var(--r2);text-align:center;cursor:pointer"><div style="font-size:1.8rem;margin-bottom:.75rem">📚</div><div class="s" style="font-weight:700;margin-bottom:.25rem">${k}</div><div style="font-size:.8rem;color:var(--txt2)">Expert guides & templates</div></div>`).join('');
-  
-  // Calc Grid
+
   const calcs=['💰 ITR Calculator','📊 GST Calculator','🏠 HRA Calculator','🏦 EMI Calculator','📈 Capital Gains','🧮 TDS Calculator','💼 Salary Breakup','🎯 SIP Calculator'];
   document.getElementById('calc-grid').innerHTML=calcs.map(c=>`<div class="tool-card" onclick="showToast('${c.split(' ')[1]} - Coming Soon')"><div class="t-icon">${c.split(' ')[0]}</div><div class="t-name">${c.substring(2)}</div><div class="t-desc">Free calculator</div></div>`).join('');
-});
+
+  // Add news category filter buttons
+  const cats=[...new Set(news.map(n=>n.cat))];
+  const catCont=document.getElementById('news-cats');
+  if(catCont){
+    catCont.innerHTML='<button class="btn btn-primary btn-sm" onclick="filterNews('all',this)">All</button>'+cats.map(c=>`<button class="btn btn-ghost btn-sm" onclick="filterNews('${c}',this)">${c}</button>`).join('');
+  }
+}
+
+function filterNews(cat,btn){
+  document.querySelectorAll('#news-cats button').forEach(b=>b.className='btn btn-ghost btn-sm');
+  btn.className='btn btn-primary btn-sm';
+  const cont=document.getElementById('news-full');
+  const filtered=cat==='all'?news:news.filter(n=>n.cat===cat);
+  cont.innerHTML=filtered.map(n=>`
+    <div class="news-card">
+      <span class="n-cat">${n.cat}</span>
+      <div class="n-title">${n.title}</div>
+      <div class="n-desc">${n.desc}</div>
+      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
+    </div>
+  `).join('');
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', initRender);
+} else {
+  initRender();
+}
 
 // SCROLL NAV
 window.addEventListener('scroll',()=>{
