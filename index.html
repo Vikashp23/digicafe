@@ -1,1859 +1,806 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DigiCafe - Your Complete Tax & Compliance Partner. Income Tax Returns (ITR), GST, LLP Compliance, Company Compliance, Business Registration, Startup Registration. Fast, Transparent, Expert Services.">
-    <meta name="keywords" content="Income Tax Return, ITR Filing, GST Registration, LLP Compliance, Company Compliance, Tax Consultant, CA Services, Business Registration, MSME, Startup Registration, TDS, Audit, Accounting">
-    <title>DigiCafe - Complete Tax & Compliance Partner | ITR, GST, Company Compliance</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #0066ff;
-            --secondary: #00d4ff;
-            --accent: #ff6b35;
-            --success: #10b981;
-            --danger: #ef4444;
-            --bg-light: #f8fafc;
-            --bg-white: #ffffff;
-            --text-dark: #1e293b;
-            --text-gray: #64748b;
-            --border: #e2e8f0;
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 12px rgba(0, 102, 255, 0.1);
-            --shadow-lg: 0 10px 30px rgba(0, 102, 255, 0.15);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-white);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ════════════════════════════════════════
-           HEADER
-           ════════════════════════════════════════ */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            box-shadow: var(--shadow-md);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-gray);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-cta {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-nav {
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-nav-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .btn-nav-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        @media (max-width: 768px) {
-            .nav-links,
-            .nav-cta {
-                display: none;
-            }
-        }
-
-        /* ════════════════════════════════════════
-           HERO SECTION
-           ════════════════════════════════════════ */
-        .hero {
-            margin-top: 70px;
-            padding: 80px 0 60px;
-            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero .subheading {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: var(--bg-white);
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-light);
-            transform: translateY(-3px);
-        }
-
-        .hero-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .feature-stat {
-            text-align: center;
-        }
-
-        .feature-stat h3 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-stat p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .hero .subheading {
-                font-size: 1rem;
-            }
-            .cta-buttons {
-                flex-direction: column;
-            }
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* ════════════════════════════════════════
-           SECTIONS
-           ════════════════════════════════════════ */
-        section {
-            padding: 80px 0;
-        }
-
-        section:nth-child(even) {
-            background: var(--bg-light);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .section-header p {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        /* ════════════════════════════════════════
-           SERVICE CARDS
-           ════════════════════════════════════════ */
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--bg-white);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--secondary);
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.3rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .service-card p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-list li {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            padding: 0.4rem 0;
-            padding-left: 1.8rem;
-            position: relative;
-        }
-
-        .service-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* ════════════════════════════════════════
-           DOCUMENT CHECKLIST
-           ════════════════════════════════════════ */
-        .checklist-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-            margin-bottom: 3rem;
-        }
-
-        .checklist {
-            background: var(--bg-white);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 2px solid var(--border);
-        }
-
-        .checklist h3 {
-            font-size: 1.3rem;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-
-        .checklist-items {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.8rem;
-            background: var(--bg-light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .checklist-item:hover {
-            background: #e0f2fe;
-        }
-
-        .checklist-checkbox {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--border);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-
-        .checklist-item input[type="checkbox"] {
-            display: none;
-        }
-
-        .checklist-item input[type="checkbox"]:checked + .checklist-checkbox {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-color: var(--primary);
-            color: white;
-        }
-
-        .checklist-item input[type="checkbox"]:checked + .checklist-checkbox::after {
-            content: '✓';
-            font-weight: 700;
-        }
-
-        .checklist-label {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .client-checklist {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 2px solid var(--secondary);
-        }
-
-        .client-checklist h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .client-checklist-items {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .client-check {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            padding: 0.8rem;
-            background: var(--bg-white);
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .client-check input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: var(--primary);
-        }
-
-        .client-check label {
-            cursor: pointer;
-            flex: 1;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .checklist-container {
-                grid-template-columns: 1fr;
-            }
-            .client-checklist-items {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ════════════════════════════════════════
-           TIMELINE / DUE DATES
-           ════════════════════════════════════════ */
-        .timeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .timeline-item {
-            background: var(--bg-white);
-            border-radius: 12px;
-            padding: 2rem;
-            border-left: 4px solid var(--primary);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .timeline-item h4 {
-            color: var(--text-dark);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-date {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-item p {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        /* ════════════════════════════════════════
-           WHY DIGICAFE
-           ════════════════════════════════════════ */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .benefit-card {
-            background: var(--bg-white);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .benefit-card h3 {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 0.7rem;
-        }
-
-        .benefit-card p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* ════════════════════════════════════════
-           FAQ
-           ════════════════════════════════════════ */
-        .faq-container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--bg-white);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .faq-item:hover {
-            box-shadow: var(--shadow-sm);
-            border-color: var(--primary);
-        }
-
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .faq-icon {
-            font-size: 1.2rem;
-            color: var(--primary);
-            transition: transform 0.3s;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            display: none;
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-
-        /* ════════════════════════════════════════
-           LEAD FORM
-           ════════════════════════════════════════ */
-        .form-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 3rem;
-            color: var(--text-dark);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.9rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-submit {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-        }
-
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .form-message {
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 1rem;
-            display: none;
-        }
-
-        .form-message.success {
-            background: #dcfce7;
-            color: #166534;
-            display: block;
-        }
-
-        .form-message.error {
-            background: #fee2e2;
-            color: #991b1b;
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .form-container {
-                padding: 2rem;
-            }
-        }
-
-        /* ════════════════════════════════════════
-           FOOTER
-           ════════════════════════════════════════ */
-        footer {
-            background: var(--text-dark);
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .footer-section a {
-            display: block;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* ════════════════════════════════════════
-           ANIMATIONS
-           ════════════════════════════════════════ */
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .slide-up {
-            animation: slideUp 0.6s ease-out;
-        }
-
-        /* ════════════════════════════════════════
-           RESPONSIVE
-           ════════════════════════════════════════ */
-        @media (max-width: 768px) {
-            section {
-                padding: 50px 0;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .service-grid,
-            .benefits-grid,
-            .timeline {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DigiCafe — India's #1 AI-Powered Tax, GST, Compliance & Learning Platform. ITR Filing, GST Registration, Company Incorporation, TDS, Trademark, News, Courses, AI Tools, and Professional Services.">
+<meta name="keywords" content="ITR Filing, GST, Tax Consultant, Company Registration, LLP, Compliance, AI Tax Assistant, Courses, India">
+<title>DigiCafe – Our Service, Your Solution | Premium Compliance Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07091a;--bg2:#0c1029;--bg3:#111836;--bg4:#0a0e24;
+  --surf:rgba(255,255,255,0.04);--surf2:rgba(255,255,255,0.08);
+  --bdr:rgba(255,255,255,0.08);--bdr2:rgba(255,255,255,0.15);
+  --blue:#3b82f6;--blue2:#60a5fa;--blue3:#1d4ed8;--teal:#06d6a0;--teal2:#34d399;
+  --gold:#f59e0b;--purple:#a855f7;--red:#ef4444;--green:#10b981;
+  --txt:#f1f5f9;--txt2:#94a3b8;--txt3:#64748b;--txt4:#475569;
+  --r:10px;--r2:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
+.s{font-family:'Sora',sans-serif}
+.mono{font-family:'JetBrains Mono',monospace}
+.c{max-width:1280px;margin:0 auto;padding:0 20px}
+.hidden{display:none!important}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.glass{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);backdrop-filter:blur(16px)}
+.glass:hover{border-color:var(--bdr2);transition:all .3s}
+.g-text{background:linear-gradient(135deg,var(--blue2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:var(--r);font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .25s;text-decoration:none;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue3));color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,.4)}
+.btn-ghost{background:transparent;color:var(--txt2);border:1px solid var(--bdr2)}
+.btn-ghost:hover{background:var(--surf2);color:var(--txt)}
+.btn-sm{padding:.45rem 1rem;font-size:.82rem}
+.btn-lg{padding:.85rem 2rem;font-size:1rem}
+.btn-full{width:100%;justify-content:center}
+.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .8rem;border-radius:20px;font-size:.78rem;font-weight:600}
+.badge-blue{background:rgba(59,130,246,.15);color:var(--blue2);border:1px solid rgba(59,130,246,.25)}
+.badge-teal{background:rgba(6,214,160,.12);color:var(--teal);border:1px solid rgba(6,214,160,.25)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,9,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr)}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 20px;max-width:1400px;margin:0 auto}
+.logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.4rem;background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
+.nav-center{display:flex;gap:.15rem;list-style:none}
+.nav-center a{display:block;padding:.4rem .75rem;color:var(--txt2);font-size:.85rem;font-weight:500;text-decoration:none;border-radius:8px;cursor:pointer;transition:all .2s}
+.nav-center a:hover,.nav-center a.active{color:var(--txt);background:var(--surf2)}
+.nav-right{display:flex;gap:.75rem;align-items:center}
+@media(max-width:1024px){.nav-center{display:none}}
+
+/* HERO */
+.hero{min-height:85vh;display:flex;align-items:center;padding-top:64px;background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(6,214,160,.05))}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;line-height:1.1;margin-bottom:1.25rem}
+.hero p{font-size:1.05rem;color:var(--txt2);max-width:560px;margin-bottom:2rem;line-height:1.8}
+@media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}}
+
+/* SECTION */
+.sec{padding:80px 0}
+.sh{text-align:center;margin-bottom:3rem}
+.sh h2{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin:.75rem 0 1rem}
+.sh p{color:var(--txt2);font-size:1.05rem;max-width:580px;margin:0 auto}
+
+/* NEWS */
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
+.news-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;transition:all .3s;cursor:pointer}
+.news-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 8px 32px rgba(59,130,246,.15)}
+.n-cat{display:inline-block;padding:.3rem .8rem;background:rgba(59,130,246,.15);color:var(--blue2);border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:.75rem}
+.n-title{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem;line-height:1.4}
+.n-desc{font-size:.85rem;color:var(--txt2);margin-bottom:1rem;line-height:1.6}
+.n-date{font-size:.78rem;color:var(--txt3)}
+
+/* TOOLS GRID */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
+.tool-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;text-align:center;transition:all .3s;cursor:pointer}
+.tool-card:hover{border-color:var(--blue);transform:translateY(-3px)}
+.t-icon{font-size:2.5rem;margin-bottom:.75rem}
+.t-name{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.t-desc{font-size:.8rem;color:var(--txt2)}
+
+/* COURSES */
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+.course-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);overflow:hidden;transition:all .3s}
+.course-card:hover{border-color:var(--blue);transform:translateY(-4px)}
+.c-thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(6,214,160,.05))}
+.c-body{padding:1.25rem}
+.c-title{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.c-desc{font-size:.8rem;color:var(--txt2);margin-bottom:.75rem;line-height:1.5}
+.c-meta{display:flex;gap:.5rem;font-size:.75rem;color:var(--txt3);margin-bottom:.75rem}
+.c-btn{width:100%;padding:.6rem;background:var(--blue);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
+.svc-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;transition:all .3s;cursor:pointer}
+.svc-card:hover{border-color:var(--blue);background:var(--surf2);transform:translateY(-3px)}
+.s-icon{font-size:2rem;margin-bottom:.75rem}
+.s-title{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.s-desc{font-size:.8rem;color:var(--txt2);margin-bottom:.75rem;line-height:1.5}
+.s-price{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--teal);font-weight:600}
+
+/* CLIENT DASHBOARD */
+.dash-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 64px)}
+.d-sidebar{background:var(--bg2);border-right:1px solid var(--bdr);padding:1.5rem 1rem;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto}
+.d-user{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding:1rem;background:var(--surf);border-radius:var(--r);border:1px solid var(--bdr)}
+.d-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+.d-uname{font-weight:700;font-size:.9rem}
+.d-urole{font-size:.75rem;color:var(--txt3)}
+.side-nav{list-style:none}
+.side-nav a{display:flex;align-items:center;gap:.6rem;padding:.6rem .9rem;color:var(--txt2);font-size:.85rem;font-weight:500;border-radius:8px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:.15rem}
+.side-nav a:hover{background:var(--surf2);color:var(--txt)}
+.side-nav a.active{background:rgba(59,130,246,.15);color:var(--blue2)}
+.d-main{background:var(--bg);padding:2rem;overflow-y:auto}
+.d-content{display:none}
+.d-content.active{display:block}
+.d-title{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.4rem}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.25rem;margin-bottom:2rem}
+.kpi{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;transition:all .3s}
+.kpi:hover{border-color:var(--blue);transform:translateY(-3px)}
+.kpi-val{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800}
+.kpi-label{font-size:.8rem;color:var(--txt3);margin-top:.4rem}
+
+/* TABLE */
+.table{width:100%;border-collapse:collapse;font-size:.85rem}
+.table th{text-align:left;padding:.65rem 1rem;background:var(--bg3);color:var(--txt3);font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.table td{padding:.75rem 1rem;border-bottom:1px solid var(--bdr);color:var(--txt2)}
+.table tr:hover td{background:var(--surf)}
+
+/* ADMIN */
+.admin-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 64px)}
+.admin-sidebar{background:var(--bg3);border-right:1px solid var(--bdr);padding:1rem}
+.admin-sidebar h4{font-size:.7rem;font-weight:700;color:var(--txt4);text-transform:uppercase;letter-spacing:1px;padding:.6rem .75rem .3rem}
+.admin-nav a{display:flex;align-items:center;gap:.65rem;padding:.6rem .75rem;color:var(--txt2);font-size:.83rem;font-weight:500;border-radius:8px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:.15rem}
+.admin-nav a:hover{background:var(--surf2);color:var(--txt)}
+.admin-nav a.active{background:rgba(59,130,246,.15);color:var(--blue2)}
+.admin-main{background:var(--bg);padding:1.75rem;overflow-y:auto}
+.admin-content{display:none}
+.admin-content.active{display:block}
+.admin-kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:1.75rem}
+.admin-kpi{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:1.25rem}
+.ak-val{font-family:'Sora',sans-serif;font-size:1.8rem;font-weight:800}
+.ak-label{font-size:.75rem;color:var(--txt3);margin-bottom:.4rem}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem}
+.foot-col h4{font-size:.78rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem}
+.foot-col a{display:block;color:var(--txt2);text-decoration:none;font-size:.83rem;padding:.28rem 0;cursor:pointer;transition:color .2s}
+.foot-col a:hover{color:var(--txt)}
+.foot-bottom{border-top:1px solid var(--bdr);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.foot-bottom p{font-size:.8rem;color:var(--txt3)}
+
+/* TOAST */
+#toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:var(--bg3);border:1px solid var(--bdr2);border-radius:var(--r);padding:.75rem 1.25rem;font-size:.88rem;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:translateX(120%);transition:transform .3s}
+#toast.show{transform:translateX(0)}
+
+@media(max-width:1024px){
+  .dash-layout,.admin-layout{grid-template-columns:1fr}
+  .d-sidebar,.admin-sidebar{display:none}
+}
+</style>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
+  import {
+    getAuth, GoogleAuthProvider,
+    signInWithPopup, signInWithRedirect, getRedirectResult,
+    signOut, onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDcdR-ba5Lh-DfG-wuABRntQm1sSYSr3Kk",
+    authDomain: "digicafe-ee519.firebaseapp.com",
+    projectId: "digicafe-ee519",
+    storageBucket: "digicafe-ee519.appspot.com",
+    messagingSenderId: "582268562769",
+    appId: "1:582268562769:web:720288e24fd8de7166f770",
+    measurementId: "G-25T4WHH8X4"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+  provider.addScope('email');
+  provider.addScope('profile');
+
+  // Handle user after sign-in
+  function handleUser(user) {
+    if (!user) return;
+    const nameParts = user.displayName ? user.displayName.split(' ') : ['U',''];
+    const initials = (nameParts[0][0] + (nameParts[1]?.[0] || '')).toUpperCase();
+    const avatarEl = document.querySelector('.d-avatar');
+    const nameEl = document.querySelector('.d-uname');
+    const titleEl = document.querySelector('.d-title');
+    if (avatarEl) avatarEl.textContent = initials;
+    if (nameEl) nameEl.textContent = user.displayName || user.email;
+    if (titleEl) titleEl.textContent = 'Welcome back, ' + (user.displayName?.split(' ')[0] || 'User') + '!';
+    showToast('✓ Signed in as ' + (user.displayName || user.email));
+    setTimeout(() => showPage('dashboard'), 800);
+  }
+
+  // Check for redirect result on page load
+  getRedirectResult(auth).then((result) => {
+    if (result?.user) handleUser(result.user);
+  }).catch((err) => {
+    if (err.code) showToast('⚠ Google error: ' + err.code);
+  });
+
+  window.signInWithGoogle = async function() {
+    const btn = document.getElementById('google-signin-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+    try {
+      // Try popup first, fall back to redirect
+      const result = await signInWithPopup(auth, provider);
+      handleUser(result.user);
+    } catch (err) {
+      // If popup fails for any reason, use redirect
+      if (
+        err.code === 'auth/popup-blocked' ||
+        err.code === 'auth/popup-closed-by-user' ||
+        err.code === 'auth/cancelled-popup-request' ||
+        err.code === 'auth/operation-not-supported-in-this-environment'
+      ) {
+        showToast('Redirecting to Google...');
+        await signInWithRedirect(auth, provider);
+        return; // page will redirect
+      }
+      // Show exact error code in toast for debugging
+      showToast('⚠ ' + (err.message || err.code || 'Sign-in failed'));
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fab fa-google"></i> Sign in with Google';
+    }
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('✓ Firebase user:', user.email);
+      // Update nav logout button to use firebaseSignOut
+      document.querySelectorAll('.side-nav a[onclick="showPage('home')"], .admin-nav a[onclick="showPage('home')"]').forEach(btn => {
+        btn.setAttribute('onclick', 'firebaseSignOut()');
+      });
+    }
+  });
+
+  window.firebaseSignOut = async function() {
+    await signOut(auth);
+    showToast('✓ Signed out');
+    showPage('home');
+  };
+
+  console.log("Firebase initialized successfully 🚀");
+</script>
 </head>
 <body>
 
-    <!-- ════════════════════════════════════════
-         HEADER
-         ════════════════════════════════════════ -->
-    <header id="header">
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">DigiCafe</a>
-                <ul class="nav-links">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#itr">ITR Filing</a></li>
-                    <li><a href="#llp">LLP Compliance</a></li>
-                    <li><a href="#company">Company Compliance</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-                <div class="nav-cta">
-                    <a href="#contact" class="btn-nav btn-nav-primary">Get Started</a>
-                </div>
-            </nav>
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-wrap">
+    <div class="logo" onclick="goHome()">DigiCafe</div>
+    <ul class="nav-center">
+      <li><a onclick="showPage('home')" data-p="home">Home</a></li>
+      <li><a onclick="showPage('news')" data-p="news">News</a></li>
+      <li><a onclick="showPage('knowledge')" data-p="knowledge">Knowledge</a></li>
+      <li><a onclick="showPage('courses')" data-p="courses">Courses</a></li>
+      <li><a onclick="showPage('ai')" data-p="ai">AI Tools</a></li>
+      <li><a onclick="showPage('services')" data-p="services">Services</a></li>
+      <li><a onclick="showPage('tools')" data-p="tools">Calculators</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost btn-sm" onclick="showPage('login')">Log In</button>
+      <button class="btn btn-primary btn-sm" onclick="showPage('login')">Get Started</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home" style="padding-top:64px">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="c">
+      <div class="hero-inner">
+        <div>
+          <span class="badge badge-blue" style="margin-bottom:1rem">🇮🇳 #1 in India</span>
+          <h1>India's #1 AI-Powered<br><span class="g-text">Tax & Compliance</span><br>Platform</h1>
+          <p>File ITR, register for GST, incorporate companies, manage TDS — all with AI assistance, real-time tracking, and expert support.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <button class="btn btn-primary btn-lg" onclick="showPage('login')"><i class="fas fa-rocket"></i> Start Free</button>
+            <button class="btn btn-ghost btn-lg" onclick="showPage('services')"><i class="fas fa-th"></i> Explore</button>
+            <a href="https://wa.me/918539979271" target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          </div>
         </div>
-    </header>
+        <div class="hero-img" style="text-align:center;font-size:5rem">🏢📊💼</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ════════════════════════════════════════
-         HERO SECTION
-         ════════════════════════════════════════ -->
-    <section class="hero">
-        <div class="container">
-            <h1>Your Complete Tax & Compliance Partner</h1>
-            <p class="subheading">Income Tax Returns | GST | LLP Compliance | Company Compliance | Accounting | MCA Filings | Business Registration</p>
-            <p class="hero-description">
-                Expert tax and compliance solutions for individuals, startups, LLPs, and companies. 
-                Transparent processes, dedicated support, and fast turnaround times.
-            </p>
+  <!-- STATS -->
+  <section style="padding:40px 0;background:var(--bg2);border-top:1px solid var(--bdr)">
+    <div class="c">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;text-align:center">
+        <div><div class="s" style="font-size:2.5rem;font-weight:800;color:var(--blue)">10K+</div><div style="color:var(--txt3);font-size:.9rem;margin-top:.25rem">Clients</div></div>
+        <div><div class="s" style="font-size:2.5rem;font-weight:800;color:var(--teal)">500+</div><div style="color:var(--txt3);font-size:.9rem;margin-top:.25rem">Templates</div></div>
+        <div><div class="s" style="font-size:2.5rem;font-weight:800;color:var(--gold)">120+</div><div style="color:var(--txt3);font-size:.9rem;margin-top:.25rem">Services</div></div>
+        <div><div class="s" style="font-size:2.5rem;font-weight:800;color:var(--purple)">50+</div><div style="color:var(--txt3);font-size:.9rem;margin-top:.25rem">Courses</div></div>
+      </div>
+    </div>
+  </section>
 
-            <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> Get Started Now
-                </a>
-                <a href="#contact" class="btn btn-secondary">
-                    <i class="fas fa-calendar"></i> Schedule Consultation
-                </a>
-            </div>
+  <!-- NEWS PREVIEW -->
+  <section class="sec">
+    <div class="c">
+      <div class="sh">
+        <span class="badge badge-blue">Latest Updates</span>
+        <h2>Government & Tax <span class="g-text">News</span></h2>
+        <p>Daily news, notifications, and updates on Income Tax, GST, Companies Act, and more.</p>
+      </div>
+      <div class="news-grid" id="news-home"></div>
+    </div>
+  </section>
 
-            <div class="hero-features">
-                <div class="feature-stat">
-                    <h3>₹299</h3>
-                    <p>Starting Price</p>
-                </div>
-                <div class="feature-stat">
-                    <h3>7 Days</h3>
-                    <p>Average Turnaround</p>
-                </div>
-                <div class="feature-stat">
-                    <h3>100%</h3>
-                    <p>Transparent Pricing</p>
-                </div>
-                <div class="feature-stat">
-                    <h3>24/7</h3>
-                    <p>Support Available</p>
-                </div>
-            </div>
+  <!-- SERVICES PREVIEW -->
+  <section class="sec" style="background:var(--bg2)">
+    <div class="c">
+      <div class="sh">
+        <span class="badge badge-teal">120+ Services</span>
+        <h2>Complete <span class="g-text">Compliance Solutions</span></h2>
+      </div>
+      <div class="svc-grid" id="svc-home"></div>
+    </div>
+  </section>
+
+  <!-- AI TOOLS -->
+  <section class="sec">
+    <div class="c">
+      <div class="sh">
+        <span class="badge badge-blue">AI Assistant</span>
+        <h2>Powered by <span class="g-text">Artificial Intelligence</span></h2>
+        <p>AI drafts notices, analyzes documents, generates notices — 24/7.</p>
+      </div>
+      <div class="tools-grid" id="ai-home"></div>
+    </div>
+  </section>
+
+  <!-- COURSES PREVIEW -->
+  <section class="sec" style="background:var(--bg2)">
+    <div class="c">
+      <div class="sh">
+        <span class="badge badge-gold">Learning</span>
+        <h2>Professional <span class="g-text">Courses</span></h2>
+      </div>
+      <div class="course-grid" id="courses-home"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:80px 0;background:linear-gradient(135deg,var(--bg3),var(--bg2))">
+    <div class="c" style="text-align:center">
+      <h2 class="s" style="font-size:2.2rem;font-weight:800;margin-bottom:1rem">Ready to Transform Your Practice?</h2>
+      <p style="color:var(--txt2);font-size:1.05rem;margin-bottom:2rem">Join 10,000+ tax professionals trusted by DigiCafe.</p>
+      <button class="btn btn-primary btn-lg" onclick="showPage('login')" style="font-size:1rem;padding:1rem 2.5rem"><i class="fas fa-rocket"></i> Get Started Free</button>
+    </div>
+  </section>
+</div>
+
+<!-- NEWS PAGE -->
+<div class="page" id="page-news" style="padding:80px 20px">
+  <div class="c">
+    <div class="sh">
+      <h2>Tax & <span class="g-text">Compliance News</span></h2>
+      <p>Latest updates on Income Tax, GST, Companies Act, and Government notifications.</p>
+    </div>
+    <div style="margin-bottom:2rem;display:flex;gap:.5rem;flex-wrap:wrap" id="news-cats"></div>
+    <div class="news-grid" id="news-full"></div>
+  </div>
+</div>
+
+<!-- KNOWLEDGE PAGE -->
+<div class="page" id="page-knowledge" style="padding:80px 20px">
+  <div class="c">
+    <div class="sh">
+      <h2>Knowledge <span class="g-text">Center</span></h2>
+      <p>Complete library of tax, GST, compliance, and business guides.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem" id="kb-grid"></div>
+  </div>
+</div>
+
+<!-- COURSES PAGE -->
+<div class="page" id="page-courses" style="padding:80px 20px">
+  <div class="c">
+    <div class="sh">
+      <h2><span class="g-text">Professional Courses</span></h2>
+      <p>Live webinars, recorded courses, certificates, and community learning.</p>
+    </div>
+    <div class="course-grid" id="courses-full"></div>
+  </div>
+</div>
+
+<!-- AI TOOLS PAGE -->
+<div class="page" id="page-ai" style="padding:80px 20px">
+  <div class="c">
+    <div class="sh">
+      <h2>DigiCafe <span class="g-text">AI Tools</span></h2>
+      <p>Intelligent assistants for tax, GST, compliance, and business needs.</p>
+    </div>
+    <div class="tools-grid" id="ai-full"></div>
+    <div style="text-align:center;margin-top:3rem">
+      <button class="btn btn-primary btn-lg" onclick="showPage('login')"><i class="fas fa-robot"></i> Try AI Assistant</button>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES PAGE -->
+<div class="page" id="page-services" style="padding:80px 20px">
+  <div class="c">
+    <div class="sh">
+      <h2>All <span class="g-text">Services</span></h2>
+      <p>120+ compliance, tax, and government services in one platform.</p>
+    </div>
+    <div class="svc-grid" id="svc-full"></div>
+  </div>
+</div>
+
+<!-- TOOLS PAGE (CALCULATORS) -->
+<div class="page" id="page-tools" style="padding:80px 20px">
+  <div class="c">
+    <div class="sh">
+      <h2>Free <span class="g-text">Calculators</span></h2>
+      <p>Instant tax and finance calculations for all your needs.</p>
+    </div>
+    <div class="tools-grid" id="calc-grid"></div>
+  </div>
+</div>
+
+<!-- LOGIN PAGE -->
+<div class="page" id="page-login" style="padding:80px 20px;min-height:calc(100vh - 64px);display:flex;align-items:center">
+  <div class="c" style="max-width:420px;margin:0 auto;width:100%">
+    <div class="glass" style="padding:2.5rem;border-radius:24px">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <div class="logo s" style="font-size:1.8rem;display:inline-block">DigiCafe</div>
+        <p style="color:var(--txt3);font-size:.85rem;margin-top:.5rem">Professional Tax & Compliance Platform</p>
+      </div>
+      <div style="display:flex;gap:.5rem;background:var(--bg2);border-radius:10px;padding:4px;margin-bottom:1.5rem">
+        <button class="btn-tab active" style="flex:1;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:.5rem;cursor:pointer;font-weight:600;font-size:.85rem;font-family:inherit" onclick="switchTab('login')">Log In</button>
+        <button class="btn-tab" style="flex:1;background:none;color:var(--txt2);border:none;cursor:pointer;font-weight:600;font-size:.85rem;font-family:inherit;padding:.5rem" onclick="switchTab('register')">Register</button>
+      </div>
+      <form id="login-form" onsubmit="return handleLogin(event)">
+        <div style="margin-bottom:1.1rem">
+          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Email Address</label>
+          <input type="email" placeholder="you@example.com" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
         </div>
-    </section>
-
-    <!-- ════════════════════════════════════════
-         SERVICES SECTION
-         ════════════════════════════════════════ -->
-    <section id="services">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Our Services</span>
-                <h2>Complete Tax & Compliance Solutions</h2>
-                <p>All services you need for individuals, startups, LLPs, and companies</p>
-            </div>
-
-            <div class="service-grid">
-                <div class="service-card">
-                    <div class="service-icon">📋</div>
-                    <h3>Income Tax Returns</h3>
-                    <p>Professional ITR filing for salaried individuals, freelancers, business owners, and rental income earners</p>
-                    <ul class="service-list">
-                        <li>Form 26AS Reconciliation</li>
-                        <li>Deduction Optimization</li>
-                        <li>Refund Tracking</li>
-                        <li>Expert Consultation</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
-                    <h3>GST Services</h3>
-                    <p>Complete GST registration, monthly returns, annual reconciliation, and notice handling</p>
-                    <ul class="service-list">
-                        <li>GST Registration</li>
-                        <li>Monthly/Quarterly Filing</li>
-                        <li>GST Reconciliation</li>
-                        <li>Notice Reply Support</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🏢</div>
-                    <h3>Company Compliance</h3>
-                    <p>Complete annual compliance for Pvt Ltd and Public Companies with all statutory filings</p>
-                    <ul class="service-list">
-                        <li>AOC-4, MGT-7 Filing</li>
-                        <li>Annual Accounts</li>
-                        <li>Board Minutes</li>
-                        <li>ROC Compliance</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🤝</div>
-                    <h3>LLP Compliance</h3>
-                    <p>Dedicated LLP compliance including Form 11, Form 8, ITR, and GST management</p>
-                    <ul class="service-list">
-                        <li>Form 11 & Form 8 Filing</li>
-                        <li>LLP ITR Preparation</li>
-                        <li>GST Returns</li>
-                        <li>Bank Reconciliation</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
-                    <h3>Startup Registration</h3>
-                    <p>Quick setup for startups with Pvt Ltd, LLP, OPC, MSME, and Startup India registration</p>
-                    <ul class="service-list">
-                        <li>Business Registration</li>
-                        <li>MSME Certification</li>
-                        <li>Startup India Registration</li>
-                        <li>IEC Code Assistance</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🔍</div>
-                    <h3>Audit & Accounting</h3>
-                    <p>Statutory audit, internal audit, bookkeeping, and accounting services</p>
-                    <ul class="service-list">
-                        <li>Statutory Audit</li>
-                        <li>Internal Audit</li>
-                        <li>Bookkeeping Services</li>
-                        <li>Financial Statements</li>
-                    </ul>
-                </div>
-            </div>
+        <div style="margin-bottom:1.1rem">
+          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Password</label>
+          <input type="password" placeholder="Your password" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
         </div>
-    </section>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-bottom:1rem;padding:1rem"><i class="fas fa-sign-in-alt"></i> Log In</button>
+      </form>
+      <div style="text-align:center;font-size:.8rem;color:var(--txt3)">Forgot password? <a href="#" style="color:var(--blue)">Reset</a></div>
+      <div style="text-align:center;color:var(--txt3);font-size:.8rem;margin:1rem 0;position:relative">
+        <span style="background:var(--bg2);padding:0 .5rem;position:relative;z-index:1">or</span>
+        <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:var(--bdr);z-index:0"></div>
+      </div>
+      <button type="button" class="btn btn-ghost btn-full" id="google-signin-btn" onclick="signInWithGoogle()"><i class="fab fa-google"></i> Sign in with Google</button>
+      <div style="text-align:center;font-size:.82rem;color:var(--txt3);margin-top:1.5rem">New here? <a href="#" style="color:var(--blue);cursor:pointer" onclick="switchTab('register');return false">Create Account</a></div>
+    </div>
+  </div>
+</div>
 
-    <!-- ════════════════════════════════════════
-         ITR FILING SECTION
-         ════════════════════════════════════════ -->
-    <section id="itr">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Quick & Easy</span>
-                <h2>Income Tax Return (ITR) Filing</h2>
-                <p>Professional ITR preparation with transparent documentation requirements</p>
-            </div>
-
-            <div class="checklist-container">
-                <div class="checklist">
-                    <h3>📋 Required Documents</h3>
-                    <div class="checklist-items">
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc1">
-                            <label for="doc1" class="checklist-checkbox"></label>
-                            <label for="doc1" class="checklist-label">PAN Card</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc2">
-                            <label for="doc2" class="checklist-checkbox"></label>
-                            <label for="doc2" class="checklist-label">Aadhaar Card</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc3">
-                            <label for="doc3" class="checklist-checkbox"></label>
-                            <label for="doc3" class="checklist-label">Mobile Number & Email ID</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc4">
-                            <label for="doc4" class="checklist-checkbox"></label>
-                            <label for="doc4" class="checklist-label">Form 16 (if salaried)</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc5">
-                            <label for="doc5" class="checklist-checkbox"></label>
-                            <label for="doc5" class="checklist-label">Form 26AS</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc6">
-                            <label for="doc6" class="checklist-checkbox"></label>
-                            <label for="doc6" class="checklist-label">AIS/TIS Report</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc7">
-                            <label for="doc7" class="checklist-checkbox"></label>
-                            <label for="doc7" class="checklist-label">Bank Statements</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc8">
-                            <label for="doc8" class="checklist-checkbox"></label>
-                            <label for="doc8" class="checklist-label">Interest Certificates (FD/Savings)</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc9">
-                            <label for="doc9" class="checklist-checkbox"></label>
-                            <label for="doc9" class="checklist-label">Capital Gain Statements</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc10">
-                            <label for="doc10" class="checklist-checkbox"></label>
-                            <label for="doc10" class="checklist-label">Home Loan Interest Certificate</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc11">
-                            <label for="doc11" class="checklist-checkbox"></label>
-                            <label for="doc11" class="checklist-label">LIC Premium Details</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc12">
-                            <label for="doc12" class="checklist-checkbox"></label>
-                            <label for="doc12" class="checklist-label">ELSS / Mutual Fund SIP</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc13">
-                            <label for="doc13" class="checklist-checkbox"></label>
-                            <label for="doc13" class="checklist-label">PPF Passbook</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc14">
-                            <label for="doc14" class="checklist-checkbox"></label>
-                            <label for="doc14" class="checklist-label">NPS Statement</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc15">
-                            <label for="doc15" class="checklist-checkbox"></label>
-                            <label for="doc15" class="checklist-label">Health Insurance Receipt</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="doc16">
-                            <label for="doc16" class="checklist-checkbox"></label>
-                            <label for="doc16" class="checklist-label">Donation Receipts (80G)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="client-checklist">
-                    <h3>✅ Do You Have These Income Sources?</h3>
-                    <p style="color: var(--text-gray); margin-bottom: 1.5rem;">Help us understand your tax situation</p>
-                    
-                    <div class="client-checklist-items">
-                        <div class="client-check">
-                            <input type="radio" name="income" id="salary-yes" value="yes">
-                            <label for="salary-yes">Any salary income?</label>
-                        </div>
-                        <div class="client-check">
-                            <input type="radio" name="income" id="salary-no" value="no">
-                            <label for="salary-no">No salary income</label>
-                        </div>
-
-                        <div class="client-check">
-                            <input type="radio" name="fd" id="fd-yes" value="yes">
-                            <label for="fd-yes">Any FD interest?</label>
-                        </div>
-                        <div class="client-check">
-                            <input type="radio" name="fd" id="fd-no" value="no">
-                            <label for="fd-no">No FD interest</label>
-                        </div>
-
-                        <div class="client-check">
-                            <input type="radio" name="rental" id="rental-yes" value="yes">
-                            <label for="rental-yes">Any rental income?</label>
-                        </div>
-                        <div class="client-check">
-                            <input type="radio" name="rental" id="rental-no" value="no">
-                            <label for="rental-no">No rental income</label>
-                        </div>
-
-                        <div class="client-check">
-                            <input type="radio" name="capital" id="capital-yes" value="yes">
-                            <label for="capital-yes">Any capital gains?</label>
-                        </div>
-                        <div class="client-check">
-                            <input type="radio" name="capital" id="capital-no" value="no">
-                            <label for="capital-no">No capital gains</label>
-                        </div>
-
-                        <div class="client-check">
-                            <input type="radio" name="foreign" id="foreign-yes" value="yes">
-                            <label for="foreign-yes">Any foreign assets?</label>
-                        </div>
-                        <div class="client-check">
-                            <input type="radio" name="foreign" id="foreign-no" value="no">
-                            <label for="foreign-no">No foreign assets</label>
-                        </div>
-
-                        <div class="client-check">
-                            <input type="radio" name="investments" id="investments-yes" value="yes">
-                            <label for="investments-yes">Any investments?</label>
-                        </div>
-                        <div class="client-check">
-                            <input type="radio" name="investments" id="investments-no" value="no">
-                            <label for="investments-no">No tax-saving investments</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 3rem;">
-                <h3 style="text-align: center; color: var(--text-dark); margin-bottom: 2rem;">ITR Services Overview</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>📄 ITR Preparation</h4>
-                        <span class="timeline-date">2-3 Days</span>
-                        <p>Complete ITR form filling with all deductions optimized for maximum refund</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>🔍 Form 26AS Review</h4>
-                        <span class="timeline-date">1 Day</span>
-                        <p>Verification of income reported by banks and employers against ITR</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>💾 E-Filing</h4>
-                        <span class="timeline-date">1 Day</span>
-                        <p>ITR e-filing via NSDL portal with ITR-V acknowledgement generation</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>📞 Support & Tracking</h4>
-                        <span class="timeline-date">Ongoing</span>
-                        <p>Continuous support for queries, refund tracking, and tax planning</p>
-                    </div>
-                </div>
-            </div>
+<!-- CLIENT DASHBOARD -->
+<div class="page" id="page-dashboard">
+  <div class="dash-layout">
+    <div class="d-sidebar">
+      <div class="d-user">
+        <div class="d-avatar">VK</div>
+        <div>
+          <div class="d-uname">Vikash Pathak</div>
+          <div class="d-urole">Client</div>
         </div>
-    </section>
-
-    <!-- ════════════════════════════════════════
-         GST SECTION
-         ════════════════════════════════════════ -->
-    <section id="gst">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Compliance Made Easy</span>
-                <h2>GST Registration & Returns</h2>
-                <p>Complete GST support from registration to reconciliation</p>
-            </div>
-
-            <div class="service-grid">
-                <div class="service-card">
-                    <h3>🏛️ GST Registration</h3>
-                    <p>Quick GST registration with complete documentation support and hassle-free processing</p>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-light); border-radius: 8px;">
-                        <p style="font-size: 0.9rem; color: var(--text-gray);"><strong>Required:</strong> PAN, Aadhaar, Business Registration, Address Proof, Bank Details</p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <h3>📊 Monthly Returns</h3>
-                    <p>Accurate GSTR-1, GSTR-2, GSTR-3B filing with complete reconciliation and support</p>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-light); border-radius: 8px;">
-                        <p style="font-size: 0.9rem; color: var(--text-gray;"><strong>Includes:</strong> Sales/Purchase reconciliation, Input Tax Credit</p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <h3>📋 Annual Return</h3>
-                    <p>Year-end GST annual return preparation and reconciliation of all monthly returns</p>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-light); border-radius: 8px;">
-                        <p style="font-size: 0.9rem; color: var(--text-gray);"><strong>Benefit:</strong> Identify discrepancies early, plan refunds</p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <h3>⚠️ Notice Reply</h3>
-                    <p>Professional response to GST notices and demand letters with complete documentation</p>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-light); border-radius: 8px;">
-                        <p style="font-size: 0.9rem; color: var(--text-gray);"><strong>Support:</strong> Legal compliance, evidence gathering</p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <h3>🔄 Reconciliation</h3>
-                    <p>Complete GST reconciliation identifying mismatches and discrepancies in returns</p>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-light); border-radius: 8px;">
-                        <p style="font-size: 0.9rem; color: var(--text-gray);"><strong>Analysis:</strong> Invoice matching, credit ITC review</p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <h3>📞 Advisory Services</h3>
-                    <p>Expert GST advisory on compliance, planning, and rate classification issues</p>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-light); border-radius: 8px;">
-                        <p style="font-size: 0.9rem; color: var(--text-gray);"><strong>Covers:</strong> Input tax optimization, filing strategies</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%); border-radius: 15px; border: 2px solid #ffb84d;">
-                <h3 style="color: var(--text-dark); margin-bottom: 1rem;">📋 GST Documents Required</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <div style="display: flex; gap: 0.7rem; align-items: start;">
-                        <span style="color: var(--success); font-size: 1.3rem;">✓</span>
-                        <span style="color: var(--text-gray);">GST Certificate</span>
-                    </div>
-                    <div style="display: flex; gap: 0.7rem; align-items: start;">
-                        <span style="color: var(--success); font-size: 1.3rem;">✓</span>
-                        <span style="color: var(--text-gray);">Sales Register</span>
-                    </div>
-                    <div style="display: flex; gap: 0.7rem; align-items: start;">
-                        <span style="color: var(--success); font-size: 1.3rem;">✓</span>
-                        <span style="color: var(--text-gray);">Purchase Register</span>
-                    </div>
-                    <div style="display: flex; gap: 0.7rem; align-items: start;">
-                        <span style="color: var(--success); font-size: 1.3rem;">✓</span>
-                        <span style="color: var(--text-gray);">E-Way Bills</span>
-                    </div>
-                    <div style="display: flex; gap: 0.7rem; align-items: start;">
-                        <span style="color: var(--success); font-size: 1.3rem;">✓</span>
-                        <span style="color: var(--text-gray);">GSTR Reports</span>
-                    </div>
-                    <div style="display: flex; gap: 0.7rem; align-items: start;">
-                        <span style="color: var(--success); font-size: 1.3rem;">✓</span>
-                        <span style="color: var(--text-gray);">Bank Statements</span>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <ul class="side-nav">
+        <li><a onclick="showDash('overview')" class="active"><i class="fas fa-home"></i> Overview</a></li>
+        <li><a onclick="showDash('applications')"><i class="fas fa-file-alt"></i> Applications</a></li>
+        <li><a onclick="showDash('documents')"><i class="fas fa-folder"></i> Documents</a></li>
+        <li><a onclick="showDash('invoices')"><i class="fas fa-receipt"></i> Invoices</a></li>
+        <li><a onclick="showDash('messages')"><i class="fas fa-envelope"></i> Messages</a></li>
+        <li><a onclick="showDash('support')"><i class="fas fa-headset"></i> Support</a></li>
+        <li><a onclick="showPage('home')"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </div>
+    <div class="d-main">
+      <div class="d-content active" id="dash-overview">
+        <div class="d-title">Welcome back, Vikash!</div>
+        <p style="color:var(--txt2);margin-bottom:2rem">Your compliance status and pending applications.</p>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="kpi-val">3</div><div class="kpi-label">Active Applications</div></div>
+          <div class="kpi"><div class="kpi-val">₹24,500</div><div class="kpi-label">Total Paid</div></div>
+          <div class="kpi"><div class="kpi-val">2</div><div class="kpi-label">Pending Documents</div></div>
+          <div class="kpi"><div class="kpi-val">5</div><div class="kpi-label">Completed Services</div></div>
         </div>
-    </section>
-
-    <!-- ════════════════════════════════════════
-         LLP COMPLIANCE SECTION
-         ════════════════════════════════════════ -->
-    <section id="llp">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">LLP Focused</span>
-                <h2>LLP Annual Compliance</h2>
-                <p>Complete annual compliance for Limited Liability Partnerships</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 3rem;">
-                <div>
-                    <h3 style="color: var(--text-dark); margin-bottom: 1.5rem;">📋 Mandatory Filings</h3>
-                    <div style="background: var(--bg-white); border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-sm);">
-                        <div class="timeline">
-                            <div style="margin-bottom: 1.5rem;">
-                                <div style="display: flex; gap: 0.8rem; align-items: center;">
-                                    <span style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</span>
-                                    <div>
-                                        <h4 style="color: var(--text-dark); margin-bottom: 0.2rem;">Form 11 - Partnership Changes</h4>
-                                        <p style="color: var(--text-gray); font-size: 0.9rem;">Due: 30 May (every year)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="margin-bottom: 1.5rem;">
-                                <div style="display: flex; gap: 0.8rem; align-items: center;">
-                                    <span style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</span>
-                                    <div>
-                                        <h4 style="color: var(--text-dark); margin-bottom: 0.2rem;">Form 8 - Annual Return</h4>
-                                        <p style="color: var(--text-gray); font-size: 0.9rem;">Due: 30 October (after FY ends)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div style="display: flex; gap: 0.8rem; align-items: center;">
-                                    <span style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</span>
-                                    <div>
-                                        <h4 style="color: var(--text-dark); margin-bottom: 0.2rem;">Income Tax Return (ITR)</h4>
-                                        <p style="color: var(--text-gray); font-size: 0.9rem;">Due: 31 October (AY ends on Oct 31)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 style="color: var(--text-dark); margin-bottom: 1.5rem;">📋 Documents Required</h3>
-                    <div class="checklist">
-                        <div class="checklist-items">
-                            <div class="checklist-item">
-                                <input type="checkbox" id="llp-doc1">
-                                <label for="llp-doc1" class="checklist-checkbox"></label>
-                                <label for="llp-doc1" class="checklist-label">LLP PAN</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="llp-doc2">
-                                <label for="llp-doc2" class="checklist-checkbox"></label>
-                                <label for="llp-doc2" class="checklist-label">LLPIN</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="llp-doc3">
-                                <label for="llp-doc3" class="checklist-checkbox"></label>
-                                <label for="llp-doc3" class="checklist-label">Partnership Agreement</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="llp-doc4">
-                                <label for="llp-doc4" class="checklist-checkbox"></label>
-                                <label for="llp-doc4" class="checklist-label">Bank Statements</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="llp-doc5">
-                                <label for="llp-doc5" class="checklist-checkbox"></label>
-                                <label for="llp-doc5" class="checklist-label">GST Returns</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="llp-doc6">
-                                <label for="llp-doc6" class="checklist-checkbox"></label>
-                                <label for="llp-doc6" class="checklist-label">Sales & Purchase Register</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="llp-doc7">
-                                <label for="llp-doc7" class="checklist-checkbox"></label>
-                                <label for="llp-doc7" class="checklist-label">Loan Details</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="llp-doc8">
-                                <label for="llp-doc8" class="checklist-checkbox"></label>
-                                <label for="llp-doc8" class="checklist-label">Partner Contribution Details</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;margin-top:2rem">
+          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Recent Applications</h3>
+          <table class="table">
+            <thead><tr><th>Service</th><th>Date</th><th>Status</th><th>Amount</th></tr></thead>
+            <tbody>
+              <tr><td>Income Tax Return (ITR-2)</td><td>15 Jan 2025</td><td><span style="background:rgba(16,185,129,.15);color:var(--green);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">Completed</span></td><td>₹2,999</td></tr>
+              <tr><td>GST Registration</td><td>10 Jan 2025</td><td><span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">Under Review</span></td><td>₹3,499</td></tr>
+              <tr><td>TDS Return Filing (26Q)</td><td>05 Jan 2025</td><td><span style="background:rgba(245,158,11,.15);color:var(--gold);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">In Progress</span></td><td>₹1,999</td></tr>
+            </tbody>
+          </table>
         </div>
-    </section>
+      </div>
+      <div class="d-content" id="dash-applications"><p style="padding:2rem;color:var(--txt2)">Your applications here...</p></div>
+      <div class="d-content" id="dash-documents"><p style="padding:2rem;color:var(--txt2)">Document upload and management here...</p></div>
+      <div class="d-content" id="dash-invoices"><p style="padding:2rem;color:var(--txt2)">Your invoices and payment history here...</p></div>
+      <div class="d-content" id="dash-messages"><p style="padding:2rem;color:var(--txt2)">Messages from support team here...</p></div>
+      <div class="d-content" id="dash-support"><p style="padding:2rem;color:var(--txt2)">Support tickets and help center here...</p></div>
+    </div>
+  </div>
+</div>
 
-    <!-- ════════════════════════════════════════
-         COMPANY COMPLIANCE SECTION
-         ════════════════════════════════════════ -->
-    <section id="company">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Corporate Compliance</span>
-                <h2>Private Limited Company Compliance</h2>
-                <p>Complete annual compliance for Pvt Ltd companies</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 3rem;">
-                <div>
-                    <h3 style="color: var(--text-dark); margin-bottom: 1.5rem;">📋 Mandatory Filings</h3>
-                    <div class="service-grid" style="grid-template-columns: 1fr;">
-                        <div class="service-card">
-                            <h4 style="color: var(--primary); margin-bottom: 1rem;">Key Compliance</h4>
-                            <ul class="service-list">
-                                <li>AOC-4 (Annual Report)</li>
-                                <li>MGT-7 / MGT-7A (Board Report)</li>
-                                <li>ADT-1 (Audit Report)</li>
-                                <li>DPT-3 (Deposits Report)</li>
-                                <li>DIR-3 KYC (Director KYC)</li>
-                                <li>Income Tax Return</li>
-                                <li>GST Returns</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 style="color: var(--text-dark); margin-bottom: 1.5rem;">📋 Documents Required</h3>
-                    <div class="checklist">
-                        <div class="checklist-items">
-                            <div class="checklist-item">
-                                <input type="checkbox" id="co-doc1">
-                                <label for="co-doc1" class="checklist-checkbox"></label>
-                                <label for="co-doc1" class="checklist-label">PAN & CIN</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="co-doc2">
-                                <label for="co-doc2" class="checklist-checkbox"></label>
-                                <label for="co-doc2" class="checklist-label">MOA & AOA</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="co-doc3">
-                                <label for="co-doc3" class="checklist-checkbox"></label>
-                                <label for="co-doc3" class="checklist-label">Financial Statements</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="co-doc4">
-                                <label for="co-doc4" class="checklist-checkbox"></label>
-                                <label for="co-doc4" class="checklist-label">Bank Statements</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="co-doc5">
-                                <label for="co-doc5" class="checklist-checkbox"></label>
-                                <label for="co-doc5" class="checklist-label">GST Returns</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="co-doc6">
-                                <label for="co-doc6" class="checklist-checkbox"></label>
-                                <label for="co-doc6" class="checklist-label">TDS Returns</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="co-doc7">
-                                <label for="co-doc7" class="checklist-checkbox"></label>
-                                <label for="co-doc7" class="checklist-label">Shareholding Details</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="co-doc8">
-                                <label for="co-doc8" class="checklist-checkbox"></label>
-                                <label for="co-doc8" class="checklist-label">Fixed Asset Register</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- ADMIN PANEL -->
+<div class="page" id="page-admin">
+  <div class="admin-layout">
+    <div class="admin-sidebar">
+      <div style="font-weight:700;font-size:1rem;margin-bottom:1.5rem;color:var(--txt)">Admin Panel</div>
+      <h4>Dashboard</h4>
+      <div class="admin-nav">
+        <a onclick="showAdmin('overview')" class="active"><i class="fas fa-chart-line"></i> Overview</a>
+      </div>
+      <h4>Management</h4>
+      <div class="admin-nav">
+        <a onclick="showAdmin('clients')"><i class="fas fa-users"></i> Clients</a>
+        <a onclick="showAdmin('services')"><i class="fas fa-cogs"></i> Services</a>
+        <a onclick="showAdmin('payments')"><i class="fas fa-credit-card"></i> Payments</a>
+      </div>
+      <h4>Content</h4>
+      <div class="admin-nav">
+        <a onclick="showAdmin('news')"><i class="fas fa-newspaper"></i> News</a>
+        <a onclick="showAdmin('courses')"><i class="fas fa-book"></i> Courses</a>
+      </div>
+      <h4>Account</h4>
+      <div class="admin-nav">
+        <a onclick="showPage('home')"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+    <div class="admin-main">
+      <div class="admin-content active" id="admin-overview">
+        <div class="s" style="font-size:1.4rem;font-weight:800;margin-bottom:2rem">Dashboard Analytics</div>
+        <div class="admin-kpis">
+          <div class="admin-kpi"><div class="ak-label">Total Clients</div><div class="ak-val">2,843</div></div>
+          <div class="admin-kpi"><div class="ak-label">This Month Revenue</div><div class="ak-val">₹4,52,100</div></div>
+          <div class="admin-kpi"><div class="ak-label">Pending Applications</div><div class="ak-val">127</div></div>
+          <div class="admin-kpi"><div class="ak-label">Completed Tasks</div><div class="ak-val">892</div></div>
+          <div class="admin-kpi"><div class="ak-label">Staff Active</div><div class="ak-val">12</div></div>
+          <div class="admin-kpi"><div class="ak-label">New Sign-ups</div><div class="ak-val">+345</div></div>
         </div>
-    </section>
-
-    <!-- ════════════════════════════════════════
-         STARTUP REGISTRATION
-         ════════════════════════════════════════ -->
-    <section id="startup">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Quick Setup</span>
-                <h2>Startup & Business Registration</h2>
-                <p>Fast business registration for startups and new ventures</p>
-            </div>
-
-            <div class="service-grid">
-                <div class="service-card">
-                    <div class="service-icon">🏢</div>
-                    <h3>Private Limited Company</h3>
-                    <p>Complete Pvt Ltd registration with GST, PAN, bank account setup</p>
-                    <ul class="service-list">
-                        <li>Name Approval (RUN)</li>
-                        <li>MCA Filing & Registration</li>
-                        <li>GST Registration</li>
-                        <li>Bank Account Setup</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🤝</div>
-                    <h3>LLP Registration</h3>
-                    <p>Quick LLP setup with all statutory filings and documentation</p>
-                    <ul class="service-list">
-                        <li>DPIN Assignment</li>
-                        <li>LLP Registration</li>
-                        <li>Stamp & Registration</li>
-                        <li>GST/PAN Filing</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">👤</div>
-                    <h3>OPC (One Person Company)</h3>
-                    <p>Ideal for single founder startups with limited liability</p>
-                    <ul class="service-list">
-                        <li>Name Approval</li>
-                        <li>OPC Registration</li>
-                        <li>GST/PAN Setup</li>
-                        <li>Compliance Support</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">📝</div>
-                    <h3>Partnership Firm</h3>
-                    <p>Traditional partnership registration with deed and filing</p>
-                    <ul class="service-list">
-                        <li>Partnership Deed</li>
-                        <li>Registration Filing</li>
-                        <li>PAN & TAN</li>
-                        <li>GST Registration</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🏷️</div>
-                    <h3>MSME Registration</h3>
-                    <p>Udyam registration for micro, small & medium enterprises</p>
-                    <ul class="service-list">
-                        <li>Udyam Registration</li>
-                        <li>GST Assistance</li>
-                        <li>Subsidy Guidance</li>
-                        <li>Compliance Support</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
-                    <h3>Startup India Registration</h3>
-                    <p>Complete startup recognition with benefits and incentives</p>
-                    <ul class="service-list">
-                        <li>Startup Recognition</li>
-                        <li>Tax Benefits Guidance</li>
-                        <li>Funding Support</li>
-                        <li>Compliance Tracking</li>
-                    </ul>
-                </div>
-            </div>
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;margin-top:2rem">
+          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Recent Transactions</h3>
+          <table class="table">
+            <thead><tr><th>Client</th><th>Service</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Rahul Agarwal</td><td>ITR Filing</td><td>₹2,999</td><td>15 Jan 2025</td><td><span style="background:rgba(16,185,129,.15);color:var(--green);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">Completed</span></td></tr>
+              <tr><td>Priya Sharma</td><td>GST Registration</td><td>₹3,499</td><td>14 Jan 2025</td><td><span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">Processing</span></td></tr>
+              <tr><td>Mukesh Kumar</td><td>Company Registration</td><td>₹8,999</td><td>13 Jan 2025</td><td><span style="background:rgba(245,158,11,.15);color:var(--gold);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">In Progress</span></td></tr>
+            </tbody>
+          </table>
         </div>
-    </section>
+      </div>
+      <div class="admin-content" id="admin-clients"><p style="padding:2rem;color:var(--txt2)">Client management here...</p></div>
+      <div class="admin-content" id="admin-services"><p style="padding:2rem;color:var(--txt2)">Service management here...</p></div>
+      <div class="admin-content" id="admin-payments"><p style="padding:2rem;color:var(--txt2)">Payment analytics here...</p></div>
+      <div class="admin-content" id="admin-news"><p style="padding:2rem;color:var(--txt2)">News management here...</p></div>
+      <div class="admin-content" id="admin-courses"><p style="padding:2rem;color:var(--txt2)">Course management here...</p></div>
+    </div>
+  </div>
+</div>
 
-    <!-- ════════════════════════════════════════
-         WHY DIGICAFE
-         ════════════════════════════════════════ -->
-    <section id="why">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Why DigiCafe</span>
-                <h2>Why Choose DigiCafe</h2>
-                <p>Trusted by individuals, startups, and businesses across India</p>
-            </div>
-
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">👨‍💼</div>
-                    <h3>Expert Consultation</h3>
-                    <p>CA, tax consultant, and MCA compliance experts with 8+ years experience</p>
-                </div>
-
-                <div class="benefit-card">
-                    <div class="benefit-icon">⚡</div>
-                    <h3>Fast Turnaround</h3>
-                    <p>Average 7-day completion time with express options available</p>
-                </div>
-
-                <div class="benefit-card">
-                    <div class="benefit-icon">💰</div>
-                    <h3>Transparent Pricing</h3>
-                    <p>No hidden charges. Clear pricing from ₹299 onwards with itemized breakdowns</p>
-                </div>
-
-                <div class="benefit-card">
-                    <div class="benefit-icon">📤</div>
-                    <h3>Online Document Collection</h3>
-                    <p>Secure document upload via WhatsApp and email for convenience</p>
-                </div>
-
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎯</div>
-                    <h3>Dedicated Support</h3>
-                    <p>WhatsApp support 24/7 for all queries and document tracking</p>
-                </div>
-
-                <div class="benefit-card">
-                    <div class="benefit-icon">🔐</div>
-                    <h3>Secure Data Handling</h3>
-                    <p>Encrypted data storage and confidential handling of all documents</p>
-                </div>
-            </div>
+<!-- FOOTER -->
+<footer>
+  <div class="c">
+    <div class="foot-grid">
+      <div>
+        <div class="logo s" style="font-size:1.3rem">DigiCafe</div>
+        <p style="font-size:.85rem;color:var(--txt2);margin:1rem 0">India's #1 AI-Powered Tax & Compliance Platform. Our Service, Your Solution.</p>
+        <div style="display:flex;gap:.75rem">
+          <button class="btn btn-primary btn-sm" onclick="showPage('login')"><i class="fas fa-phone"></i> Support</button>
+          <a href="https://wa.me/918539979271" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
-    </section>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <a onclick="showPage('services')">All Services</a>
+        <a onclick="showPage('services')">Income Tax</a>
+        <a onclick="showPage('services')">GST</a>
+        <a onclick="showPage('services')">Company Reg</a>
+      </div>
+      <div>
+        <h4>Learning</h4>
+        <a onclick="showPage('courses')">Courses</a>
+        <a onclick="showPage('knowledge')">Knowledge Base</a>
+        <a onclick="showPage('news')">News</a>
+        <a onclick="showPage('ai')">AI Tools</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a onclick="showPage('home')">About Us</a>
+        <a onclick="showPage('home')">Contact</a>
+        <a onclick="showPage('home')">Privacy</a>
+        <a onclick="showPage('home')">Terms</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2025 DigiCafe Compliance & Digital Solutions · MSME: UDYAM-KR-02-0041919</p>
+      <p>By Vikash Pathak · Bengaluru, India · <a href="mailto:vikashpathak.mgmt@gmail.com" style="color:var(--blue2)">vikashpathak.mgmt@gmail.com</a></p>
+    </div>
+  </div>
+</footer>
 
-    <!-- ════════════════════════════════════════
-         FAQ SECTION
-         ════════════════════════════════════════ -->
-    <section id="faq">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Common Questions</span>
-                <h2>Frequently Asked Questions</h2>
-                <p>Find answers to common questions about our services</p>
-            </div>
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/918539979271?text=Hi%20DigiCafe!%20I%20want%20to%20know%20more" target="_blank" style="position:fixed;bottom:2rem;left:2rem;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;transition:all .3s" title="Chat on WhatsApp">💬</a>
 
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How much time does ITR filing take?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        ITR filing typically takes 7 days from document submission. This includes document verification (1 day), ITR preparation (2-3 days), and e-filing (1 day). Express turnaround of 3 days is available for urgent filings with additional charges.
-                    </div>
-                </div>
+<!-- TOAST -->
+<div id="toast"></div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can I claim LIC and SIP investments for tax deductions?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes! Both LIC premiums and SIP investments (ELSS funds) are eligible under Section 80C with a combined limit of ₹1,50,000 per financial year. We help optimize these deductions to maximize your refund. Other eligible investments include PPF, NSC, and Sukanya Samriddhi.
-                    </div>
-                </div>
+<script>
+// ═══ DATA ═══
+const news = [
+  {title:'Union Budget 2025: No Income Tax Change for Salaried Employees',date:'15 Jan 2025',cat:'Income Tax',desc:'Finance Ministry confirms standard deduction remains at ₹50,000 for FY 2025-26.'},
+  {title:'GST Extension on Textiles Extended Till March 2025',date:'14 Jan 2025',cat:'GST',desc:'5% GST on specified textiles extended for 3 more months to boost exports.'},
+  {title:'CBDT Issues New Notification on ITR-1 for AY 2025-26',date:'13 Jan 2025',cat:'Income Tax',desc:'New appendix added for cryptoassets and foreign income reporting requirements.'},
+  {title:'GST Council Approves Reverse Charge Mechanism for Services',date:'12 Jan 2025',cat:'GST',desc:'New rules effective 1 April 2025 for specified B2B service transactions.'},
+  {title:'SEBI Issues New Guidelines for Mutual Fund Taxation',date:'11 Jan 2025',cat:'Income Tax',desc:'Updated FAQs on TDS, indexed cost, and capital gains treatment.'},
+  {title:'Company Law: New MCA Portal Features for Annual Compliance',date:'10 Jan 2025',cat:'Companies Act',desc:'Streamlined filing process for AOC-4, MGT-7 with auto-validation.'},
+];
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What documents are required for company compliance?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        For company compliance, you need PAN, CIN, MOA & AOA, financial statements, bank statements, GST returns, TDS returns, shareholding details, and fixed asset register. We provide a detailed checklist after consultation to ensure nothing is missed.
-                    </div>
-                </div>
+const services = [
+  {icon:'💰',name:'Income Tax',desc:'ITR filing, refund tracking, tax planning, notice reply',price:'₹999+'},
+  {icon:'📊',name:'GST Registration',desc:'GSTIN approval, GSTR filing, reconciliation, audit',price:'₹1,999+'},
+  {icon:'🏢',name:'Company Reg',desc:'Pvt Ltd, LLP, OPC, name approval, DIN services',price:'₹4,999+'},
+  {icon:'📋',name:'TDS Returns',desc:'24Q/26Q filing, Form 16, challan verification',price:'₹1,499+'},
+  {icon:'™️',name:'Trademark Reg',desc:'Search, filing, objection reply, renewal',price:'₹2,999+'},
+  {icon:'🔐',name:'Digital Signature',desc:'Class 3 DSC, renewal, USB token, installation',price:'₹1,299+'},
+  {icon:'🚀',name:'MSME/Startup',desc:'Udyam registration, Startup India, FSSAI',price:'₹1,499+'},
+  {icon:'👤',name:'PAN/TAN/Aadhaar',desc:'New PAN, TAN registration, Aadhaar update',price:'₹499+'},
+];
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What happens if LLP Form 11 is not filed?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Failing to file Form 11 by the deadline (30 May) can result in penalties up to ₹10,000 and potential strike-off of the LLP. It's critical to file on time. We ensure timely filing and send reminders well in advance.
-                    </div>
-                </div>
+const aiTools = [
+  {icon:'🧠',name:'AI Tax Assistant',desc:'ITR guidance, tax planning, deduction tips'},
+  {icon:'📊',name:'AI GST Assistant',desc:'GST classification, ITC optimization, GSTR help'},
+  {icon:'📝',name:'Notice Reply Generator',desc:'Draft professional IT/GST notice replies instantly'},
+  {icon:'📧',name:'Email Generator',desc:'Professional client emails for all situations'},
+  {icon:'📱',name:'WhatsApp Generator',desc:'Client reminders and compliance messages'},
+  {icon:'🔍',name:'Document Review AI',desc:'AI verifies PAN, Aadhaar, GST documents'},
+  {icon:'💼',name:'Business Consultant',desc:'AI business advice, strategy, growth tips'},
+  {icon:'💰',name:'Loan Advisor AI',desc:'Loan eligibility, EMI calculation, advisory'},
+];
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How can I track my refund status?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Once ITR is e-filed, you can track refund status on the income-tax website using your acknowledgement number. We monitor your refund and send updates via WhatsApp. Average refund processing time is 30-45 days from e-filing date.
-                    </div>
-                </div>
+const courses = [
+  {icon:'💰',name:'Income Tax Mastery',desc:'Complete ITR filing, AIS analysis, tax planning',dur:'12 hrs',level:'Beginner'},
+  {icon:'📊',name:'GST Complete Course',desc:'Registration, GSTR filing, reconciliation, audit',dur:'15 hrs',level:'Beginner'},
+  {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, LLP, annual compliance, ROC filings',dur:'10 hrs',level:'Beginner'},
+  {icon:'📚',name:'Tally Prime Training',desc:'Complete accounting, GST, payroll, bank rec',dur:'20 hrs',level:'Intermediate'},
+  {icon:'🤖',name:'Excel for Accountants',desc:'Pivot tables, VLOOKUP, macros, automation',dur:'18 hrs',level:'Intermediate'},
+  {icon:'⚖️',name:'Company Law 101',desc:'Companies Act, ROC compliance, DIN services',dur:'12 hrs',level:'Beginner'},
+];
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do you provide consultation before filing?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Absolutely! We offer free pre-filing consultation via WhatsApp or call to understand your tax situation, identify deductions, and plan for tax savings. This helps us prepare accurate and optimized returns.
-                    </div>
-                </div>
+// ═══ PAGE ROUTING ═══
+function showPage(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.querySelectorAll('[data-p]').forEach(x=>x.classList.remove('active'));
+  document.querySelector('[data-p="'+p+'"]')?.classList.add('active');
+  window.scrollTo(0,0);
+  updateNav();
+}
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What is your pricing structure?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        We offer transparent, affordable pricing starting from ₹299 for basic ITR filing. Pricing varies based on complexity, income sources, and services needed. We provide quotes before starting work with no hidden charges.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+function updateNav(){
+  const active = document.querySelector('.page.active').id.replace('page-','');
+  document.querySelectorAll('[data-p]').forEach(x=>x.classList.toggle('active',x.dataset.p===active));
+}
 
-    <!-- ════════════════════════════════════════
-         CONTACT / LEAD FORM SECTION
-         ════════════════════════════════════════ -->
-    <section class="form-section" id="contact">
-        <div class="container">
-            <div class="section-header" style="color: white; margin-bottom: 2rem;">
-                <h2 style="color: white;">Get Started Today</h2>
-                <p style="color: rgba(255,255,255,0.8);">Fill this form and we'll contact you within 2 hours</p>
-            </div>
+function goHome(){showPage('home')}
 
-            <div class="form-container">
-                <form id="contactForm">
-                    <div id="formMessage" class="form-message"></div>
+// ═══ DASHBOARD ═══
+function showDash(s){
+  document.querySelectorAll('#page-dashboard .d-content').forEach(x=>x.classList.remove('active'));
+  document.getElementById('dash-'+s).classList.add('active');
+  document.querySelectorAll('#page-dashboard .side-nav a').forEach(x=>x.classList.remove('active'));
+  event.target.closest('a').classList.add('active');
+}
 
-                    <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required placeholder="Your name">
-                    </div>
+// ═══ ADMIN ═══
+function showAdmin(s){
+  document.querySelectorAll('#page-admin .admin-content').forEach(x=>x.classList.remove('active'));
+  document.getElementById('admin-'+s).classList.add('active');
+  document.querySelectorAll('#page-admin .admin-nav a').forEach(x=>x.classList.remove('active'));
+  event.target.closest('a').classList.add('active');
+}
 
-                    <div class="form-group">
-                        <label for="phone">Mobile Number *</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="Your mobile number">
-                    </div>
+// ═══ TABS ═══
+function switchTab(t){
+  document.querySelectorAll('.btn-tab').forEach(x=>x.classList.remove('active'));
+  event.target.classList.add('active');
+}
 
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required placeholder="your@email.com">
-                    </div>
+function handleLogin(e){
+  e.preventDefault();
+  showToast('✓ Login successful!');
+  setTimeout(()=>showPage('dashboard'),1000);
+  return false;
+}
 
-                    <div class="form-group">
-                        <label for="pan">PAN (Optional)</label>
-                        <input type="text" id="pan" name="pan" placeholder="ABCDE1234F">
-                    </div>
+// ═══ TOAST ═══
+function showToast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
 
-                    <div class="form-group">
-                        <label for="service">Service Required *</label>
-                        <select id="service" name="service" required>
-                            <option value="">-- Select Service --</option>
-                            <option value="ITR">Income Tax Return (ITR)</option>
-                            <option value="GST">GST Registration & Returns</option>
-                            <option value="LLP">LLP Compliance</option>
-                            <option value="Company">Company Compliance</option>
-                            <option value="Startup">Startup Registration</option>
-                            <option value="Accounting">Audit & Accounting</option>
-                            <option value="Other">Other Services</option>
-                        </select>
-                    </div>
+// ═══ RENDER ═══
+function renderNews(cont){
+  cont.innerHTML=news.map(n=>`
+    <div class="news-card">
+      <span class="n-cat">${n.cat}</span>
+      <div class="n-title">${n.title}</div>
+      <div class="n-desc">${n.desc}</div>
+      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
+    </div>
+  `).join('');
+}
 
-                    <div class="form-group">
-                        <label for="message">Message (Optional)</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your requirement..."></textarea>
-                    </div>
+function renderServices(cont){
+  cont.innerHTML=services.map(s=>`
+    <div class="svc-card">
+      <div class="s-icon">${s.icon}</div>
+      <div class="s-title">${s.name}</div>
+      <div class="s-desc">${s.desc}</div>
+      <div class="s-price">${s.price}</div>
+    </div>
+  `).join('');
+}
 
-                    <button type="submit" class="form-submit">Send Me a Consultation</button>
-                </form>
+function renderAI(cont){
+  cont.innerHTML=aiTools.map(a=>`
+    <div class="tool-card">
+      <div class="t-icon">${a.icon}</div>
+      <div class="t-name">${a.name}</div>
+      <div class="t-desc">${a.desc}</div>
+    </div>
+  `).join('');
+}
 
-                <p style="text-align: center; margin-top: 1.5rem; color: var(--text-gray); font-size: 0.9rem;">
-                    <i class="fas fa-lock"></i> Your data is secure and confidential
-                </p>
-            </div>
-        </div>
-    </section>
+function renderCourses(cont){
+  cont.innerHTML=courses.map(c=>`
+    <div class="course-card">
+      <div class="c-thumb">${c.icon}</div>
+      <div class="c-body">
+        <div class="c-title">${c.name}</div>
+        <div class="c-desc">${c.desc}</div>
+        <div class="c-meta"><span>${c.dur}</span> · <span>${c.level}</span></div>
+        <button class="c-btn" onclick="showPage('login');showToast('Enroll in course')"><i class="fas fa-book"></i> Enroll</button>
+      </div>
+    </div>
+  `).join('');
+}
 
-    <!-- ════════════════════════════════════════
-         FOOTER
-         ════════════════════════════════════════ -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <a href="#services">Services</a>
-                    <a href="#why">Why DigiCafe</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#contact">Contact Us</a>
-                </div>
+// ═══ INIT ═══
+window.addEventListener('DOMContentLoaded',()=>{
+  renderNews(document.getElementById('news-home'));
+  renderNews(document.getElementById('news-full'));
+  renderServices(document.getElementById('svc-home'));
+  renderServices(document.getElementById('svc-full'));
+  renderAI(document.getElementById('ai-home'));
+  renderAI(document.getElementById('ai-full'));
+  renderCourses(document.getElementById('courses-home'));
+  renderCourses(document.getElementById('courses-full'));
+  
+  // KB Grid
+  const kb=['Income Tax Library','GST Library','TDS Library','Company Law','LLP Compliance','Trademark Guide','MSME Registration','Bookkeeping SOP'];
+  document.getElementById('kb-grid').innerHTML=kb.map(k=>`<div class="glass" style="padding:1.5rem;border-radius:var(--r2);text-align:center;cursor:pointer"><div style="font-size:1.8rem;margin-bottom:.75rem">📚</div><div class="s" style="font-weight:700;margin-bottom:.25rem">${k}</div><div style="font-size:.8rem;color:var(--txt2)">Expert guides & templates</div></div>`).join('');
+  
+  // Calc Grid
+  const calcs=['💰 ITR Calculator','📊 GST Calculator','🏠 HRA Calculator','🏦 EMI Calculator','📈 Capital Gains','🧮 TDS Calculator','💼 Salary Breakup','🎯 SIP Calculator'];
+  document.getElementById('calc-grid').innerHTML=calcs.map(c=>`<div class="tool-card" onclick="showToast('${c.split(' ')[1]} - Coming Soon')"><div class="t-icon">${c.split(' ')[0]}</div><div class="t-name">${c.substring(2)}</div><div class="t-desc">Free calculator</div></div>`).join('');
+});
 
-                <div class="footer-section">
-                    <h4>Services</h4>
-                    <a href="#itr">ITR Filing</a>
-                    <a href="#gst">GST Services</a>
-                    <a href="#llp">LLP Compliance</a>
-                    <a href="#company">Company Compliance</a>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <a href="https://wa.me/918539979271" target="_blank">💬 WhatsApp: +91 85399 79271</a>
-                    <a href="mailto:email.vikashpathak@gmail.com">📧 Email: email.vikashpathak@gmail.com</a>
-                    <a href="tel:+918539979271">📞 Call: +91 85399 79271</a>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <a href="https://www.linkedin.com/in/vikashpathak2306/" target="_blank">LinkedIn</a>
-                    <a href="https://github.com/vikashp23" target="_blank">GitHub</a>
-                    <a href="#contact">Contact Form</a>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2024 DigiCafe - Your Complete Tax & Compliance Partner</p>
-                <p>Compliance Made Simple for Individuals, Professionals & Businesses | Bengaluru, India</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ════════════════════════════════════════
-         JAVASCRIPT
-         ════════════════════════════════════════ -->
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = 'var(--shadow-md)';
-            } else {
-                header.style.boxShadow = 'none';
-            }
-        });
-
-        // Navigation smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
-            });
-        });
-
-        // FAQ Toggle
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.querySelector('.faq-question').addEventListener('click', () => {
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-            });
-        });
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formData = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                pan: document.getElementById('pan').value,
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value
-            };
-
-            // Validate phone
-            if (formData.phone.length < 10) {
-                showMessage('Please enter a valid mobile number', 'error');
-                return;
-            }
-
-            // Validate email
-            if (!formData.email.includes('@')) {
-                showMessage('Please enter a valid email address', 'error');
-                return;
-            }
-
-            // Show success message
-            showMessage('✓ Thank you! We will contact you within 2 hours. WhatsApp confirmation sent.', 'success');
-
-            // Clear form
-            this.reset();
-
-            // In production, send data to server
-            console.log('Form Data:', formData);
-        });
-
-        function showMessage(text, type) {
-            const messageDiv = document.getElementById('formMessage');
-            messageDiv.textContent = text;
-            messageDiv.className = 'form-message ' + type;
-            
-            if (type === 'success') {
-                setTimeout(() => {
-                    messageDiv.className = 'form-message';
-                }, 5000);
-            }
-        }
-
-        // Add animation to elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('slide-up');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.service-card, .benefit-card, .timeline-item').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+// SCROLL NAV
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.boxShadow=window.scrollY>30?'0 4px 20px rgba(0,0,0,.5)':'none';
+});
+</script>
 </body>
 </html>
