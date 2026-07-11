@@ -1463,19 +1463,37 @@ function updateNav(){
 function goHome(){showPage('home')}
 
 // ═══ DASHBOARD ═══
-function showDash(s){
-  document.querySelectorAll('#page-dashboard .d-content').forEach(x=>x.classList.remove('active'));
-  document.getElementById('dash-'+s).classList.add('active');
-  document.querySelectorAll('#page-dashboard .side-nav a').forEach(x=>x.classList.remove('active'));
-  event.target.closest('a').classList.add('active');
+function showDash(s, clickedElement){
+  document.querySelectorAll('#page-dashboard .d-content')
+    .forEach(x => x.classList.remove('active'));
+
+  const section = document.getElementById('dash-' + s);
+  if (section) section.classList.add('active');
+
+  document.querySelectorAll('#page-dashboard .side-nav a')
+    .forEach(x => x.classList.remove('active'));
+
+  if (clickedElement) {
+    const link = clickedElement.closest('a');
+    if (link) link.classList.add('active');
+  }
 }
 
 // ═══ ADMIN ═══
-function showAdmin(s){
-  document.querySelectorAll('#page-admin .admin-content').forEach(x=>x.classList.remove('active'));
-  document.getElementById('admin-'+s).classList.add('active');
-  document.querySelectorAll('#page-admin .admin-nav a').forEach(x=>x.classList.remove('active'));
-  event.target.closest('a').classList.add('active');
+function showAdmin(s, clickedElement){
+  document.querySelectorAll('#page-admin .admin-content')
+    .forEach(x => x.classList.remove('active'));
+
+  const section = document.getElementById('admin-' + s);
+  if (section) section.classList.add('active');
+
+  document.querySelectorAll('#page-admin .admin-nav a')
+    .forEach(x => x.classList.remove('active'));
+
+  if (clickedElement) {
+    const link = clickedElement.closest('a');
+    if (link) link.classList.add('active');
+  }
 }
 
 // ═══ TABS ═══
