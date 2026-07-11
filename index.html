@@ -271,6 +271,19 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   const analytics = getAnalytics(app);
   const auth = getAuth(app);
   const db = getFirestore(app);
+
+  // Public bridge used by the non-module Request Help form below.
+  // Saves every request in Firestore so it can be used by the admin dashboard.
+  window.saveServiceRequest = async function(requestData) {
+    const ref = await addDoc(collection(db, 'serviceRequests'), {
+      ...requestData,
+      status: 'Received',
+      source: 'DigiCafe Website',
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    });
+    return ref.id;
+  };
   // Only this email can add/delete News from the in-browser Admin panel.
   // This must ALSO be enforced in your Firestore Security Rules (see chat) —
   // this constant alone does not restrict access, it only shows/hides the UI.
@@ -1593,29 +1606,30 @@ function getRequestHelpData(){
   };
 }
 
-function submitRequestHelp(e){
+async function submitRequestHelp(e){
   e.preventDefault();
   const d=getRequestHelpData();
   if(!d.name || !d.mobile || !d.category){
     showToast('⚠ Please fill in name, mobile and service category');
     return false;
   }
-  // Existing email functionality (mailto) — kept as the primary submission method
-  const subject=encodeURIComponent('Service Request: '+d.category+(d.service?(' - '+d.service):''));
-  const body=encodeURIComponent(
-    'New Service Request from DigiCafe website\n\n'+
-    'Category: '+d.category+'\n'+
-    'Specific Service: '+(d.service||'-')+'\n'+
-    'Name: '+d.name+'\n'+
-    'Mobile: '+d.mobile+'\n'+
-    'Email: '+(d.email||'-')+'\n'+
-    'Urgency: '+d.urgency+'\n'+
-    'Notes: '+(d.notes||'-')
-  );
-  window.location.href=`mailto:vikashpathak.mgmt@gmail.com?subject=${subject}&body=${body}`;
-  showToast('✓ Opening email to send your request...');
-  /* FIREBASE TODO: also write this object (d) to a Firestore "serviceRequests" collection here,
-     with a serverTimestamp() and status:"Received", once Firebase is connected for this form. */
+
+  const btn=e.target.querySelector('button[type="submit"]');
+  const oldText=btn ? btn.innerHTML : '';
+  if(btn){ btn.disabled=true; btn.innerHTML='Submitting...'; }
+
+  try{
+    if(typeof window.saveServiceRequest !== 'function') throw new Error('Firebase is still loading. Please try again.');
+    const requestId=await window.saveServiceRequest(d);
+    showToast('✓ Request submitted successfully. Reference: '+requestId);
+    e.target.reset();
+    if(document.getElementById('rh-service')) document.getElementById('rh-service').innerHTML='<option value="">Select a category first</option>';
+  }catch(err){
+    console.error('Service request submission failed:',err);
+    showToast('⚠ Could not submit request. Please try WhatsApp or email.');
+  }finally{
+    if(btn){ btn.disabled=false; btn.innerHTML=oldText; }
+  }
   return false;
 }
 
