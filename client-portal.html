@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Client Portal – DigiCafe</title>
+<style>
+  :root {
+    --navy:  #1B3A6B;
+    --gold:  #F5A623;
+    --green: #1a7f4b;
+    --red:   #c0392b;
+    --orange:#e67e22;
+    --blue-lt:#D6E4F0;
+    --bg:    #f4f7fb;
+    --white: #ffffff;
+    --text:  #1a1a2e;
+    --muted: #6b7280;
+    --border:#e2e8f0;
+    --radius:12px;
+    --shadow:0 4px 24px rgba(27,58,107,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+  }
+  .logo-text { color: #fff; font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+  .logo-sub  { color: var(--gold); font-size: 11px; letter-spacing: 1px; }
+  .header-right { color: rgba(255,255,255,0.6); font-size: 12px; text-align: right; }
+
+  /* ── HERO STRIP ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #2d5aa0 100%);
+    color: #fff;
+    text-align: center;
+    padding: 36px 24px 28px;
+  }
+  .hero h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+  .hero p  { font-size: 14px; color: rgba(255,255,255,0.75); }
+  .india-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── MAIN CONTAINER ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 16px 64px;
+  }
+
+  /* ── LOGIN CARD ── */
+  .login-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 40px 36px;
+    text-align: center;
+    border-top: 4px solid var(--gold);
+  }
+  .login-card h2 { font-size: 22px; color: var(--navy); margin-bottom: 6px; }
+  .login-card p  { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+
+  .input-group { position: relative; margin-bottom: 18px; }
+  .input-group label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .input-group input {
+    width: 100%;
+    padding: 13px 16px 13px 44px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: border-color 0.2s;
+    background: var(--bg);
+    color: var(--text);
+  }
+  .input-group input:focus {
+    outline: none;
+    border-color: var(--navy);
+    background: #fff;
+  }
+  .input-icon {
+    position: absolute;
+    left: 14px;
+    top: 37px;
+    font-size: 18px;
+    pointer-events: none;
+  }
+
+  .btn-login {
+    width: 100%;
+    padding: 14px;
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-login:hover   { background: #243f7a; }
+  .btn-login:active  { transform: scale(0.98); }
+  .btn-login:disabled{ background: #9ca3af; cursor: not-allowed; }
+
+  .login-hint {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--blue-lt);
+    padding: 10px 14px;
+    border-radius: 8px;
+  }
+
+  .error-msg {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    color: var(--red);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 14px;
+    display: none;
+  }
+
+  /* ── DASHBOARD ── */
+  #dashboard { display: none; }
+
+  .client-header {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--gold);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .client-info h2 { font-size: 20px; color: var(--navy); font-weight: 800; }
+  .client-info p  { color: var(--muted); font-size: 13px; margin-top: 3px; }
+  .btn-logout {
+    padding: 8px 20px;
+    background: transparent;
+    border: 2px solid var(--navy);
+    border-radius: 8px;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-logout:hover { background: var(--navy); color: #fff; }
+
+  /* ── STAT CARDS ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border-top: 3px solid var(--navy);
+  }
+  .stat-card.green  { border-top-color: var(--green); }
+  .stat-card.red    { border-top-color: var(--red); }
+  .stat-card.orange { border-top-color: var(--orange); }
+  .stat-num  { font-size: 30px; font-weight: 800; color: var(--navy); }
+  .stat-card.green  .stat-num { color: var(--green); }
+  .stat-card.red    .stat-num { color: var(--red); }
+  .stat-card.orange .stat-num { color: var(--orange); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 500; }
+
+  /* ── TABLE ── */
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .table-wrap {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .tasks-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .tasks-table thead tr {
+    background: var(--navy);
+    color: #fff;
+  }
+  .tasks-table th {
+    padding: 13px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+  }
+  .tasks-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .tasks-table tbody tr:last-child td { border-bottom: none; }
+  .tasks-table tbody tr:hover { background: var(--bg); }
+
+  /* ── STATUS BADGES ── */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge-pending    { background:#fef3c7; color:#92400e; }
+  .badge-progress   { background:#dbeafe; color:#1e40af; }
+  .badge-completed  { background:#d1fae5; color:#065f46; }
+  .badge-overdue    { background:#fee2e2; color:#991b1b; }
+
+  /* ── DUE DATE CHIP ── */
+  .due-chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+  }
+  .due-urgent  { color: var(--red);    font-weight: 700; }
+  .due-warning { color: var(--orange); font-weight: 700; }
+  .due-ok      { color: var(--green);  font-weight: 600; }
+  .due-done    { color: var(--muted); }
+
+  /* ── LOADING ── */
+  .spinner {
+    display: inline-block;
+    width: 20px; height: 20px;
+    border: 3px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--muted);
+  }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { font-size: 14px; }
+
+  /* ── FOOTER ── */
+  .portal-footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .portal-footer a { color: var(--navy); text-decoration: none; font-weight: 600; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .login-card { padding: 28px 18px; }
+    .client-header { flex-direction: column; align-items: flex-start; }
+    .tasks-table th:nth-child(4),
+    .tasks-table td:nth-child(4),
+    .tasks-table th:nth-child(6),
+    .tasks-table td:nth-child(6) { display: none; }
+  }
+
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #25D366;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="https://vikashp23.github.io/digicafe/">
+    <div class="logo-icon">☕</div>
+    <div>
+      <div class="logo-text">DigiCafe</div>
+      <div class="logo-sub">CLIENT PORTAL</div>
+    </div>
+  </a>
+  <div class="header-right">
+    🇮🇳 #1 Tax &amp; Compliance<br>Our Service, Your Solution
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="india-badge">🇮🇳 Trusted by 10,000+ Clients</div>
+  <h1>📋 Your Filing Status</h1>
+  <p>Check your pending tasks, due dates &amp; compliance status in real time</p>
+</div>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div id="loginSection">
+    <div class="login-card">
+      <h2>🔐 Client Login</h2>
+      <p>Enter your PAN number to view your compliance status</p>
+
+      <div class="input-group">
+        <label for="panInput">PAN Number</label>
+        <span class="input-icon">🪪</span>
+        <input
+          type="text"
+          id="panInput"
+          placeholder="e.g. ABCDE1234F"
+          maxlength="10"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+
+      <button class="btn-login" id="loginBtn" onclick="handleLogin()">
+        🔍 Check My Status
+      </button>
+
+      <div class="error-msg" id="errorMsg">
+        ❌ PAN not found. Please check and try again, or contact DigiCafe.
+      </div>
+
+      <div class="login-hint">
+        💡 Enter your 10-digit PAN (e.g. ABCDE1234F) — no password needed.<br>
+        Your data is fetched live from DigiCafe records.
+      </div>
+
+      <div style="margin-top:20px;">
+        <a class="whatsapp-btn" href="https://wa.me/918539979271" target="_blank">
+          💬 Need Help? WhatsApp Us
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard">
+
+    <div class="client-header">
+      <div class="client-info">
+        <h2 id="clientNameDisplay">Welcome!</h2>
+        <p id="clientPanDisplay">PAN: — &nbsp;|&nbsp; Last updated live from DigiCafe records</p>
+      </div>
+      <button class="btn-logout" onclick="handleLogout()">← Logout</button>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="statTotal">0</div>
+        <div class="stat-label">Total Tasks</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-num" id="statPending">0</div>
+        <div class="stat-label">Pending</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-num" id="statProgress">0</div>
+        <div class="stat-label">In Progress</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num" id="statDone">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+    </div>
+
+    <!-- TASKS TABLE -->
+    <div class="section-title">📅 Your Compliance Tasks</div>
+    <div class="table-wrap">
+      <table class="tasks-table" id="tasksTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Service</th>
+            <th>Period / FY</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Reference</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody id="tasksBody">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CONTACT -->
+    <div style="background:#fff;border-radius:12px;padding:22px 24px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+      <div>
+        <div style="font-weight:700;color:var(--navy);font-size:15px;">📞 Contact DigiCafe</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:4px;">Have a question about your filings? We're here to help.</div>
+      </div>
+      <a class="whatsapp-btn" href="https://wa.me/918539979271" target="_blank">
+        💬 WhatsApp Now
+      </a>
+    </div>
+
+  </div><!-- /dashboard -->
+
+  <div class="portal-footer">
+    © 2025 <a href="https://vikashp23.github.io/digicafe/">DigiCafe</a> – Our Service, Your Solution &nbsp;|&nbsp;
+    MSME: UDYAM-KR-02-0041919 &nbsp;|&nbsp; By Vikash Pathak, Bengaluru
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ══════════════════════════════════════════════════════
+//  ⚠️  REPLACE THIS URL with your deployed Apps Script URL
+//  (Step 3 in the setup guide)
+// ══════════════════════════════════════════════════════
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJ_klprvZskGWEMCZNCy_vPMztB-aji0xM00VhQfWNj4TN4Fc9heU_2kCy7YNujtlgHw/exec";
+
+// ── LOGIN ────────────────────────────────────────────
+async function handleLogin() {
+  const pan = document.getElementById("panInput").value.trim().toUpperCase();
+  const errEl = document.getElementById("errorMsg");
+  const btn   = document.getElementById("loginBtn");
+
+  errEl.style.display = "none";
+
+  if (!pan || pan.length !== 10) {
+    errEl.textContent = "⚠️ Please enter a valid 10-digit PAN (e.g. ABCDE1234F)";
+    errEl.style.display = "block";
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Fetching your data…';
+
+  try {
+    const res  = await fetch(`${APPS_SCRIPT_URL}?pan=${pan}`);
+    const data = await res.json();
+
+    if (!data.found || data.tasks.length === 0) {
+      errEl.textContent = "❌ PAN not found in our records. Please check or contact DigiCafe.";
+      errEl.style.display = "block";
+      btn.disabled = false;
+      btn.innerHTML = "🔍 Check My Status";
+      return;
+    }
+
+    showDashboard(data);
+
+  } catch (err) {
+    errEl.textContent = "⚠️ Could not connect. Please try again or contact DigiCafe.";
+    errEl.style.display = "block";
+    btn.disabled = false;
+    btn.innerHTML = "🔍 Check My Status";
+  }
+}
+
+// ── DASHBOARD ────────────────────────────────────────
+function showDashboard(data) {
+  document.getElementById("loginSection").style.display = "none";
+  document.getElementById("dashboard").style.display = "block";
+
+  document.getElementById("clientNameDisplay").textContent = `👋 ${data.clientName}`;
+  document.getElementById("clientPanDisplay").textContent =
+    `PAN: ${data.pan}  |  Last fetched live from DigiCafe records`;
+
+  // Stats
+  const tasks = data.tasks;
+  document.getElementById("statTotal").textContent   = tasks.length;
+  document.getElementById("statPending").textContent = tasks.filter(t => t.status.toLowerCase().includes("pending") || t.status.toLowerCase().includes("overdue")).length;
+  document.getElementById("statProgress").textContent= tasks.filter(t => t.status.toLowerCase().includes("progress")).length;
+  document.getElementById("statDone").textContent    = tasks.filter(t => t.status.toLowerCase().includes("complet")).length;
+
+  // Table
+  const tbody = document.getElementById("tasksBody");
+  tbody.innerHTML = "";
+
+  if (tasks.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state">
+      <div class="icon">✅</div><p>No tasks found. You're all clear!</p></div></td></tr>`;
+    return;
+  }
+
+  tasks.forEach((t, i) => {
+    const dueCls  = getDueClass(t.dueDate, t.status);
+    const dueText = t.dueDate || "—";
+    const badge   = getBadge(t.status);
+
+    tbody.innerHTML += `
+      <tr>
+        <td style="color:var(--muted);font-size:12px;">${i + 1}</td>
+        <td><strong>${t.service}</strong></td>
+        <td style="color:var(--muted);font-size:12px;">${t.period || t.financialYear || "—"}</td>
+        <td><span class="due-chip ${dueCls}">📅 ${dueText}</span></td>
+        <td>${badge}</td>
+        <td style="font-size:12px;color:var(--muted);">${t.filingRef || "—"}</td>
+        <td style="font-size:12px;color:var(--muted);">${t.remarks || "—"}</td>
+      </tr>`;
+  });
+}
+
+function getDueClass(dateStr, status) {
+  if (!dateStr || status.toLowerCase().includes("complet")) return "due-done";
+  const due   = new Date(dateStr.split("-").reverse().join("-")); // parse dd-MMM-yyyy
+  const today = new Date();
+  const diff  = Math.ceil((due - today) / 86400000);
+  if (diff < 0)  return "due-urgent";
+  if (diff <= 7) return "due-urgent";
+  if (diff <= 15)return "due-warning";
+  return "due-ok";
+}
+
+function getBadge(status) {
+  const s = (status || "").toLowerCase();
+  if (s.includes("complet")) return `<span class="badge badge-completed">✅ Completed</span>`;
+  if (s.includes("progress"))return `<span class="badge badge-progress">⏳ In Progress</span>`;
+  if (s.includes("overdue")) return `<span class="badge badge-overdue">🔴 Overdue</span>`;
+  return `<span class="badge badge-pending">🟡 Pending</span>`;
+}
+
+// ── LOGOUT ───────────────────────────────────────────
+function handleLogout() {
+  document.getElementById("dashboard").style.display  = "none";
+  document.getElementById("loginSection").style.display = "block";
+  document.getElementById("panInput").value = "";
+  document.getElementById("loginBtn").disabled = false;
+  document.getElementById("loginBtn").innerHTML = "🔍 Check My Status";
+  document.getElementById("errorMsg").style.display = "none";
+}
+
+// Allow Enter key to login
+document.getElementById("panInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") handleLogin();
+});
+</script>
+</body>
+</html>
