@@ -1186,7 +1186,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       </div>
       <ul class="side-nav">
         <li><a onclick="showDash('overview')" class="active"><i class="fas fa-home"></i> Overview</a></li>
-        <li><a onclick="showDash('applications')"><i class="fas fa-file-alt"></i> Applications</a></li>
+        <li><a onclick="showDash('applications', this)"><i class="fas fa-file-alt"></i> Applications</a></li>
         <li><a onclick="showDash('documents')"><i class="fas fa-folder"></i> Documents</a></li>
         <li><a onclick="showDash('invoices')"><i class="fas fa-receipt"></i> Invoices</a></li>
         <li><a onclick="showDash('messages')"><i class="fas fa-envelope"></i> Messages</a></li>
@@ -1234,7 +1234,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       </div>
       <h4>Management</h4>
       <div class="admin-nav">
-        <a onclick="showAdmin('requests')"><i class="fas fa-inbox"></i> Requests</a>
+        <a onclick="showAdmin('requests', this)"><i class="fas fa-inbox"></i> Requests</a>
         <a onclick="showAdmin('clients')"><i class="fas fa-users"></i> Clients</a>
         <a onclick="showAdmin('services')"><i class="fas fa-cogs"></i> Services</a>
         <a onclick="showAdmin('payments')"><i class="fas fa-credit-card"></i> Payments</a>
