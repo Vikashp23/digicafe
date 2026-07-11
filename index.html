@@ -52,6 +52,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 .nav-wrap{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 20px;max-width:1400px;margin:0 auto}
 .logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.4rem;background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
 .nav-center{display:flex;gap:.15rem;list-style:none}
+/* Sections temporarily hidden from the public nav (Section 1 request) — markup/JS kept intact for later re-enable. */
+.nav-hideable{display:none!important}
 .nav-center a{display:block;padding:.4rem .75rem;color:var(--txt2);font-size:.85rem;font-weight:500;text-decoration:none;border-radius:8px;cursor:pointer;transition:all .2s}
 .nav-center a:hover,.nav-center a.active{color:var(--txt);background:var(--surf2)}
 .nav-right{display:flex;gap:.75rem;align-items:center}
@@ -350,8 +352,15 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     if (avatarEl) avatarEl.textContent = initials;
     if (nameEl) nameEl.textContent = shownName;
     if (titleEl) titleEl.textContent = 'Welcome back, ' + (parts[0] || 'Client') + '!';
-    window.loadClientDashboard(user);
-    showPage('dashboard');
+    if (user.email === ADMIN_EMAIL) {
+      // Admin account signs straight into the Admin Panel, not the client view.
+      showPage('admin');
+      if (window.showAdminSection) window.showAdminSection('overview');
+    } else {
+      window.loadClientDashboard(user);
+      window.initFilingStatus(user);
+      showPage('dashboard');
+    }
   }
 
   window.loadClientDashboard = function(user) {
@@ -373,7 +382,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       if(vals[3]) vals[3].textContent = completed;
       const tbody = document.querySelector('#dash-overview .table tbody');
       if (tbody) {
-        if (!rows.length) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">No services availed yet.</td></tr>';
+        if (!rows.length) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">No services availed yet. Explore DigiCafe services below.</td></tr>';
         else tbody.innerHTML = rows.slice(0,10).map(r => {
           const dt = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-IN') : '—';
           const service = r.service || r.serviceName || r.category || 'Service Request';
@@ -383,6 +392,29 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
         }).join('');
       }
     }, err => console.warn('Client requests load failed:', err));
+  };
+
+  // ═══ MY FILING & TASK STATUS (Section 6): PAN is stored on the client's own
+  // Firebase profile (private, tied to their UID) — never entered as a public
+  // lookup key. See window.loadFilingStatus (classic script) for the actual
+  // Apps Script fetch once the PAN is known.
+  window.saveUserPan = async function(pan) {
+    const user = window._currentFirebaseUser;
+    if (!user) throw new Error('You must be logged in to save your PAN.');
+    await setDoc(doc(db, 'users', user.uid), { pan, panUpdatedAt: serverTimestamp() }, { merge: true });
+    return true;
+  };
+
+  window.initFilingStatus = async function(user) {
+    try {
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      const pan = snap.exists() ? snap.data().pan : null;
+      if (pan && window.showFilingStatus) window.showFilingStatus(pan);
+      else if (window.showFilingPanSetup) window.showFilingPanSetup();
+    } catch (e) {
+      console.warn('Could not load saved PAN:', e.message);
+      if (window.showFilingPanSetup) window.showFilingPanSetup();
+    }
   };
 
   window._firebaseLogin = async function(email, password) {
@@ -442,6 +474,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     if (window._isAdmin) startAdminListeners(); else stopAdminListeners();
     if (window.refreshAdminNewsGate) window.refreshAdminNewsGate();
     if (window.refreshAdminRequestsGate) window.refreshAdminRequestsGate();
+    if (window.refreshAdminAnnouncementsGate) window.refreshAdminAnnouncementsGate();
   });
 
   window.firebaseSignOut = async function() {
@@ -551,6 +584,27 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     } catch (e) { showToast('⚠ Could not update status: ' + e.message); }
   };
 
+  // ═══ CLIENT ANNOUNCEMENTS (Section 8) — public-read, admin-write ═══
+  window._announcements = [];
+  onSnapshot(collection(db, 'announcements'), (snap) => {
+    const rows = [];
+    snap.forEach(d => rows.push({ id: d.id, ...d.data() }));
+    rows.sort((a, b) => ((b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)));
+    window._announcements = rows;
+    if (window.renderClientAnnouncements) window.renderClientAnnouncements();
+    if (window.renderAdminAnnouncements) window.renderAdminAnnouncements();
+  }, err => console.warn('Announcements sync unavailable:', err.message));
+
+  window._publishAnnouncement = async function(title, body) {
+    if (!window._isAdmin) { showToast('⚠ Admin sign-in required'); return; }
+    await addDoc(collection(db, 'announcements'), { title, body, createdAt: serverTimestamp() });
+  };
+
+  window._deleteAnnouncement = async function(id) {
+    if (!window._isAdmin) { showToast('⚠ Admin sign-in required'); return; }
+    await deleteDoc(doc(db, 'announcements', id));
+  };
+
   console.log("Firebase initialized successfully 🚀");
 </script>
 </head>
@@ -563,31 +617,32 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     <ul class="nav-center">
       <li><a onclick="showPage('home')" data-p="home">Home</a></li>
       <li><a onclick="showPage('news')" data-p="news">News</a></li>
-      <li><a onclick="showPage('knowledge')" data-p="knowledge">Knowledge</a></li>
-      <li><a onclick="showPage('courses')" data-p="courses">Courses</a></li>
-      <li><a onclick="showPage('ai')" data-p="ai">AI Tools</a></li>
-      <li><a onclick="showPage('services')" data-p="services">Services</a></li>
-      <li><a onclick="showPage('tools')" data-p="tools">Calculators</a></li>
+      <li class="nav-hideable"><a onclick="showPage('knowledge')" data-p="knowledge">Knowledge</a></li>
+      <li class="nav-hideable"><a onclick="showPage('courses')" data-p="courses">Courses</a></li>
+      <li class="nav-hideable"><a onclick="showPage('ai')" data-p="ai">AI Tools</a></li>
+      <li class="nav-hideable"><a onclick="showPage('services')" data-p="services">Services</a></li>
+      <li class="nav-hideable"><a onclick="showPage('tools')" data-p="tools">Calculators</a></li>
       <li><a onclick="showPage('digital')" data-p="digital">Digital Assistance</a></li>
     </ul>
     <div class="nav-right">
       <button class="btn btn-ghost btn-sm" onclick="showPage('login')">Log In</button>
-      <button class="btn btn-primary btn-sm" onclick="showPage('login')">Get Started</button>
+      <button class="btn btn-primary btn-sm nav-hideable" onclick="showPage('login')">Get Started</button>
       <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fas fa-bars"></i></button>
     </div>
   </div>
   <div class="mobile-nav" id="mobile-nav">
     <a onclick="showPage('home');toggleMobileNav()">Home</a>
-    <a onclick="showPage('services');toggleMobileNav()">Services</a>
+    <a class="nav-hideable" onclick="showPage('services');toggleMobileNav()">Services</a>
     <a onclick="showPage('digital');toggleMobileNav()">Digital Assistance</a>
     <a onclick="scrollDacTo('dac-voter');toggleMobileNav()">Voter / SIR</a>
     <a onclick="showPage('news');toggleMobileNav()">News</a>
-    <a onclick="showPage('knowledge');toggleMobileNav()">Knowledge</a>
-    <a onclick="showPage('courses');toggleMobileNav()">Courses</a>
-    <a onclick="showPage('ai');toggleMobileNav()">AI Tools</a>
-    <a onclick="showPage('tools');toggleMobileNav()">Calculators</a>
+    <a class="nav-hideable" onclick="showPage('knowledge');toggleMobileNav()">Knowledge</a>
+    <a class="nav-hideable" onclick="showPage('courses');toggleMobileNav()">Courses</a>
+    <a class="nav-hideable" onclick="showPage('ai');toggleMobileNav()">AI Tools</a>
+    <a class="nav-hideable" onclick="showPage('tools');toggleMobileNav()">Calculators</a>
     <a onclick="scrollDacTo('request-help');toggleMobileNav()">Get Help</a>
     <a href="https://wa.me/918539979271" target="_blank">Contact / WhatsApp</a>
+    <a onclick="showPage('login');toggleMobileNav()" style="font-weight:700">Log In</a>
   </div>
 </nav>
 
@@ -1186,11 +1241,14 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       </div>
       <ul class="side-nav">
         <li><a onclick="showDash('overview')" class="active"><i class="fas fa-home"></i> Overview</a></li>
-        <li><a onclick="showDash('applications', this)"><i class="fas fa-file-alt"></i> Applications</a></li>
+        <li><a onclick="showDash('applications')"><i class="fas fa-file-alt"></i> My Applications</a></li>
+        <li><a onclick="showDash('services')"><i class="fas fa-th-large"></i> Available Services</a></li>
+        <li><a onclick="showDash('filing')"><i class="fas fa-tasks"></i> Filing &amp; Task Status</a></li>
         <li><a onclick="showDash('documents')"><i class="fas fa-folder"></i> Documents</a></li>
         <li><a onclick="showDash('invoices')"><i class="fas fa-receipt"></i> Invoices</a></li>
         <li><a onclick="showDash('messages')"><i class="fas fa-envelope"></i> Messages</a></li>
         <li><a onclick="showDash('support')"><i class="fas fa-headset"></i> Support</a></li>
+        <li><a onclick="showDash('announcements')"><i class="fas fa-bullhorn"></i> Announcements</a></li>
         <li><a onclick="showPage('home')"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
       </ul>
     </div>
@@ -1215,10 +1273,55 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
         </div>
       </div>
       <div class="d-content" id="dash-applications"><p style="padding:2rem;color:var(--txt2)">Your applications here...</p></div>
+
+      <!-- ═══ AVAILABLE DIGICAFE SERVICES (Section 4) ═══ -->
+      <div class="d-content" id="dash-services">
+        <div class="d-title">DigiCafe Services Available for You</div>
+        <p style="color:var(--txt2);margin-bottom:1.5rem">Tap a service to send a request — we'll pre-fill the form for you.</p>
+        <div class="tools-grid" id="dash-services-grid"></div>
+      </div>
+
+      <!-- ═══ MY FILING & TASK STATUS (Section 6 — PAN-linked, via authenticated profile) ═══ -->
+      <div class="d-content" id="dash-filing">
+        <div class="d-title">My Filing &amp; Task Status</div>
+        <p style="color:var(--txt2);margin-bottom:1.5rem">Live compliance/task tracking from DigiCafe's records, matched to your account.</p>
+
+        <div id="filing-pan-setup" class="hidden" style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;max-width:420px">
+          <p style="color:var(--txt2);margin-bottom:1rem;font-size:.9rem"><i class="fas fa-info-circle"></i> Link your PAN once to see your filing status here. This is saved privately to your account only.</p>
+          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">PAN Number</label>
+          <input type="text" id="filing-pan-input" placeholder="e.g. ABCDE1234F" maxlength="10" style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem;text-transform:uppercase;margin-bottom:1rem">
+          <button type="button" class="btn btn-primary" onclick="saveMyPan()"><i class="fas fa-save"></i> Save &amp; Load Status</button>
+          <div id="filing-pan-error" class="hidden" style="color:var(--red);font-size:.82rem;margin-top:.75rem"></div>
+        </div>
+
+        <div id="filing-status-view" class="hidden">
+          <div class="kpi-grid" id="filing-stats"></div>
+          <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;margin-top:1.5rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+              <h3 class="s" style="font-weight:700">Your Compliance Tasks</h3>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="editMyPan()"><i class="fas fa-pen"></i> Change PAN</button>
+            </div>
+            <table class="table">
+              <thead><tr><th>Service</th><th>Period / FY</th><th>Due Date</th><th>Status</th><th>Reference</th><th>Remarks</th></tr></thead>
+              <tbody id="filing-tasks-body"><tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <div class="d-content" id="dash-documents"><p style="padding:2rem;color:var(--txt2)">Document upload and management here...</p></div>
       <div class="d-content" id="dash-invoices"><p style="padding:2rem;color:var(--txt2)">Your invoices and payment history here...</p></div>
       <div class="d-content" id="dash-messages"><p style="padding:2rem;color:var(--txt2)">Messages from support team here...</p></div>
       <div class="d-content" id="dash-support"><p style="padding:2rem;color:var(--txt2)">Support tickets and help center here...</p></div>
+
+      <!-- ═══ DIGICAFE ANNOUNCEMENTS (Section 8) ═══ -->
+      <div class="d-content" id="dash-announcements">
+        <div class="d-title">What's New at DigiCafe</div>
+        <p style="color:var(--txt2);margin-bottom:1.5rem">Deadline reminders, new services, and important compliance updates.</p>
+        <div id="dash-announcements-list" class="tools-grid" style="grid-template-columns:1fr">
+          <p style="color:var(--txt3);padding:1rem">No announcements yet.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1234,7 +1337,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       </div>
       <h4>Management</h4>
       <div class="admin-nav">
-        <a onclick="showAdmin('requests', this)"><i class="fas fa-inbox"></i> Requests</a>
+        <a onclick="showAdmin('requests')"><i class="fas fa-inbox"></i> Requests</a>
         <a onclick="showAdmin('clients')"><i class="fas fa-users"></i> Clients</a>
         <a onclick="showAdmin('services')"><i class="fas fa-cogs"></i> Services</a>
         <a onclick="showAdmin('payments')"><i class="fas fa-credit-card"></i> Payments</a>
@@ -1242,6 +1345,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       <h4>Content</h4>
       <div class="admin-nav">
         <a onclick="showAdmin('news')"><i class="fas fa-newspaper"></i> News</a>
+        <a onclick="showAdmin('announcements')"><i class="fas fa-bullhorn"></i> Announcements</a>
         <a onclick="showAdmin('courses')"><i class="fas fa-book"></i> Courses</a>
       </div>
       <h4>Account</h4>
@@ -1331,6 +1435,35 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
         </div>
       </div>
       <div class="admin-content" id="admin-courses"><p style="padding:2rem;color:var(--txt2)">Course management here...</p></div>
+
+      <!-- ═══ ADMIN: CLIENT ANNOUNCEMENTS (Section 8) ═══ -->
+      <div class="admin-content" id="admin-announcements">
+        <div class="d-title">Client Announcements</div>
+        <p style="color:var(--txt2);margin-bottom:1.5rem">Published items appear instantly on every logged-in client's dashboard under "What's New at DigiCafe."</p>
+
+        <div id="announcements-admin-gate" class="glass" style="padding:2rem;border-radius:var(--r2);text-align:center;max-width:460px">
+          <p style="color:var(--txt2);margin-bottom:1rem"><i class="fas fa-lock"></i> Sign in with the DigiCafe admin Google account to publish announcements.</p>
+          <button type="button" class="btn btn-primary" onclick="signInWithGoogle()"><i class="fab fa-google"></i> Sign in with Google</button>
+        </div>
+
+        <div id="announcements-admin-panel" class="hidden">
+          <div class="glass" style="padding:1.5rem;border-radius:var(--r2);margin-bottom:2rem;max-width:640px">
+            <form id="admin-announcement-form" onsubmit="return submitAdminAnnouncement(event)">
+              <div class="rh-group">
+                <label>Title</label>
+                <input type="text" id="aa-title" placeholder="e.g. GST Filing Deadline Extended" required>
+              </div>
+              <div class="rh-group">
+                <label>Message</label>
+                <textarea id="aa-body" placeholder="Details clients should know" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary"><i class="fas fa-bullhorn"></i> Publish Announcement</button>
+            </form>
+          </div>
+          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Published Announcements</h3>
+          <div id="admin-announcements-list" style="display:flex;flex-direction:column;gap:.75rem;max-width:640px"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1463,37 +1596,24 @@ function updateNav(){
 function goHome(){showPage('home')}
 
 // ═══ DASHBOARD ═══
-function showDash(s, clickedElement){
-  document.querySelectorAll('#page-dashboard .d-content')
-    .forEach(x => x.classList.remove('active'));
-
-  const section = document.getElementById('dash-' + s);
-  if (section) section.classList.add('active');
-
-  document.querySelectorAll('#page-dashboard .side-nav a')
-    .forEach(x => x.classList.remove('active'));
-
-  if (clickedElement) {
-    const link = clickedElement.closest('a');
-    if (link) link.classList.add('active');
-  }
+function showDash(s){
+  document.querySelectorAll('#page-dashboard .d-content').forEach(x=>x.classList.remove('active'));
+  document.getElementById('dash-'+s).classList.add('active');
+  document.querySelectorAll('#page-dashboard .side-nav a').forEach(x=>x.classList.remove('active'));
+  event.target.closest('a').classList.add('active');
 }
 
 // ═══ ADMIN ═══
-function showAdmin(s, clickedElement){
-  document.querySelectorAll('#page-admin .admin-content')
-    .forEach(x => x.classList.remove('active'));
-
-  const section = document.getElementById('admin-' + s);
-  if (section) section.classList.add('active');
-
-  document.querySelectorAll('#page-admin .admin-nav a')
-    .forEach(x => x.classList.remove('active'));
-
-  if (clickedElement) {
-    const link = clickedElement.closest('a');
-    if (link) link.classList.add('active');
-  }
+window.showAdminSection = function(s){
+  document.querySelectorAll('#page-admin .admin-content').forEach(x=>x.classList.remove('active'));
+  const target = document.getElementById('admin-'+s);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('#page-admin .admin-nav a').forEach(x=>{
+    x.classList.toggle('active', x.getAttribute('onclick') === `showAdmin('${s}')`);
+  });
+};
+function showAdmin(s){
+  window.showAdminSection(s);
 }
 
 // ═══ TABS ═══
@@ -1641,6 +1761,36 @@ function initRender(){
 
   renderNewsCats();
   fetchAutoNews(); // Task 5: populate/refresh automatic daily news (non-blocking)
+  renderDashboardServices(); // Section 4: Available DigiCafe Services grid
+  if (window.renderClientAnnouncements) window.renderClientAnnouncements(); // Section 8
+}
+
+// ═══ DASHBOARD: AVAILABLE DIGICAFE SERVICES (Section 4) ═══
+const DASHBOARD_SERVICES = [
+  {icon:'🧾', name:'Income Tax Return Filing', service:'ITR Filing Assistance', category:'Income Tax & TDS'},
+  {icon:'📄', name:'AIS / Form 26AS Assistance', service:'AIS & Form 26AS Review', category:'Income Tax & TDS'},
+  {icon:'💰', name:'TDS Assistance', service:'TDS Credit Reconciliation', category:'Income Tax & TDS'},
+  {icon:'🧮', name:'GST Registration & Return Filing', service:'GST Registration', category:'GST & Business Compliance'},
+  {icon:'📊', name:'Accounting & Tally Support', service:'Tally Data Entry Support', category:'Accounting & Tally'},
+  {icon:'🏦', name:'Bank Reconciliation', service:'Bank Reconciliation', category:'Accounting & Tally'},
+  {icon:'🔍', name:'TDS Reconciliation', service:'TDS Mismatch Investigation', category:'Income Tax & TDS'},
+  {icon:'🏭', name:'MSME / Udyam Registration', service:'Udyam / MSME Registration', category:'GST & Business Compliance'},
+  {icon:'🍽️', name:'FSSAI Assistance', service:'FSSAI Registration / Licence Assistance', category:'GST & Business Compliance'},
+  {icon:'🗳️', name:'SIR / Voter Service Assistance', service:'SIR / Enumeration Form Assistance', category:'Voter / SIR'},
+  {icon:'📁', name:'Digital Document Assistance', service:'Digital Document Preparation', category:'Digital Documents'},
+  {icon:'💼', name:'Resume & Career Assistance', service:'Professional Resume / CV Preparation', category:'Job & Career'},
+  {icon:'🏢', name:'Business Registration Assistance', service:'Company / Firm Registration Coordination', category:'GST & Business Compliance'},
+  {icon:'🪪', name:'PAN / TAN Assistance', service:'PAN Card Assistance', category:'Digital Documents'},
+  {icon:'🔏', name:'DSC Assistance', service:'DSC (Digital Signature Certificate) Assistance', category:'Digital Documents'},
+  {icon:'➕', name:'Other Digital Assistance', service:'', category:''}
+];
+function renderDashboardServices(){
+  const grid = document.getElementById('dash-services-grid');
+  if(!grid) return;
+  grid.innerHTML = DASHBOARD_SERVICES.map(s=>{
+    const clickFn = s.service ? `openServiceRequest('${s.service.replace(/'/g,"\\'")}','${s.category.replace(/'/g,"\\'")}')` : `openServiceRequest('','')`;
+    return `<div class="tool-card" onclick="${clickFn}"><div class="t-icon">${s.icon}</div><div class="t-name">${s.name}</div><div class="t-desc">Tap to request</div></div>`;
+  }).join('');
 }
 
 function renderNewsCats(){
@@ -1853,6 +2003,157 @@ window.updateAdminOverviewKpis = function(){
   set('ak-signups', window._adminSignupsThisMonth==null ? '—' : '+'+window._adminSignupsThisMonth);
 };
 
+// ═══ MY FILING & TASK STATUS (Section 6) ═══
+// Uses the same Google Apps Script endpoint as the legacy PAN-lookup portal,
+// but the PAN itself now comes from the client's own authenticated Firebase
+// profile (saved once, privately) instead of being typed into a public form.
+// NOTE (security): the Apps Script URL below still answers ANY ?pan= request
+// with no auth check of its own — seeing this file or the URL is enough to
+// query someone else's PAN directly, bypassing this UI entirely. Restricting
+// that requires editing the Apps Script itself (see the change report).
+const FILING_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJ_klprvZskGWEMCZNCy_vPMztB-aji0xM00VhQfWNj4TN4Fc9heU_2kCy7YNujtlgHw/exec";
+
+window.showFilingPanSetup = function(){
+  document.getElementById('filing-pan-setup')?.classList.remove('hidden');
+  document.getElementById('filing-status-view')?.classList.add('hidden');
+};
+
+window.editMyPan = function(){
+  window.showFilingPanSetup();
+};
+
+window.saveMyPan = async function(){
+  const input = document.getElementById('filing-pan-input');
+  const errEl = document.getElementById('filing-pan-error');
+  const pan = (input?.value || '').trim().toUpperCase();
+  errEl.classList.add('hidden');
+  if (!/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan)) {
+    errEl.textContent = '⚠ Please enter a valid 10-character PAN (e.g. ABCDE1234F)';
+    errEl.classList.remove('hidden');
+    return;
+  }
+  try {
+    if (typeof window.saveUserPan !== 'function') throw new Error('Still loading, please try again.');
+    await window.saveUserPan(pan);
+    window.showFilingStatus(pan);
+  } catch (e) {
+    errEl.textContent = '⚠ ' + e.message;
+    errEl.classList.remove('hidden');
+  }
+};
+
+window.showFilingStatus = async function(pan){
+  document.getElementById('filing-pan-setup')?.classList.add('hidden');
+  document.getElementById('filing-status-view')?.classList.remove('hidden');
+  const statsEl = document.getElementById('filing-stats');
+  const bodyEl = document.getElementById('filing-tasks-body');
+  bodyEl.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">Loading your filing status...</td></tr>';
+  try {
+    const res = await fetch(`${FILING_APPS_SCRIPT_URL}?pan=${encodeURIComponent(pan)}`);
+    const data = await res.json();
+    if (!data.found || !Array.isArray(data.tasks) || !data.tasks.length) {
+      statsEl.innerHTML = '';
+      bodyEl.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">No filing records found for this PAN yet. Contact DigiCafe if you believe this is a mistake.</td></tr>';
+      return;
+    }
+    const tasks = data.tasks;
+    const esc = window.escapeHtml || (s=>s);
+    const pending = tasks.filter(t=>/pending|overdue/i.test(t.status||'')).length;
+    const progress = tasks.filter(t=>/progress/i.test(t.status||'')).length;
+    const done = tasks.filter(t=>/complet/i.test(t.status||'')).length;
+    statsEl.innerHTML = `
+      <div class="kpi"><div class="kpi-val">${tasks.length}</div><div class="kpi-label">Total Tasks</div></div>
+      <div class="kpi"><div class="kpi-val" style="color:var(--red)">${pending}</div><div class="kpi-label">Pending</div></div>
+      <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${progress}</div><div class="kpi-label">In Progress</div></div>
+      <div class="kpi"><div class="kpi-val" style="color:var(--green)">${done}</div><div class="kpi-label">Completed</div></div>`;
+    const badge = s => {
+      const t=(s||'').toLowerCase();
+      if(t.includes('complet')) return `<span style="background:rgba(16,185,129,.15);color:var(--green);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">✅ Completed</span>`;
+      if(t.includes('progress')) return `<span style="background:rgba(245,158,11,.15);color:var(--gold);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">⏳ In Progress</span>`;
+      if(t.includes('overdue')) return `<span style="background:rgba(239,68,68,.15);color:var(--red);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">🔴 Overdue</span>`;
+      return `<span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">🟡 Pending</span>`;
+    };
+    bodyEl.innerHTML = tasks.map(t=>`<tr>
+      <td>${esc(t.service||'—')}</td>
+      <td>${esc(t.period||t.financialYear||'—')}</td>
+      <td>${esc(t.dueDate||'—')}</td>
+      <td>${badge(t.status)}</td>
+      <td>${esc(t.filingRef||'—')}</td>
+      <td>${esc(t.remarks||'—')}</td>
+    </tr>`).join('');
+  } catch (e) {
+    statsEl.innerHTML = '';
+    bodyEl.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">⚠ Could not load filing status right now. Please try again later.</td></tr>';
+  }
+};
+
+// ═══ CLIENT ANNOUNCEMENTS (Section 8) ═══
+window.renderClientAnnouncements = function(){
+  const esc = window.escapeHtml || (s=>s);
+  const list = document.getElementById('dash-announcements-list');
+  if (!list) return;
+  const rows = window._announcements || [];
+  if (!rows.length) {
+    list.innerHTML = '<p style="color:var(--txt3);padding:1rem">No announcements yet.</p>';
+    return;
+  }
+  list.innerHTML = rows.map(a => {
+    const dt = a.createdAt?.toDate ? a.createdAt.toDate().toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) : '';
+    return `<div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.25rem 1.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap">
+        <div class="s" style="font-weight:700"><i class="fas fa-bullhorn" style="color:var(--blue2);margin-right:.4rem"></i>${esc(a.title||'')}</div>
+        <div style="font-size:.78rem;color:var(--txt3)">${dt}</div>
+      </div>
+      <p style="color:var(--txt2);margin-top:.5rem;font-size:.9rem">${esc(a.body||'')}</p>
+    </div>`;
+  }).join('');
+};
+
+window.refreshAdminAnnouncementsGate = function(){
+  const gate=document.getElementById('announcements-admin-gate');
+  const panel=document.getElementById('announcements-admin-panel');
+  if(!gate || !panel) return;
+  if(window._isAdmin){
+    gate.classList.add('hidden');
+    panel.classList.remove('hidden');
+    window.renderAdminAnnouncements();
+  } else {
+    gate.classList.remove('hidden');
+    panel.classList.add('hidden');
+  }
+};
+
+window.renderAdminAnnouncements = function(){
+  const esc = window.escapeHtml || (s=>s);
+  const list = document.getElementById('admin-announcements-list');
+  if (!list) return;
+  const rows = window._announcements || [];
+  if (!rows.length) { list.innerHTML = '<p style="color:var(--txt3)">No announcements published yet.</p>'; return; }
+  list.innerHTML = rows.map(a => `
+    <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem">
+      <div>
+        <div class="s" style="font-weight:700">${esc(a.title||'')}</div>
+        <p style="color:var(--txt2);margin-top:.35rem;font-size:.85rem">${esc(a.body||'')}</p>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="window._deleteAnnouncement('${a.id}').then(()=>showToast('✓ Announcement removed')).catch(err=>showToast('⚠ '+err.message))"><i class="fas fa-trash"></i></button>
+    </div>`).join('');
+};
+
+async function submitAdminAnnouncement(e){
+  e.preventDefault();
+  const title = document.getElementById('aa-title').value.trim();
+  const body = document.getElementById('aa-body').value.trim();
+  if (!title || !body) { showToast('⚠ Please fill in both fields'); return false; }
+  try {
+    await window._publishAnnouncement(title, body);
+    document.getElementById('admin-announcement-form').reset();
+    showToast('✓ Announcement published');
+  } catch (err) {
+    showToast('⚠ ' + err.message);
+  }
+  return false;
+}
+
 function submitAdminNews(e){
   e.preventDefault();
   const item = {
@@ -1971,7 +2272,7 @@ const dacServiceMap = {
   'GST & Business Compliance': ['GST Registration','GST Return Filing Assistance','GSTR-2B Reconciliation','GST Notice Document Assistance','Udyam / MSME Registration','FSSAI Registration / Licence Assistance','Trade Licence Assistance','Company / Firm Registration Coordination','Business Compliance Support'],
   'Accounting & Tally': ['Bookkeeping','Bank Statement Data Preparation','Bank Reconciliation','Ledger Reconciliation','Customer / Vendor Reconciliation','Tally Data Entry Support','Accounting Entry Assistance','Excel Data Cleanup','P&L and Balance Sheet Preparation Support'],
   'Job & Career': ['Professional Resume / CV Preparation','ATS-Friendly Resume Support','LinkedIn Profile Improvement','Job Application Assistance','Interview Preparation','Job Description vs Profile Comparison','Salary and CTC Understanding','Professional Email Drafting','Career Profile Review'],
-  'Digital Documents': ['PDF Merge / Split / Compress Assistance','PDF to Word / Excel Conversion','Excel Data Formatting and Cleanup','Online Application Form Assistance','Document Organisation','Digital Document Preparation','Basic Data Entry Assistance'],
+  'Digital Documents': ['PDF Merge / Split / Compress Assistance','PDF to Word / Excel Conversion','Excel Data Formatting and Cleanup','Online Application Form Assistance','Document Organisation','Digital Document Preparation','Basic Data Entry Assistance','PAN Card Assistance','TAN Application Assistance','DSC (Digital Signature Certificate) Assistance'],
   'Voter / SIR': ['SIR / Enumeration Form Assistance','Voter Record Search Assistance','New Voter Registration Guidance','Voter Details Correction Assistance','Address Change / Shifting Assistance','Document Upload Assistance','Application Status Tracking Guidance'],
   'Travel': ['Flight Booking Assistance','Hotel Booking Assistance','Cancellation Guidance','Refund Follow-up Assistance','Travel Itinerary Preparation','Booking Reconciliation Support'],
   'Insurance': ['Health Insurance Requirement Assessment','Policy Feature Comparison Assistance','Family Health Insurance Guidance','Understanding Waiting Periods','Understanding Co-payment and Room Rent Limits','Claim Process Guidance','Connect with an Authorised Insurance Expert']
