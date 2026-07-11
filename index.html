@@ -166,6 +166,80 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   .dash-layout,.admin-layout{grid-template-columns:1fr}
   .d-sidebar,.admin-sidebar{display:none}
 }
+
+/* ═══ DIGITAL ASSISTANCE CENTRE (added) ═══ */
+
+/* Scrolling updates ticker */
+.ticker-wrap{background:var(--bg3);border-bottom:1px solid var(--bdr);overflow:hidden;white-space:nowrap;padding:.55rem 0}
+.ticker-track{display:inline-block;padding-left:100%;animation:ticker-scroll 38s linear infinite}
+.ticker-track span{display:inline-block;padding:0 2.5rem;font-size:.82rem;color:var(--txt2);font-weight:500}
+@keyframes ticker-scroll{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
+.ticker-wrap:hover .ticker-track{animation-play-state:paused}
+
+/* Mobile hamburger */
+.hamburger{display:none;background:none;border:none;color:var(--txt);font-size:1.3rem;cursor:pointer;padding:.4rem}
+@media(max-width:1024px){.hamburger{display:block}}
+.mobile-nav{display:none;flex-direction:column;background:rgba(7,9,26,.98);border-bottom:1px solid var(--bdr);padding:.5rem 1rem 1rem}
+.mobile-nav.open{display:flex}
+.mobile-nav a{display:block;padding:.7rem .5rem;color:var(--txt2);text-decoration:none;font-size:.92rem;font-weight:500;border-bottom:1px solid var(--bdr);cursor:pointer}
+.mobile-nav a:last-child{border-bottom:none}
+.mobile-nav a:hover,.mobile-nav a.active{color:var(--txt)}
+
+/* Quick selector chips */
+.quick-select{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:2.5rem}
+.qs-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:24px;background:var(--surf);border:1px solid var(--bdr2);color:var(--txt2);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.qs-chip:hover{background:var(--surf2);color:var(--txt);border-color:var(--blue)}
+
+/* Service search */
+.dac-search{max-width:560px;margin:0 auto 3rem;position:relative}
+.dac-search input{width:100%;padding:.95rem 1.25rem .95rem 3rem;border-radius:30px;background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.95rem}
+.dac-search input:focus{outline:none;border-color:var(--blue)}
+.dac-search i{position:absolute;left:1.15rem;top:50%;transform:translateY(-50%);color:var(--txt3)}
+.dac-search-count{text-align:center;font-size:.8rem;color:var(--txt3);margin-top:.6rem}
+
+/* Category blocks */
+.dac-cat{margin-bottom:3.5rem;scroll-margin-top:80px}
+.dac-cat-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:.85rem;border-bottom:1px solid var(--bdr)}
+.dac-cat-head h3{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;display:flex;align-items:center;gap:.6rem}
+.dac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.1rem}
+.dac-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.25rem;transition:all .3s}
+.dac-card:hover{border-color:var(--blue);background:var(--surf2);transform:translateY(-3px)}
+.dac-card.dac-hide{display:none}
+.dac-card.dac-match{border-color:var(--teal)}
+.dac-name{font-family:'Sora',sans-serif;font-size:.92rem;font-weight:700;margin-bottom:.5rem}
+.dac-note{font-size:.82rem;color:var(--txt2);line-height:1.6;padding:1rem 1.25rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:var(--r);margin-bottom:1.5rem}
+.dac-disclaimer{font-size:.8rem;color:var(--txt3);line-height:1.6;padding:1rem 1.25rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:1.5rem}
+.dac-cta{text-align:center;margin-top:1.5rem}
+
+/* Status badges */
+.stat{display:inline-block;padding:.22rem .6rem;border-radius:20px;font-size:.68rem;font-weight:700;margin:0 .3rem .3rem 0}
+.sb-avail{background:rgba(16,185,129,.15);color:var(--green)}
+.sb-expert{background:rgba(245,158,11,.15);color:var(--gold)}
+.sb-online{background:rgba(59,130,246,.15);color:var(--blue2)}
+.sb-price{background:rgba(168,85,247,.15);color:var(--purple)}
+
+/* Trust & Safety */
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem}
+.trust-item{display:flex;gap:.85rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.25rem}
+.trust-item i{color:var(--teal);font-size:1.1rem;margin-top:.15rem}
+.trust-item p{font-size:.86rem;color:var(--txt2);line-height:1.55}
+
+/* Pricing table */
+.price-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.price-table th{text-align:left;padding:.75rem 1rem;background:var(--bg3);color:var(--txt3);font-size:.74rem;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.price-table td{padding:.9rem 1rem;border-bottom:1px solid var(--bdr);color:var(--txt2)}
+.price-table td:first-child{color:var(--txt);font-weight:600}
+.price-table td:last-child{font-family:'JetBrains Mono',monospace;color:var(--teal);font-weight:600;white-space:nowrap}
+
+/* Request Help form */
+.rh-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media(max-width:640px){.rh-grid{grid-template-columns:1fr}}
+.rh-group{margin-bottom:1.1rem}
+.rh-group label{display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem}
+.rh-group input,.rh-group select,.rh-group textarea{width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem}
+.rh-group textarea{resize:vertical;min-height:90px}
+.rh-group input:focus,.rh-group select:focus,.rh-group textarea:focus{outline:none;border-color:var(--blue)}
+.rh-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem}
 </style>
 
 <!-- Firebase SDK -->
@@ -178,6 +252,10 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     createUserWithEmailAndPassword, updateProfile,
     signOut, onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+  import {
+    getFirestore, collection, addDoc, deleteDoc, doc,
+    onSnapshot, query, orderBy, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDcdR-ba5Lh-DfG-wuABRntQm1sSYSr3Kk",
@@ -192,6 +270,12 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth(app);
+  const db = getFirestore(app);
+  // Only this email can add/delete News from the in-browser Admin panel.
+  // This must ALSO be enforced in your Firestore Security Rules (see chat) —
+  // this constant alone does not restrict access, it only shows/hides the UI.
+  const ADMIN_EMAIL = 'vikashpathak.mgmt@gmail.com';
+  window._isAdmin = false;
   const provider = new GoogleAuthProvider();
   provider.addScope('email');
   provider.addScope('profile');
@@ -253,6 +337,11 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
         if(btn.getAttribute('onclick') === "showPage('home')"){
           btn.setAttribute('onclick', 'firebaseSignOut()');
         }
+      });
+    }
+    // Gate the in-browser News admin UI to the one authorised account.
+    window._isAdmin = !!(user && user.email === ADMIN_EMAIL);
+    if (window.refreshAdminNewsGate) window.refreshAdminNewsGate();
   });
 
   window.firebaseSignOut = async function() {
@@ -276,6 +365,36 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     }
   };
 
+  // ═══ NEWS — daily-editable via Firestore (Admin > News) ═══
+  // Collection "news": { title, date, cat, desc, createdAt }
+  // Public site reads it live (onSnapshot). If the collection is empty
+  // (e.g. brand new site / offline), the page falls back to the static
+  // `news` array already defined in the main script below — nothing breaks.
+  try {
+    const newsQuery = query(collection(db, 'news'), orderBy('createdAt', 'desc'));
+    onSnapshot(newsQuery, (snap) => {
+      const items = [];
+      snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+      window._liveNews = items;
+      if (window.renderAllNews) window.renderAllNews();
+      if (window.renderAdminNewsList) window.renderAdminNewsList();
+    }, (err) => {
+      console.warn('Live News sync unavailable, using built-in fallback list:', err.message);
+    });
+  } catch (err) {
+    console.warn('Firestore News sync not started:', err.message);
+  }
+
+  window._addNewsItem = async function(item) {
+    if (!window._isAdmin) { showToast('⚠ Please sign in with the admin Google account first'); return; }
+    await addDoc(collection(db, 'news'), { ...item, createdAt: serverTimestamp() });
+  };
+
+  window._deleteNewsItem = async function(id) {
+    if (!window._isAdmin) { showToast('⚠ Please sign in with the admin Google account first'); return; }
+    await deleteDoc(doc(db, 'news', id));
+  };
+
   console.log("Firebase initialized successfully 🚀");
 </script>
 </head>
@@ -293,13 +412,43 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       <li><a onclick="showPage('ai')" data-p="ai">AI Tools</a></li>
       <li><a onclick="showPage('services')" data-p="services">Services</a></li>
       <li><a onclick="showPage('tools')" data-p="tools">Calculators</a></li>
+      <li><a onclick="showPage('digital')" data-p="digital">Digital Assistance</a></li>
     </ul>
     <div class="nav-right">
       <button class="btn btn-ghost btn-sm" onclick="showPage('login')">Log In</button>
       <button class="btn btn-primary btn-sm" onclick="showPage('login')">Get Started</button>
+      <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fas fa-bars"></i></button>
     </div>
   </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a onclick="showPage('home');toggleMobileNav()">Home</a>
+    <a onclick="showPage('services');toggleMobileNav()">Services</a>
+    <a onclick="showPage('digital');toggleMobileNav()">Digital Assistance</a>
+    <a onclick="scrollDacTo('dac-voter');toggleMobileNav()">Voter / SIR</a>
+    <a onclick="showPage('news');toggleMobileNav()">News</a>
+    <a onclick="showPage('knowledge');toggleMobileNav()">Knowledge</a>
+    <a onclick="showPage('courses');toggleMobileNav()">Courses</a>
+    <a onclick="showPage('ai');toggleMobileNav()">AI Tools</a>
+    <a onclick="showPage('tools');toggleMobileNav()">Calculators</a>
+    <a onclick="scrollDacTo('request-help');toggleMobileNav()">Get Help</a>
+    <a href="https://wa.me/918539979271" target="_blank">Contact / WhatsApp</a>
+  </div>
 </nav>
+
+<!-- SCROLLING UPDATES TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span>📢 New: DigiCafe Digital, Tax, Accounting, Career &amp; Public Service Assistance Centre now live</span>
+    <span>✅ ITR, AIS and Form 26AS assistance available</span>
+    <span>✅ Accounting, Tally and reconciliation support available</span>
+    <span>✅ Resume and career assistance now available</span>
+    <span>✅ SIR and voter service assistance available</span>
+    <span>✅ Digital document assistance available</span>
+    <span>✅ GST, MSME/Udyam and FSSAI assistance available</span>
+    <span>✅ Travel booking and insurance guidance now available</span>
+    <span>💬 WhatsApp us anytime at +91 85399 79271</span>
+  </div>
+</div>
 
 <!-- HOME PAGE -->
 <div class="page active" id="page-home" style="padding-top:64px">
@@ -448,6 +597,360 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     <div class="svc-grid" id="svc-full"></div>
   </div>
 </div>
+
+<!-- DIGITAL ASSISTANCE CENTRE PAGE -->
+<div class="page" id="page-digital" style="padding:80px 20px">
+  <div class="c">
+    <div class="sh">
+      <span class="badge badge-teal">New</span>
+      <h2>DigiCafe Digital Assistance <span class="g-text">Centre</span></h2>
+      <p>Digital, Tax, Accounting, Career &amp; Public Service Assistance — all under one roof. Search a service below or pick a category to jump straight there.</p>
+    </div>
+
+    <!-- SERVICE SEARCH -->
+    <div class="dac-search">
+      <i class="fas fa-search"></i>
+      <input type="text" id="dac-search-input" oninput="filterDacServices(this.value)" placeholder="Search services — ITR, GST, TDS, Resume, Voter, Tally…">
+      <div class="dac-search-count" id="dac-search-count"></div>
+    </div>
+
+    <!-- QUICK SELECTOR -->
+    <div class="sh" style="margin-bottom:1rem">
+      <h3 class="s" style="font-size:1.1rem;font-weight:700">How Can We Help You?</h3>
+    </div>
+    <div class="quick-select">
+      <div class="qs-chip" onclick="scrollDacTo('dac-tax')"><i class="fas fa-file-invoice-dollar"></i> Tax &amp; ITR</div>
+      <div class="qs-chip" onclick="scrollDacTo('dac-gst')"><i class="fas fa-building"></i> GST &amp; Business</div>
+      <div class="qs-chip" onclick="scrollDacTo('dac-accounts')"><i class="fas fa-calculator"></i> Accounting &amp; Tally</div>
+      <div class="qs-chip" onclick="scrollDacTo('dac-career')"><i class="fas fa-briefcase"></i> Job &amp; Career</div>
+      <div class="qs-chip" onclick="scrollDacTo('dac-voter')"><i class="fas fa-vote-yea"></i> Voter / SIR</div>
+      <div class="qs-chip" onclick="scrollDacTo('dac-docs')"><i class="fas fa-file-alt"></i> Digital Documents</div>
+      <div class="qs-chip" onclick="scrollDacTo('dac-travel')"><i class="fas fa-plane"></i> Travel</div>
+      <div class="qs-chip" onclick="scrollDacTo('dac-insurance')"><i class="fas fa-shield-alt"></i> Insurance Expert</div>
+    </div>
+
+    <!-- A. INCOME TAX & TDS -->
+    <div class="dac-cat" id="dac-tax">
+      <div class="dac-cat-head">
+        <h3><i class="fas fa-file-invoice-dollar" style="color:var(--blue2)"></i> Income Tax &amp; TDS Assistance</h3>
+        <span class="badge badge-blue">ITR Filing — Price based on complexity</span>
+      </div>
+      <div class="dac-grid">
+        <div class="dac-card" data-kw="itr filing income tax return assistance">
+          <div class="s-icon">🧾</div><div class="dac-name">ITR Filing Assistance</div>
+          <div class="s-desc">Help preparing and filing your Income Tax Return correctly and on time.</div>
+          <span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on complexity</span>
+        </div>
+        <div class="dac-card" data-kw="ais form 26as review annual information statement">
+          <div class="s-icon">📄</div><div class="dac-name">AIS &amp; Form 26AS Review</div>
+          <div class="s-desc">Cross-checking your AIS and Form 26AS for accuracy before filing.</div>
+          <span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span>
+        </div>
+        <div class="dac-card" data-kw="tds credit reconciliation">
+          <div class="s-icon">🔄</div><div class="dac-name">TDS Credit Reconciliation</div>
+          <div class="s-desc">Matching TDS deducted with credit reflecting in your tax records.</div>
+          <span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span>
+        </div>
+        <div class="dac-card" data-kw="form 16 form 16a assistance">
+          <div class="s-icon">🧷</div><div class="dac-name">Form 16 / Form 16A Assistance</div>
+          <div class="s-desc">Help understanding, organising and using your Form 16 / 16A.</div>
+          <span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span>
+        </div>
+        <div class="dac-card" data-kw="tds mismatch investigation">
+          <div class="s-icon">🔍</div><div class="dac-name">TDS Mismatch Investigation</div>
+          <div class="s-desc">Identifying reasons for TDS mismatches and the corrective steps needed.</div>
+          <span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span>
+        </div>
+        <div class="dac-card" data-kw="income tax refund assistance">
+          <div class="s-icon">💸</div><div class="dac-name">Income Tax Refund Assistance</div>
+          <div class="s-desc">Guidance on tracking, follow-up and resolving refund delays.</div>
+          <span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span>
+        </div>
+        <div class="dac-card" data-kw="old vs new tax regime comparison">
+          <div class="s-icon">⚖️</div><div class="dac-name">Old vs New Tax Regime Comparison</div>
+          <div class="s-desc">Comparing both regimes against your income to see what suits you better.</div>
+          <span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span>
+        </div>
+        <div class="dac-card" data-kw="revised return assistance">
+          <div class="s-icon">📝</div><div class="dac-name">Revised Return Assistance</div>
+          <div class="s-desc">Support in correcting and refiling a revised Income Tax Return.</div>
+          <span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on complexity</span>
+        </div>
+        <div class="dac-card" data-kw="tax document checklist">
+          <div class="s-icon">✅</div><div class="dac-name">Tax Document Checklist</div>
+          <div class="s-desc">A ready checklist of documents required for smooth ITR filing.</div>
+          <span class="stat sb-avail">Available Now</span><span class="stat sb-price">Price on Request</span>
+        </div>
+      </div>
+      <div class="dac-cta">
+        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20assistance%20with%20Income%20Tax%20%2F%20TDS%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Tax Assistance</a>
+      </div>
+    </div>
+
+    <!-- B. GST & BUSINESS COMPLIANCE -->
+    <div class="dac-cat" id="dac-gst">
+      <div class="dac-cat-head">
+        <h3><i class="fas fa-building" style="color:var(--teal)"></i> GST &amp; Business Compliance</h3>
+        <span class="badge badge-teal">Price on Request</span>
+      </div>
+      <div class="dac-grid">
+        <div class="dac-card" data-kw="gst registration"><div class="s-icon">🏛️</div><div class="dac-name">GST Registration</div><div class="s-desc">Assistance with new GST registration and documentation.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="gst return filing assistance gstr"><div class="s-icon">📑</div><div class="dac-name">GST Return Filing Assistance</div><div class="s-desc">Help preparing and filing periodic GST returns.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="gstr-2b reconciliation"><div class="s-icon">🔁</div><div class="dac-name">GSTR-2B Reconciliation</div><div class="s-desc">Matching purchase records with GSTR-2B for accurate ITC claims.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="gst notice document assistance"><div class="s-icon">📨</div><div class="dac-name">GST Notice Document Assistance</div><div class="s-desc">Organising documents needed to respond to a GST notice.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="udyam msme registration"><div class="s-icon">🏭</div><div class="dac-name">Udyam / MSME Registration</div><div class="s-desc">Guidance and filing support for Udyam / MSME registration.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="fssai registration licence assistance"><div class="s-icon">🍽️</div><div class="dac-name">FSSAI Registration / Licence Assistance</div><div class="s-desc">Help with FSSAI application, documents and renewals.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="trade licence assistance"><div class="s-icon">🏪</div><div class="dac-name">Trade Licence Assistance</div><div class="s-desc">Guidance on applying for and renewing a local trade licence.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="company firm registration coordination"><div class="s-icon">🏢</div><div class="dac-name">Company / Firm Registration Coordination</div><div class="s-desc">Coordinating paperwork for Pvt Ltd / LLP / Firm registration.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="business compliance support"><div class="s-icon">🧩</div><div class="dac-name">Business Compliance Support</div><div class="s-desc">General ongoing help staying on top of regulatory filings.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+      </div>
+      <div class="dac-cta">
+        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20assistance%20with%20GST%20%2F%20Business%20Compliance%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Business Assistance</a>
+      </div>
+    </div>
+
+    <!-- C. ACCOUNTING & TALLY -->
+    <div class="dac-cat" id="dac-accounts">
+      <div class="dac-cat-head">
+        <h3><i class="fas fa-calculator" style="color:var(--gold)"></i> Accounting &amp; Tally Services</h3>
+        <span class="badge badge-blue">Price based on volume</span>
+      </div>
+      <div class="dac-grid">
+        <div class="dac-card" data-kw="bookkeeping"><div class="s-icon">📚</div><div class="dac-name">Bookkeeping</div><div class="s-desc">Day-to-day recording of financial transactions.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
+        <div class="dac-card" data-kw="bank statement data preparation"><div class="s-icon">🏦</div><div class="dac-name">Bank Statement Data Preparation</div><div class="s-desc">Converting bank statements into usable, organised data.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="bank reconciliation"><div class="s-icon">🔗</div><div class="dac-name">Bank Reconciliation</div><div class="s-desc">Matching book entries with bank statement transactions.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
+        <div class="dac-card" data-kw="ledger reconciliation"><div class="s-icon">📒</div><div class="dac-name">Ledger Reconciliation</div><div class="s-desc">Reviewing and reconciling ledger balances for accuracy.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
+        <div class="dac-card" data-kw="customer vendor reconciliation"><div class="s-icon">🤝</div><div class="dac-name">Customer / Vendor Reconciliation</div><div class="s-desc">Matching outstanding balances with customers and vendors.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
+        <div class="dac-card" data-kw="tally data entry support"><div class="s-icon">🧮</div><div class="dac-name">Tally Data Entry Support</div><div class="s-desc">Data entry support for Tally-based accounting.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Price based on volume</span></div>
+        <div class="dac-card" data-kw="accounting entry assistance"><div class="s-icon">✏️</div><div class="dac-name">Accounting Entry Assistance</div><div class="s-desc">Help passing accurate day-to-day accounting entries.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
+        <div class="dac-card" data-kw="excel data cleanup"><div class="s-icon">📊</div><div class="dac-name">Excel Data Cleanup</div><div class="s-desc">Cleaning, formatting and organising messy Excel data.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="pl balance sheet preparation support"><div class="s-icon">📈</div><div class="dac-name">P&amp;L and Balance Sheet Preparation Support</div><div class="s-desc">Support preparing draft P&amp;L and Balance Sheet statements.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+      </div>
+      <div class="dac-note"><i class="fas fa-info-circle"></i> Finalisation, certification, audit and services requiring professional attestation will be handled or reviewed by an appropriately qualified professional where applicable.</div>
+      <div class="dac-cta">
+        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20help%20with%20Accounting%20%2F%20Tally%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Accounting Help</a>
+      </div>
+    </div>
+
+    <!-- D. JOB & CAREER -->
+    <div class="dac-cat" id="dac-career">
+      <div class="dac-cat-head">
+        <h3><i class="fas fa-briefcase" style="color:var(--purple)"></i> Job &amp; Career Assistance</h3>
+        <span class="badge badge-teal">Starting from ₹499</span>
+      </div>
+      <div class="dac-grid">
+        <div class="dac-card" data-kw="professional resume cv preparation"><div class="s-icon">📄</div><div class="dac-name">Professional Resume / CV Preparation</div><div class="s-desc">A polished, professional resume tailored to your profile.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹499</span></div>
+        <div class="dac-card" data-kw="ats friendly resume support"><div class="s-icon">🤖</div><div class="dac-name">ATS-Friendly Resume Support</div><div class="s-desc">Formatting your resume to pass applicant tracking systems.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹499</span></div>
+        <div class="dac-card" data-kw="linkedin profile improvement"><div class="s-icon">💼</div><div class="dac-name">LinkedIn Profile Improvement</div><div class="s-desc">Improving your LinkedIn profile to stand out to recruiters.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="job application assistance"><div class="s-icon">📤</div><div class="dac-name">Job Application Assistance</div><div class="s-desc">Help completing and submitting job applications.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="interview preparation"><div class="s-icon">🎤</div><div class="dac-name">Interview Preparation</div><div class="s-desc">Guided practice and tips ahead of your interview.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="job description profile comparison"><div class="s-icon">🔎</div><div class="dac-name">Job Description vs Profile Comparison</div><div class="s-desc">Checking how well your profile matches a job description.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="salary ctc understanding"><div class="s-icon">💰</div><div class="dac-name">Salary and CTC Understanding</div><div class="s-desc">Breaking down an offer's CTC into what you'll actually take home.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="professional email drafting"><div class="s-icon">✉️</div><div class="dac-name">Professional Email Drafting</div><div class="s-desc">Drafting clear, professional emails for job or work needs.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="career profile review"><div class="s-icon">🧭</div><div class="dac-name">Career Profile Review</div><div class="s-desc">An overall review of your career profile with suggestions.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+      </div>
+      <div class="dac-cta">
+        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20help%20with%20job%20and%20career%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Career Assistance</a>
+      </div>
+    </div>
+
+    <!-- E. DIGITAL DOCUMENT SERVICES -->
+    <div class="dac-cat" id="dac-docs">
+      <div class="dac-cat-head">
+        <h3><i class="fas fa-file-alt" style="color:var(--blue2)"></i> Digital Document Services</h3>
+        <span class="badge badge-teal">Starting from ₹99</span>
+      </div>
+      <div class="dac-grid">
+        <div class="dac-card" data-kw="pdf merge split compress assistance"><div class="s-icon">📎</div><div class="dac-name">PDF Merge / Split / Compress Assistance</div><div class="s-desc">Combining, splitting or shrinking PDF files as needed.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="pdf to word excel conversion"><div class="s-icon">🔄</div><div class="dac-name">PDF to Word / Excel Conversion</div><div class="s-desc">Converting PDF files into editable Word or Excel formats.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="excel data formatting cleanup"><div class="s-icon">📊</div><div class="dac-name">Excel Data Formatting and Cleanup</div><div class="s-desc">Cleaning up and formatting Excel sheets for clarity.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="online application form assistance"><div class="s-icon">🖥️</div><div class="dac-name">Online Application Form Assistance</div><div class="s-desc">Help filling out online government or private forms.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="document organisation"><div class="s-icon">🗂️</div><div class="dac-name">Document Organisation</div><div class="s-desc">Organising your documents into a clear, usable structure.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="digital document preparation"><div class="s-icon">🧾</div><div class="dac-name">Digital Document Preparation</div><div class="s-desc">Preparing digital copies of your documents, ready to submit.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="basic data entry assistance"><div class="s-icon">⌨️</div><div class="dac-name">Basic Data Entry Assistance</div><div class="s-desc">Simple data entry support for small day-to-day tasks.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
+      </div>
+      <div class="dac-cta">
+        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20digital%20document%20assistance." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Digital Help</a>
+      </div>
+    </div>
+
+    <!-- F. SIR & VOTER SERVICE ASSISTANCE -->
+    <div class="dac-cat" id="dac-voter">
+      <div class="dac-cat-head">
+        <h3><i class="fas fa-vote-yea" style="color:var(--green)"></i> SIR &amp; Voter Service Assistance</h3>
+        <span class="badge badge-blue">Starting from ₹99</span>
+      </div>
+      <div class="dac-disclaimer"><i class="fas fa-info-circle"></i> DigiCafe is an independent private assistance service and is not affiliated with or authorised by the Election Commission of India. Final decisions are made by the competent authorities.</div>
+      <div class="dac-grid">
+        <div class="dac-card" data-kw="sir enumeration form assistance voter"><div class="s-icon">📝</div><div class="dac-name">SIR / Enumeration Form Assistance</div><div class="s-desc">Help filling out Special Intensive Revision / enumeration forms.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="voter record search assistance"><div class="s-icon">🔍</div><div class="dac-name">Voter Record Search Assistance</div><div class="s-desc">Help locating your existing voter record.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="new voter registration guidance"><div class="s-icon">🗳️</div><div class="dac-name">New Voter Registration Guidance</div><div class="s-desc">Step-by-step guidance for first-time voter registration.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="voter details correction assistance"><div class="s-icon">✏️</div><div class="dac-name">Voter Details Correction Assistance</div><div class="s-desc">Help correcting errors in your existing voter details.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="address change shifting assistance"><div class="s-icon">📍</div><div class="dac-name">Address Change / Shifting Assistance</div><div class="s-desc">Guidance when updating your voter address after shifting.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="document upload assistance"><div class="s-icon">📤</div><div class="dac-name">Document Upload Assistance</div><div class="s-desc">Help scanning and uploading the required supporting documents.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
+        <div class="dac-card" data-kw="application status tracking guidance"><div class="s-icon">📊</div><div class="dac-name">Application Status Tracking Guidance</div><div class="s-desc">Help checking and understanding your application status.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
+      </div>
+      <div class="dac-cta">
+        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20assistance%20with%20Voter%20%2F%20SIR%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Voter / SIR Assistance</a>
+      </div>
+    </div>
+
+    <!-- G. TRAVEL ASSISTANCE -->
+    <div class="dac-cat" id="dac-travel">
+      <div class="dac-cat-head">
+        <h3><i class="fas fa-plane" style="color:var(--blue2)"></i> Travel Assistance</h3>
+        <span class="badge badge-teal">Price on Request</span>
+      </div>
+      <div class="dac-disclaimer"><i class="fas fa-info-circle"></i> DigiCafe assists with bookings and coordination and is not an airline or travel supplier unless officially authorised.</div>
+      <div class="dac-grid">
+        <div class="dac-card" data-kw="flight booking assistance"><div class="s-icon">✈️</div><div class="dac-name">Flight Booking Assistance</div><div class="s-desc">Help finding and booking suitable flight options.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="hotel booking assistance"><div class="s-icon">🏨</div><div class="dac-name">Hotel Booking Assistance</div><div class="s-desc">Help finding and booking hotels for your trip.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="cancellation guidance"><div class="s-icon">🚫</div><div class="dac-name">Cancellation Guidance</div><div class="s-desc">Guidance on cancelling flight or hotel bookings.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="refund follow up assistance"><div class="s-icon">💵</div><div class="dac-name">Refund Follow-up Assistance</div><div class="s-desc">Following up on pending travel refunds on your behalf.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="travel itinerary preparation"><div class="s-icon">🗺️</div><div class="dac-name">Travel Itinerary Preparation</div><div class="s-desc">Putting together a clear day-by-day travel itinerary.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="booking reconciliation support"><div class="s-icon">🧾</div><div class="dac-name">Booking Reconciliation Support</div><div class="s-desc">Checking booking confirmations and charges for accuracy.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+      </div>
+      <div class="dac-cta">
+        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20travel%20assistance." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Travel Assistance</a>
+      </div>
+    </div>
+
+    <!-- H. INSURANCE GUIDANCE & EXPERT CONNECT -->
+    <div class="dac-cat" id="dac-insurance">
+      <div class="dac-cat-head">
+        <h3><i class="fas fa-shield-alt" style="color:var(--gold)"></i> Insurance Guidance &amp; Expert Connect</h3>
+        <span class="badge badge-blue">Price on Request</span>
+      </div>
+      <div class="dac-disclaimer"><i class="fas fa-info-circle"></i> Insurance products, solicitation and regulated advice, where applicable, will be provided only through appropriately licensed or authorised professionals. DigiCafe may provide general information and coordination support.</div>
+      <div class="dac-grid">
+        <div class="dac-card" data-kw="health insurance requirement assessment"><div class="s-icon">🩺</div><div class="dac-name">Health Insurance Requirement Assessment</div><div class="s-desc">General discussion to understand your health cover needs.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="policy feature comparison assistance"><div class="s-icon">📋</div><div class="dac-name">Policy Feature Comparison Assistance</div><div class="s-desc">Comparing publicly available features across policies.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="family health insurance guidance"><div class="s-icon">👨‍👩‍👧‍👦</div><div class="dac-name">Family Health Insurance Guidance</div><div class="s-desc">General guidance while considering a family floater plan.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="understanding waiting periods"><div class="s-icon">⏳</div><div class="dac-name">Understanding Waiting Periods</div><div class="s-desc">Explaining how waiting periods typically work in policies.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="understanding co-payment room rent limits"><div class="s-icon">🏥</div><div class="dac-name">Understanding Co-payment and Room Rent Limits</div><div class="s-desc">Explaining common co-payment and room-rent clauses.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="claim process guidance"><div class="s-icon">📁</div><div class="dac-name">Claim Process Guidance</div><div class="s-desc">General guidance on the typical insurance claim process.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
+        <div class="dac-card" data-kw="connect authorised insurance expert"><div class="s-icon">🧑‍💼</div><div class="dac-name">Connect with an Authorised Insurance Expert</div><div class="s-desc">We connect you with a licensed/authorised insurance professional.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
+      </div>
+      <div class="dac-cta">
+        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20want%20to%20connect%20with%20an%20insurance%20expert." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Connect With Insurance Expert</a>
+      </div>
+    </div>
+
+    <!-- CATEGORY-BASED PRICING -->
+    <div class="sh" style="margin-top:1rem">
+      <span class="badge badge-blue">Pricing</span>
+      <h2>Category-Based <span class="g-text">Pricing</span></h2>
+      <p>Final charges depend on complexity, volume, urgency, government fees and professional involvement.</p>
+    </div>
+    <div class="glass" style="padding:1.5rem;border-radius:var(--r2);overflow-x:auto;margin-bottom:3.5rem">
+      <table class="price-table">
+        <thead><tr><th>Category</th><th>Indicative Price</th></tr></thead>
+        <tbody>
+          <tr><td>Basic Assistance</td><td>Starting from ₹99</td></tr>
+          <tr><td>Digital Document Assistance</td><td>Starting from ₹99</td></tr>
+          <tr><td>Voter / SIR Assistance</td><td>Starting from ₹99</td></tr>
+          <tr><td>Resume &amp; Career Assistance</td><td>Starting from ₹499</td></tr>
+          <tr><td>Accounting &amp; Reconciliation</td><td>Price based on volume</td></tr>
+          <tr><td>ITR Filing Assistance</td><td>Price based on return complexity</td></tr>
+          <tr><td>GST &amp; Business Compliance</td><td>Price on Request</td></tr>
+          <tr><td>Expert Consultation / Professional Review</td><td>Price on Request</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TRUST & SAFETY -->
+    <div class="sh">
+      <span class="badge badge-teal">Trust</span>
+      <h2>Safe &amp; Transparent <span class="g-text">Assistance</span></h2>
+    </div>
+    <div class="trust-grid" style="margin-bottom:3.5rem">
+      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Transparent service charges shared before work starts.</p></div>
+      <div class="trust-item"><i class="fas fa-check-circle"></i><p>No guaranteed government approval or refund promises.</p></div>
+      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Never share OTPs or passwords publicly — DigiCafe will never ask for them either.</p></div>
+      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Please verify all information carefully before final submission.</p></div>
+      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Complex matters may be referred to a CA, CS, advocate or another appropriately qualified professional.</p></div>
+      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Government fees and DigiCafe service charges are separate, where applicable.</p></div>
+    </div>
+
+    <!-- REQUEST HELP FORM -->
+    <div class="sh" id="request-help">
+      <span class="badge badge-blue">Get Help</span>
+      <h2>Request <span class="g-text">Assistance</span></h2>
+      <p>Fill in your details and we'll get back to you — or send it straight to us on WhatsApp.</p>
+    </div>
+    <div class="glass" style="max-width:760px;margin:0 auto;padding:2rem;border-radius:var(--r2)">
+      <form id="request-help-form" onsubmit="return submitRequestHelp(event)">
+        <div class="rh-grid">
+          <div class="rh-group">
+            <label>Service Category</label>
+            <select id="rh-category" onchange="updateSpecificServices()" required>
+              <option value="">Select category</option>
+              <option value="Income Tax & TDS">Income Tax &amp; TDS Assistance</option>
+              <option value="GST & Business Compliance">GST &amp; Business Compliance</option>
+              <option value="Accounting & Tally">Accounting &amp; Tally Services</option>
+              <option value="Job & Career">Job &amp; Career Assistance</option>
+              <option value="Digital Documents">Digital Document Services</option>
+              <option value="Voter / SIR">SIR &amp; Voter Service Assistance</option>
+              <option value="Travel">Travel Assistance</option>
+              <option value="Insurance">Insurance Guidance &amp; Expert Connect</option>
+            </select>
+          </div>
+          <div class="rh-group">
+            <label>Specific Service</label>
+            <select id="rh-service" required><option value="">Select category first</option></select>
+          </div>
+          <div class="rh-group">
+            <label>Full Name</label>
+            <input type="text" id="rh-name" placeholder="Your full name" required>
+          </div>
+          <div class="rh-group">
+            <label>Mobile Number</label>
+            <input type="tel" id="rh-mobile" placeholder="+91 98765 43210" required>
+          </div>
+          <div class="rh-group">
+            <label>Email</label>
+            <input type="email" id="rh-email" placeholder="you@example.com">
+          </div>
+          <div class="rh-group">
+            <label>Deadline / Urgency</label>
+            <select id="rh-urgency">
+              <option value="Not Urgent">Not Urgent</option>
+              <option value="Within a Week">Within a Week</option>
+              <option value="Within 2-3 Days">Within 2-3 Days</option>
+              <option value="Urgent / Today">Urgent / Today</option>
+            </select>
+          </div>
+        </div>
+        <div class="rh-group">
+          <label>Notes</label>
+          <textarea id="rh-notes" placeholder="Any additional details about your request"></textarea>
+        </div>
+        <div class="rh-actions">
+          <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-paper-plane"></i> Send Request</button>
+          <button type="button" class="btn btn-lg" style="background:#25D366;color:#fff" onclick="sendRequestOnWhatsApp()"><i class="fab fa-whatsapp"></i> Send Request on WhatsApp</button>
+        </div>
+      </form>
+    </div>
+
+    <!--
+      FUTURE FIREBASE INTEGRATION (do not remove):
+      - Firebase Authentication: connect here for client registration/login specific to the
+        Digital Assistance Centre (reuse the existing Firebase app initialised above in <head>).
+      - Firestore: create a "serviceRequests" collection and write each Request Help form
+        submission here (category, service, name, mobile, email, urgency, notes, timestamp, status).
+      - Firestore: create a "clients" collection linked to the authenticated user's UID for the
+        Client Dashboard (request history, status tracking).
+      - Firebase Storage: enable document upload (e.g. for Voter/SIR document uploads and
+        Accounting bank-statement uploads) and store the file reference against the relevant
+        serviceRequests document.
+      - Admin Dashboard: read from "serviceRequests" (all clients) with status update controls
+        (Received / In Progress / Completed) and push Firestore-based Notifications to clients.
+      No backend calls are implemented yet — this section is intentionally static/demo until
+      Firebase is wired in.
+    -->
+  </div>
+</div>
+
 
 <!-- TOOLS PAGE (CALCULATORS) -->
 <div class="page" id="page-tools" style="padding:80px 20px">
@@ -617,7 +1120,45 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       <div class="admin-content" id="admin-clients"><p style="padding:2rem;color:var(--txt2)">Client management here...</p></div>
       <div class="admin-content" id="admin-services"><p style="padding:2rem;color:var(--txt2)">Service management here...</p></div>
       <div class="admin-content" id="admin-payments"><p style="padding:2rem;color:var(--txt2)">Payment analytics here...</p></div>
-      <div class="admin-content" id="admin-news"><p style="padding:2rem;color:var(--txt2)">News management here...</p></div>
+      <div class="admin-content" id="admin-news">
+        <div class="d-title">News Management</div>
+        <p style="color:var(--txt2);margin-bottom:1.5rem">Add today's update below — it publishes to the live site instantly, no file editing needed.</p>
+
+        <!-- Shown only when NOT signed in as the admin account -->
+        <div id="news-admin-gate" class="glass" style="padding:2rem;border-radius:var(--r2);text-align:center;max-width:460px">
+          <p style="color:var(--txt2);margin-bottom:1rem"><i class="fas fa-lock"></i> Sign in with the DigiCafe admin Google account to add or remove News items.</p>
+          <button type="button" class="btn btn-primary" onclick="signInWithGoogle()"><i class="fab fa-google"></i> Sign in with Google</button>
+        </div>
+
+        <!-- Shown only when signed in as the admin account -->
+        <div id="news-admin-panel" class="hidden">
+          <div class="glass" style="padding:1.5rem;border-radius:var(--r2);margin-bottom:2rem;max-width:640px">
+            <form id="admin-news-form" onsubmit="return submitAdminNews(event)">
+              <div class="rh-grid">
+                <div class="rh-group">
+                  <label>Title</label>
+                  <input type="text" id="an-title" placeholder="Headline" required>
+                </div>
+                <div class="rh-group">
+                  <label>Date</label>
+                  <input type="text" id="an-date" placeholder="e.g. 11 Jul 2026" required>
+                </div>
+                <div class="rh-group">
+                  <label>Category</label>
+                  <input type="text" id="an-cat" placeholder="e.g. Income Tax, GST, Companies Act" required>
+                </div>
+              </div>
+              <div class="rh-group">
+                <label>Description</label>
+                <textarea id="an-desc" placeholder="One or two sentence summary" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Publish News Item</button>
+            </form>
+          </div>
+          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Published Items</h3>
+          <div id="admin-news-list" style="display:flex;flex-direction:column;gap:.75rem;max-width:640px"></div>
+        </div>
+      </div>
       <div class="admin-content" id="admin-courses"><p style="padding:2rem;color:var(--txt2)">Course management here...</p></div>
     </div>
   </div>
@@ -659,7 +1200,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     </div>
     <div class="foot-bottom">
       <p>© 2025 DigiCafe Compliance & Digital Solutions · MSME: UDYAM-KR-02-0041919</p>
-      <p>By Vikash Pathak · Bengaluru, India · <a href="mailto:vikashpathak.mgmt@gmail.com" style="color:var(--blue2)">vikashpathak.mgmt@gmail.com</a></p>
+      <p>By Vikash Pathak · Bengaluru, India · <a href="mailto:vikashpathak.mgmt@gmail.com" style="color:var(--blue2)">vikashpathak.mgmt@gmail.com</a> · <a onclick="showPage('admin');showAdmin('news')" style="color:var(--txt3);cursor:pointer" title="Admin sign-in required">Admin</a></p>
     </div>
   </div>
 </footer>
@@ -680,6 +1221,12 @@ const news = [
   {title:'SEBI Issues New Guidelines for Mutual Fund Taxation',date:'11 Jan 2025',cat:'Income Tax',desc:'Updated FAQs on TDS, indexed cost, and capital gains treatment.'},
   {title:'Company Law: New MCA Portal Features for Annual Compliance',date:'10 Jan 2025',cat:'Companies Act',desc:'Streamlined filing process for AOC-4, MGT-7 with auto-validation.'},
 ];
+
+// Live Firestore news (added via Admin > News) overrides the static list above
+// once at least one item has been published. Until then, the static list shows.
+function getNewsData(){
+  return (window._liveNews && window._liveNews.length) ? window._liveNews : news;
+}
 
 const services = [
   {icon:'💰',name:'Income Tax',desc:'ITR filing, refund tracking, tax planning, notice reply',price:'₹999+'},
@@ -809,7 +1356,7 @@ function showToast(m){
 
 // ═══ RENDER ═══
 function renderNews(cont){
-  cont.innerHTML=news.map(n=>`
+  cont.innerHTML=getNewsData().map(n=>`
     <div class="news-card">
       <span class="n-cat">${n.cat}</span>
       <div class="n-title">${n.title}</div>
@@ -874,19 +1421,31 @@ function initRender(){
   const calcs=['💰 ITR Calculator','📊 GST Calculator','🏠 HRA Calculator','🏦 EMI Calculator','📈 Capital Gains','🧮 TDS Calculator','💼 Salary Breakup','🎯 SIP Calculator'];
   document.getElementById('calc-grid').innerHTML=calcs.map(c=>`<div class="tool-card" onclick="showToast('${c.split(' ')[1]} - Coming Soon')"><div class="t-icon">${c.split(' ')[0]}</div><div class="t-name">${c.substring(2)}</div><div class="t-desc">Free calculator</div></div>`).join('');
 
-  // Add news category filter buttons
-  const cats=[...new Set(news.map(n=>n.cat))];
+  renderNewsCats();
+}
+
+function renderNewsCats(){
+  const cats=[...new Set(getNewsData().map(n=>n.cat))];
   const catCont=document.getElementById('news-cats');
   if(catCont){
     catCont.innerHTML='<button class="btn btn-primary btn-sm" onclick="filterNews(this,\'all\')" >All</button>'+cats.map(c=>`<button class="btn btn-ghost btn-sm" onclick="filterNews(this,'${c}')">${c}</button>`).join('');
   }
 }
 
+// Called by the Firebase module script whenever the live "news" collection
+// changes, so News updates on the site instantly without a page reload.
+window.renderAllNews = function(){
+  const home=document.getElementById('news-home'); if(home) renderNews(home);
+  const full=document.getElementById('news-full'); if(full) renderNews(full);
+  renderNewsCats();
+};
+
 function filterNews(btn,cat){
   document.querySelectorAll('#news-cats button').forEach(b=>b.className='btn btn-ghost btn-sm');
   btn.className='btn btn-primary btn-sm';
   const cont=document.getElementById('news-full');
-  const filtered=cat==='all'?news:news.filter(n=>n.cat===cat);
+  const data=getNewsData();
+  const filtered=cat==='all'?data:data.filter(n=>n.cat===cat);
   cont.innerHTML=filtered.map(n=>`
     <div class="news-card">
       <span class="n-cat">${n.cat}</span>
@@ -903,10 +1462,179 @@ if(document.readyState==='loading'){
   initRender();
 }
 
+// ═══ ADMIN NEWS MANAGEMENT (Firestore-backed) ═══
+window.refreshAdminNewsGate = function(){
+  const gate=document.getElementById('news-admin-gate');
+  const panel=document.getElementById('news-admin-panel');
+  if(!gate || !panel) return;
+  if(window._isAdmin){
+    gate.classList.add('hidden');
+    panel.classList.remove('hidden');
+    renderAdminNewsList();
+  } else {
+    gate.classList.remove('hidden');
+    panel.classList.add('hidden');
+  }
+};
+
+window.renderAdminNewsList = function(){
+  const list=document.getElementById('admin-news-list');
+  if(!list) return;
+  const items = window._liveNews || [];
+  if(!items.length){
+    list.innerHTML = '<p style="color:var(--txt3);font-size:.85rem">No published items yet — add your first one above. Until then, the site shows its built-in default news.</p>';
+    return;
+  }
+  list.innerHTML = items.map(n => `
+    <div class="glass" style="padding:1rem 1.25rem;border-radius:var(--r);display:flex;justify-content:space-between;align-items:flex-start;gap:1rem">
+      <div>
+        <span class="n-cat" style="margin-bottom:.4rem;display:inline-block">${n.cat}</span>
+        <div class="n-title">${n.title}</div>
+        <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="deleteAdminNews('${n.id}')"><i class="fas fa-trash"></i></button>
+    </div>
+  `).join('');
+};
+
+function submitAdminNews(e){
+  e.preventDefault();
+  const item = {
+    title: document.getElementById('an-title').value,
+    date: document.getElementById('an-date').value,
+    cat: document.getElementById('an-cat').value,
+    desc: document.getElementById('an-desc').value
+  };
+  if(!item.title || !item.date || !item.cat || !item.desc){
+    showToast('⚠ Please fill in every field');
+    return false;
+  }
+  window._addNewsItem(item).then(()=>{
+    showToast('✓ News item published');
+    document.getElementById('admin-news-form').reset();
+  }).catch(err=>showToast('⚠ '+err.message));
+  return false;
+}
+
+function deleteAdminNews(id){
+  if(!confirm('Remove this news item from the live site?')) return;
+  window._deleteNewsItem(id).then(()=>showToast('✓ News item removed')).catch(err=>showToast('⚠ '+err.message));
+}
+
 // SCROLL NAV
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').style.boxShadow=window.scrollY>30?'0 4px 20px rgba(0,0,0,.5)':'none';
 });
+
+// ═══ MOBILE NAV (Digital Assistance Centre update) ═══
+function toggleMobileNav(){
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
+// ═══ QUICK SELECTOR / SCROLL TO SERVICE ═══
+function scrollDacTo(id){
+  showPage('digital');
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  },80);
+}
+
+// ═══ SERVICE SEARCH (no page reload) ═══
+function filterDacServices(query){
+  const q=query.trim().toLowerCase();
+  const cards=document.querySelectorAll('#page-digital .dac-card');
+  let count=0;
+  cards.forEach(card=>{
+    const kw=(card.dataset.kw||'')+' '+card.querySelector('.dac-name').textContent.toLowerCase();
+    const match = q==='' || kw.toLowerCase().includes(q);
+    card.classList.toggle('dac-hide', !match);
+    card.classList.toggle('dac-match', match && q!=='');
+    if(match) count++;
+  });
+  // Hide whole category block if it has no visible cards (only when searching)
+  document.querySelectorAll('#page-digital .dac-cat').forEach(cat=>{
+    const visible=[...cat.querySelectorAll('.dac-card')].some(c=>!c.classList.contains('dac-hide'));
+    cat.style.display = (q!=='' && !visible) ? 'none' : '';
+  });
+  const countEl=document.getElementById('dac-search-count');
+  if(countEl) countEl.textContent = q==='' ? '' : `${count} matching service${count===1?'':'s'} found`;
+}
+
+// ═══ REQUEST HELP FORM ═══
+const dacServiceMap = {
+  'Income Tax & TDS': ['ITR Filing Assistance','AIS & Form 26AS Review','TDS Credit Reconciliation','Form 16 / Form 16A Assistance','TDS Mismatch Investigation','Income Tax Refund Assistance','Old vs New Tax Regime Comparison','Revised Return Assistance','Tax Document Checklist'],
+  'GST & Business Compliance': ['GST Registration','GST Return Filing Assistance','GSTR-2B Reconciliation','GST Notice Document Assistance','Udyam / MSME Registration','FSSAI Registration / Licence Assistance','Trade Licence Assistance','Company / Firm Registration Coordination','Business Compliance Support'],
+  'Accounting & Tally': ['Bookkeeping','Bank Statement Data Preparation','Bank Reconciliation','Ledger Reconciliation','Customer / Vendor Reconciliation','Tally Data Entry Support','Accounting Entry Assistance','Excel Data Cleanup','P&L and Balance Sheet Preparation Support'],
+  'Job & Career': ['Professional Resume / CV Preparation','ATS-Friendly Resume Support','LinkedIn Profile Improvement','Job Application Assistance','Interview Preparation','Job Description vs Profile Comparison','Salary and CTC Understanding','Professional Email Drafting','Career Profile Review'],
+  'Digital Documents': ['PDF Merge / Split / Compress Assistance','PDF to Word / Excel Conversion','Excel Data Formatting and Cleanup','Online Application Form Assistance','Document Organisation','Digital Document Preparation','Basic Data Entry Assistance'],
+  'Voter / SIR': ['SIR / Enumeration Form Assistance','Voter Record Search Assistance','New Voter Registration Guidance','Voter Details Correction Assistance','Address Change / Shifting Assistance','Document Upload Assistance','Application Status Tracking Guidance'],
+  'Travel': ['Flight Booking Assistance','Hotel Booking Assistance','Cancellation Guidance','Refund Follow-up Assistance','Travel Itinerary Preparation','Booking Reconciliation Support'],
+  'Insurance': ['Health Insurance Requirement Assessment','Policy Feature Comparison Assistance','Family Health Insurance Guidance','Understanding Waiting Periods','Understanding Co-payment and Room Rent Limits','Claim Process Guidance','Connect with an Authorised Insurance Expert']
+};
+
+function updateSpecificServices(){
+  const cat=document.getElementById('rh-category').value;
+  const sel=document.getElementById('rh-service');
+  const list=dacServiceMap[cat];
+  if(!list){ sel.innerHTML='<option value="">Select category first</option>'; return; }
+  sel.innerHTML='<option value="">Select service</option>'+list.map(s=>`<option value="${s}">${s}</option>`).join('');
+}
+
+function getRequestHelpData(){
+  return {
+    category: document.getElementById('rh-category').value,
+    service: document.getElementById('rh-service').value,
+    name: document.getElementById('rh-name').value,
+    mobile: document.getElementById('rh-mobile').value,
+    email: document.getElementById('rh-email').value,
+    urgency: document.getElementById('rh-urgency').value,
+    notes: document.getElementById('rh-notes').value
+  };
+}
+
+function submitRequestHelp(e){
+  e.preventDefault();
+  const d=getRequestHelpData();
+  if(!d.name || !d.mobile || !d.category){
+    showToast('⚠ Please fill in name, mobile and service category');
+    return false;
+  }
+  // Existing email functionality (mailto) — kept as the primary submission method
+  const subject=encodeURIComponent('Service Request: '+d.category+(d.service?(' - '+d.service):''));
+  const body=encodeURIComponent(
+    'New Service Request from DigiCafe website\n\n'+
+    'Category: '+d.category+'\n'+
+    'Specific Service: '+(d.service||'-')+'\n'+
+    'Name: '+d.name+'\n'+
+    'Mobile: '+d.mobile+'\n'+
+    'Email: '+(d.email||'-')+'\n'+
+    'Urgency: '+d.urgency+'\n'+
+    'Notes: '+(d.notes||'-')
+  );
+  window.location.href=`mailto:vikashpathak.mgmt@gmail.com?subject=${subject}&body=${body}`;
+  showToast('✓ Opening email to send your request...');
+  /* FIREBASE TODO: also write this object (d) to a Firestore "serviceRequests" collection here,
+     with a serverTimestamp() and status:"Received", once Firebase is connected for this form. */
+  return false;
+}
+
+function sendRequestOnWhatsApp(){
+  const d=getRequestHelpData();
+  if(!d.name || !d.mobile || !d.category){
+    showToast('⚠ Please fill in name, mobile and service category');
+    return;
+  }
+  const msg='Hi DigiCafe, I would like to request assistance:\n'+
+    'Category: '+d.category+'\n'+
+    'Specific Service: '+(d.service||'-')+'\n'+
+    'Name: '+d.name+'\n'+
+    'Mobile: '+d.mobile+'\n'+
+    'Email: '+(d.email||'-')+'\n'+
+    'Urgency: '+d.urgency+'\n'+
+    'Notes: '+(d.notes||'-');
+  window.open('https://wa.me/918539979271?text='+encodeURIComponent(msg),'_blank');
+}
 </script>
 </body>
 </html>
