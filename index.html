@@ -249,12 +249,12 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   import {
     getAuth, GoogleAuthProvider,
     signInWithPopup, signInWithRedirect, getRedirectResult,
-    createUserWithEmailAndPassword, updateProfile,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile,
     signOut, onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
   import {
-    getFirestore, collection, addDoc, deleteDoc, doc,
-    onSnapshot, query, orderBy, serverTimestamp
+    getFirestore, collection, addDoc, deleteDoc, doc, setDoc, getDoc, updateDoc,
+    onSnapshot, query, where, orderBy, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -272,16 +272,55 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   const auth = getAuth(app);
   const db = getFirestore(app);
 
+  // Shared HTML-escaping helper (also exposed as window.escapeHtml for the classic script).
+  function escapeHtml(str){
+    return String(str ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  }
+  window.escapeHtml = escapeHtml;
+
   // Public bridge used by the non-module Request Help form below.
   // Saves every request in Firestore so it can be used by the admin dashboard.
+  window.queueAdminEmail = async function(subject, text) {
+    // Compatible with Firebase Trigger Email extension when configured to watch the `mail` collection.
+    return addDoc(collection(db, 'mail'), {
+      to: ['vikashpathak.mgmt@gmail.com'],
+      message: { subject, text },
+      createdAt: serverTimestamp()
+    });
+  };
+
+  window.logAuthEvent = async function(type, user, extra = {}) {
+    if (!user) return;
+    const eventData = {
+      type,
+      userId: user.uid,
+      email: user.email || '',
+      displayName: user.displayName || extra.fullName || '',
+      createdAt: serverTimestamp()
+    };
+    try { await addDoc(collection(db, 'authEvents'), eventData); } catch (e) { console.warn('Auth event log failed:', e); }
+    try {
+      const label = type === 'register' ? 'New DigiCafe Registration' : 'DigiCafe Login Alert';
+      const text = `${label}\nName: ${eventData.displayName || '-'}\nEmail: ${eventData.email || '-'}\nUser ID: ${eventData.userId}`;
+      await window.queueAdminEmail(label + (eventData.email ? ' - ' + eventData.email : ''), text);
+    } catch (e) { console.warn('Email queue unavailable. Configure Firebase Trigger Email extension:', e); }
+  };
+
   window.saveServiceRequest = async function(requestData) {
+    const user = auth.currentUser;
     const ref = await addDoc(collection(db, 'serviceRequests'), {
       ...requestData,
+      userId: user ? user.uid : null,
+      userEmail: user ? (user.email || requestData.email || '') : (requestData.email || ''),
       status: 'Received',
       source: 'DigiCafe Website',
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     });
+    try {
+      await window.queueAdminEmail('New DigiCafe Service Request - ' + (requestData.service || requestData.category || 'Service'),
+        `New service request\nReference: ${ref.id}\nName: ${requestData.name || '-'}\nMobile: ${requestData.mobile || '-'}\nEmail: ${requestData.email || user?.email || '-'}\nCategory: ${requestData.category || '-'}\nService: ${requestData.service || '-'}\nUrgency: ${requestData.urgency || '-'}\nNotes: ${requestData.notes || '-'}`);
+    } catch (e) { console.warn('Service request email queue unavailable:', e); }
     return ref.id;
   };
   // Only this email can add/delete News from the in-browser Admin panel.
@@ -294,19 +333,64 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   provider.addScope('profile');
 
   // Handle user after sign-in
-  function handleUser(user) {
+  async function handleUser(user) {
     if (!user) return;
-    const nameParts = user.displayName ? user.displayName.split(' ') : ['U',''];
-    const initials = (nameParts[0][0] + (nameParts[1]?.[0] || '')).toUpperCase();
+    window._currentFirebaseUser = user;
+    let fullName = user.displayName || '';
+    try {
+      const profileSnap = await getDoc(doc(db, 'users', user.uid));
+      if (profileSnap.exists()) fullName = profileSnap.data().fullName || fullName;
+    } catch (e) { console.warn('Profile load failed:', e); }
+    const shownName = fullName || user.email || 'Client';
+    const parts = shownName.trim().split(/\s+/);
+    const initials = ((parts[0]?.[0] || 'C') + (parts[1]?.[0] || '')).toUpperCase();
     const avatarEl = document.querySelector('.d-avatar');
     const nameEl = document.querySelector('.d-uname');
     const titleEl = document.querySelector('.d-title');
     if (avatarEl) avatarEl.textContent = initials;
-    if (nameEl) nameEl.textContent = user.displayName || user.email;
-    if (titleEl) titleEl.textContent = 'Welcome back, ' + (user.displayName?.split(' ')[0] || 'User') + '!';
-    showToast('✓ Signed in as ' + (user.displayName || user.email));
-    setTimeout(() => showPage('dashboard'), 800);
+    if (nameEl) nameEl.textContent = shownName;
+    if (titleEl) titleEl.textContent = 'Welcome back, ' + (parts[0] || 'Client') + '!';
+    window.loadClientDashboard(user);
+    showPage('dashboard');
   }
+
+  window.loadClientDashboard = function(user) {
+    if (!user) return;
+    const q = query(collection(db, 'serviceRequests'), where('userId', '==', user.uid));
+    if (window._clientRequestsUnsub) window._clientRequestsUnsub();
+    window._clientRequestsUnsub = onSnapshot(q, (snap) => {
+      const rows = [];
+      snap.forEach(d => rows.push({id:d.id, ...d.data()}));
+      rows.sort((a,b) => ((b.createdAt?.seconds||0) - (a.createdAt?.seconds||0)));
+      const active = rows.filter(r => !['completed','cancelled'].includes(String(r.status||'').toLowerCase())).length;
+      const completed = rows.filter(r => String(r.status||'').toLowerCase() === 'completed').length;
+      const totalPaid = rows.reduce((sum,r) => sum + Number(r.paidAmount || r.amountPaid || 0), 0);
+      const pendingDocs = rows.reduce((sum,r) => sum + Number(r.pendingDocuments || 0), 0);
+      const vals = document.querySelectorAll('#dash-overview .kpi-val');
+      if(vals[0]) vals[0].textContent = active;
+      if(vals[1]) vals[1].textContent = '₹' + totalPaid.toLocaleString('en-IN');
+      if(vals[2]) vals[2].textContent = pendingDocs;
+      if(vals[3]) vals[3].textContent = completed;
+      const tbody = document.querySelector('#dash-overview .table tbody');
+      if (tbody) {
+        if (!rows.length) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">No services availed yet.</td></tr>';
+        else tbody.innerHTML = rows.slice(0,10).map(r => {
+          const dt = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-IN') : '—';
+          const service = r.service || r.serviceName || r.category || 'Service Request';
+          const status = r.status || 'Received';
+          const amount = Number(r.amount || r.totalAmount || 0);
+          return `<tr><td>${escapeHtml(service)}</td><td>${dt}</td><td><span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">${escapeHtml(status)}</span></td><td>${amount ? '₹'+amount.toLocaleString('en-IN') : '—'}</td></tr>`;
+        }).join('');
+      }
+    }, err => console.warn('Client requests load failed:', err));
+  };
+
+  window._firebaseLogin = async function(email, password) {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+    await handleUser(cred.user);
+    await window.logAuthEvent('login', cred.user);
+    return cred.user;
+  };
 
   // Check for redirect result on page load
   getRedirectResult(auth).then((result) => {
@@ -345,6 +429,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('✓ Firebase user:', user.email);
+      handleUser(user);
       // Update nav logout button to use firebaseSignOut
       document.querySelectorAll('.side-nav a, .admin-nav a').forEach(btn => {
         if(btn.getAttribute('onclick') === "showPage('home')"){
@@ -352,9 +437,11 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
         }
       });
     }
-    // Gate the in-browser News admin UI to the one authorised account.
+    // Gate the in-browser News/Requests admin UI to the one authorised account.
     window._isAdmin = !!(user && user.email === ADMIN_EMAIL);
+    if (window._isAdmin) startAdminListeners(); else stopAdminListeners();
     if (window.refreshAdminNewsGate) window.refreshAdminNewsGate();
+    if (window.refreshAdminRequestsGate) window.refreshAdminRequestsGate();
   });
 
   window.firebaseSignOut = async function() {
@@ -367,7 +454,9 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(cred.user, { displayName: name });
-      handleUser(cred.user);
+      await setDoc(doc(db, 'users', cred.user.uid), { fullName: name, email, mobile: document.getElementById('reg-phone')?.value || '', uid: cred.user.uid, createdAt: serverTimestamp() }, { merge: true });
+      await window.logAuthEvent('register', cred.user, { fullName: name });
+      await handleUser(cred.user);
       showToast('✓ Account created! Welcome, ' + name.split(' ')[0] + '!');
     } catch(err) {
       let msg = err.message || 'Registration failed';
@@ -406,6 +495,60 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   window._deleteNewsItem = async function(id) {
     if (!window._isAdmin) { showToast('⚠ Please sign in with the admin Google account first'); return; }
     await deleteDoc(doc(db, 'news', id));
+  };
+
+  // ═══ ADMIN: LIVE SERVICE REQUESTS + REAL DASHBOARD METRICS (admin-only) ═══
+  // Every client Service Request written by window.saveServiceRequest above is
+  // read back here (gated to the DigiCafe admin account) so it is visible in
+  // Admin > Requests, and feeds the Overview KPIs with real numbers instead of
+  // hard-coded demo figures.
+  window._adminRequests = [];
+  window._adminUsersCount = null;
+  window._adminSignupsThisMonth = null;
+  let _adminRequestsUnsub = null, _adminUsersUnsub = null, _adminAuthEventsUnsub = null;
+
+  function startAdminListeners() {
+    if (_adminRequestsUnsub) return; // already running
+    _adminRequestsUnsub = onSnapshot(collection(db, 'serviceRequests'), (snap) => {
+      const rows = [];
+      snap.forEach(d => rows.push({ id: d.id, ...d.data() }));
+      rows.sort((a, b) => ((b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)));
+      window._adminRequests = rows;
+      if (window.renderAdminRequests) window.renderAdminRequests();
+      if (window.updateAdminOverviewKpis) window.updateAdminOverviewKpis();
+    }, err => console.warn('Admin requests sync unavailable:', err.message));
+
+    _adminUsersUnsub = onSnapshot(collection(db, 'users'), (snap) => {
+      window._adminUsersCount = snap.size;
+      if (window.updateAdminOverviewKpis) window.updateAdminOverviewKpis();
+    }, err => console.warn('Admin users sync unavailable:', err.message));
+
+    _adminAuthEventsUnsub = onSnapshot(collection(db, 'authEvents'), (snap) => {
+      const now = new Date();
+      let count = 0;
+      snap.forEach(d => {
+        const data = d.data();
+        const dt = data.createdAt?.toDate ? data.createdAt.toDate() : null;
+        if (data.type === 'register' && dt && dt.getMonth() === now.getMonth() && dt.getFullYear() === now.getFullYear()) count++;
+      });
+      window._adminSignupsThisMonth = count;
+      if (window.updateAdminOverviewKpis) window.updateAdminOverviewKpis();
+    }, err => console.warn('Admin auth-events sync unavailable:', err.message));
+  }
+
+  function stopAdminListeners() {
+    if (_adminRequestsUnsub) { _adminRequestsUnsub(); _adminRequestsUnsub = null; }
+    if (_adminUsersUnsub) { _adminUsersUnsub(); _adminUsersUnsub = null; }
+    if (_adminAuthEventsUnsub) { _adminAuthEventsUnsub(); _adminAuthEventsUnsub = null; }
+    window._adminRequests = []; window._adminUsersCount = null; window._adminSignupsThisMonth = null;
+  }
+
+  window._updateRequestStatus = async function(id, status) {
+    if (!window._isAdmin) { showToast('⚠ Admin sign-in required'); return; }
+    try {
+      await updateDoc(doc(db, 'serviceRequests', id), { status, updatedAt: serverTimestamp() });
+      showToast('✓ Status updated');
+    } catch (e) { showToast('⚠ Could not update status: ' + e.message); }
   };
 
   console.log("Firebase initialized successfully 🚀");
@@ -1035,9 +1178,9 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   <div class="dash-layout">
     <div class="d-sidebar">
       <div class="d-user">
-        <div class="d-avatar">VK</div>
+        <div class="d-avatar">C</div>
         <div>
-          <div class="d-uname">Vikash Pathak</div>
+          <div class="d-uname">Client</div>
           <div class="d-urole">Client</div>
         </div>
       </div>
@@ -1053,22 +1196,20 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     </div>
     <div class="d-main">
       <div class="d-content active" id="dash-overview">
-        <div class="d-title">Welcome back, Vikash!</div>
+        <div class="d-title">Welcome back, Client!</div>
         <p style="color:var(--txt2);margin-bottom:2rem">Your compliance status and pending applications.</p>
         <div class="kpi-grid">
-          <div class="kpi"><div class="kpi-val">3</div><div class="kpi-label">Active Applications</div></div>
-          <div class="kpi"><div class="kpi-val">₹24,500</div><div class="kpi-label">Total Paid</div></div>
-          <div class="kpi"><div class="kpi-val">2</div><div class="kpi-label">Pending Documents</div></div>
-          <div class="kpi"><div class="kpi-val">5</div><div class="kpi-label">Completed Services</div></div>
+          <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Active Applications</div></div>
+          <div class="kpi"><div class="kpi-val">₹0</div><div class="kpi-label">Total Paid</div></div>
+          <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Pending Documents</div></div>
+          <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Completed Services</div></div>
         </div>
         <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;margin-top:2rem">
           <h3 class="s" style="font-weight:700;margin-bottom:1rem">Recent Applications</h3>
           <table class="table">
             <thead><tr><th>Service</th><th>Date</th><th>Status</th><th>Amount</th></tr></thead>
             <tbody>
-              <tr><td>Income Tax Return (ITR-2)</td><td>15 Jan 2025</td><td><span style="background:rgba(16,185,129,.15);color:var(--green);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">Completed</span></td><td>₹2,999</td></tr>
-              <tr><td>GST Registration</td><td>10 Jan 2025</td><td><span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">Under Review</span></td><td>₹3,499</td></tr>
-              <tr><td>TDS Return Filing (26Q)</td><td>05 Jan 2025</td><td><span style="background:rgba(245,158,11,.15);color:var(--gold);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">In Progress</span></td><td>₹1,999</td></tr>
+              <tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">Loading your services...</td></tr>
             </tbody>
           </table>
         </div>
@@ -1093,6 +1234,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       </div>
       <h4>Management</h4>
       <div class="admin-nav">
+        <a onclick="showAdmin('requests')"><i class="fas fa-inbox"></i> Requests</a>
         <a onclick="showAdmin('clients')"><i class="fas fa-users"></i> Clients</a>
         <a onclick="showAdmin('services')"><i class="fas fa-cogs"></i> Services</a>
         <a onclick="showAdmin('payments')"><i class="fas fa-credit-card"></i> Payments</a>
@@ -1111,21 +1253,19 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       <div class="admin-content active" id="admin-overview">
         <div class="s" style="font-size:1.4rem;font-weight:800;margin-bottom:2rem">Dashboard Analytics</div>
         <div class="admin-kpis">
-          <div class="admin-kpi"><div class="ak-label">Total Clients</div><div class="ak-val">2,843</div></div>
-          <div class="admin-kpi"><div class="ak-label">This Month Revenue</div><div class="ak-val">₹4,52,100</div></div>
-          <div class="admin-kpi"><div class="ak-label">Pending Applications</div><div class="ak-val">127</div></div>
-          <div class="admin-kpi"><div class="ak-label">Completed Tasks</div><div class="ak-val">892</div></div>
-          <div class="admin-kpi"><div class="ak-label">Staff Active</div><div class="ak-val">12</div></div>
-          <div class="admin-kpi"><div class="ak-label">New Sign-ups</div><div class="ak-val">+345</div></div>
+          <div class="admin-kpi"><div class="ak-label">Total Clients</div><div class="ak-val" id="ak-clients">—</div></div>
+          <div class="admin-kpi"><div class="ak-label">This Month Revenue</div><div class="ak-val" id="ak-revenue">—</div></div>
+          <div class="admin-kpi"><div class="ak-label">Pending Applications</div><div class="ak-val" id="ak-pending">—</div></div>
+          <div class="admin-kpi"><div class="ak-label">Completed Tasks</div><div class="ak-val" id="ak-completed">—</div></div>
+          <div class="admin-kpi"><div class="ak-label">Staff Active</div><div class="ak-val">—</div></div>
+          <div class="admin-kpi"><div class="ak-label">New Sign-ups</div><div class="ak-val" id="ak-signups">—</div></div>
         </div>
         <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;margin-top:2rem">
-          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Recent Transactions</h3>
+          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Recent Service Requests</h3>
           <table class="table">
-            <thead><tr><th>Client</th><th>Service</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td>Rahul Agarwal</td><td>ITR Filing</td><td>₹2,999</td><td>15 Jan 2025</td><td><span style="background:rgba(16,185,129,.15);color:var(--green);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">Completed</span></td></tr>
-              <tr><td>Priya Sharma</td><td>GST Registration</td><td>₹3,499</td><td>14 Jan 2025</td><td><span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">Processing</span></td></tr>
-              <tr><td>Mukesh Kumar</td><td>Company Registration</td><td>₹8,999</td><td>13 Jan 2025</td><td><span style="background:rgba(245,158,11,.15);color:var(--gold);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">In Progress</span></td></tr>
+            <thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody id="admin-overview-requests">
+              <tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">Sign in with the admin Google account to see live requests.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1133,6 +1273,24 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       <div class="admin-content" id="admin-clients"><p style="padding:2rem;color:var(--txt2)">Client management here...</p></div>
       <div class="admin-content" id="admin-services"><p style="padding:2rem;color:var(--txt2)">Service management here...</p></div>
       <div class="admin-content" id="admin-payments"><p style="padding:2rem;color:var(--txt2)">Payment analytics here...</p></div>
+      <div class="admin-content" id="admin-requests">
+        <div class="d-title">Service Requests</div>
+        <p style="color:var(--txt2);margin-bottom:1.5rem">Every request submitted from the Digital Assistance Centre appears here in real time, linked to the client's account when they were logged in.</p>
+
+        <!-- Shown only when NOT signed in as the admin account -->
+        <div id="requests-admin-gate" class="glass" style="padding:2rem;border-radius:var(--r2);text-align:center;max-width:460px">
+          <p style="color:var(--txt2);margin-bottom:1rem"><i class="fas fa-lock"></i> Sign in with the DigiCafe admin Google account to view client requests.</p>
+          <button type="button" class="btn btn-primary" onclick="signInWithGoogle()"><i class="fab fa-google"></i> Sign in with Google</button>
+        </div>
+
+        <!-- Shown only when signed in as the admin account -->
+        <div id="requests-admin-panel" class="hidden">
+          <table class="table">
+            <thead><tr><th>Client</th><th>Contact</th><th>Category / Service</th><th>Urgency</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody id="admin-requests-list"></tbody>
+          </table>
+        </div>
+      </div>
       <div class="admin-content" id="admin-news">
         <div class="d-title">News Management</div>
         <p style="color:var(--txt2);margin-bottom:1.5rem">Add today's update below — it publishes to the live site instantly, no file editing needed.</p>
@@ -1235,10 +1393,25 @@ const news = [
   {title:'Company Law: New MCA Portal Features for Annual Compliance',date:'10 Jan 2025',cat:'Companies Act',desc:'Streamlined filing process for AOC-4, MGT-7 with auto-validation.'},
 ];
 
-// Live Firestore news (added via Admin > News) overrides the static list above
-// once at least one item has been published. Until then, the static list shows.
+// News priority:
+//   1. Admin-published items in Firestore (window._liveNews, via Admin > News)
+//   2. Auto-fetched daily updates (window._autoNews, via fetchAutoNews() below)
+//   3. Built-in static fallback list above, so the section is never empty.
 function getNewsData(){
-  return (window._liveNews && window._liveNews.length) ? window._liveNews : news;
+  const manual = (window._liveNews && window._liveNews.length) ? window._liveNews : [];
+  const auto = (window._autoNews && window._autoNews.length) ? window._autoNews : [];
+  if (manual.length || auto.length) {
+    const seen = new Set();
+    const combined = [...manual, ...auto].filter(n => {
+      const key = (n.title || '').trim().toLowerCase();
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    combined.sort((a, b) => (b._ts || 0) - (a._ts || 0));
+    return combined;
+  }
+  return news;
 }
 
 const services = [
@@ -1324,8 +1497,17 @@ function switchTab(t){
 
 function handleLogin(e){
   e.preventDefault();
-  showToast('✓ Login successful!');
-  setTimeout(()=>showPage('dashboard'),1000);
+  const inputs = e.target.querySelectorAll('input');
+  const email = inputs[0].value.trim();
+  const password = inputs[1].value;
+  if (!window._firebaseLogin) { showToast('⚠ Firebase login is not ready.'); return false; }
+  window._firebaseLogin(email, password)
+    .then(()=>showToast('✓ Login successful!'))
+    .catch(err=>{
+      let msg = 'Login failed. Please check your email and password.';
+      if(err.code === 'auth/invalid-credential') msg = 'Invalid email or password.';
+      showToast('⚠ ' + msg);
+    });
   return false;
 }
 
@@ -1368,15 +1550,20 @@ function showToast(m){
 }
 
 // ═══ RENDER ═══
-function renderNews(cont){
-  cont.innerHTML=getNewsData().map(n=>`
+function newsCardHtml(n){
+  const title = n.link ? `<a href="${n.link}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">${n.title}</a>` : n.title;
+  return `
     <div class="news-card">
       <span class="n-cat">${n.cat}</span>
-      <div class="n-title">${n.title}</div>
+      <div class="n-title">${title}</div>
       <div class="n-desc">${n.desc}</div>
-      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
+      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}${n.source ? ' · <i class="fas fa-globe"></i> '+n.source : ''}</div>
     </div>
-  `).join('');
+  `;
+}
+
+function renderNews(cont){
+  cont.innerHTML=getNewsData().map(newsCardHtml).join('');
 }
 
 function renderServices(cont){
@@ -1435,6 +1622,7 @@ function initRender(){
   document.getElementById('calc-grid').innerHTML=calcs.map(c=>`<div class="tool-card" onclick="showToast('${c.split(' ')[1]} - Coming Soon')"><div class="t-icon">${c.split(' ')[0]}</div><div class="t-name">${c.substring(2)}</div><div class="t-desc">Free calculator</div></div>`).join('');
 
   renderNewsCats();
+  fetchAutoNews(); // Task 5: populate/refresh automatic daily news (non-blocking)
 }
 
 function renderNewsCats(){
@@ -1453,20 +1641,82 @@ window.renderAllNews = function(){
   renderNewsCats();
 };
 
+// ═══ AUTOMATIC DAILY NEWS (Task 5) ═══
+// No API key required and nothing secret is exposed: this reads public Google
+// News RSS feeds (Income Tax / GST / MCA-compliance topics) through the free,
+// keyless rss2json converter so it can be fetched directly from the browser.
+// Results are cached in localStorage for 24h so the News section still shows
+// the last successful fetch if the person is offline or the source fails.
+const AUTO_NEWS_CACHE_KEY = 'digicafe_auto_news_v1';
+const AUTO_NEWS_TOPICS = [
+  { q: 'Income Tax India', cat: 'Income Tax' },
+  { q: 'GST India', cat: 'GST' },
+  { q: 'MCA compliance India OR Companies Act India', cat: 'Companies Act' }
+];
+
+function loadAutoNewsCache(){
+  try {
+    const raw = localStorage.getItem(AUTO_NEWS_CACHE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
+}
+
+function saveAutoNewsCache(items){
+  try { localStorage.setItem(AUTO_NEWS_CACHE_KEY, JSON.stringify({ items, fetchedAt: Date.now() })); } catch (e) {}
+}
+
+async function fetchAutoNews(){
+  const cached = loadAutoNewsCache();
+  const ONE_DAY = 24 * 60 * 60 * 1000;
+  // Serve cache immediately so the section is never empty while we refresh.
+  if (cached && cached.items && cached.items.length) {
+    window._autoNews = cached.items;
+    window.renderAllNews && window.renderAllNews();
+    if (Date.now() - cached.fetchedAt < ONE_DAY) return; // still fresh, no refetch needed today
+  }
+  try {
+    const results = await Promise.all(AUTO_NEWS_TOPICS.map(async topic => {
+      const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(topic.q)}&hl=en-IN&gl=IN&ceid=IN:en`;
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+      const res = await fetch(apiUrl);
+      if (!res.ok) throw new Error('rss2json request failed');
+      const data = await res.json();
+      if (data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Unexpected feed response');
+      return data.items.slice(0, 5).map(it => {
+        const ts = it.pubDate ? new Date(it.pubDate).getTime() : Date.now();
+        let source = '';
+        try { source = new URL(it.link).hostname.replace('www.', ''); } catch(e) {}
+        return {
+          title: (it.title || '').replace(/\s*-\s*[^-]+$/, ''), // Google News appends "- Source"
+          date: it.pubDate ? new Date(it.pubDate).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) : '',
+          cat: topic.cat,
+          desc: (it.description || '').replace(/<[^>]*>/g, '').slice(0, 180),
+          source,
+          link: it.link,
+          _ts: ts
+        };
+      });
+    }));
+    const items = results.flat().filter(n => n.title);
+    if (items.length) {
+      window._autoNews = items;
+      saveAutoNewsCache(items);
+      window.renderAllNews && window.renderAllNews();
+    }
+  } catch (err) {
+    console.warn('Automatic news fetch failed, keeping cached/static news:', err.message);
+    // window._autoNews already holds the cache (if any); static `news` array covers the rest.
+  }
+}
+
 function filterNews(btn,cat){
   document.querySelectorAll('#news-cats button').forEach(b=>b.className='btn btn-ghost btn-sm');
   btn.className='btn btn-primary btn-sm';
   const cont=document.getElementById('news-full');
   const data=getNewsData();
   const filtered=cat==='all'?data:data.filter(n=>n.cat===cat);
-  cont.innerHTML=filtered.map(n=>`
-    <div class="news-card">
-      <span class="n-cat">${n.cat}</span>
-      <div class="n-title">${n.title}</div>
-      <div class="n-desc">${n.desc}</div>
-      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
-    </div>
-  `).join('');
+  cont.innerHTML=filtered.map(newsCardHtml).join('');
 }
 
 if(document.readyState==='loading'){
@@ -1510,6 +1760,81 @@ window.renderAdminNewsList = function(){
   `).join('');
 };
 
+// ═══ ADMIN: SERVICE REQUESTS PANEL (Firestore-backed, admin-only) ═══
+const REQUEST_STATUSES = ['Received','In Progress','Under Review','Completed','Cancelled'];
+
+window.refreshAdminRequestsGate = function(){
+  const gate=document.getElementById('requests-admin-gate');
+  const panel=document.getElementById('requests-admin-panel');
+  if(!gate || !panel) return;
+  if(window._isAdmin){
+    gate.classList.add('hidden');
+    panel.classList.remove('hidden');
+    renderAdminRequests();
+  } else {
+    gate.classList.remove('hidden');
+    panel.classList.add('hidden');
+  }
+};
+
+window.renderAdminRequests = function(){
+  const esc = window.escapeHtml || (s=>s);
+  const rows = window._adminRequests || [];
+  const list = document.getElementById('admin-requests-list');
+  const overviewList = document.getElementById('admin-overview-requests');
+  const statusColor = s => ({completed:'var(--green)',cancelled:'var(--txt3)'}[String(s||'').toLowerCase()] || 'var(--blue2)');
+  const statusBg = s => ({completed:'rgba(16,185,129,.15)',cancelled:'rgba(148,163,184,.15)'}[String(s||'').toLowerCase()] || 'rgba(59,130,246,.15)');
+
+  if(list){
+    if(!rows.length){
+      list.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">No service requests yet.</td></tr>';
+    } else {
+      list.innerHTML = rows.map(r=>{
+        const dt = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-IN') : '—';
+        const statusOpts = REQUEST_STATUSES.map(s=>`<option value="${s}" ${((r.status||'Received')===s)?'selected':''}>${s}</option>`).join('');
+        return `<tr>
+          <td>${esc(r.name||'—')}${r.userEmail?'<div style="font-size:.75rem;color:var(--txt3)">'+esc(r.userEmail)+'</div>':''}</td>
+          <td>${esc(r.mobile||'—')}</td>
+          <td>${esc(r.category||'—')}<div style="font-size:.75rem;color:var(--txt3)">${esc(r.service||'')}</div></td>
+          <td>${esc(r.urgency||'—')}</td>
+          <td>${dt}</td>
+          <td><select onchange="window._updateRequestStatus('${r.id}', this.value)" style="background:${statusBg(r.status)};color:${statusColor(r.status)};border:none;border-radius:4px;padding:.25rem .5rem;font-size:.8rem">${statusOpts}</select></td>
+        </tr>`;
+      }).join('');
+    }
+  }
+
+  if(overviewList){
+    if(!rows.length){
+      overviewList.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">No service requests yet.</td></tr>';
+    } else {
+      overviewList.innerHTML = rows.slice(0,6).map(r=>{
+        const dt = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-IN') : '—';
+        return `<tr><td>${esc(r.name||'—')}</td><td>${esc(r.service||r.category||'—')}</td><td>${dt}</td>
+          <td><span style="background:${statusBg(r.status)};color:${statusColor(r.status)};padding:.2rem .6rem;border-radius:4px;font-size:.8rem">${esc(r.status||'Received')}</span></td></tr>`;
+      }).join('');
+    }
+  }
+};
+
+window.updateAdminOverviewKpis = function(){
+  const rows = window._adminRequests || [];
+  const pending = rows.filter(r=>!['completed','cancelled'].includes(String(r.status||'').toLowerCase())).length;
+  const completed = rows.filter(r=>String(r.status||'').toLowerCase()==='completed').length;
+  const now = new Date();
+  const revenue = rows.reduce((sum,r)=>{
+    const dt = r.createdAt?.toDate ? r.createdAt.toDate() : null;
+    const inThisMonth = dt && dt.getMonth()===now.getMonth() && dt.getFullYear()===now.getFullYear();
+    return sum + (inThisMonth ? Number(r.amount||r.totalAmount||0) : 0);
+  }, 0);
+  const set=(id,val)=>{ const el=document.getElementById(id); if(el) el.textContent=val; };
+  set('ak-pending', pending);
+  set('ak-completed', completed);
+  set('ak-revenue', '₹'+revenue.toLocaleString('en-IN'));
+  set('ak-clients', window._adminUsersCount==null ? '—' : window._adminUsersCount.toLocaleString('en-IN'));
+  set('ak-signups', window._adminSignupsThisMonth==null ? '—' : '+'+window._adminSignupsThisMonth);
+};
+
 function submitAdminNews(e){
   e.preventDefault();
   const item = {
@@ -1545,6 +1870,54 @@ function toggleMobileNav(){
 }
 
 // ═══ QUICK SELECTOR / SCROLL TO SERVICE ═══
+function openServiceRequest(serviceName, categoryName){
+  showPage('digital');
+  setTimeout(()=>{
+    const cat=document.getElementById('rh-category');
+    const service=document.getElementById('rh-service');
+    if(cat && categoryName){
+      cat.value=categoryName;
+      updateSpecificServices();
+    }
+    if(service && serviceName) service.value=serviceName;
+    const userEmail = window._currentFirebaseUser?.email || '';
+    const emailInput=document.getElementById('rh-email');
+    if(emailInput && !emailInput.value && userEmail) emailInput.value=userEmail;
+    document.getElementById('request-help')?.scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>document.getElementById('rh-name')?.focus(),350);
+  },100);
+}
+
+function enableServiceCards(){
+  const categoryMap={
+    'dac-tax':'Income Tax & TDS',
+    'dac-gst':'GST & Business Compliance',
+    'dac-accounts':'Accounting & Tally',
+    'dac-career':'Job & Career',
+    'dac-docs':'Digital Documents',
+    'dac-voter':'Voter / SIR',
+    'dac-travel':'Travel',
+    'dac-insurance':'Insurance'
+  };
+  document.querySelectorAll('#page-digital .dac-card').forEach(card=>{
+    if(card.dataset.clickReady==='1') return;
+    const cat=card.closest('.dac-cat');
+    const name=card.querySelector('.dac-name')?.textContent?.trim();
+    const category=cat ? categoryMap[cat.id] : '';
+    if(!name || !category) return;
+    card.dataset.clickReady='1';
+    card.setAttribute('role','button');
+    card.setAttribute('tabindex','0');
+    card.style.cursor='pointer';
+    card.title='Click to request this service';
+    const open=()=>openServiceRequest(name,category);
+    card.addEventListener('click',open);
+    card.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', enableServiceCards);
+
 function scrollDacTo(id){
   showPage('digital');
   setTimeout(()=>{
