@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DigiCafe Admin Portal — Manage clients, services, payments, and platform content.">
+<title>DigiCafe Admin Portal – Authorized Access Only</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e27;--bg2:#0f1535;--bg3:#141d3f;--bg4:#0d1228;
+  --surf:rgba(59,130,246,0.05);--surf2:rgba(59,130,246,0.08);
+  --bdr:rgba(59,130,246,0.15);--bdr2:rgba(59,130,246,0.25);
+  --blue:#3b82f6;--blue2:#60a5fa;--blue3:#1d4ed8;--blue4:#0d47a1;
+  --teal:#06d6a0;--teal2:#34d399;--gold:#f59e0b;--gold2:#fbbf24;
+  --purple:#a855f7;--red:#ef4444;--green:#10b981;--orange:#f97316;
+  --txt:#f8fafc;--txt2:#cbd5e1;--txt3:#94a3b8;--txt4:#64748b;
+  --r:12px;--r2:18px;--shadow:0 10px 40px rgba(0,0,0,0.4);--glow:0 0 60px rgba(59,130,246,0.2)
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--blue2)}
+.s{font-family:'Sora',sans-serif}
+.mono{font-family:'JetBrains Mono',monospace}
+.c{max-width:1320px;margin:0 auto;padding:0 24px}
+.hidden{display:none!important}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .5s cubic-bezier(0.34,1.56,0.64,1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.glass{background:rgba(15,21,53,0.6);border:1px solid var(--bdr);border-radius:var(--r2);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.glass:hover{border-color:var(--bdr2);box-shadow:var(--shadow);transition:all .3s ease}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.7rem 1.6rem;border-radius:var(--r);font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .3s ease;text-decoration:none;font-family:inherit;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color:#fff;box-shadow:0 8px 24px rgba(59,130,246,0.4);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(59,130,246,0.6)}
+.btn-primary:active{transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--txt2);border:2px solid var(--bdr2);backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:var(--surf2);color:var(--txt);border-color:var(--blue2)}
+.btn-sm{padding:.5rem 1.2rem;font-size:.85rem}
+.btn-lg{padding:.9rem 2.2rem;font-size:1rem}
+.btn-full{width:100%;justify-content:center}
+.btn:disabled{opacity:0.6;cursor:not-allowed}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,14,39,0.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:1px solid var(--bdr);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 24px;max-width:1400px;margin:0 auto}
+.logo{font-family:'Sora',sans-serif;font-weight:900;font-size:1.6rem;background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;letter-spacing:-1px;text-transform:uppercase;transition:all .3s}
+.logo:hover{transform:scale(1.05)}
+.logo-badge{display:inline-block;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;padding:.35rem .8rem;border-radius:25px;font-size:.65rem;font-weight:800;margin-left:.6rem;letter-spacing:.5px;text-transform:uppercase}
+
+.login-page{min-height:100vh;display:flex;align-items:center;padding:80px 0;background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(6,214,160,0.08));position:relative;overflow:hidden}
+.login-page::before{content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,0.3),transparent);border-radius:50%;filter:blur(60px)}
+.login-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);backdrop-filter:blur(30px);padding:2.5rem;max-width:440px;width:100%;margin:0 auto;position:relative;z-index:1}
+.login-card h2{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:900;margin-bottom:.5rem;color:var(--txt)}
+.login-card p{color:var(--txt3);font-size:.9rem;margin-bottom:1.5rem;font-weight:500}
+
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;font-size:.85rem;font-weight:700;color:var(--txt2);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.5px}
+.form-group input{width:100%;padding:.9rem 1.2rem;border-radius:var(--r);background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);font-family:inherit;font-size:.95rem;transition:all .3s}
+.form-group input:focus{outline:none;border-color:var(--blue2);box-shadow:0 0 0 4px rgba(59,130,246,0.2);background:var(--bg3)}
+
+.alert{padding:1.25rem;border-radius:var(--r);margin-bottom:1.5rem;font-size:.9rem;display:flex;align-items:flex-start;gap:.75rem}
+.alert-danger{background:rgba(239,68,68,0.1);border:1.5px solid rgba(239,68,68,0.3);color:#fca5a5;border-left:4px solid var(--red)}
+
+.admin-layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 68px)}
+.admin-sidebar{background:var(--bg2);border-right:1px solid var(--bdr);padding:2rem 1.5rem;position:sticky;top:68px;height:calc(100vh - 68px);overflow-y:auto}
+.admin-sidebar h4{font-size:.75rem;font-weight:800;color:var(--txt4);text-transform:uppercase;letter-spacing:1px;padding:.8rem 0 .4rem;margin-top:1.5rem;margin-bottom:1rem}
+.admin-nav a{display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;color:var(--txt3);font-size:.9rem;font-weight:600;border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:.3rem}
+.admin-nav a:hover{background:var(--surf2);color:var(--txt)}
+.admin-nav a.active{background:linear-gradient(135deg,rgba(59,130,246,0.3),rgba(6,214,160,0.1));color:#60a5fa;border-left:3px solid #60a5fa;padding-left:calc(1.2rem - 3px)}
+.admin-main{background:var(--bg);padding:2.5rem;overflow-y:auto}
+.admin-content{display:none}
+.admin-content.active{display:block}
+
+.admin-kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;margin-bottom:2.5rem}
+.admin-kpi{background:linear-gradient(135deg,var(--surf),rgba(59,130,246,0.03));border:1px solid var(--bdr);border-radius:var(--r2);padding:1.75rem;transition:all .3s}
+.admin-kpi:hover{border-color:var(--bdr2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(59,130,246,0.15)}
+.ak-val{font-family:'Sora',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+.ak-label{font-size:.8rem;color:var(--txt4);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+
+.table{width:100%;border-collapse:collapse;font-size:.9rem}
+.table th{text-align:left;padding:1rem;background:var(--bg3);color:var(--txt4);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;font-weight:700;border-bottom:2px solid var(--bdr)}
+.table td{padding:1rem;border-bottom:1px solid var(--bdr);color:var(--txt2)}
+.table tr:hover td{background:var(--surf)}
+
+#toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:var(--bg3);border:1.5px solid var(--bdr2);border-radius:var(--r);padding:1rem 1.5rem;font-size:.9rem;font-weight:600;box-shadow:var(--shadow);transform:translateX(120%);transition:transform .3s cubic-bezier(0.34,1.56,0.64,1);max-width:380px}
+#toast.show{transform:translateX(0)}
+#toast.success{border-left:4px solid #10b981}
+#toast.error{border-left:4px solid #ef4444}
+#toast.info{border-left:4px solid #60a5fa}
+
+@media(max-width:1024px){.admin-layout{grid-template-columns:1fr}.admin-sidebar{display:none}}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <div class="nav-wrap">
+    <div class="logo" onclick="goHome()">
+      DigiCafe <span class="logo-badge">ADMIN</span>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn btn-primary btn-sm" id="logout-btn" style="display:none" onclick="adminSignOut()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+</nav>
+
+<!-- LOGIN PAGE -->
+<div class="page active" id="page-login">
+  <div class="login-page">
+    <div class="login-card">
+      <h2>Admin Portal</h2>
+      <p>DigiCafe — Authorized Access Only</p>
+      
+      <div class="alert alert-danger" id="auth-error" style="display:none"></div>
+      
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="form-group">
+          <label>Admin Email</label>
+          <input type="email" id="admin-email" placeholder="admin@digicafe.com" required autofocus>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="admin-password" placeholder="Your password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" style="padding:1rem;margin-bottom:1rem"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      </form>
+      
+      <div style="text-align:center;font-size:.8rem;color:var(--txt3);margin-top:1.5rem">
+        <p style="margin-bottom:.5rem">Only authorized admins can access this portal.</p>
+        <p>Unauthorized access attempts are logged.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="page" id="page-admin">
+  <div class="admin-layout">
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar">
+      <div style="font-weight:900;font-size:1.1rem;margin-bottom:2rem;color:var(--txt)">Admin Panel</div>
+      <h4>Dashboard</h4>
+      <div class="admin-nav">
+        <a onclick="showAdminPage('overview')" class="active"><i class="fas fa-chart-line"></i> Overview</a>
+      </div>
+      <h4>Management</h4>
+      <div class="admin-nav">
+        <a onclick="showAdminPage('clients')"><i class="fas fa-users"></i> Clients</a>
+        <a onclick="showAdminPage('services')"><i class="fas fa-cogs"></i> Services</a>
+        <a onclick="showAdminPage('payments')"><i class="fas fa-credit-card"></i> Payments</a>
+      </div>
+      <h4>Operations</h4>
+      <div class="admin-nav">
+        <a onclick="showAdminPage('requests')"><i class="fas fa-tasks"></i> Requests</a>
+      </div>
+      <h4>Account</h4>
+      <div class="admin-nav">
+        <a onclick="adminSignOut()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      <!-- OVERVIEW -->
+      <div class="admin-content active" id="admin-overview">
+        <div class="s" style="font-size:1.6rem;font-weight:900;margin-bottom:2.5rem">📊 Dashboard Analytics</div>
+        <div class="admin-kpis">
+          <div class="admin-kpi"><div class="ak-label">Total Clients</div><div class="ak-val">2,843</div></div>
+          <div class="admin-kpi"><div class="ak-label">This Month Revenue</div><div class="ak-val">₹4,52,100</div></div>
+          <div class="admin-kpi"><div class="ak-label">Pending Applications</div><div class="ak-val">127</div></div>
+          <div class="admin-kpi"><div class="ak-label">Completed Tasks</div><div class="ak-val">892</div></div>
+          <div class="admin-kpi"><div class="ak-label">Staff Active</div><div class="ak-val">12</div></div>
+          <div class="admin-kpi"><div class="ak-label">New Sign-ups</div><div class="ak-val">+345</div></div>
+        </div>
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;margin-top:2rem">
+          <h3 class="s" style="font-weight:800;margin-bottom:1.5rem;font-size:1.2rem">Recent Transactions</h3>
+          <table class="table">
+            <thead><tr><th>Client</th><th>Service</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Rahul Agarwal</td><td>ITR Filing</td><td>₹2,999</td><td>15 Jan 2025</td><td><span style="background:rgba(16,185,129,.15);color:var(--green);padding:.3rem .8rem;border-radius:6px;font-size:.8rem;font-weight:700">✓ Completed</span></td></tr>
+              <tr><td>Priya Sharma</td><td>GST Registration</td><td>₹3,499</td><td>14 Jan 2025</td><td><span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.3rem .8rem;border-radius:6px;font-size:.8rem;font-weight:700">Processing</span></td></tr>
+              <tr><td>Mukesh Kumar</td><td>Company Registration</td><td>₹8,999</td><td>13 Jan 2025</td><td><span style="background:rgba(245,158,11,.15);color:var(--gold2);padding:.3rem .8rem;border-radius:6px;font-size:.8rem;font-weight:700">In Progress</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- OTHER SECTIONS -->
+      <div class="admin-content" id="admin-clients">
+        <div class="s" style="font-size:1.6rem;font-weight:900;margin-bottom:1.5rem">👥 Client Management</div>
+        <button class="btn btn-primary btn-lg" style="margin-bottom:1.5rem"><i class="fas fa-plus"></i> Add Client</button>
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:3rem;text-align:center;color:var(--txt3)">
+          <i class="fas fa-users" style="font-size:3rem;opacity:.5;margin-bottom:1rem;display:block"></i>
+          <p>Client management interface would display all clients, their services, invoices, and communication history.</p>
+        </div>
+      </div>
+
+      <div class="admin-content" id="admin-services">
+        <div class="s" style="font-size:1.6rem;font-weight:900;margin-bottom:1.5rem">⚙️ Service Management</div>
+        <button class="btn btn-primary btn-lg" style="margin-bottom:1.5rem"><i class="fas fa-plus"></i> Add Service</button>
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:3rem;text-align:center;color:var(--txt3)">
+          <i class="fas fa-cogs" style="font-size:3rem;opacity:.5;margin-bottom:1rem;display:block"></i>
+          <p>Manage all services, pricing, documents required, and processing timelines.</p>
+        </div>
+      </div>
+
+      <div class="admin-content" id="admin-payments">
+        <div class="s" style="font-size:1.6rem;font-weight:900;margin-bottom:1.5rem">💳 Payment Management</div>
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:3rem;text-align:center;color:var(--txt3)">
+          <i class="fas fa-credit-card" style="font-size:3rem;opacity:.5;margin-bottom:1rem;display:block"></i>
+          <p>View all payments, refunds, transaction history, and payment reconciliation.</p>
+        </div>
+      </div>
+
+      <div class="admin-content" id="admin-news">
+        <div class="s" style="font-size:1.6rem;font-weight:900;margin-bottom:1.5rem">📰 News Management</div>
+        <button class="btn btn-primary btn-lg" style="margin-bottom:1.5rem"><i class="fas fa-plus"></i> Publish News</button>
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:3rem;text-align:center;color:var(--txt3)">
+          <i class="fas fa-newspaper" style="font-size:3rem;opacity:.5;margin-bottom:1rem;display:block"></i>
+          <p>Publish tax updates, government notifications, and compliance news to all clients.</p>
+        </div>
+      </div>
+
+      <!-- REQUESTS MANAGEMENT -->
+      <div class="admin-content" id="admin-requests">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem">
+          <div class="s" style="font-size:1.6rem;font-weight:900">📋 Service Requests</div>
+          <button class="btn btn-primary btn-sm" onclick="refreshRequests()"><i class="fas fa-sync"></i> Refresh</button>
+        </div>
+        
+        <!-- FILTERS -->
+        <div style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
+          <select id="status-filter" style="padding:.7rem 1rem;background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);border-radius:var(--r);font-weight:600;cursor:pointer">
+            <option value="">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="on-hold">On Hold</option>
+          </select>
+          <select id="service-filter" style="padding:.7rem 1rem;background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);border-radius:var(--r);font-weight:600;cursor:pointer">
+            <option value="">All Services</option>
+            <option value="Income Tax">Income Tax</option>
+            <option value="GST">GST</option>
+            <option value="Company Reg">Company Registration</option>
+            <option value="TDS">TDS</option>
+          </select>
+        </div>
+
+        <!-- REQUESTS TABLE -->
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);overflow:hidden">
+          <table class="table" style="margin:0">
+            <thead><tr>
+              <th>Client Name</th>
+              <th>Service</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Documents</th>
+              <th>Actions</th>
+            </tr></thead>
+            <tbody id="requests-tbody">
+              <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--txt3)"><i class="fas fa-spinner fa-spin"></i> Loading requests...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDcdR-ba5Lh-DfG-wuABRntQm1sSYSr3Kk",
+    authDomain: "digicafe-ee519.firebaseapp.com",
+    projectId: "digicafe-ee519",
+    storageBucket: "digicafe-ee519.appspot.com",
+    messagingSenderId: "582268562769",
+    appId: "1:582268562769:web:720288e24fd8de7166f770",
+    measurementId: "G-25T4WHH8X4"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+
+  const AUTHORIZED_ADMINS = ['vikashpathak.mgmt@gmail.com', 'admin@digicafe.com', 'support@digicafe.com'];
+
+  function isAuthorizedAdmin(email) {
+    return AUTHORIZED_ADMINS.includes(email.toLowerCase());
+  }
+
+  window.handleAdminLogin = async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('admin-email').value;
+    const password = document.getElementById('admin-password').value;
+    const errorDiv = document.getElementById('auth-error');
+    const loginBtn = e.target.querySelector('button[type="submit"]');
+    
+    if (!isAuthorizedAdmin(email)) {
+      errorDiv.style.display = 'flex';
+      errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> <span>This email is not authorized as an admin. Access denied.</span>';
+      showToast('⚠ Unauthorized admin email', 'error');
+      console.warn('Unauthorized admin login attempt:', email);
+      return false;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+    
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      if (!isAuthorizedAdmin(result.user.email)) {
+        await signOut(auth);
+        errorDiv.style.display = 'flex';
+        errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> <span>Access denied. Only authorized admins can log in.</span>';
+        showToast('⚠ Access denied', 'error');
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        return false;
+      }
+      console.log('✓ Admin logged in:', result.user.email);
+      showToast('✓ Admin access granted', 'success');
+      errorDiv.style.display = 'none';
+      setTimeout(() => {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-admin').classList.add('active');
+        document.getElementById('logout-btn').style.display = 'flex';
+      }, 500);
+    } catch(err) {
+      errorDiv.style.display = 'flex';
+      errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> <span>Login failed: ' + (err.message || 'Invalid credentials') + '</span>';
+      showToast('⚠ Login failed', 'error');
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+    }
+    return false;
+  };
+
+  window.adminSignOut = async function() {
+    await signOut(auth);
+    document.getElementById('logout-btn').style.display = 'none';
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-login').classList.add('active');
+    showToast('✓ Logged out', 'success');
+    document.getElementById('admin-email').value = '';
+    document.getElementById('admin-password').value = '';
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user && isAuthorizedAdmin(user.email)) {
+      console.log('✓ Admin authorized:', user.email);
+      document.getElementById('logout-btn').style.display = 'flex';
+      document.getElementById('page-login').classList.remove('active');
+      document.getElementById('page-admin').classList.add('active');
+    } else if (user) {
+      console.warn('⚠ Non-admin user tried to access admin panel:', user.email);
+      signOut(auth);
+      showToast('⚠ Access denied', 'error');
+      document.getElementById('page-login').classList.add('active');
+      document.getElementById('page-admin').classList.remove('active');
+    } else {
+      document.getElementById('logout-btn').style.display = 'none';
+      document.getElementById('page-login').classList.add('active');
+      document.getElementById('page-admin').classList.remove('active');
+    }
+  });
+
+  console.log("Admin Portal Firebase initialized 🚀");
+</script>
+
+<script>
+function goHome() {
+  window.location.href = 'index.html';
+}
+
+function showAdminPage(section) {
+  document.querySelectorAll('.admin-content').forEach(x => x.classList.remove('active'));
+  document.getElementById('admin-' + section).classList.add('active');
+  document.querySelectorAll('.admin-sidebar a').forEach(a => a.classList.remove('active'));
+  event.target.closest('a').classList.add('active');
+  
+  if(section === 'requests') {
+    loadRequests();
+  }
+}
+
+// ═══ REQUEST MANAGEMENT ═══
+const mockRequests = [
+  {id:1, client:'Rahul Agarwal', email:'rahul@example.com', service:'Income Tax (ITR)', date:'15 Jan 2025', status:'pending', amount:'₹2,999'},
+  {id:2, client:'Priya Sharma', email:'priya@example.com', service:'GST Registration', date:'14 Jan 2025', status:'in-progress', amount:'₹3,499'},
+  {id:3, client:'Mukesh Kumar', email:'mukesh@example.com', service:'Company Registration', date:'13 Jan 2025', status:'completed', amount:'₹8,999'},
+  {id:4, client:'Anjali Singh', email:'anjali@example.com', service:'TDS Compliance', date:'12 Jan 2025', status:'pending', amount:'₹1,499'},
+  {id:5, client:'Arun Patel', email:'arun@example.com', service:'Trademark Registration', date:'11 Jan 2025', status:'on-hold', amount:'₹2,999'},
+];
+
+function loadRequests() {
+  const tbody = document.getElementById('requests-tbody');
+  const statusFilter = document.getElementById('status-filter').value;
+  const serviceFilter = document.getElementById('service-filter').value;
+  
+  let filtered = mockRequests.filter(r => {
+    if(statusFilter && r.status !== statusFilter) return false;
+    if(serviceFilter && r.service !== serviceFilter) return false;
+    return true;
+  });
+  
+  if(filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--txt3)">No requests found</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = filtered.map(req => `
+    <tr>
+      <td><strong>${req.client}</strong><br><span style="font-size:.75rem;color:var(--txt3)">${req.email}</span></td>
+      <td>${req.service}</td>
+      <td>${req.date}</td>
+      <td>
+        <select onchange="updateRequestStatus(${req.id}, this.value)" style="padding:.4rem .6rem;background:var(--bg2);border:1px solid var(--bdr);color:var(--txt);border-radius:6px;font-size:.8rem;font-weight:700;cursor:pointer;min-width:110px">
+          <option value="pending" ${req.status==='pending'?'selected':''}>⏳ Pending</option>
+          <option value="in-progress" ${req.status==='in-progress'?'selected':''}>⚙️ In Progress</option>
+          <option value="completed" ${req.status==='completed'?'selected':''}>✅ Completed</option>
+          <option value="on-hold" ${req.status==='on-hold'?'selected':''}>⏸️ On Hold</option>
+        </select>
+      </td>
+      <td><button class="btn btn-sm" style="background:rgba(59,130,246,.2);color:var(--blue2);border:none;cursor:pointer" onclick="showDocuments(${req.id})"><i class="fas fa-file"></i> Docs</button></td>
+      <td>
+        <button class="btn btn-sm" style="background:rgba(59,130,246,.2);color:var(--blue2);border:none;cursor:pointer;margin-right:.25rem" onclick="uploadDocument(${req.id})"><i class="fas fa-upload"></i></button>
+        <button class="btn btn-sm" style="background:rgba(6,214,160,.2);color:var(--teal);border:none;cursor:pointer" onclick="downloadDocument(${req.id})"><i class="fas fa-download"></i></button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function updateRequestStatus(id, status) {
+  const req = mockRequests.find(r => r.id === id);
+  if(req) {
+    req.status = status;
+    showToast(`✓ Request #${id} status updated to: ${status}`, 'success');
+    loadRequests();
+  }
+}
+
+function uploadDocument(id) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.multiple = true;
+  input.onchange = (e) => {
+    const files = e.target.files;
+    if(files.length > 0) {
+      const fileNames = Array.from(files).map(f => f.name).join(', ');
+      showToast(`✓ Uploaded ${files.length} file(s) for request #${id}: ${fileNames}`, 'success');
+    }
+  };
+  input.click();
+}
+
+function downloadDocument(id) {
+  const req = mockRequests.find(r => r.id === id);
+  if(req) {
+    showToast(`✓ Downloading documents for: ${req.client}`, 'success');
+    // In real app: create zip or download specific documents
+  }
+}
+
+function showDocuments(id) {
+  const req = mockRequests.find(r => r.id === id);
+  showToast(`📄 ${req.client} has uploaded: ITR_2024.pdf, PAN_Card.jpg (2 files)`, 'info');
+}
+
+function refreshRequests() {
+  loadRequests();
+  showToast('✓ Requests refreshed', 'success');
+}
+
+function showToast(msg, type = 'info') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>
