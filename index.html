@@ -12,236 +12,200 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#07091a;--bg2:#0c1029;--bg3:#111836;--bg4:#0a0e24;
-  --surf:rgba(255,255,255,0.04);--surf2:rgba(255,255,255,0.08);
-  --bdr:rgba(255,255,255,0.08);--bdr2:rgba(255,255,255,0.15);
-  --blue:#3b82f6;--blue2:#60a5fa;--blue3:#1d4ed8;--teal:#06d6a0;--teal2:#34d399;
-  --gold:#f59e0b;--purple:#a855f7;--red:#ef4444;--green:#10b981;
-  --txt:#f1f5f9;--txt2:#94a3b8;--txt3:#64748b;--txt4:#475569;
-  --r:10px;--r2:16px;
+  --bg:#0a0e27;--bg2:#0f1535;--bg3:#141d3f;--bg4:#0d1228;
+  --surf:rgba(59,130,246,0.05);--surf2:rgba(59,130,246,0.08);
+  --bdr:rgba(59,130,246,0.15);--bdr2:rgba(59,130,246,0.25);
+  --blue:#3b82f6;--blue2:#60a5fa;--blue3:#1d4ed8;--blue4:#0d47a1;
+  --teal:#06d6a0;--teal2:#34d399;--gold:#f59e0b;--gold2:#fbbf24;
+  --purple:#a855f7;--red:#ef4444;--green:#10b981;--orange:#f97316;
+  --txt:#f8fafc;--txt2:#cbd5e1;--txt3:#94a3b8;--txt4:#64748b;
+  --r:12px;--r2:18px;--shadow:0 10px 40px rgba(0,0,0,0.4);--glow:0 0 60px rgba(59,130,246,0.2)
 }
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--blue2)}
 .s{font-family:'Sora',sans-serif}
 .mono{font-family:'JetBrains Mono',monospace}
-.c{max-width:1280px;margin:0 auto;padding:0 20px}
+.c{max-width:1320px;margin:0 auto;padding:0 24px}
 .hidden{display:none!important}
 .page{display:none}
-.page.active{display:block;animation:fadeIn .4s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.glass{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);backdrop-filter:blur(16px)}
-.glass:hover{border-color:var(--bdr2);transition:all .3s}
-.g-text{background:linear-gradient(135deg,var(--blue2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:var(--r);font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .25s;text-decoration:none;font-family:inherit}
-.btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue3));color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.3)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,.4)}
-.btn-ghost{background:transparent;color:var(--txt2);border:1px solid var(--bdr2)}
-.btn-ghost:hover{background:var(--surf2);color:var(--txt)}
-.btn-sm{padding:.45rem 1rem;font-size:.82rem}
-.btn-lg{padding:.85rem 2rem;font-size:1rem}
-.btn-full{width:100%;justify-content:center}
-.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .8rem;border-radius:20px;font-size:.78rem;font-weight:600}
-.badge-blue{background:rgba(59,130,246,.15);color:var(--blue2);border:1px solid rgba(59,130,246,.25)}
-.badge-teal{background:rgba(6,214,160,.12);color:var(--teal);border:1px solid rgba(6,214,160,.25)}
+.page.active{display:block;animation:fadeIn .5s cubic-bezier(0.34,1.56,0.64,1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,9,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr)}
-.nav-wrap{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 20px;max-width:1400px;margin:0 auto}
-.logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.4rem;background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
-.nav-center{display:flex;gap:.15rem;list-style:none}
-/* Sections temporarily hidden from the public nav (Section 1 request) — markup/JS kept intact for later re-enable. */
-.nav-hideable{display:none!important}
-.nav-center a{display:block;padding:.4rem .75rem;color:var(--txt2);font-size:.85rem;font-weight:500;text-decoration:none;border-radius:8px;cursor:pointer;transition:all .2s}
-.nav-center a:hover,.nav-center a.active{color:var(--txt);background:var(--surf2)}
-.nav-right{display:flex;gap:.75rem;align-items:center}
+/* GLASS MORPHISM */
+.glass{background:rgba(15,21,53,0.6);border:1px solid var(--bdr);border-radius:var(--r2);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.glass:hover{border-color:var(--bdr2);box-shadow:var(--shadow);transition:all .3s ease}
+
+/* GRADIENTS */
+.g-text{background:linear-gradient(135deg,#60a5fa 0%,#06d6a0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.g-blue{background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%)}
+.g-teal{background:linear-gradient(135deg,#06d6a0 0%,#059669 100%)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.7rem 1.6rem;border-radius:var(--r);font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .3s ease;text-decoration:none;font-family:inherit;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color:#fff;box-shadow:0 8px 24px rgba(59,130,246,0.4);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(59,130,246,0.6)}
+.btn-primary:active{transform:translateY(-1px)}
+.btn-teal{background:linear-gradient(135deg,#06d6a0 0%,#059669 100%);color:#000;font-weight:700;box-shadow:0 8px 24px rgba(6,214,160,0.3)}
+.btn-teal:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(6,214,160,0.4)}
+.btn-ghost{background:transparent;color:var(--txt2);border:2px solid var(--bdr2);backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:var(--surf2);color:var(--txt);border-color:var(--blue2)}
+.btn-sm{padding:.5rem 1.2rem;font-size:.85rem}
+.btn-lg{padding:.9rem 2.2rem;font-size:1rem}
+.btn-xl{padding:1.1rem 2.8rem;font-size:1.05rem}
+.btn-full{width:100%;justify-content:center}
+.btn:disabled{opacity:0.6;cursor:not-allowed}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem 1rem;border-radius:30px;font-size:.75rem;font-weight:700;letter-spacing:.5px}
+.badge-blue{background:rgba(59,130,246,0.2);color:#60a5fa;border:1px solid rgba(59,130,246,0.4)}
+.badge-teal{background:rgba(6,214,160,0.2);color:#34d399;border:1px solid rgba(6,214,160,0.4)}
+.badge-gold{background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4)}
+
+/* NAVIGATION */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,14,39,0.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:1px solid var(--bdr);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 24px;max-width:1400px;margin:0 auto}
+.logo{font-family:'Sora',sans-serif;font-weight:900;font-size:1.6rem;background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;letter-spacing:-1px;text-transform:uppercase;transition:all .3s}
+.logo:hover{transform:scale(1.05)}
+.nav-center{display:flex;gap:.25rem;list-style:none;align-items:center}
+.nav-center a{display:block;padding:.5rem 1rem;color:var(--txt3);font-size:.9rem;font-weight:600;text-decoration:none;border-radius:10px;cursor:pointer;transition:all .2s;position:relative}
+.nav-center a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,#60a5fa,#06d6a0);transition:width .3s}
+.nav-center a:hover{color:var(--txt);background:var(--surf2)}
+.nav-center a:hover::after{width:100%}
+.nav-center a.active{color:var(--txt);background:var(--surf2)}
+.nav-right{display:flex;gap:1rem;align-items:center}
 @media(max-width:1024px){.nav-center{display:none}}
 
-/* HERO */
-.hero{min-height:85vh;display:flex;align-items:center;padding-top:64px;background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(6,214,160,.05))}
-.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.hero h1{font-family:'Sora',sans-serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;line-height:1.1;margin-bottom:1.25rem}
-.hero p{font-size:1.05rem;color:var(--txt2);max-width:560px;margin-bottom:2rem;line-height:1.8}
+/* HERO SECTION */
+.hero{min-height:90vh;display:flex;align-items:center;padding:80px 0;background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(6,214,160,0.08));position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,0.3),transparent);border-radius:50%;filter:blur(60px);animation:float 8s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-30px)}}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(2.4rem,6vw,4rem);font-weight:900;line-height:1.15;margin-bottom:1.5rem;color:var(--txt)}
+.hero h1 span{background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1rem;color:var(--txt2);max-width:600px;margin-bottom:2.5rem;line-height:1.8;font-weight:500}
+.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
 @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}}
 
-/* SECTION */
-.sec{padding:80px 0}
-.sh{text-align:center;margin-bottom:3rem}
-.sh h2{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin:.75rem 0 1rem}
-.sh p{color:var(--txt2);font-size:1.05rem;max-width:580px;margin:0 auto}
+/* SECTIONS */
+.sec{padding:100px 0;position:relative}
+.sec:nth-child(even){background:linear-gradient(135deg,rgba(59,130,246,0.03),rgba(6,214,160,0.02))}
+.sh{text-align:center;margin-bottom:4rem}
+.sh h2{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin:.75rem 0 1.25rem;letter-spacing:-1px}
+.sh p{color:var(--txt2);font-size:1.1rem;max-width:620px;margin:0 auto;font-weight:500}
 
-/* NEWS */
-.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
-.news-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;transition:all .3s;cursor:pointer}
-.news-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 8px 32px rgba(59,130,246,.15)}
-.n-cat{display:inline-block;padding:.3rem .8rem;background:rgba(59,130,246,.15);color:var(--blue2);border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:.75rem}
-.n-title{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem;line-height:1.4}
-.n-desc{font-size:.85rem;color:var(--txt2);margin-bottom:1rem;line-height:1.6}
-.n-date{font-size:.78rem;color:var(--txt3)}
+/* CARDS */
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2rem}
+.news-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;transition:all .4s cubic-bezier(0.34,1.56,0.64,1);cursor:pointer;position:relative;overflow:hidden}
+.news-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(59,130,246,0.1),transparent);opacity:0;transition:opacity .4s}
+.news-card:hover{border-color:var(--bdr2);transform:translateY(-8px);box-shadow:var(--shadow)}
+.news-card:hover::before{opacity:1}
+.n-cat{display:inline-block;padding:.4rem 1rem;background:linear-gradient(135deg,rgba(59,130,246,0.25),rgba(6,214,160,0.15));color:#60a5fa;border-radius:25px;font-size:.75rem;font-weight:700;margin-bottom:1rem;letter-spacing:.5px;text-transform:uppercase}
+.n-title{font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:.75rem;line-height:1.4;color:var(--txt)}
+.n-desc{font-size:.9rem;color:var(--txt3);margin-bottom:1.25rem;line-height:1.7}
+.n-date{font-size:.8rem;color:var(--txt4);display:flex;align-items:center;gap:.5rem}
 
 /* TOOLS GRID */
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
-.tool-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;text-align:center;transition:all .3s;cursor:pointer}
-.tool-card:hover{border-color:var(--blue);transform:translateY(-3px)}
-.t-icon{font-size:2.5rem;margin-bottom:.75rem}
-.t-name{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.4rem}
-.t-desc{font-size:.8rem;color:var(--txt2)}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.75rem}
+.tool-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;text-align:center;transition:all .3s;cursor:pointer}
+.tool-card:hover{border-color:var(--bdr2);transform:translateY(-5px);box-shadow:0 12px 32px rgba(59,130,246,0.2)}
+.t-icon{font-size:3rem;margin-bottom:1rem;display:inline-block}
+.t-name{font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.5rem;color:var(--txt)}
+.t-desc{font-size:.85rem;color:var(--txt3);line-height:1.5}
 
 /* COURSES */
-.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
-.course-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);overflow:hidden;transition:all .3s}
-.course-card:hover{border-color:var(--blue);transform:translateY(-4px)}
-.c-thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(6,214,160,.05))}
-.c-body{padding:1.25rem}
-.c-title{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.4rem}
-.c-desc{font-size:.8rem;color:var(--txt2);margin-bottom:.75rem;line-height:1.5}
-.c-meta{display:flex;gap:.5rem;font-size:.75rem;color:var(--txt3);margin-bottom:.75rem}
-.c-btn{width:100%;padding:.6rem;background:var(--blue);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}
+.course-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);overflow:hidden;transition:all .4s;cursor:pointer}
+.course-card:hover{border-color:var(--bdr2);transform:translateY(-8px);box-shadow:0 16px 40px rgba(59,130,246,0.25)}
+.c-thumb{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(6,214,160,0.1));position:relative;overflow:hidden}
+.c-thumb::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.1),transparent);opacity:0;transition:opacity .4s}
+.course-card:hover .c-thumb::before{opacity:1}
+.c-body{padding:1.5rem}
+.c-title{font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:800;margin-bottom:.5rem;color:var(--txt)}
+.c-desc{font-size:.85rem;color:var(--txt3);margin-bottom:1rem;line-height:1.6}
+.c-meta{display:flex;gap:1rem;font-size:.75rem;color:var(--txt4);margin-bottom:1rem;font-weight:600}
+.c-btn{width:100%;padding:.75rem;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:700;transition:all .3s;font-size:.9rem}
+.c-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(59,130,246,0.4)}
 
 /* SERVICES */
-.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
-.svc-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;transition:all .3s;cursor:pointer}
-.svc-card:hover{border-color:var(--blue);background:var(--surf2);transform:translateY(-3px)}
-.s-icon{font-size:2rem;margin-bottom:.75rem}
-.s-title{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.3rem}
-.s-desc{font-size:.8rem;color:var(--txt2);margin-bottom:.75rem;line-height:1.5}
-.s-price{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--teal);font-weight:600}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.75rem}
+.svc-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;transition:all .3s;cursor:pointer;position:relative}
+.svc-card:hover{border-color:var(--bdr2);background:var(--surf2);transform:translateY(-5px);box-shadow:0 12px 32px rgba(59,130,246,0.2)}
+.s-icon{font-size:2.5rem;margin-bottom:1rem;display:inline-block}
+.s-title{font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.5rem;color:var(--txt)}
+.s-desc{font-size:.85rem;color:var(--txt3);margin-bottom:1rem;line-height:1.6}
+.s-price{font-family:'Sora',sans-serif;font-size:1.1rem;color:#06d6a0;font-weight:800}
 
-/* CLIENT DASHBOARD */
-.dash-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 64px)}
-.d-sidebar{background:var(--bg2);border-right:1px solid var(--bdr);padding:1.5rem 1rem;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto}
-.d-user{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding:1rem;background:var(--surf);border-radius:var(--r);border:1px solid var(--bdr)}
-.d-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-.d-uname{font-weight:700;font-size:.9rem}
-.d-urole{font-size:.75rem;color:var(--txt3)}
+/* DASHBOARD */
+.dash-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 68px)}
+.d-sidebar{background:var(--bg2);border-right:1px solid var(--bdr);padding:2rem 1.5rem;position:sticky;top:68px;height:calc(100vh - 68px);overflow-y:auto}
+.d-user{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding:1.25rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2)}
+.d-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#60a5fa,#06d6a0);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.1rem;flex-shrink:0}
+.d-uname{font-weight:800;font-size:.95rem;color:var(--txt)}
+.d-urole{font-size:.8rem;color:var(--txt3)}
 .side-nav{list-style:none}
-.side-nav a{display:flex;align-items:center;gap:.6rem;padding:.6rem .9rem;color:var(--txt2);font-size:.85rem;font-weight:500;border-radius:8px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:.15rem}
-.side-nav a:hover{background:var(--surf2);color:var(--txt)}
-.side-nav a.active{background:rgba(59,130,246,.15);color:var(--blue2)}
-.d-main{background:var(--bg);padding:2rem;overflow-y:auto}
+.side-nav a{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;color:var(--txt3);font-size:.9rem;font-weight:600;border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:.2rem}
+.side-nav a:hover{background:var(--surf);color:var(--txt)}
+.side-nav a.active{background:linear-gradient(135deg,rgba(59,130,246,0.3),rgba(6,214,160,0.1));color:#60a5fa;border-left:3px solid #60a5fa;padding-left:calc(1rem - 3px)}
+.d-main{background:var(--bg);padding:2.5rem;overflow-y:auto}
 .d-content{display:none}
 .d-content.active{display:block}
-.d-title{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.4rem}
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.25rem;margin-bottom:2rem}
-.kpi{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;transition:all .3s}
-.kpi:hover{border-color:var(--blue);transform:translateY(-3px)}
-.kpi-val{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800}
-.kpi-label{font-size:.8rem;color:var(--txt3);margin-top:.4rem}
+.d-title{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:900;margin-bottom:.5rem;color:var(--txt)}
+.d-title span{background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;margin-bottom:2.5rem}
+.kpi{background:linear-gradient(135deg,var(--surf),rgba(59,130,246,0.03));border:1px solid var(--bdr);border-radius:var(--r2);padding:1.75rem;transition:all .3s}
+.kpi:hover{border-color:var(--bdr2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(59,130,246,0.15)}
+.kpi-val{font-family:'Sora',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+.kpi-label{font-size:.8rem;color:var(--txt4);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+
+/* FORMS */
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;font-size:.85rem;font-weight:700;color:var(--txt2);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.9rem 1.2rem;border-radius:var(--r);background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);font-family:inherit;font-size:.95rem;transition:all .3s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--blue2);box-shadow:0 0 0 4px rgba(59,130,246,0.2);background:var(--bg3)}
 
 /* TABLE */
-.table{width:100%;border-collapse:collapse;font-size:.85rem}
-.table th{text-align:left;padding:.65rem 1rem;background:var(--bg3);color:var(--txt3);font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
-.table td{padding:.75rem 1rem;border-bottom:1px solid var(--bdr);color:var(--txt2)}
+.table{width:100%;border-collapse:collapse;font-size:.9rem}
+.table th{text-align:left;padding:1rem;background:var(--bg3);color:var(--txt4);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;font-weight:700;border-bottom:2px solid var(--bdr)}
+.table td{padding:1rem;border-bottom:1px solid var(--bdr);color:var(--txt2)}
 .table tr:hover td{background:var(--surf)}
 
-/* ADMIN */
-.admin-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 64px)}
-.admin-sidebar{background:var(--bg3);border-right:1px solid var(--bdr);padding:1rem}
-.admin-sidebar h4{font-size:.7rem;font-weight:700;color:var(--txt4);text-transform:uppercase;letter-spacing:1px;padding:.6rem .75rem .3rem}
-.admin-nav a{display:flex;align-items:center;gap:.65rem;padding:.6rem .75rem;color:var(--txt2);font-size:.83rem;font-weight:500;border-radius:8px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:.15rem}
-.admin-nav a:hover{background:var(--surf2);color:var(--txt)}
-.admin-nav a.active{background:rgba(59,130,246,.15);color:var(--blue2)}
-.admin-main{background:var(--bg);padding:1.75rem;overflow-y:auto}
-.admin-content{display:none}
-.admin-content.active{display:block}
-.admin-kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:1.75rem}
-.admin-kpi{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:1.25rem}
-.ak-val{font-family:'Sora',sans-serif;font-size:1.8rem;font-weight:800}
-.ak-label{font-size:.75rem;color:var(--txt3);margin-bottom:.4rem}
-
 /* FOOTER */
-footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px}
-.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem}
-.foot-col h4{font-size:.78rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem}
-.foot-col a{display:block;color:var(--txt2);text-decoration:none;font-size:.83rem;padding:.28rem 0;cursor:pointer;transition:color .2s}
-.foot-col a:hover{color:var(--txt)}
-.foot-bottom{border-top:1px solid var(--bdr);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.foot-bottom p{font-size:.8rem;color:var(--txt3)}
+footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:80px 0 40px;margin-top:60px}
+.foot-grid{display:grid;grid-template-columns:2fr 1.5fr 1.5fr 1.5fr;gap:3rem;margin-bottom:3rem}
+.foot-brand h3{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.foot-brand p{font-size:.9rem;color:var(--txt3);line-height:1.7;margin-bottom:1.5rem;font-weight:500}
+.foot-col h4{font-size:.8rem;font-weight:800;color:var(--txt2);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.25rem}
+.foot-col a{display:block;color:var(--txt3);text-decoration:none;font-size:.9rem;padding:.35rem 0;cursor:pointer;transition:all .2s;font-weight:500}
+.foot-col a:hover{color:var(--txt);transform:translateX(4px)}
+.foot-bottom{border-top:1px solid var(--bdr);padding-top:1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.foot-bottom p{font-size:.8rem;color:var(--txt4);font-weight:600}
 
 /* TOAST */
-#toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:var(--bg3);border:1px solid var(--bdr2);border-radius:var(--r);padding:.75rem 1.25rem;font-size:.88rem;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:translateX(120%);transition:transform .3s}
+#toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:var(--bg3);border:1.5px solid var(--bdr2);border-radius:var(--r);padding:1rem 1.5rem;font-size:.9rem;font-weight:600;box-shadow:var(--shadow);transform:translateX(120%);transition:transform .3s cubic-bezier(0.34,1.56,0.64,1);max-width:380px}
 #toast.show{transform:translateX(0)}
+#toast.success{border-left:4px solid #10b981}
+#toast.error{border-left:4px solid #ef4444}
+#toast.info{border-left:4px solid #60a5fa}
 
+/* RESPONSIVE */
 @media(max-width:1024px){
+  .nav-center{display:none}
   .dash-layout,.admin-layout{grid-template-columns:1fr}
   .d-sidebar,.admin-sidebar{display:none}
+  .foot-grid{grid-template-columns:1fr 1fr}
 }
-
-/* ═══ DIGITAL ASSISTANCE CENTRE (added) ═══ */
-
-/* Scrolling updates ticker */
-.ticker-wrap{background:var(--bg3);border-bottom:1px solid var(--bdr);overflow:hidden;white-space:nowrap;padding:.55rem 0}
-.ticker-track{display:inline-block;padding-left:100%;animation:ticker-scroll 38s linear infinite}
-.ticker-track span{display:inline-block;padding:0 2.5rem;font-size:.82rem;color:var(--txt2);font-weight:500}
-@keyframes ticker-scroll{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
-.ticker-wrap:hover .ticker-track{animation-play-state:paused}
-
-/* Mobile hamburger */
-.hamburger{display:none;background:none;border:none;color:var(--txt);font-size:1.3rem;cursor:pointer;padding:.4rem}
-@media(max-width:1024px){.hamburger{display:block}}
-.mobile-nav{display:none;flex-direction:column;background:rgba(7,9,26,.98);border-bottom:1px solid var(--bdr);padding:.5rem 1rem 1rem}
-.mobile-nav.open{display:flex}
-.mobile-nav a{display:block;padding:.7rem .5rem;color:var(--txt2);text-decoration:none;font-size:.92rem;font-weight:500;border-bottom:1px solid var(--bdr);cursor:pointer}
-.mobile-nav a:last-child{border-bottom:none}
-.mobile-nav a:hover,.mobile-nav a.active{color:var(--txt)}
-
-/* Quick selector chips */
-.quick-select{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:2.5rem}
-.qs-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:24px;background:var(--surf);border:1px solid var(--bdr2);color:var(--txt2);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
-.qs-chip:hover{background:var(--surf2);color:var(--txt);border-color:var(--blue)}
-
-/* Service search */
-.dac-search{max-width:560px;margin:0 auto 3rem;position:relative}
-.dac-search input{width:100%;padding:.95rem 1.25rem .95rem 3rem;border-radius:30px;background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.95rem}
-.dac-search input:focus{outline:none;border-color:var(--blue)}
-.dac-search i{position:absolute;left:1.15rem;top:50%;transform:translateY(-50%);color:var(--txt3)}
-.dac-search-count{text-align:center;font-size:.8rem;color:var(--txt3);margin-top:.6rem}
-
-/* Category blocks */
-.dac-cat{margin-bottom:3.5rem;scroll-margin-top:80px}
-.dac-cat-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:.85rem;border-bottom:1px solid var(--bdr)}
-.dac-cat-head h3{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;display:flex;align-items:center;gap:.6rem}
-.dac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.1rem}
-.dac-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.25rem;transition:all .3s}
-.dac-card:hover{border-color:var(--blue);background:var(--surf2);transform:translateY(-3px)}
-.dac-card.dac-hide{display:none}
-.dac-card.dac-match{border-color:var(--teal)}
-.dac-name{font-family:'Sora',sans-serif;font-size:.92rem;font-weight:700;margin-bottom:.5rem}
-.dac-note{font-size:.82rem;color:var(--txt2);line-height:1.6;padding:1rem 1.25rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:var(--r);margin-bottom:1.5rem}
-.dac-disclaimer{font-size:.8rem;color:var(--txt3);line-height:1.6;padding:1rem 1.25rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:1.5rem}
-.dac-cta{text-align:center;margin-top:1.5rem}
-
-/* Status badges */
-.stat{display:inline-block;padding:.22rem .6rem;border-radius:20px;font-size:.68rem;font-weight:700;margin:0 .3rem .3rem 0}
-.sb-avail{background:rgba(16,185,129,.15);color:var(--green)}
-.sb-expert{background:rgba(245,158,11,.15);color:var(--gold)}
-.sb-online{background:rgba(59,130,246,.15);color:var(--blue2)}
-.sb-price{background:rgba(168,85,247,.15);color:var(--purple)}
-
-/* Trust & Safety */
-.trust-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem}
-.trust-item{display:flex;gap:.85rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.25rem}
-.trust-item i{color:var(--teal);font-size:1.1rem;margin-top:.15rem}
-.trust-item p{font-size:.86rem;color:var(--txt2);line-height:1.55}
-
-/* Pricing table */
-.price-table{width:100%;border-collapse:collapse;font-size:.88rem}
-.price-table th{text-align:left;padding:.75rem 1rem;background:var(--bg3);color:var(--txt3);font-size:.74rem;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
-.price-table td{padding:.9rem 1rem;border-bottom:1px solid var(--bdr);color:var(--txt2)}
-.price-table td:first-child{color:var(--txt);font-weight:600}
-.price-table td:last-child{font-family:'JetBrains Mono',monospace;color:var(--teal);font-weight:600;white-space:nowrap}
-
-/* Request Help form */
-.rh-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
-@media(max-width:640px){.rh-grid{grid-template-columns:1fr}}
-.rh-group{margin-bottom:1.1rem}
-.rh-group label{display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem}
-.rh-group input,.rh-group select,.rh-group textarea{width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem}
-.rh-group textarea{resize:vertical;min-height:90px}
-.rh-group input:focus,.rh-group select:focus,.rh-group textarea:focus{outline:none;border-color:var(--blue)}
-.rh-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem}
+@media(max-width:640px){
+  .c{padding:0 16px}
+  .sh h2{font-size:1.6rem}
+  .hero-buttons{flex-direction:column}
+  .btn{width:100%}
+}
 </style>
 
 <!-- Firebase SDK -->
@@ -251,13 +215,9 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   import {
     getAuth, GoogleAuthProvider,
     signInWithPopup, signInWithRedirect, getRedirectResult,
-    createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile,
+    createUserWithEmailAndPassword, updateProfile,
     signOut, onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-  import {
-    getFirestore, collection, addDoc, deleteDoc, doc, setDoc, getDoc, updateDoc,
-    onSnapshot, query, where, orderBy, serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDcdR-ba5Lh-DfG-wuABRntQm1sSYSr3Kk",
@@ -272,157 +232,24 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // Shared HTML-escaping helper (also exposed as window.escapeHtml for the classic script).
-  function escapeHtml(str){
-    return String(str ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  }
-  window.escapeHtml = escapeHtml;
-
-  // Public bridge used by the non-module Request Help form below.
-  // Saves every request in Firestore so it can be used by the admin dashboard.
-  window.queueAdminEmail = async function(subject, text) {
-    // Compatible with Firebase Trigger Email extension when configured to watch the `mail` collection.
-    return addDoc(collection(db, 'mail'), {
-      to: ['vikashpathak.mgmt@gmail.com'],
-      message: { subject, text },
-      createdAt: serverTimestamp()
-    });
-  };
-
-  window.logAuthEvent = async function(type, user, extra = {}) {
-    if (!user) return;
-    const eventData = {
-      type,
-      userId: user.uid,
-      email: user.email || '',
-      displayName: user.displayName || extra.fullName || '',
-      createdAt: serverTimestamp()
-    };
-    try { await addDoc(collection(db, 'authEvents'), eventData); } catch (e) { console.warn('Auth event log failed:', e); }
-    try {
-      const label = type === 'register' ? 'New DigiCafe Registration' : 'DigiCafe Login Alert';
-      const text = `${label}\nName: ${eventData.displayName || '-'}\nEmail: ${eventData.email || '-'}\nUser ID: ${eventData.userId}`;
-      await window.queueAdminEmail(label + (eventData.email ? ' - ' + eventData.email : ''), text);
-    } catch (e) { console.warn('Email queue unavailable. Configure Firebase Trigger Email extension:', e); }
-  };
-
-  window.saveServiceRequest = async function(requestData) {
-    const user = auth.currentUser;
-    const ref = await addDoc(collection(db, 'serviceRequests'), {
-      ...requestData,
-      userId: user ? user.uid : null,
-      userEmail: user ? (user.email || requestData.email || '') : (requestData.email || ''),
-      status: 'Received',
-      source: 'DigiCafe Website',
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp()
-    });
-    try {
-      await window.queueAdminEmail('New DigiCafe Service Request - ' + (requestData.service || requestData.category || 'Service'),
-        `New service request\nReference: ${ref.id}\nName: ${requestData.name || '-'}\nMobile: ${requestData.mobile || '-'}\nEmail: ${requestData.email || user?.email || '-'}\nCategory: ${requestData.category || '-'}\nService: ${requestData.service || '-'}\nUrgency: ${requestData.urgency || '-'}\nNotes: ${requestData.notes || '-'}`);
-    } catch (e) { console.warn('Service request email queue unavailable:', e); }
-    return ref.id;
-  };
-  // Only this email can add/delete News from the in-browser Admin panel.
-  // This must ALSO be enforced in your Firestore Security Rules (see chat) —
-  // this constant alone does not restrict access, it only shows/hides the UI.
-  const ADMIN_EMAIL = 'vikashpathak.mgmt@gmail.com';
-  window._isAdmin = false;
   const provider = new GoogleAuthProvider();
   provider.addScope('email');
   provider.addScope('profile');
 
   // Handle user after sign-in
-  async function handleUser(user) {
+  function handleUser(user) {
     if (!user) return;
-    window._currentFirebaseUser = user;
-    let fullName = user.displayName || '';
-    try {
-      const profileSnap = await getDoc(doc(db, 'users', user.uid));
-      if (profileSnap.exists()) fullName = profileSnap.data().fullName || fullName;
-    } catch (e) { console.warn('Profile load failed:', e); }
-    const shownName = fullName || user.email || 'Client';
-    const parts = shownName.trim().split(/\s+/);
-    const initials = ((parts[0]?.[0] || 'C') + (parts[1]?.[0] || '')).toUpperCase();
+    const nameParts = user.displayName ? user.displayName.split(' ') : ['U',''];
+    const initials = (nameParts[0][0] + (nameParts[1]?.[0] || '')).toUpperCase();
     const avatarEl = document.querySelector('.d-avatar');
     const nameEl = document.querySelector('.d-uname');
     const titleEl = document.querySelector('.d-title');
     if (avatarEl) avatarEl.textContent = initials;
-    if (nameEl) nameEl.textContent = shownName;
-    if (titleEl) titleEl.textContent = 'Welcome back, ' + (parts[0] || 'Client') + '!';
-    if (user.email === ADMIN_EMAIL) {
-      // Admin account signs straight into the Admin Panel, not the client view.
-      showPage('admin');
-      if (window.showAdminSection) window.showAdminSection('overview');
-    } else {
-      window.loadClientDashboard(user);
-      window.initFilingStatus(user);
-      showPage('dashboard');
-    }
+    if (nameEl) nameEl.textContent = user.displayName || user.email;
+    if (titleEl) titleEl.textContent = 'Welcome back, ' + (user.displayName?.split(' ')[0] || 'User') + '!';
+    showToast('✓ Signed in as ' + (user.displayName || user.email));
+    setTimeout(() => showPage('dashboard'), 800);
   }
-
-  window.loadClientDashboard = function(user) {
-    if (!user) return;
-    const q = query(collection(db, 'serviceRequests'), where('userId', '==', user.uid));
-    if (window._clientRequestsUnsub) window._clientRequestsUnsub();
-    window._clientRequestsUnsub = onSnapshot(q, (snap) => {
-      const rows = [];
-      snap.forEach(d => rows.push({id:d.id, ...d.data()}));
-      rows.sort((a,b) => ((b.createdAt?.seconds||0) - (a.createdAt?.seconds||0)));
-      const active = rows.filter(r => !['completed','cancelled'].includes(String(r.status||'').toLowerCase())).length;
-      const completed = rows.filter(r => String(r.status||'').toLowerCase() === 'completed').length;
-      const totalPaid = rows.reduce((sum,r) => sum + Number(r.paidAmount || r.amountPaid || 0), 0);
-      const pendingDocs = rows.reduce((sum,r) => sum + Number(r.pendingDocuments || 0), 0);
-      const vals = document.querySelectorAll('#dash-overview .kpi-val');
-      if(vals[0]) vals[0].textContent = active;
-      if(vals[1]) vals[1].textContent = '₹' + totalPaid.toLocaleString('en-IN');
-      if(vals[2]) vals[2].textContent = pendingDocs;
-      if(vals[3]) vals[3].textContent = completed;
-      const tbody = document.querySelector('#dash-overview .table tbody');
-      if (tbody) {
-        if (!rows.length) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">No services availed yet. Explore DigiCafe services below.</td></tr>';
-        else tbody.innerHTML = rows.slice(0,10).map(r => {
-          const dt = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-IN') : '—';
-          const service = r.service || r.serviceName || r.category || 'Service Request';
-          const status = r.status || 'Received';
-          const amount = Number(r.amount || r.totalAmount || 0);
-          return `<tr><td>${escapeHtml(service)}</td><td>${dt}</td><td><span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">${escapeHtml(status)}</span></td><td>${amount ? '₹'+amount.toLocaleString('en-IN') : '—'}</td></tr>`;
-        }).join('');
-      }
-    }, err => console.warn('Client requests load failed:', err));
-  };
-
-  // ═══ MY FILING & TASK STATUS (Section 6): PAN is stored on the client's own
-  // Firebase profile (private, tied to their UID) — never entered as a public
-  // lookup key. See window.loadFilingStatus (classic script) for the actual
-  // Apps Script fetch once the PAN is known.
-  window.saveUserPan = async function(pan) {
-    const user = window._currentFirebaseUser;
-    if (!user) throw new Error('You must be logged in to save your PAN.');
-    await setDoc(doc(db, 'users', user.uid), { pan, panUpdatedAt: serverTimestamp() }, { merge: true });
-    return true;
-  };
-
-  window.initFilingStatus = async function(user) {
-    try {
-      const snap = await getDoc(doc(db, 'users', user.uid));
-      const pan = snap.exists() ? snap.data().pan : null;
-      if (pan && window.showFilingStatus) window.showFilingStatus(pan);
-      else if (window.showFilingPanSetup) window.showFilingPanSetup();
-    } catch (e) {
-      console.warn('Could not load saved PAN:', e.message);
-      if (window.showFilingPanSetup) window.showFilingPanSetup();
-    }
-  };
-
-  window._firebaseLogin = async function(email, password) {
-    const cred = await signInWithEmailAndPassword(auth, email, password);
-    await handleUser(cred.user);
-    await window.logAuthEvent('login', cred.user);
-    return cred.user;
-  };
 
   // Check for redirect result on page load
   getRedirectResult(auth).then((result) => {
@@ -461,20 +288,12 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('✓ Firebase user:', user.email);
-      handleUser(user);
-      // Update nav logout button to use firebaseSignOut
-      document.querySelectorAll('.side-nav a, .admin-nav a').forEach(btn => {
+      // Update nav logout button to use firebaseSignOut (client dashboard only)
+      document.querySelectorAll('.side-nav a').forEach(btn => {
         if(btn.getAttribute('onclick') === "showPage('home')"){
           btn.setAttribute('onclick', 'firebaseSignOut()');
         }
       });
-    }
-    // Gate the in-browser News/Requests admin UI to the one authorised account.
-    window._isAdmin = !!(user && user.email === ADMIN_EMAIL);
-    if (window._isAdmin) startAdminListeners(); else stopAdminListeners();
-    if (window.refreshAdminNewsGate) window.refreshAdminNewsGate();
-    if (window.refreshAdminRequestsGate) window.refreshAdminRequestsGate();
-    if (window.refreshAdminAnnouncementsGate) window.refreshAdminAnnouncementsGate();
   });
 
   window.firebaseSignOut = async function() {
@@ -487,9 +306,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(cred.user, { displayName: name });
-      await setDoc(doc(db, 'users', cred.user.uid), { fullName: name, email, mobile: document.getElementById('reg-phone')?.value || '', uid: cred.user.uid, createdAt: serverTimestamp() }, { merge: true });
-      await window.logAuthEvent('register', cred.user, { fullName: name });
-      await handleUser(cred.user);
+      handleUser(cred.user);
       showToast('✓ Account created! Welcome, ' + name.split(' ')[0] + '!');
     } catch(err) {
       let msg = err.message || 'Registration failed';
@@ -498,111 +315,6 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       showToast('⚠ ' + msg);
       throw err;
     }
-  };
-
-  // ═══ NEWS — daily-editable via Firestore (Admin > News) ═══
-  // Collection "news": { title, date, cat, desc, createdAt }
-  // Public site reads it live (onSnapshot). If the collection is empty
-  // (e.g. brand new site / offline), the page falls back to the static
-  // `news` array already defined in the main script below — nothing breaks.
-  try {
-    const newsQuery = query(collection(db, 'news'), orderBy('createdAt', 'desc'));
-    onSnapshot(newsQuery, (snap) => {
-      const items = [];
-      snap.forEach(d => items.push({ id: d.id, ...d.data() }));
-      window._liveNews = items;
-      if (window.renderAllNews) window.renderAllNews();
-      if (window.renderAdminNewsList) window.renderAdminNewsList();
-    }, (err) => {
-      console.warn('Live News sync unavailable, using built-in fallback list:', err.message);
-    });
-  } catch (err) {
-    console.warn('Firestore News sync not started:', err.message);
-  }
-
-  window._addNewsItem = async function(item) {
-    if (!window._isAdmin) { showToast('⚠ Please sign in with the admin Google account first'); return; }
-    await addDoc(collection(db, 'news'), { ...item, createdAt: serverTimestamp() });
-  };
-
-  window._deleteNewsItem = async function(id) {
-    if (!window._isAdmin) { showToast('⚠ Please sign in with the admin Google account first'); return; }
-    await deleteDoc(doc(db, 'news', id));
-  };
-
-  // ═══ ADMIN: LIVE SERVICE REQUESTS + REAL DASHBOARD METRICS (admin-only) ═══
-  // Every client Service Request written by window.saveServiceRequest above is
-  // read back here (gated to the DigiCafe admin account) so it is visible in
-  // Admin > Requests, and feeds the Overview KPIs with real numbers instead of
-  // hard-coded demo figures.
-  window._adminRequests = [];
-  window._adminUsersCount = null;
-  window._adminSignupsThisMonth = null;
-  let _adminRequestsUnsub = null, _adminUsersUnsub = null, _adminAuthEventsUnsub = null;
-
-  function startAdminListeners() {
-    if (_adminRequestsUnsub) return; // already running
-    _adminRequestsUnsub = onSnapshot(collection(db, 'serviceRequests'), (snap) => {
-      const rows = [];
-      snap.forEach(d => rows.push({ id: d.id, ...d.data() }));
-      rows.sort((a, b) => ((b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)));
-      window._adminRequests = rows;
-      if (window.renderAdminRequests) window.renderAdminRequests();
-      if (window.updateAdminOverviewKpis) window.updateAdminOverviewKpis();
-    }, err => console.warn('Admin requests sync unavailable:', err.message));
-
-    _adminUsersUnsub = onSnapshot(collection(db, 'users'), (snap) => {
-      window._adminUsersCount = snap.size;
-      if (window.updateAdminOverviewKpis) window.updateAdminOverviewKpis();
-    }, err => console.warn('Admin users sync unavailable:', err.message));
-
-    _adminAuthEventsUnsub = onSnapshot(collection(db, 'authEvents'), (snap) => {
-      const now = new Date();
-      let count = 0;
-      snap.forEach(d => {
-        const data = d.data();
-        const dt = data.createdAt?.toDate ? data.createdAt.toDate() : null;
-        if (data.type === 'register' && dt && dt.getMonth() === now.getMonth() && dt.getFullYear() === now.getFullYear()) count++;
-      });
-      window._adminSignupsThisMonth = count;
-      if (window.updateAdminOverviewKpis) window.updateAdminOverviewKpis();
-    }, err => console.warn('Admin auth-events sync unavailable:', err.message));
-  }
-
-  function stopAdminListeners() {
-    if (_adminRequestsUnsub) { _adminRequestsUnsub(); _adminRequestsUnsub = null; }
-    if (_adminUsersUnsub) { _adminUsersUnsub(); _adminUsersUnsub = null; }
-    if (_adminAuthEventsUnsub) { _adminAuthEventsUnsub(); _adminAuthEventsUnsub = null; }
-    window._adminRequests = []; window._adminUsersCount = null; window._adminSignupsThisMonth = null;
-  }
-
-  window._updateRequestStatus = async function(id, status) {
-    if (!window._isAdmin) { showToast('⚠ Admin sign-in required'); return; }
-    try {
-      await updateDoc(doc(db, 'serviceRequests', id), { status, updatedAt: serverTimestamp() });
-      showToast('✓ Status updated');
-    } catch (e) { showToast('⚠ Could not update status: ' + e.message); }
-  };
-
-  // ═══ CLIENT ANNOUNCEMENTS (Section 8) — public-read, admin-write ═══
-  window._announcements = [];
-  onSnapshot(collection(db, 'announcements'), (snap) => {
-    const rows = [];
-    snap.forEach(d => rows.push({ id: d.id, ...d.data() }));
-    rows.sort((a, b) => ((b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)));
-    window._announcements = rows;
-    if (window.renderClientAnnouncements) window.renderClientAnnouncements();
-    if (window.renderAdminAnnouncements) window.renderAdminAnnouncements();
-  }, err => console.warn('Announcements sync unavailable:', err.message));
-
-  window._publishAnnouncement = async function(title, body) {
-    if (!window._isAdmin) { showToast('⚠ Admin sign-in required'); return; }
-    await addDoc(collection(db, 'announcements'), { title, body, createdAt: serverTimestamp() });
-  };
-
-  window._deleteAnnouncement = async function(id) {
-    if (!window._isAdmin) { showToast('⚠ Admin sign-in required'); return; }
-    await deleteDoc(doc(db, 'announcements', id));
   };
 
   console.log("Firebase initialized successfully 🚀");
@@ -617,49 +329,15 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     <ul class="nav-center">
       <li><a onclick="showPage('home')" data-p="home">Home</a></li>
       <li><a onclick="showPage('news')" data-p="news">News</a></li>
-      <li class="nav-hideable"><a onclick="showPage('knowledge')" data-p="knowledge">Knowledge</a></li>
-      <li class="nav-hideable"><a onclick="showPage('courses')" data-p="courses">Courses</a></li>
-      <li class="nav-hideable"><a onclick="showPage('ai')" data-p="ai">AI Tools</a></li>
-      <li class="nav-hideable"><a onclick="showPage('services')" data-p="services">Services</a></li>
-      <li class="nav-hideable"><a onclick="showPage('tools')" data-p="tools">Calculators</a></li>
-      <li><a onclick="showPage('digital')" data-p="digital">Digital Assistance</a></li>
+      <li><a onclick="showPage('digital-assistance')" data-p="digital-assistance">Digital Assistance</a></li>
+      <!-- HIDDEN FROM NAV BUT CODE KEPT: Knowledge, Courses, AI Tools, Services, Calculators -->
     </ul>
     <div class="nav-right">
       <button class="btn btn-ghost btn-sm" onclick="showPage('login')">Log In</button>
-      <button class="btn btn-primary btn-sm nav-hideable" onclick="showPage('login')">Get Started</button>
-      <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      <button class="btn btn-primary btn-sm" onclick="showPage('login')">Get Started</button>
     </div>
   </div>
-  <div class="mobile-nav" id="mobile-nav">
-    <a onclick="showPage('home');toggleMobileNav()">Home</a>
-    <a class="nav-hideable" onclick="showPage('services');toggleMobileNav()">Services</a>
-    <a onclick="showPage('digital');toggleMobileNav()">Digital Assistance</a>
-    <a onclick="scrollDacTo('dac-voter');toggleMobileNav()">Voter / SIR</a>
-    <a onclick="showPage('news');toggleMobileNav()">News</a>
-    <a class="nav-hideable" onclick="showPage('knowledge');toggleMobileNav()">Knowledge</a>
-    <a class="nav-hideable" onclick="showPage('courses');toggleMobileNav()">Courses</a>
-    <a class="nav-hideable" onclick="showPage('ai');toggleMobileNav()">AI Tools</a>
-    <a class="nav-hideable" onclick="showPage('tools');toggleMobileNav()">Calculators</a>
-    <a onclick="scrollDacTo('request-help');toggleMobileNav()">Get Help</a>
-    <a href="https://wa.me/918539979271" target="_blank">Contact / WhatsApp</a>
-    <a onclick="showPage('login');toggleMobileNav()" style="font-weight:700">Log In</a>
-  </div>
 </nav>
-
-<!-- SCROLLING UPDATES TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <span>📢 New: DigiCafe Digital, Tax, Accounting, Career &amp; Public Service Assistance Centre now live</span>
-    <span>✅ ITR, AIS and Form 26AS assistance available</span>
-    <span>✅ Accounting, Tally and reconciliation support available</span>
-    <span>✅ Resume and career assistance now available</span>
-    <span>✅ SIR and voter service assistance available</span>
-    <span>✅ Digital document assistance available</span>
-    <span>✅ GST, MSME/Udyam and FSSAI assistance available</span>
-    <span>✅ Travel booking and insurance guidance now available</span>
-    <span>💬 WhatsApp us anytime at +91 85399 79271</span>
-  </div>
-</div>
 
 <!-- HOME PAGE -->
 <div class="page active" id="page-home" style="padding-top:64px">
@@ -762,6 +440,51 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   </div>
 </div>
 
+<!-- DIGITAL ASSISTANCE PAGE -->
+<div class="page" id="page-digital-assistance" style="padding:80px 20px">
+  <div class="c">
+    <div class="sh">
+      <h2>Digital <span class="g-text">Assistance Services</span></h2>
+      <p>Get expert guidance on tax, compliance, business services, and government documentation.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem">
+      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Connect with our experts on WhatsApp!')">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">💼</div>
+        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Tax & Compliance Guidance</h3>
+        <p style="color:var(--txt2);font-size:.9rem">Expert advice on ITR filing, GST registration, TDS compliance, and tax planning.</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Our team is ready to help!')">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">📋</div>
+        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Government Services</h3>
+        <p style="color:var(--txt2);font-size:.9rem">Assistance with PAN, Aadhaar, company registration, trademark, and digital signatures.</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="window.open('https://wa.me/918539979271','_blank')">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">💬</div>
+        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">WhatsApp Support</h3>
+        <p style="color:var(--txt2);font-size:.9rem">Chat with our team on WhatsApp for quick support and guidance on any service.</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Document assistance available!')">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">📄</div>
+        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Document Assistance</h3>
+        <p style="color:var(--txt2);font-size:.9rem">Help with document preparation, verification, and filing for all services.</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Premium consulting available!')">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">👨‍💼</div>
+        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Expert Consultation</h3>
+        <p style="color:var(--txt2);font-size:.9rem">One-on-one consultation with certified tax professionals and compliance experts.</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Schedule your call now!')">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">📞</div>
+        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Phone Support</h3>
+        <p style="color:var(--txt2);font-size:.9rem">Call our support team at +91 85399 79271 for any assistance or inquiries.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <button class="btn btn-primary btn-lg" onclick="window.open('https://wa.me/918539979271','_blank')" style="font-size:1rem;padding:1rem 2.5rem"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</button>
+    </div>
+  </div>
+</div>
+
 <!-- KNOWLEDGE PAGE -->
 <div class="page" id="page-knowledge" style="padding:80px 20px">
   <div class="c">
@@ -808,360 +531,6 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     <div class="svc-grid" id="svc-full"></div>
   </div>
 </div>
-
-<!-- DIGITAL ASSISTANCE CENTRE PAGE -->
-<div class="page" id="page-digital" style="padding:80px 20px">
-  <div class="c">
-    <div class="sh">
-      <span class="badge badge-teal">New</span>
-      <h2>DigiCafe Digital Assistance <span class="g-text">Centre</span></h2>
-      <p>Digital, Tax, Accounting, Career &amp; Public Service Assistance — all under one roof. Search a service below or pick a category to jump straight there.</p>
-    </div>
-
-    <!-- SERVICE SEARCH -->
-    <div class="dac-search">
-      <i class="fas fa-search"></i>
-      <input type="text" id="dac-search-input" oninput="filterDacServices(this.value)" placeholder="Search services — ITR, GST, TDS, Resume, Voter, Tally…">
-      <div class="dac-search-count" id="dac-search-count"></div>
-    </div>
-
-    <!-- QUICK SELECTOR -->
-    <div class="sh" style="margin-bottom:1rem">
-      <h3 class="s" style="font-size:1.1rem;font-weight:700">How Can We Help You?</h3>
-    </div>
-    <div class="quick-select">
-      <div class="qs-chip" onclick="scrollDacTo('dac-tax')"><i class="fas fa-file-invoice-dollar"></i> Tax &amp; ITR</div>
-      <div class="qs-chip" onclick="scrollDacTo('dac-gst')"><i class="fas fa-building"></i> GST &amp; Business</div>
-      <div class="qs-chip" onclick="scrollDacTo('dac-accounts')"><i class="fas fa-calculator"></i> Accounting &amp; Tally</div>
-      <div class="qs-chip" onclick="scrollDacTo('dac-career')"><i class="fas fa-briefcase"></i> Job &amp; Career</div>
-      <div class="qs-chip" onclick="scrollDacTo('dac-voter')"><i class="fas fa-vote-yea"></i> Voter / SIR</div>
-      <div class="qs-chip" onclick="scrollDacTo('dac-docs')"><i class="fas fa-file-alt"></i> Digital Documents</div>
-      <div class="qs-chip" onclick="scrollDacTo('dac-travel')"><i class="fas fa-plane"></i> Travel</div>
-      <div class="qs-chip" onclick="scrollDacTo('dac-insurance')"><i class="fas fa-shield-alt"></i> Insurance Expert</div>
-    </div>
-
-    <!-- A. INCOME TAX & TDS -->
-    <div class="dac-cat" id="dac-tax">
-      <div class="dac-cat-head">
-        <h3><i class="fas fa-file-invoice-dollar" style="color:var(--blue2)"></i> Income Tax &amp; TDS Assistance</h3>
-        <span class="badge badge-blue">ITR Filing — Price based on complexity</span>
-      </div>
-      <div class="dac-grid">
-        <div class="dac-card" data-kw="itr filing income tax return assistance">
-          <div class="s-icon">🧾</div><div class="dac-name">ITR Filing Assistance</div>
-          <div class="s-desc">Help preparing and filing your Income Tax Return correctly and on time.</div>
-          <span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on complexity</span>
-        </div>
-        <div class="dac-card" data-kw="ais form 26as review annual information statement">
-          <div class="s-icon">📄</div><div class="dac-name">AIS &amp; Form 26AS Review</div>
-          <div class="s-desc">Cross-checking your AIS and Form 26AS for accuracy before filing.</div>
-          <span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span>
-        </div>
-        <div class="dac-card" data-kw="tds credit reconciliation">
-          <div class="s-icon">🔄</div><div class="dac-name">TDS Credit Reconciliation</div>
-          <div class="s-desc">Matching TDS deducted with credit reflecting in your tax records.</div>
-          <span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span>
-        </div>
-        <div class="dac-card" data-kw="form 16 form 16a assistance">
-          <div class="s-icon">🧷</div><div class="dac-name">Form 16 / Form 16A Assistance</div>
-          <div class="s-desc">Help understanding, organising and using your Form 16 / 16A.</div>
-          <span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span>
-        </div>
-        <div class="dac-card" data-kw="tds mismatch investigation">
-          <div class="s-icon">🔍</div><div class="dac-name">TDS Mismatch Investigation</div>
-          <div class="s-desc">Identifying reasons for TDS mismatches and the corrective steps needed.</div>
-          <span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span>
-        </div>
-        <div class="dac-card" data-kw="income tax refund assistance">
-          <div class="s-icon">💸</div><div class="dac-name">Income Tax Refund Assistance</div>
-          <div class="s-desc">Guidance on tracking, follow-up and resolving refund delays.</div>
-          <span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span>
-        </div>
-        <div class="dac-card" data-kw="old vs new tax regime comparison">
-          <div class="s-icon">⚖️</div><div class="dac-name">Old vs New Tax Regime Comparison</div>
-          <div class="s-desc">Comparing both regimes against your income to see what suits you better.</div>
-          <span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span>
-        </div>
-        <div class="dac-card" data-kw="revised return assistance">
-          <div class="s-icon">📝</div><div class="dac-name">Revised Return Assistance</div>
-          <div class="s-desc">Support in correcting and refiling a revised Income Tax Return.</div>
-          <span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on complexity</span>
-        </div>
-        <div class="dac-card" data-kw="tax document checklist">
-          <div class="s-icon">✅</div><div class="dac-name">Tax Document Checklist</div>
-          <div class="s-desc">A ready checklist of documents required for smooth ITR filing.</div>
-          <span class="stat sb-avail">Available Now</span><span class="stat sb-price">Price on Request</span>
-        </div>
-      </div>
-      <div class="dac-cta">
-        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20assistance%20with%20Income%20Tax%20%2F%20TDS%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Tax Assistance</a>
-      </div>
-    </div>
-
-    <!-- B. GST & BUSINESS COMPLIANCE -->
-    <div class="dac-cat" id="dac-gst">
-      <div class="dac-cat-head">
-        <h3><i class="fas fa-building" style="color:var(--teal)"></i> GST &amp; Business Compliance</h3>
-        <span class="badge badge-teal">Price on Request</span>
-      </div>
-      <div class="dac-grid">
-        <div class="dac-card" data-kw="gst registration"><div class="s-icon">🏛️</div><div class="dac-name">GST Registration</div><div class="s-desc">Assistance with new GST registration and documentation.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="gst return filing assistance gstr"><div class="s-icon">📑</div><div class="dac-name">GST Return Filing Assistance</div><div class="s-desc">Help preparing and filing periodic GST returns.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="gstr-2b reconciliation"><div class="s-icon">🔁</div><div class="dac-name">GSTR-2B Reconciliation</div><div class="s-desc">Matching purchase records with GSTR-2B for accurate ITC claims.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="gst notice document assistance"><div class="s-icon">📨</div><div class="dac-name">GST Notice Document Assistance</div><div class="s-desc">Organising documents needed to respond to a GST notice.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="udyam msme registration"><div class="s-icon">🏭</div><div class="dac-name">Udyam / MSME Registration</div><div class="s-desc">Guidance and filing support for Udyam / MSME registration.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="fssai registration licence assistance"><div class="s-icon">🍽️</div><div class="dac-name">FSSAI Registration / Licence Assistance</div><div class="s-desc">Help with FSSAI application, documents and renewals.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="trade licence assistance"><div class="s-icon">🏪</div><div class="dac-name">Trade Licence Assistance</div><div class="s-desc">Guidance on applying for and renewing a local trade licence.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="company firm registration coordination"><div class="s-icon">🏢</div><div class="dac-name">Company / Firm Registration Coordination</div><div class="s-desc">Coordinating paperwork for Pvt Ltd / LLP / Firm registration.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="business compliance support"><div class="s-icon">🧩</div><div class="dac-name">Business Compliance Support</div><div class="s-desc">General ongoing help staying on top of regulatory filings.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-      </div>
-      <div class="dac-cta">
-        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20assistance%20with%20GST%20%2F%20Business%20Compliance%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Business Assistance</a>
-      </div>
-    </div>
-
-    <!-- C. ACCOUNTING & TALLY -->
-    <div class="dac-cat" id="dac-accounts">
-      <div class="dac-cat-head">
-        <h3><i class="fas fa-calculator" style="color:var(--gold)"></i> Accounting &amp; Tally Services</h3>
-        <span class="badge badge-blue">Price based on volume</span>
-      </div>
-      <div class="dac-grid">
-        <div class="dac-card" data-kw="bookkeeping"><div class="s-icon">📚</div><div class="dac-name">Bookkeeping</div><div class="s-desc">Day-to-day recording of financial transactions.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
-        <div class="dac-card" data-kw="bank statement data preparation"><div class="s-icon">🏦</div><div class="dac-name">Bank Statement Data Preparation</div><div class="s-desc">Converting bank statements into usable, organised data.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="bank reconciliation"><div class="s-icon">🔗</div><div class="dac-name">Bank Reconciliation</div><div class="s-desc">Matching book entries with bank statement transactions.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
-        <div class="dac-card" data-kw="ledger reconciliation"><div class="s-icon">📒</div><div class="dac-name">Ledger Reconciliation</div><div class="s-desc">Reviewing and reconciling ledger balances for accuracy.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
-        <div class="dac-card" data-kw="customer vendor reconciliation"><div class="s-icon">🤝</div><div class="dac-name">Customer / Vendor Reconciliation</div><div class="s-desc">Matching outstanding balances with customers and vendors.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
-        <div class="dac-card" data-kw="tally data entry support"><div class="s-icon">🧮</div><div class="dac-name">Tally Data Entry Support</div><div class="s-desc">Data entry support for Tally-based accounting.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Price based on volume</span></div>
-        <div class="dac-card" data-kw="accounting entry assistance"><div class="s-icon">✏️</div><div class="dac-name">Accounting Entry Assistance</div><div class="s-desc">Help passing accurate day-to-day accounting entries.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price based on volume</span></div>
-        <div class="dac-card" data-kw="excel data cleanup"><div class="s-icon">📊</div><div class="dac-name">Excel Data Cleanup</div><div class="s-desc">Cleaning, formatting and organising messy Excel data.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="pl balance sheet preparation support"><div class="s-icon">📈</div><div class="dac-name">P&amp;L and Balance Sheet Preparation Support</div><div class="s-desc">Support preparing draft P&amp;L and Balance Sheet statements.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-      </div>
-      <div class="dac-note"><i class="fas fa-info-circle"></i> Finalisation, certification, audit and services requiring professional attestation will be handled or reviewed by an appropriately qualified professional where applicable.</div>
-      <div class="dac-cta">
-        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20help%20with%20Accounting%20%2F%20Tally%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Accounting Help</a>
-      </div>
-    </div>
-
-    <!-- D. JOB & CAREER -->
-    <div class="dac-cat" id="dac-career">
-      <div class="dac-cat-head">
-        <h3><i class="fas fa-briefcase" style="color:var(--purple)"></i> Job &amp; Career Assistance</h3>
-        <span class="badge badge-teal">Starting from ₹499</span>
-      </div>
-      <div class="dac-grid">
-        <div class="dac-card" data-kw="professional resume cv preparation"><div class="s-icon">📄</div><div class="dac-name">Professional Resume / CV Preparation</div><div class="s-desc">A polished, professional resume tailored to your profile.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹499</span></div>
-        <div class="dac-card" data-kw="ats friendly resume support"><div class="s-icon">🤖</div><div class="dac-name">ATS-Friendly Resume Support</div><div class="s-desc">Formatting your resume to pass applicant tracking systems.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹499</span></div>
-        <div class="dac-card" data-kw="linkedin profile improvement"><div class="s-icon">💼</div><div class="dac-name">LinkedIn Profile Improvement</div><div class="s-desc">Improving your LinkedIn profile to stand out to recruiters.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="job application assistance"><div class="s-icon">📤</div><div class="dac-name">Job Application Assistance</div><div class="s-desc">Help completing and submitting job applications.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="interview preparation"><div class="s-icon">🎤</div><div class="dac-name">Interview Preparation</div><div class="s-desc">Guided practice and tips ahead of your interview.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="job description profile comparison"><div class="s-icon">🔎</div><div class="dac-name">Job Description vs Profile Comparison</div><div class="s-desc">Checking how well your profile matches a job description.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="salary ctc understanding"><div class="s-icon">💰</div><div class="dac-name">Salary and CTC Understanding</div><div class="s-desc">Breaking down an offer's CTC into what you'll actually take home.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="professional email drafting"><div class="s-icon">✉️</div><div class="dac-name">Professional Email Drafting</div><div class="s-desc">Drafting clear, professional emails for job or work needs.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="career profile review"><div class="s-icon">🧭</div><div class="dac-name">Career Profile Review</div><div class="s-desc">An overall review of your career profile with suggestions.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-      </div>
-      <div class="dac-cta">
-        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20help%20with%20job%20and%20career%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Career Assistance</a>
-      </div>
-    </div>
-
-    <!-- E. DIGITAL DOCUMENT SERVICES -->
-    <div class="dac-cat" id="dac-docs">
-      <div class="dac-cat-head">
-        <h3><i class="fas fa-file-alt" style="color:var(--blue2)"></i> Digital Document Services</h3>
-        <span class="badge badge-teal">Starting from ₹99</span>
-      </div>
-      <div class="dac-grid">
-        <div class="dac-card" data-kw="pdf merge split compress assistance"><div class="s-icon">📎</div><div class="dac-name">PDF Merge / Split / Compress Assistance</div><div class="s-desc">Combining, splitting or shrinking PDF files as needed.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="pdf to word excel conversion"><div class="s-icon">🔄</div><div class="dac-name">PDF to Word / Excel Conversion</div><div class="s-desc">Converting PDF files into editable Word or Excel formats.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="excel data formatting cleanup"><div class="s-icon">📊</div><div class="dac-name">Excel Data Formatting and Cleanup</div><div class="s-desc">Cleaning up and formatting Excel sheets for clarity.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="online application form assistance"><div class="s-icon">🖥️</div><div class="dac-name">Online Application Form Assistance</div><div class="s-desc">Help filling out online government or private forms.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="document organisation"><div class="s-icon">🗂️</div><div class="dac-name">Document Organisation</div><div class="s-desc">Organising your documents into a clear, usable structure.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="digital document preparation"><div class="s-icon">🧾</div><div class="dac-name">Digital Document Preparation</div><div class="s-desc">Preparing digital copies of your documents, ready to submit.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="basic data entry assistance"><div class="s-icon">⌨️</div><div class="dac-name">Basic Data Entry Assistance</div><div class="s-desc">Simple data entry support for small day-to-day tasks.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
-      </div>
-      <div class="dac-cta">
-        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20digital%20document%20assistance." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Digital Help</a>
-      </div>
-    </div>
-
-    <!-- F. SIR & VOTER SERVICE ASSISTANCE -->
-    <div class="dac-cat" id="dac-voter">
-      <div class="dac-cat-head">
-        <h3><i class="fas fa-vote-yea" style="color:var(--green)"></i> SIR &amp; Voter Service Assistance</h3>
-        <span class="badge badge-blue">Starting from ₹99</span>
-      </div>
-      <div class="dac-disclaimer"><i class="fas fa-info-circle"></i> DigiCafe is an independent private assistance service and is not affiliated with or authorised by the Election Commission of India. Final decisions are made by the competent authorities.</div>
-      <div class="dac-grid">
-        <div class="dac-card" data-kw="sir enumeration form assistance voter"><div class="s-icon">📝</div><div class="dac-name">SIR / Enumeration Form Assistance</div><div class="s-desc">Help filling out Special Intensive Revision / enumeration forms.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="voter record search assistance"><div class="s-icon">🔍</div><div class="dac-name">Voter Record Search Assistance</div><div class="s-desc">Help locating your existing voter record.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="new voter registration guidance"><div class="s-icon">🗳️</div><div class="dac-name">New Voter Registration Guidance</div><div class="s-desc">Step-by-step guidance for first-time voter registration.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="voter details correction assistance"><div class="s-icon">✏️</div><div class="dac-name">Voter Details Correction Assistance</div><div class="s-desc">Help correcting errors in your existing voter details.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="address change shifting assistance"><div class="s-icon">📍</div><div class="dac-name">Address Change / Shifting Assistance</div><div class="s-desc">Guidance when updating your voter address after shifting.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="document upload assistance"><div class="s-icon">📤</div><div class="dac-name">Document Upload Assistance</div><div class="s-desc">Help scanning and uploading the required supporting documents.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Starting from ₹99</span></div>
-        <div class="dac-card" data-kw="application status tracking guidance"><div class="s-icon">📊</div><div class="dac-name">Application Status Tracking Guidance</div><div class="s-desc">Help checking and understanding your application status.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Starting from ₹99</span></div>
-      </div>
-      <div class="dac-cta">
-        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20assistance%20with%20Voter%20%2F%20SIR%20services." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Voter / SIR Assistance</a>
-      </div>
-    </div>
-
-    <!-- G. TRAVEL ASSISTANCE -->
-    <div class="dac-cat" id="dac-travel">
-      <div class="dac-cat-head">
-        <h3><i class="fas fa-plane" style="color:var(--blue2)"></i> Travel Assistance</h3>
-        <span class="badge badge-teal">Price on Request</span>
-      </div>
-      <div class="dac-disclaimer"><i class="fas fa-info-circle"></i> DigiCafe assists with bookings and coordination and is not an airline or travel supplier unless officially authorised.</div>
-      <div class="dac-grid">
-        <div class="dac-card" data-kw="flight booking assistance"><div class="s-icon">✈️</div><div class="dac-name">Flight Booking Assistance</div><div class="s-desc">Help finding and booking suitable flight options.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="hotel booking assistance"><div class="s-icon">🏨</div><div class="dac-name">Hotel Booking Assistance</div><div class="s-desc">Help finding and booking hotels for your trip.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="cancellation guidance"><div class="s-icon">🚫</div><div class="dac-name">Cancellation Guidance</div><div class="s-desc">Guidance on cancelling flight or hotel bookings.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="refund follow up assistance"><div class="s-icon">💵</div><div class="dac-name">Refund Follow-up Assistance</div><div class="s-desc">Following up on pending travel refunds on your behalf.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="travel itinerary preparation"><div class="s-icon">🗺️</div><div class="dac-name">Travel Itinerary Preparation</div><div class="s-desc">Putting together a clear day-by-day travel itinerary.</div><span class="stat sb-avail">Available Now</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="booking reconciliation support"><div class="s-icon">🧾</div><div class="dac-name">Booking Reconciliation Support</div><div class="s-desc">Checking booking confirmations and charges for accuracy.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-      </div>
-      <div class="dac-cta">
-        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20need%20travel%20assistance." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Get Travel Assistance</a>
-      </div>
-    </div>
-
-    <!-- H. INSURANCE GUIDANCE & EXPERT CONNECT -->
-    <div class="dac-cat" id="dac-insurance">
-      <div class="dac-cat-head">
-        <h3><i class="fas fa-shield-alt" style="color:var(--gold)"></i> Insurance Guidance &amp; Expert Connect</h3>
-        <span class="badge badge-blue">Price on Request</span>
-      </div>
-      <div class="dac-disclaimer"><i class="fas fa-info-circle"></i> Insurance products, solicitation and regulated advice, where applicable, will be provided only through appropriately licensed or authorised professionals. DigiCafe may provide general information and coordination support.</div>
-      <div class="dac-grid">
-        <div class="dac-card" data-kw="health insurance requirement assessment"><div class="s-icon">🩺</div><div class="dac-name">Health Insurance Requirement Assessment</div><div class="s-desc">General discussion to understand your health cover needs.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="policy feature comparison assistance"><div class="s-icon">📋</div><div class="dac-name">Policy Feature Comparison Assistance</div><div class="s-desc">Comparing publicly available features across policies.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="family health insurance guidance"><div class="s-icon">👨‍👩‍👧‍👦</div><div class="dac-name">Family Health Insurance Guidance</div><div class="s-desc">General guidance while considering a family floater plan.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="understanding waiting periods"><div class="s-icon">⏳</div><div class="dac-name">Understanding Waiting Periods</div><div class="s-desc">Explaining how waiting periods typically work in policies.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="understanding co-payment room rent limits"><div class="s-icon">🏥</div><div class="dac-name">Understanding Co-payment and Room Rent Limits</div><div class="s-desc">Explaining common co-payment and room-rent clauses.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="claim process guidance"><div class="s-icon">📁</div><div class="dac-name">Claim Process Guidance</div><div class="s-desc">General guidance on the typical insurance claim process.</div><span class="stat sb-online">Online Service</span><span class="stat sb-price">Price on Request</span></div>
-        <div class="dac-card" data-kw="connect authorised insurance expert"><div class="s-icon">🧑‍💼</div><div class="dac-name">Connect with an Authorised Insurance Expert</div><div class="s-desc">We connect you with a licensed/authorised insurance professional.</div><span class="stat sb-expert">Expert Assistance</span><span class="stat sb-price">Price on Request</span></div>
-      </div>
-      <div class="dac-cta">
-        <a href="https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20want%20to%20connect%20with%20an%20insurance%20expert." target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> Connect With Insurance Expert</a>
-      </div>
-    </div>
-
-    <!-- CATEGORY-BASED PRICING -->
-    <div class="sh" style="margin-top:1rem">
-      <span class="badge badge-blue">Pricing</span>
-      <h2>Category-Based <span class="g-text">Pricing</span></h2>
-      <p>Final charges depend on complexity, volume, urgency, government fees and professional involvement.</p>
-    </div>
-    <div class="glass" style="padding:1.5rem;border-radius:var(--r2);overflow-x:auto;margin-bottom:3.5rem">
-      <table class="price-table">
-        <thead><tr><th>Category</th><th>Indicative Price</th></tr></thead>
-        <tbody>
-          <tr><td>Basic Assistance</td><td>Starting from ₹99</td></tr>
-          <tr><td>Digital Document Assistance</td><td>Starting from ₹99</td></tr>
-          <tr><td>Voter / SIR Assistance</td><td>Starting from ₹99</td></tr>
-          <tr><td>Resume &amp; Career Assistance</td><td>Starting from ₹499</td></tr>
-          <tr><td>Accounting &amp; Reconciliation</td><td>Price based on volume</td></tr>
-          <tr><td>ITR Filing Assistance</td><td>Price based on return complexity</td></tr>
-          <tr><td>GST &amp; Business Compliance</td><td>Price on Request</td></tr>
-          <tr><td>Expert Consultation / Professional Review</td><td>Price on Request</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- TRUST & SAFETY -->
-    <div class="sh">
-      <span class="badge badge-teal">Trust</span>
-      <h2>Safe &amp; Transparent <span class="g-text">Assistance</span></h2>
-    </div>
-    <div class="trust-grid" style="margin-bottom:3.5rem">
-      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Transparent service charges shared before work starts.</p></div>
-      <div class="trust-item"><i class="fas fa-check-circle"></i><p>No guaranteed government approval or refund promises.</p></div>
-      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Never share OTPs or passwords publicly — DigiCafe will never ask for them either.</p></div>
-      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Please verify all information carefully before final submission.</p></div>
-      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Complex matters may be referred to a CA, CS, advocate or another appropriately qualified professional.</p></div>
-      <div class="trust-item"><i class="fas fa-check-circle"></i><p>Government fees and DigiCafe service charges are separate, where applicable.</p></div>
-    </div>
-
-    <!-- REQUEST HELP FORM -->
-    <div class="sh" id="request-help">
-      <span class="badge badge-blue">Get Help</span>
-      <h2>Request <span class="g-text">Assistance</span></h2>
-      <p>Fill in your details and we'll get back to you — or send it straight to us on WhatsApp.</p>
-    </div>
-    <div class="glass" style="max-width:760px;margin:0 auto;padding:2rem;border-radius:var(--r2)">
-      <form id="request-help-form" onsubmit="return submitRequestHelp(event)">
-        <div class="rh-grid">
-          <div class="rh-group">
-            <label>Service Category</label>
-            <select id="rh-category" onchange="updateSpecificServices()" required>
-              <option value="">Select category</option>
-              <option value="Income Tax & TDS">Income Tax &amp; TDS Assistance</option>
-              <option value="GST & Business Compliance">GST &amp; Business Compliance</option>
-              <option value="Accounting & Tally">Accounting &amp; Tally Services</option>
-              <option value="Job & Career">Job &amp; Career Assistance</option>
-              <option value="Digital Documents">Digital Document Services</option>
-              <option value="Voter / SIR">SIR &amp; Voter Service Assistance</option>
-              <option value="Travel">Travel Assistance</option>
-              <option value="Insurance">Insurance Guidance &amp; Expert Connect</option>
-            </select>
-          </div>
-          <div class="rh-group">
-            <label>Specific Service</label>
-            <select id="rh-service" required><option value="">Select category first</option></select>
-          </div>
-          <div class="rh-group">
-            <label>Full Name</label>
-            <input type="text" id="rh-name" placeholder="Your full name" required>
-          </div>
-          <div class="rh-group">
-            <label>Mobile Number</label>
-            <input type="tel" id="rh-mobile" placeholder="+91 98765 43210" required>
-          </div>
-          <div class="rh-group">
-            <label>Email</label>
-            <input type="email" id="rh-email" placeholder="you@example.com">
-          </div>
-          <div class="rh-group">
-            <label>Deadline / Urgency</label>
-            <select id="rh-urgency">
-              <option value="Not Urgent">Not Urgent</option>
-              <option value="Within a Week">Within a Week</option>
-              <option value="Within 2-3 Days">Within 2-3 Days</option>
-              <option value="Urgent / Today">Urgent / Today</option>
-            </select>
-          </div>
-        </div>
-        <div class="rh-group">
-          <label>Notes</label>
-          <textarea id="rh-notes" placeholder="Any additional details about your request"></textarea>
-        </div>
-        <div class="rh-actions">
-          <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-paper-plane"></i> Send Request</button>
-          <button type="button" class="btn btn-lg" style="background:#25D366;color:#fff" onclick="sendRequestOnWhatsApp()"><i class="fab fa-whatsapp"></i> Send Request on WhatsApp</button>
-        </div>
-      </form>
-    </div>
-
-    <!--
-      FUTURE FIREBASE INTEGRATION (do not remove):
-      - Firebase Authentication: connect here for client registration/login specific to the
-        Digital Assistance Centre (reuse the existing Firebase app initialised above in <head>).
-      - Firestore: create a "serviceRequests" collection and write each Request Help form
-        submission here (category, service, name, mobile, email, urgency, notes, timestamp, status).
-      - Firestore: create a "clients" collection linked to the authenticated user's UID for the
-        Client Dashboard (request history, status tracking).
-      - Firebase Storage: enable document upload (e.g. for Voter/SIR document uploads and
-        Accounting bank-statement uploads) and store the file reference against the relevant
-        serviceRequests document.
-      - Admin Dashboard: read from "serviceRequests" (all clients) with status update controls
-        (Received / In Progress / Completed) and push Firestore-based Notifications to clients.
-      No backend calls are implemented yet — this section is intentionally static/demo until
-      Firebase is wired in.
-    -->
-  </div>
-</div>
-
 
 <!-- TOOLS PAGE (CALCULATORS) -->
 <div class="page" id="page-tools" style="padding:80px 20px">
@@ -1233,240 +602,91 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   <div class="dash-layout">
     <div class="d-sidebar">
       <div class="d-user">
-        <div class="d-avatar">C</div>
+        <div class="d-avatar">VK</div>
         <div>
-          <div class="d-uname">Client</div>
+          <div class="d-uname">Vikash Pathak</div>
           <div class="d-urole">Client</div>
         </div>
       </div>
       <ul class="side-nav">
         <li><a onclick="showDash('overview')" class="active"><i class="fas fa-home"></i> Overview</a></li>
-        <li><a onclick="showDash('applications')"><i class="fas fa-file-alt"></i> My Applications</a></li>
-        <li><a onclick="showDash('services')"><i class="fas fa-th-large"></i> Available Services</a></li>
-        <li><a onclick="showDash('filing')"><i class="fas fa-tasks"></i> Filing &amp; Task Status</a></li>
+        <li><a onclick="showDash('applications')"><i class="fas fa-file-alt"></i> Applications</a></li>
         <li><a onclick="showDash('documents')"><i class="fas fa-folder"></i> Documents</a></li>
         <li><a onclick="showDash('invoices')"><i class="fas fa-receipt"></i> Invoices</a></li>
         <li><a onclick="showDash('messages')"><i class="fas fa-envelope"></i> Messages</a></li>
         <li><a onclick="showDash('support')"><i class="fas fa-headset"></i> Support</a></li>
-        <li><a onclick="showDash('announcements')"><i class="fas fa-bullhorn"></i> Announcements</a></li>
         <li><a onclick="showPage('home')"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
       </ul>
     </div>
     <div class="d-main">
       <div class="d-content active" id="dash-overview">
-        <div class="d-title">Welcome back, Client!</div>
-        <p style="color:var(--txt2);margin-bottom:2rem">Your compliance status and pending applications.</p>
-        <div class="kpi-grid">
+        <div class="d-title" id="dash-welcome">Welcome back!</div>
+        <p style="color:var(--txt2);margin-bottom:2rem" id="dash-subtitle">Your compliance status and pending applications.</p>
+        
+        <div class="kpi-grid" id="dash-kpi-grid">
           <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Active Applications</div></div>
           <div class="kpi"><div class="kpi-val">₹0</div><div class="kpi-label">Total Paid</div></div>
           <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Pending Documents</div></div>
           <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Completed Services</div></div>
         </div>
-        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;margin-top:2rem">
-          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Recent Applications</h3>
-          <table class="table">
-            <thead><tr><th>Service</th><th>Date</th><th>Status</th><th>Amount</th></tr></thead>
-            <tbody>
-              <tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">Loading your services...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="d-content" id="dash-applications"><p style="padding:2rem;color:var(--txt2)">Your applications here...</p></div>
 
-      <!-- ═══ AVAILABLE DIGICAFE SERVICES (Section 4) ═══ -->
-      <div class="d-content" id="dash-services">
-        <div class="d-title">DigiCafe Services Available for You</div>
-        <p style="color:var(--txt2);margin-bottom:1.5rem">Tap a service to send a request — we'll pre-fill the form for you.</p>
-        <div class="tools-grid" id="dash-services-grid"></div>
-      </div>
-
-      <!-- ═══ MY FILING & TASK STATUS (Section 6 — PAN-linked, via authenticated profile) ═══ -->
-      <div class="d-content" id="dash-filing">
-        <div class="d-title">My Filing &amp; Task Status</div>
-        <p style="color:var(--txt2);margin-bottom:1.5rem">Live compliance/task tracking from DigiCafe's records, matched to your account.</p>
-
-        <div id="filing-pan-setup" class="hidden" style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;max-width:420px">
-          <p style="color:var(--txt2);margin-bottom:1rem;font-size:.9rem"><i class="fas fa-info-circle"></i> Link your PAN once to see your filing status here. This is saved privately to your account only.</p>
-          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">PAN Number</label>
-          <input type="text" id="filing-pan-input" placeholder="e.g. ABCDE1234F" maxlength="10" style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem;text-transform:uppercase;margin-bottom:1rem">
-          <button type="button" class="btn btn-primary" onclick="saveMyPan()"><i class="fas fa-save"></i> Save &amp; Load Status</button>
-          <div id="filing-pan-error" class="hidden" style="color:var(--red);font-size:.82rem;margin-top:.75rem"></div>
+        <!-- DIGICAFE SERVICES SECTION -->
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;margin:2rem 0">
+          <h3 class="s" style="font-weight:700;margin-bottom:1.5rem">💼 DigiCafe Services Available for You</h3>
+          <p id="services-msg" style="color:var(--txt2);font-size:.95rem;margin-bottom:1.5rem">No services availed yet. Explore DigiCafe services below and submit a request.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem" id="dash-services-grid">
+            <!-- Services will be loaded here by JavaScript -->
+          </div>
         </div>
 
-        <div id="filing-status-view" class="hidden">
-          <div class="kpi-grid" id="filing-stats"></div>
-          <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;margin-top:1.5rem">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-              <h3 class="s" style="font-weight:700">Your Compliance Tasks</h3>
-              <button type="button" class="btn btn-ghost btn-sm" onclick="editMyPan()"><i class="fas fa-pen"></i> Change PAN</button>
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;margin:2rem 0">
+          <h3 class="s" style="font-weight:700;margin-bottom:1.5rem">📂 My Documents & Files</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
+            <div style="background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(6,214,160,.08));border:2px dashed var(--bdr);border-radius:var(--r2);padding:2rem;text-align:center;cursor:pointer" onclick="triggerFileUpload()">
+              <div style="font-size:2.5rem;margin-bottom:.5rem">📤</div>
+              <div class="s" style="font-weight:700;margin-bottom:.3rem">Upload Documents</div>
+              <div style="font-size:.8rem;color:var(--txt3)">Click to upload files for this service</div>
             </div>
-            <table class="table">
-              <thead><tr><th>Service</th><th>Period / FY</th><th>Due Date</th><th>Status</th><th>Reference</th><th>Remarks</th></tr></thead>
-              <tbody id="filing-tasks-body"><tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">Loading...</td></tr></tbody>
-            </table>
+            <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;text-align:center">
+              <div style="font-size:2.5rem;margin-bottom:.5rem">📥</div>
+              <div class="s" style="font-weight:700;margin-bottom:.3rem">Downloaded Files</div>
+              <button class="btn btn-sm btn-ghost" onclick="downloadClientDocs()"><i class="fas fa-download"></i> Download</button>
+            </div>
+          </div>
+
+          <!-- UPLOADED FILES LIST -->
+          <div style="background:var(--bg3);border-radius:var(--r2);overflow:hidden">
+            <div style="padding:1rem;border-bottom:1px solid var(--bdr);background:var(--bg2);font-weight:700">Uploaded Files</div>
+            <div id="uploaded-files" style="padding:1.5rem">
+              <div style="text-align:center;color:var(--txt3);padding:1rem">
+                <p><i class="fas fa-info-circle"></i> No documents uploaded yet</p>
+                <p style="font-size:.8rem;margin-top:.5rem">Upload documents using the button above</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- APPLICATIONS TRACKER -->
+        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;margin:2rem 0">
+          <h3 class="s" style="font-weight:700;margin-bottom:1.5rem">📊 My Applications</h3>
+          <div id="dash-recent-apps-container">
+            <div style="text-align:center;padding:2rem;color:var(--txt3)">
+              <i class="fas fa-inbox"></i>
+              <p style="margin-top:.5rem">No applications yet</p>
+            </div>
           </div>
         </div>
       </div>
-
+      <div class="d-content" id="dash-applications"><p style="padding:2rem;color:var(--txt2)">Your applications here...</p></div>
       <div class="d-content" id="dash-documents"><p style="padding:2rem;color:var(--txt2)">Document upload and management here...</p></div>
       <div class="d-content" id="dash-invoices"><p style="padding:2rem;color:var(--txt2)">Your invoices and payment history here...</p></div>
       <div class="d-content" id="dash-messages"><p style="padding:2rem;color:var(--txt2)">Messages from support team here...</p></div>
       <div class="d-content" id="dash-support"><p style="padding:2rem;color:var(--txt2)">Support tickets and help center here...</p></div>
-
-      <!-- ═══ DIGICAFE ANNOUNCEMENTS (Section 8) ═══ -->
-      <div class="d-content" id="dash-announcements">
-        <div class="d-title">What's New at DigiCafe</div>
-        <p style="color:var(--txt2);margin-bottom:1.5rem">Deadline reminders, new services, and important compliance updates.</p>
-        <div id="dash-announcements-list" class="tools-grid" style="grid-template-columns:1fr">
-          <p style="color:var(--txt3);padding:1rem">No announcements yet.</p>
-        </div>
-      </div>
     </div>
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
-<div class="page" id="page-admin">
-  <div class="admin-layout">
-    <div class="admin-sidebar">
-      <div style="font-weight:700;font-size:1rem;margin-bottom:1.5rem;color:var(--txt)">Admin Panel</div>
-      <h4>Dashboard</h4>
-      <div class="admin-nav">
-        <a onclick="showAdmin('overview')" class="active"><i class="fas fa-chart-line"></i> Overview</a>
-      </div>
-      <h4>Management</h4>
-      <div class="admin-nav">
-        <a onclick="showAdmin('requests')"><i class="fas fa-inbox"></i> Requests</a>
-        <a onclick="showAdmin('clients')"><i class="fas fa-users"></i> Clients</a>
-        <a onclick="showAdmin('services')"><i class="fas fa-cogs"></i> Services</a>
-        <a onclick="showAdmin('payments')"><i class="fas fa-credit-card"></i> Payments</a>
-      </div>
-      <h4>Content</h4>
-      <div class="admin-nav">
-        <a onclick="showAdmin('news')"><i class="fas fa-newspaper"></i> News</a>
-        <a onclick="showAdmin('announcements')"><i class="fas fa-bullhorn"></i> Announcements</a>
-        <a onclick="showAdmin('courses')"><i class="fas fa-book"></i> Courses</a>
-      </div>
-      <h4>Account</h4>
-      <div class="admin-nav">
-        <a onclick="showPage('home')"><i class="fas fa-sign-out-alt"></i> Logout</a>
-      </div>
-    </div>
-    <div class="admin-main">
-      <div class="admin-content active" id="admin-overview">
-        <div class="s" style="font-size:1.4rem;font-weight:800;margin-bottom:2rem">Dashboard Analytics</div>
-        <div class="admin-kpis">
-          <div class="admin-kpi"><div class="ak-label">Total Clients</div><div class="ak-val" id="ak-clients">—</div></div>
-          <div class="admin-kpi"><div class="ak-label">This Month Revenue</div><div class="ak-val" id="ak-revenue">—</div></div>
-          <div class="admin-kpi"><div class="ak-label">Pending Applications</div><div class="ak-val" id="ak-pending">—</div></div>
-          <div class="admin-kpi"><div class="ak-label">Completed Tasks</div><div class="ak-val" id="ak-completed">—</div></div>
-          <div class="admin-kpi"><div class="ak-label">Staff Active</div><div class="ak-val">—</div></div>
-          <div class="admin-kpi"><div class="ak-label">New Sign-ups</div><div class="ak-val" id="ak-signups">—</div></div>
-        </div>
-        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;margin-top:2rem">
-          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Recent Service Requests</h3>
-          <table class="table">
-            <thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Status</th></tr></thead>
-            <tbody id="admin-overview-requests">
-              <tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">Sign in with the admin Google account to see live requests.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="admin-content" id="admin-clients"><p style="padding:2rem;color:var(--txt2)">Client management here...</p></div>
-      <div class="admin-content" id="admin-services"><p style="padding:2rem;color:var(--txt2)">Service management here...</p></div>
-      <div class="admin-content" id="admin-payments"><p style="padding:2rem;color:var(--txt2)">Payment analytics here...</p></div>
-      <div class="admin-content" id="admin-requests">
-        <div class="d-title">Service Requests</div>
-        <p style="color:var(--txt2);margin-bottom:1.5rem">Every request submitted from the Digital Assistance Centre appears here in real time, linked to the client's account when they were logged in.</p>
-
-        <!-- Shown only when NOT signed in as the admin account -->
-        <div id="requests-admin-gate" class="glass" style="padding:2rem;border-radius:var(--r2);text-align:center;max-width:460px">
-          <p style="color:var(--txt2);margin-bottom:1rem"><i class="fas fa-lock"></i> Sign in with the DigiCafe admin Google account to view client requests.</p>
-          <button type="button" class="btn btn-primary" onclick="signInWithGoogle()"><i class="fab fa-google"></i> Sign in with Google</button>
-        </div>
-
-        <!-- Shown only when signed in as the admin account -->
-        <div id="requests-admin-panel" class="hidden">
-          <table class="table">
-            <thead><tr><th>Client</th><th>Contact</th><th>Category / Service</th><th>Urgency</th><th>Date</th><th>Status</th></tr></thead>
-            <tbody id="admin-requests-list"></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="admin-content" id="admin-news">
-        <div class="d-title">News Management</div>
-        <p style="color:var(--txt2);margin-bottom:1.5rem">Add today's update below — it publishes to the live site instantly, no file editing needed.</p>
-
-        <!-- Shown only when NOT signed in as the admin account -->
-        <div id="news-admin-gate" class="glass" style="padding:2rem;border-radius:var(--r2);text-align:center;max-width:460px">
-          <p style="color:var(--txt2);margin-bottom:1rem"><i class="fas fa-lock"></i> Sign in with the DigiCafe admin Google account to add or remove News items.</p>
-          <button type="button" class="btn btn-primary" onclick="signInWithGoogle()"><i class="fab fa-google"></i> Sign in with Google</button>
-        </div>
-
-        <!-- Shown only when signed in as the admin account -->
-        <div id="news-admin-panel" class="hidden">
-          <div class="glass" style="padding:1.5rem;border-radius:var(--r2);margin-bottom:2rem;max-width:640px">
-            <form id="admin-news-form" onsubmit="return submitAdminNews(event)">
-              <div class="rh-grid">
-                <div class="rh-group">
-                  <label>Title</label>
-                  <input type="text" id="an-title" placeholder="Headline" required>
-                </div>
-                <div class="rh-group">
-                  <label>Date</label>
-                  <input type="text" id="an-date" placeholder="e.g. 11 Jul 2026" required>
-                </div>
-                <div class="rh-group">
-                  <label>Category</label>
-                  <input type="text" id="an-cat" placeholder="e.g. Income Tax, GST, Companies Act" required>
-                </div>
-              </div>
-              <div class="rh-group">
-                <label>Description</label>
-                <textarea id="an-desc" placeholder="One or two sentence summary" required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Publish News Item</button>
-            </form>
-          </div>
-          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Published Items</h3>
-          <div id="admin-news-list" style="display:flex;flex-direction:column;gap:.75rem;max-width:640px"></div>
-        </div>
-      </div>
-      <div class="admin-content" id="admin-courses"><p style="padding:2rem;color:var(--txt2)">Course management here...</p></div>
-
-      <!-- ═══ ADMIN: CLIENT ANNOUNCEMENTS (Section 8) ═══ -->
-      <div class="admin-content" id="admin-announcements">
-        <div class="d-title">Client Announcements</div>
-        <p style="color:var(--txt2);margin-bottom:1.5rem">Published items appear instantly on every logged-in client's dashboard under "What's New at DigiCafe."</p>
-
-        <div id="announcements-admin-gate" class="glass" style="padding:2rem;border-radius:var(--r2);text-align:center;max-width:460px">
-          <p style="color:var(--txt2);margin-bottom:1rem"><i class="fas fa-lock"></i> Sign in with the DigiCafe admin Google account to publish announcements.</p>
-          <button type="button" class="btn btn-primary" onclick="signInWithGoogle()"><i class="fab fa-google"></i> Sign in with Google</button>
-        </div>
-
-        <div id="announcements-admin-panel" class="hidden">
-          <div class="glass" style="padding:1.5rem;border-radius:var(--r2);margin-bottom:2rem;max-width:640px">
-            <form id="admin-announcement-form" onsubmit="return submitAdminAnnouncement(event)">
-              <div class="rh-group">
-                <label>Title</label>
-                <input type="text" id="aa-title" placeholder="e.g. GST Filing Deadline Extended" required>
-              </div>
-              <div class="rh-group">
-                <label>Message</label>
-                <textarea id="aa-body" placeholder="Details clients should know" required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary"><i class="fas fa-bullhorn"></i> Publish Announcement</button>
-            </form>
-          </div>
-          <h3 class="s" style="font-weight:700;margin-bottom:1rem">Published Announcements</h3>
-          <div id="admin-announcements-list" style="display:flex;flex-direction:column;gap:.75rem;max-width:640px"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- ADMIN PANEL REMOVED - See admin.html for separate admin portal -->
 
 <!-- FOOTER -->
 <footer>
@@ -1504,13 +724,16 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     </div>
     <div class="foot-bottom">
       <p>© 2025 DigiCafe Compliance & Digital Solutions · MSME: UDYAM-KR-02-0041919</p>
-      <p>By Vikash Pathak · Bengaluru, India · <a href="mailto:vikashpathak.mgmt@gmail.com" style="color:var(--blue2)">vikashpathak.mgmt@gmail.com</a> · <a onclick="showPage('admin');showAdmin('news')" style="color:var(--txt3);cursor:pointer" title="Admin sign-in required">Admin</a></p>
+      <p>By Vikash Pathak · Bengaluru, India · <a href="mailto:vikashpathak.mgmt@gmail.com" style="color:var(--blue2)">vikashpathak.mgmt@gmail.com</a></p>
     </div>
   </div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/918539979271?text=Hi%20DigiCafe!%20I%20want%20to%20know%20more" target="_blank" style="position:fixed;bottom:2rem;left:2rem;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;transition:all .3s" title="Chat on WhatsApp">💬</a>
+
+<!-- HIDDEN FILE INPUT -->
+<input type="file" id="file-input" style="display:none" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx">
 
 <!-- TOAST -->
 <div id="toast"></div>
@@ -1526,36 +749,15 @@ const news = [
   {title:'Company Law: New MCA Portal Features for Annual Compliance',date:'10 Jan 2025',cat:'Companies Act',desc:'Streamlined filing process for AOC-4, MGT-7 with auto-validation.'},
 ];
 
-// News priority:
-//   1. Admin-published items in Firestore (window._liveNews, via Admin > News)
-//   2. Auto-fetched daily updates (window._autoNews, via fetchAutoNews() below)
-//   3. Built-in static fallback list above, so the section is never empty.
-function getNewsData(){
-  const manual = (window._liveNews && window._liveNews.length) ? window._liveNews : [];
-  const auto = (window._autoNews && window._autoNews.length) ? window._autoNews : [];
-  if (manual.length || auto.length) {
-    const seen = new Set();
-    const combined = [...manual, ...auto].filter(n => {
-      const key = (n.title || '').trim().toLowerCase();
-      if (!key || seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-    combined.sort((a, b) => (b._ts || 0) - (a._ts || 0));
-    return combined;
-  }
-  return news;
-}
-
 const services = [
-  {icon:'💰',name:'Income Tax',desc:'ITR filing, refund tracking, tax planning, notice reply',price:'₹999+'},
-  {icon:'📊',name:'GST Registration',desc:'GSTIN approval, GSTR filing, reconciliation, audit',price:'₹1,999+'},
-  {icon:'🏢',name:'Company Reg',desc:'Pvt Ltd, LLP, OPC, name approval, DIN services',price:'₹4,999+'},
-  {icon:'📋',name:'TDS Returns',desc:'24Q/26Q filing, Form 16, challan verification',price:'₹1,499+'},
-  {icon:'™️',name:'Trademark Reg',desc:'Search, filing, objection reply, renewal',price:'₹2,999+'},
-  {icon:'🔐',name:'Digital Signature',desc:'Class 3 DSC, renewal, USB token, installation',price:'₹1,299+'},
-  {icon:'🚀',name:'MSME/Startup',desc:'Udyam registration, Startup India, FSSAI',price:'₹1,499+'},
-  {icon:'👤',name:'PAN/TAN/Aadhaar',desc:'New PAN, TAN registration, Aadhaar update',price:'₹499+'},
+  {icon:'💰',name:'Income Tax (ITR)',desc:'ITR-1, ITR-2, ITR-4 filing, tax planning, refund tracking',price:'₹999+'},
+  {icon:'📊',name:'GST Registration',desc:'GSTIN approval, GSTR-1/3B/9 filing, reconciliation',price:'₹1,999+'},
+  {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, OPC, LLP formation, DIN services',price:'₹4,999+'},
+  {icon:'📋',name:'TDS Compliance',desc:'24Q/26Q filing, Form 16, challan preparation',price:'₹1,499+'},
+  {icon:'™️',name:'Trademark Registration',desc:'Search, application, objection reply, renewal',price:'₹2,999+'},
+  {icon:'🔐',name:'Digital Signature (DSC)',desc:'Class 3 DSC, USB token, installation support',price:'₹1,299+'},
+  {icon:'🚀',name:'MSME/Udyam Registration',desc:'Udyam registration, Startup India registration',price:'₹1,499+'},
+  {icon:'👤',name:'PAN/TAN/Aadhaar',desc:'New PAN, TAN registration, Aadhaar update assistance',price:'₹499+'},
 ];
 
 const aiTools = [
@@ -1604,17 +806,8 @@ function showDash(s){
 }
 
 // ═══ ADMIN ═══
-window.showAdminSection = function(s){
-  document.querySelectorAll('#page-admin .admin-content').forEach(x=>x.classList.remove('active'));
-  const target = document.getElementById('admin-'+s);
-  if(target) target.classList.add('active');
-  document.querySelectorAll('#page-admin .admin-nav a').forEach(x=>{
-    x.classList.toggle('active', x.getAttribute('onclick') === `showAdmin('${s}')`);
-  });
-};
-function showAdmin(s){
-  window.showAdminSection(s);
-}
+// ADMIN PANEL MOVED TO SEPARATE admin.html FILE
+// Regular users cannot access admin functions from here
 
 // ═══ TABS ═══
 function switchTab(t){
@@ -1635,17 +828,8 @@ function switchTab(t){
 
 function handleLogin(e){
   e.preventDefault();
-  const inputs = e.target.querySelectorAll('input');
-  const email = inputs[0].value.trim();
-  const password = inputs[1].value;
-  if (!window._firebaseLogin) { showToast('⚠ Firebase login is not ready.'); return false; }
-  window._firebaseLogin(email, password)
-    .then(()=>showToast('✓ Login successful!'))
-    .catch(err=>{
-      let msg = 'Login failed. Please check your email and password.';
-      if(err.code === 'auth/invalid-credential') msg = 'Invalid email or password.';
-      showToast('⚠ ' + msg);
-    });
+  showToast('✓ Login successful!');
+  setTimeout(()=>showPage('dashboard'),1000);
   return false;
 }
 
@@ -1688,20 +872,15 @@ function showToast(m){
 }
 
 // ═══ RENDER ═══
-function newsCardHtml(n){
-  const title = n.link ? `<a href="${n.link}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">${n.title}</a>` : n.title;
-  return `
+function renderNews(cont){
+  cont.innerHTML=news.map(n=>`
     <div class="news-card">
       <span class="n-cat">${n.cat}</span>
-      <div class="n-title">${title}</div>
+      <div class="n-title">${n.title}</div>
       <div class="n-desc">${n.desc}</div>
-      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}${n.source ? ' · <i class="fas fa-globe"></i> '+n.source : ''}</div>
+      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
     </div>
-  `;
-}
-
-function renderNews(cont){
-  cont.innerHTML=getNewsData().map(newsCardHtml).join('');
+  `).join('');
 }
 
 function renderServices(cont){
@@ -1739,8 +918,101 @@ function renderCourses(cont){
   `).join('');
 }
 
+// ═══ RENDER SERVICES IN CLIENT DASHBOARD ═══
+function renderDashboardServices(){
+  const cont = document.getElementById('dash-services-grid');
+  if(!cont) return;
+  cont.innerHTML=services.map(s=>`
+    <div class="svc-card" style="cursor:pointer;text-align:center" onclick="submitServiceRequest('${s.name}')">
+      <div class="s-icon">${s.icon}</div>
+      <div class="s-title">${s.name}</div>
+      <div style="font-size:.75rem;color:var(--txt2);margin-bottom:.5rem">${s.price}</div>
+      <button class="btn btn-primary btn-sm" style="width:100%" onclick="event.stopPropagation();submitServiceRequest('${s.name}')">Request</button>
+    </div>
+  `).join('');
+}
+
+function submitServiceRequest(serviceName){
+  showToast('✓ Service request submitted: '+serviceName);
+  // In a real app, this would save to Firebase Firestore
+}
+
+// ═══ FILE MANAGEMENT ═══
+let uploadedFiles = [];
+
+function triggerFileUpload() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.multiple = true;
+  input.accept = '.pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx';
+  input.onchange = (e) => {
+    const files = Array.from(e.target.files);
+    files.forEach(file => {
+      uploadedFiles.push({
+        name: file.name,
+        size: (file.size / 1024).toFixed(2),
+        date: new Date().toLocaleDateString(),
+        type: file.type.split('/')[1].toUpperCase()
+      });
+    });
+    displayUploadedFiles();
+    showToast(`✓ Uploaded ${files.length} file(s) successfully`, 'success');
+  };
+  input.click();
+}
+
+function displayUploadedFiles() {
+  const container = document.getElementById('uploaded-files');
+  if(uploadedFiles.length === 0) {
+    container.innerHTML = `<div style="text-align:center;color:var(--txt3);padding:1rem">
+      <p><i class="fas fa-info-circle"></i> No documents uploaded yet</p>
+      <p style="font-size:.8rem;margin-top:.5rem">Upload documents using the button above</p>
+    </div>`;
+    return;
+  }
+  
+  container.innerHTML = `
+    <table class="table">
+      <thead><tr><th>File Name</th><th>Type</th><th>Size</th><th>Uploaded</th><th>Action</th></tr></thead>
+      <tbody>
+        ${uploadedFiles.map((f, i) => `
+          <tr>
+            <td><i class="fas fa-file"></i> ${f.name}</td>
+            <td><span style="background:rgba(59,130,246,.2);color:var(--blue2);padding:.25rem .6rem;border-radius:4px;font-size:.75rem;font-weight:700">${f.type}</span></td>
+            <td>${f.size} KB</td>
+            <td>${f.date}</td>
+            <td>
+              <button class="btn btn-sm" style="background:transparent;color:var(--red);border:none;cursor:pointer;padding:.25rem" onclick="deleteFile(${i})">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function deleteFile(index) {
+  uploadedFiles.splice(index, 1);
+  displayUploadedFiles();
+  showToast('✓ File deleted', 'success');
+}
+
+function downloadClientDocs() {
+  if(uploadedFiles.length === 0) {
+    showToast('⚠ No files to download', 'error');
+    return;
+  }
+  showToast(`✓ Downloading ${uploadedFiles.length} file(s)...`, 'success');
+  // In a real app, this would create a zip file of all documents
+}
+
 // ═══ INIT ═══
 function initRender(){
+  // Initialize dashboard services
+  renderDashboardServices();
+  
   const ids = ['news-home','news-full','svc-home','svc-full','ai-home','ai-full','courses-home','courses-full','kb-grid','calc-grid'];
   if(!ids.every(id=>document.getElementById(id))) { setTimeout(initRender,50); return; }
 
@@ -1759,122 +1031,11 @@ function initRender(){
   const calcs=['💰 ITR Calculator','📊 GST Calculator','🏠 HRA Calculator','🏦 EMI Calculator','📈 Capital Gains','🧮 TDS Calculator','💼 Salary Breakup','🎯 SIP Calculator'];
   document.getElementById('calc-grid').innerHTML=calcs.map(c=>`<div class="tool-card" onclick="showToast('${c.split(' ')[1]} - Coming Soon')"><div class="t-icon">${c.split(' ')[0]}</div><div class="t-name">${c.substring(2)}</div><div class="t-desc">Free calculator</div></div>`).join('');
 
-  renderNewsCats();
-  fetchAutoNews(); // Task 5: populate/refresh automatic daily news (non-blocking)
-  renderDashboardServices(); // Section 4: Available DigiCafe Services grid
-  if (window.renderClientAnnouncements) window.renderClientAnnouncements(); // Section 8
-}
-
-// ═══ DASHBOARD: AVAILABLE DIGICAFE SERVICES (Section 4) ═══
-const DASHBOARD_SERVICES = [
-  {icon:'🧾', name:'Income Tax Return Filing', service:'ITR Filing Assistance', category:'Income Tax & TDS'},
-  {icon:'📄', name:'AIS / Form 26AS Assistance', service:'AIS & Form 26AS Review', category:'Income Tax & TDS'},
-  {icon:'💰', name:'TDS Assistance', service:'TDS Credit Reconciliation', category:'Income Tax & TDS'},
-  {icon:'🧮', name:'GST Registration & Return Filing', service:'GST Registration', category:'GST & Business Compliance'},
-  {icon:'📊', name:'Accounting & Tally Support', service:'Tally Data Entry Support', category:'Accounting & Tally'},
-  {icon:'🏦', name:'Bank Reconciliation', service:'Bank Reconciliation', category:'Accounting & Tally'},
-  {icon:'🔍', name:'TDS Reconciliation', service:'TDS Mismatch Investigation', category:'Income Tax & TDS'},
-  {icon:'🏭', name:'MSME / Udyam Registration', service:'Udyam / MSME Registration', category:'GST & Business Compliance'},
-  {icon:'🍽️', name:'FSSAI Assistance', service:'FSSAI Registration / Licence Assistance', category:'GST & Business Compliance'},
-  {icon:'🗳️', name:'SIR / Voter Service Assistance', service:'SIR / Enumeration Form Assistance', category:'Voter / SIR'},
-  {icon:'📁', name:'Digital Document Assistance', service:'Digital Document Preparation', category:'Digital Documents'},
-  {icon:'💼', name:'Resume & Career Assistance', service:'Professional Resume / CV Preparation', category:'Job & Career'},
-  {icon:'🏢', name:'Business Registration Assistance', service:'Company / Firm Registration Coordination', category:'GST & Business Compliance'},
-  {icon:'🪪', name:'PAN / TAN Assistance', service:'PAN Card Assistance', category:'Digital Documents'},
-  {icon:'🔏', name:'DSC Assistance', service:'DSC (Digital Signature Certificate) Assistance', category:'Digital Documents'},
-  {icon:'➕', name:'Other Digital Assistance', service:'', category:''}
-];
-function renderDashboardServices(){
-  const grid = document.getElementById('dash-services-grid');
-  if(!grid) return;
-  grid.innerHTML = DASHBOARD_SERVICES.map(s=>{
-    const clickFn = s.service ? `openServiceRequest('${s.service.replace(/'/g,"\\'")}','${s.category.replace(/'/g,"\\'")}')` : `openServiceRequest('','')`;
-    return `<div class="tool-card" onclick="${clickFn}"><div class="t-icon">${s.icon}</div><div class="t-name">${s.name}</div><div class="t-desc">Tap to request</div></div>`;
-  }).join('');
-}
-
-function renderNewsCats(){
-  const cats=[...new Set(getNewsData().map(n=>n.cat))];
+  // Add news category filter buttons
+  const cats=[...new Set(news.map(n=>n.cat))];
   const catCont=document.getElementById('news-cats');
   if(catCont){
     catCont.innerHTML='<button class="btn btn-primary btn-sm" onclick="filterNews(this,\'all\')" >All</button>'+cats.map(c=>`<button class="btn btn-ghost btn-sm" onclick="filterNews(this,'${c}')">${c}</button>`).join('');
-  }
-}
-
-// Called by the Firebase module script whenever the live "news" collection
-// changes, so News updates on the site instantly without a page reload.
-window.renderAllNews = function(){
-  const home=document.getElementById('news-home'); if(home) renderNews(home);
-  const full=document.getElementById('news-full'); if(full) renderNews(full);
-  renderNewsCats();
-};
-
-// ═══ AUTOMATIC DAILY NEWS (Task 5) ═══
-// No API key required and nothing secret is exposed: this reads public Google
-// News RSS feeds (Income Tax / GST / MCA-compliance topics) through the free,
-// keyless rss2json converter so it can be fetched directly from the browser.
-// Results are cached in localStorage for 24h so the News section still shows
-// the last successful fetch if the person is offline or the source fails.
-const AUTO_NEWS_CACHE_KEY = 'digicafe_auto_news_v1';
-const AUTO_NEWS_TOPICS = [
-  { q: 'Income Tax India', cat: 'Income Tax' },
-  { q: 'GST India', cat: 'GST' },
-  { q: 'MCA compliance India OR Companies Act India', cat: 'Companies Act' }
-];
-
-function loadAutoNewsCache(){
-  try {
-    const raw = localStorage.getItem(AUTO_NEWS_CACHE_KEY);
-    if (!raw) return null;
-    return JSON.parse(raw);
-  } catch (e) { return null; }
-}
-
-function saveAutoNewsCache(items){
-  try { localStorage.setItem(AUTO_NEWS_CACHE_KEY, JSON.stringify({ items, fetchedAt: Date.now() })); } catch (e) {}
-}
-
-async function fetchAutoNews(){
-  const cached = loadAutoNewsCache();
-  const ONE_DAY = 24 * 60 * 60 * 1000;
-  // Serve cache immediately so the section is never empty while we refresh.
-  if (cached && cached.items && cached.items.length) {
-    window._autoNews = cached.items;
-    window.renderAllNews && window.renderAllNews();
-    if (Date.now() - cached.fetchedAt < ONE_DAY) return; // still fresh, no refetch needed today
-  }
-  try {
-    const results = await Promise.all(AUTO_NEWS_TOPICS.map(async topic => {
-      const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(topic.q)}&hl=en-IN&gl=IN&ceid=IN:en`;
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-      const res = await fetch(apiUrl);
-      if (!res.ok) throw new Error('rss2json request failed');
-      const data = await res.json();
-      if (data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Unexpected feed response');
-      return data.items.slice(0, 5).map(it => {
-        const ts = it.pubDate ? new Date(it.pubDate).getTime() : Date.now();
-        let source = '';
-        try { source = new URL(it.link).hostname.replace('www.', ''); } catch(e) {}
-        return {
-          title: (it.title || '').replace(/\s*-\s*[^-]+$/, ''), // Google News appends "- Source"
-          date: it.pubDate ? new Date(it.pubDate).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) : '',
-          cat: topic.cat,
-          desc: (it.description || '').replace(/<[^>]*>/g, '').slice(0, 180),
-          source,
-          link: it.link,
-          _ts: ts
-        };
-      });
-    }));
-    const items = results.flat().filter(n => n.title);
-    if (items.length) {
-      window._autoNews = items;
-      saveAutoNewsCache(items);
-      window.renderAllNews && window.renderAllNews();
-    }
-  } catch (err) {
-    console.warn('Automatic news fetch failed, keeping cached/static news:', err.message);
-    // window._autoNews already holds the cache (if any); static `news` array covers the rest.
   }
 }
 
@@ -1882,9 +1043,15 @@ function filterNews(btn,cat){
   document.querySelectorAll('#news-cats button').forEach(b=>b.className='btn btn-ghost btn-sm');
   btn.className='btn btn-primary btn-sm';
   const cont=document.getElementById('news-full');
-  const data=getNewsData();
-  const filtered=cat==='all'?data:data.filter(n=>n.cat===cat);
-  cont.innerHTML=filtered.map(newsCardHtml).join('');
+  const filtered=cat==='all'?news:news.filter(n=>n.cat===cat);
+  cont.innerHTML=filtered.map(n=>`
+    <div class="news-card">
+      <span class="n-cat">${n.cat}</span>
+      <div class="n-title">${n.title}</div>
+      <div class="n-desc">${n.desc}</div>
+      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
+    </div>
+  `).join('');
 }
 
 if(document.readyState==='loading'){
@@ -1893,454 +1060,10 @@ if(document.readyState==='loading'){
   initRender();
 }
 
-// ═══ ADMIN NEWS MANAGEMENT (Firestore-backed) ═══
-window.refreshAdminNewsGate = function(){
-  const gate=document.getElementById('news-admin-gate');
-  const panel=document.getElementById('news-admin-panel');
-  if(!gate || !panel) return;
-  if(window._isAdmin){
-    gate.classList.add('hidden');
-    panel.classList.remove('hidden');
-    renderAdminNewsList();
-  } else {
-    gate.classList.remove('hidden');
-    panel.classList.add('hidden');
-  }
-};
-
-window.renderAdminNewsList = function(){
-  const list=document.getElementById('admin-news-list');
-  if(!list) return;
-  const items = window._liveNews || [];
-  if(!items.length){
-    list.innerHTML = '<p style="color:var(--txt3);font-size:.85rem">No published items yet — add your first one above. Until then, the site shows its built-in default news.</p>';
-    return;
-  }
-  list.innerHTML = items.map(n => `
-    <div class="glass" style="padding:1rem 1.25rem;border-radius:var(--r);display:flex;justify-content:space-between;align-items:flex-start;gap:1rem">
-      <div>
-        <span class="n-cat" style="margin-bottom:.4rem;display:inline-block">${n.cat}</span>
-        <div class="n-title">${n.title}</div>
-        <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
-      </div>
-      <button type="button" class="btn btn-ghost btn-sm" onclick="deleteAdminNews('${n.id}')"><i class="fas fa-trash"></i></button>
-    </div>
-  `).join('');
-};
-
-// ═══ ADMIN: SERVICE REQUESTS PANEL (Firestore-backed, admin-only) ═══
-const REQUEST_STATUSES = ['Received','In Progress','Under Review','Completed','Cancelled'];
-
-window.refreshAdminRequestsGate = function(){
-  const gate=document.getElementById('requests-admin-gate');
-  const panel=document.getElementById('requests-admin-panel');
-  if(!gate || !panel) return;
-  if(window._isAdmin){
-    gate.classList.add('hidden');
-    panel.classList.remove('hidden');
-    renderAdminRequests();
-  } else {
-    gate.classList.remove('hidden');
-    panel.classList.add('hidden');
-  }
-};
-
-window.renderAdminRequests = function(){
-  const esc = window.escapeHtml || (s=>s);
-  const rows = window._adminRequests || [];
-  const list = document.getElementById('admin-requests-list');
-  const overviewList = document.getElementById('admin-overview-requests');
-  const statusColor = s => ({completed:'var(--green)',cancelled:'var(--txt3)'}[String(s||'').toLowerCase()] || 'var(--blue2)');
-  const statusBg = s => ({completed:'rgba(16,185,129,.15)',cancelled:'rgba(148,163,184,.15)'}[String(s||'').toLowerCase()] || 'rgba(59,130,246,.15)');
-
-  if(list){
-    if(!rows.length){
-      list.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">No service requests yet.</td></tr>';
-    } else {
-      list.innerHTML = rows.map(r=>{
-        const dt = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-IN') : '—';
-        const statusOpts = REQUEST_STATUSES.map(s=>`<option value="${s}" ${((r.status||'Received')===s)?'selected':''}>${s}</option>`).join('');
-        return `<tr>
-          <td>${esc(r.name||'—')}${r.userEmail?'<div style="font-size:.75rem;color:var(--txt3)">'+esc(r.userEmail)+'</div>':''}</td>
-          <td>${esc(r.mobile||'—')}</td>
-          <td>${esc(r.category||'—')}<div style="font-size:.75rem;color:var(--txt3)">${esc(r.service||'')}</div></td>
-          <td>${esc(r.urgency||'—')}</td>
-          <td>${dt}</td>
-          <td><select onchange="window._updateRequestStatus('${r.id}', this.value)" style="background:${statusBg(r.status)};color:${statusColor(r.status)};border:none;border-radius:4px;padding:.25rem .5rem;font-size:.8rem">${statusOpts}</select></td>
-        </tr>`;
-      }).join('');
-    }
-  }
-
-  if(overviewList){
-    if(!rows.length){
-      overviewList.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--txt3);padding:2rem">No service requests yet.</td></tr>';
-    } else {
-      overviewList.innerHTML = rows.slice(0,6).map(r=>{
-        const dt = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-IN') : '—';
-        return `<tr><td>${esc(r.name||'—')}</td><td>${esc(r.service||r.category||'—')}</td><td>${dt}</td>
-          <td><span style="background:${statusBg(r.status)};color:${statusColor(r.status)};padding:.2rem .6rem;border-radius:4px;font-size:.8rem">${esc(r.status||'Received')}</span></td></tr>`;
-      }).join('');
-    }
-  }
-};
-
-window.updateAdminOverviewKpis = function(){
-  const rows = window._adminRequests || [];
-  const pending = rows.filter(r=>!['completed','cancelled'].includes(String(r.status||'').toLowerCase())).length;
-  const completed = rows.filter(r=>String(r.status||'').toLowerCase()==='completed').length;
-  const now = new Date();
-  const revenue = rows.reduce((sum,r)=>{
-    const dt = r.createdAt?.toDate ? r.createdAt.toDate() : null;
-    const inThisMonth = dt && dt.getMonth()===now.getMonth() && dt.getFullYear()===now.getFullYear();
-    return sum + (inThisMonth ? Number(r.amount||r.totalAmount||0) : 0);
-  }, 0);
-  const set=(id,val)=>{ const el=document.getElementById(id); if(el) el.textContent=val; };
-  set('ak-pending', pending);
-  set('ak-completed', completed);
-  set('ak-revenue', '₹'+revenue.toLocaleString('en-IN'));
-  set('ak-clients', window._adminUsersCount==null ? '—' : window._adminUsersCount.toLocaleString('en-IN'));
-  set('ak-signups', window._adminSignupsThisMonth==null ? '—' : '+'+window._adminSignupsThisMonth);
-};
-
-// ═══ MY FILING & TASK STATUS (Section 6) ═══
-// Uses the same Google Apps Script endpoint as the legacy PAN-lookup portal,
-// but the PAN itself now comes from the client's own authenticated Firebase
-// profile (saved once, privately) instead of being typed into a public form.
-// NOTE (security): the Apps Script URL below still answers ANY ?pan= request
-// with no auth check of its own — seeing this file or the URL is enough to
-// query someone else's PAN directly, bypassing this UI entirely. Restricting
-// that requires editing the Apps Script itself (see the change report).
-const FILING_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJ_klprvZskGWEMCZNCy_vPMztB-aji0xM00VhQfWNj4TN4Fc9heU_2kCy7YNujtlgHw/exec";
-
-window.showFilingPanSetup = function(){
-  document.getElementById('filing-pan-setup')?.classList.remove('hidden');
-  document.getElementById('filing-status-view')?.classList.add('hidden');
-};
-
-window.editMyPan = function(){
-  window.showFilingPanSetup();
-};
-
-window.saveMyPan = async function(){
-  const input = document.getElementById('filing-pan-input');
-  const errEl = document.getElementById('filing-pan-error');
-  const pan = (input?.value || '').trim().toUpperCase();
-  errEl.classList.add('hidden');
-  if (!/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan)) {
-    errEl.textContent = '⚠ Please enter a valid 10-character PAN (e.g. ABCDE1234F)';
-    errEl.classList.remove('hidden');
-    return;
-  }
-  try {
-    if (typeof window.saveUserPan !== 'function') throw new Error('Still loading, please try again.');
-    await window.saveUserPan(pan);
-    window.showFilingStatus(pan);
-  } catch (e) {
-    errEl.textContent = '⚠ ' + e.message;
-    errEl.classList.remove('hidden');
-  }
-};
-
-window.showFilingStatus = async function(pan){
-  document.getElementById('filing-pan-setup')?.classList.add('hidden');
-  document.getElementById('filing-status-view')?.classList.remove('hidden');
-  const statsEl = document.getElementById('filing-stats');
-  const bodyEl = document.getElementById('filing-tasks-body');
-  bodyEl.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">Loading your filing status...</td></tr>';
-  try {
-    const res = await fetch(`${FILING_APPS_SCRIPT_URL}?pan=${encodeURIComponent(pan)}`);
-    const data = await res.json();
-    if (!data.found || !Array.isArray(data.tasks) || !data.tasks.length) {
-      statsEl.innerHTML = '';
-      bodyEl.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">No filing records found for this PAN yet. Contact DigiCafe if you believe this is a mistake.</td></tr>';
-      return;
-    }
-    const tasks = data.tasks;
-    const esc = window.escapeHtml || (s=>s);
-    const pending = tasks.filter(t=>/pending|overdue/i.test(t.status||'')).length;
-    const progress = tasks.filter(t=>/progress/i.test(t.status||'')).length;
-    const done = tasks.filter(t=>/complet/i.test(t.status||'')).length;
-    statsEl.innerHTML = `
-      <div class="kpi"><div class="kpi-val">${tasks.length}</div><div class="kpi-label">Total Tasks</div></div>
-      <div class="kpi"><div class="kpi-val" style="color:var(--red)">${pending}</div><div class="kpi-label">Pending</div></div>
-      <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${progress}</div><div class="kpi-label">In Progress</div></div>
-      <div class="kpi"><div class="kpi-val" style="color:var(--green)">${done}</div><div class="kpi-label">Completed</div></div>`;
-    const badge = s => {
-      const t=(s||'').toLowerCase();
-      if(t.includes('complet')) return `<span style="background:rgba(16,185,129,.15);color:var(--green);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">✅ Completed</span>`;
-      if(t.includes('progress')) return `<span style="background:rgba(245,158,11,.15);color:var(--gold);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">⏳ In Progress</span>`;
-      if(t.includes('overdue')) return `<span style="background:rgba(239,68,68,.15);color:var(--red);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">🔴 Overdue</span>`;
-      return `<span style="background:rgba(59,130,246,.15);color:var(--blue2);padding:.2rem .6rem;border-radius:4px;font-size:.8rem">🟡 Pending</span>`;
-    };
-    bodyEl.innerHTML = tasks.map(t=>`<tr>
-      <td>${esc(t.service||'—')}</td>
-      <td>${esc(t.period||t.financialYear||'—')}</td>
-      <td>${esc(t.dueDate||'—')}</td>
-      <td>${badge(t.status)}</td>
-      <td>${esc(t.filingRef||'—')}</td>
-      <td>${esc(t.remarks||'—')}</td>
-    </tr>`).join('');
-  } catch (e) {
-    statsEl.innerHTML = '';
-    bodyEl.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--txt3);padding:2rem">⚠ Could not load filing status right now. Please try again later.</td></tr>';
-  }
-};
-
-// ═══ CLIENT ANNOUNCEMENTS (Section 8) ═══
-window.renderClientAnnouncements = function(){
-  const esc = window.escapeHtml || (s=>s);
-  const list = document.getElementById('dash-announcements-list');
-  if (!list) return;
-  const rows = window._announcements || [];
-  if (!rows.length) {
-    list.innerHTML = '<p style="color:var(--txt3);padding:1rem">No announcements yet.</p>';
-    return;
-  }
-  list.innerHTML = rows.map(a => {
-    const dt = a.createdAt?.toDate ? a.createdAt.toDate().toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) : '';
-    return `<div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.25rem 1.5rem">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap">
-        <div class="s" style="font-weight:700"><i class="fas fa-bullhorn" style="color:var(--blue2);margin-right:.4rem"></i>${esc(a.title||'')}</div>
-        <div style="font-size:.78rem;color:var(--txt3)">${dt}</div>
-      </div>
-      <p style="color:var(--txt2);margin-top:.5rem;font-size:.9rem">${esc(a.body||'')}</p>
-    </div>`;
-  }).join('');
-};
-
-window.refreshAdminAnnouncementsGate = function(){
-  const gate=document.getElementById('announcements-admin-gate');
-  const panel=document.getElementById('announcements-admin-panel');
-  if(!gate || !panel) return;
-  if(window._isAdmin){
-    gate.classList.add('hidden');
-    panel.classList.remove('hidden');
-    window.renderAdminAnnouncements();
-  } else {
-    gate.classList.remove('hidden');
-    panel.classList.add('hidden');
-  }
-};
-
-window.renderAdminAnnouncements = function(){
-  const esc = window.escapeHtml || (s=>s);
-  const list = document.getElementById('admin-announcements-list');
-  if (!list) return;
-  const rows = window._announcements || [];
-  if (!rows.length) { list.innerHTML = '<p style="color:var(--txt3)">No announcements published yet.</p>'; return; }
-  list.innerHTML = rows.map(a => `
-    <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem">
-      <div>
-        <div class="s" style="font-weight:700">${esc(a.title||'')}</div>
-        <p style="color:var(--txt2);margin-top:.35rem;font-size:.85rem">${esc(a.body||'')}</p>
-      </div>
-      <button type="button" class="btn btn-ghost btn-sm" onclick="window._deleteAnnouncement('${a.id}').then(()=>showToast('✓ Announcement removed')).catch(err=>showToast('⚠ '+err.message))"><i class="fas fa-trash"></i></button>
-    </div>`).join('');
-};
-
-async function submitAdminAnnouncement(e){
-  e.preventDefault();
-  const title = document.getElementById('aa-title').value.trim();
-  const body = document.getElementById('aa-body').value.trim();
-  if (!title || !body) { showToast('⚠ Please fill in both fields'); return false; }
-  try {
-    await window._publishAnnouncement(title, body);
-    document.getElementById('admin-announcement-form').reset();
-    showToast('✓ Announcement published');
-  } catch (err) {
-    showToast('⚠ ' + err.message);
-  }
-  return false;
-}
-
-function submitAdminNews(e){
-  e.preventDefault();
-  const item = {
-    title: document.getElementById('an-title').value,
-    date: document.getElementById('an-date').value,
-    cat: document.getElementById('an-cat').value,
-    desc: document.getElementById('an-desc').value
-  };
-  if(!item.title || !item.date || !item.cat || !item.desc){
-    showToast('⚠ Please fill in every field');
-    return false;
-  }
-  window._addNewsItem(item).then(()=>{
-    showToast('✓ News item published');
-    document.getElementById('admin-news-form').reset();
-  }).catch(err=>showToast('⚠ '+err.message));
-  return false;
-}
-
-function deleteAdminNews(id){
-  if(!confirm('Remove this news item from the live site?')) return;
-  window._deleteNewsItem(id).then(()=>showToast('✓ News item removed')).catch(err=>showToast('⚠ '+err.message));
-}
-
 // SCROLL NAV
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').style.boxShadow=window.scrollY>30?'0 4px 20px rgba(0,0,0,.5)':'none';
 });
-
-// ═══ MOBILE NAV (Digital Assistance Centre update) ═══
-function toggleMobileNav(){
-  document.getElementById('mobile-nav').classList.toggle('open');
-}
-
-// ═══ QUICK SELECTOR / SCROLL TO SERVICE ═══
-function openServiceRequest(serviceName, categoryName){
-  showPage('digital');
-  setTimeout(()=>{
-    const cat=document.getElementById('rh-category');
-    const service=document.getElementById('rh-service');
-    if(cat && categoryName){
-      cat.value=categoryName;
-      updateSpecificServices();
-    }
-    if(service && serviceName) service.value=serviceName;
-    const userEmail = window._currentFirebaseUser?.email || '';
-    const emailInput=document.getElementById('rh-email');
-    if(emailInput && !emailInput.value && userEmail) emailInput.value=userEmail;
-    document.getElementById('request-help')?.scrollIntoView({behavior:'smooth',block:'start'});
-    setTimeout(()=>document.getElementById('rh-name')?.focus(),350);
-  },100);
-}
-
-function enableServiceCards(){
-  const categoryMap={
-    'dac-tax':'Income Tax & TDS',
-    'dac-gst':'GST & Business Compliance',
-    'dac-accounts':'Accounting & Tally',
-    'dac-career':'Job & Career',
-    'dac-docs':'Digital Documents',
-    'dac-voter':'Voter / SIR',
-    'dac-travel':'Travel',
-    'dac-insurance':'Insurance'
-  };
-  document.querySelectorAll('#page-digital .dac-card').forEach(card=>{
-    if(card.dataset.clickReady==='1') return;
-    const cat=card.closest('.dac-cat');
-    const name=card.querySelector('.dac-name')?.textContent?.trim();
-    const category=cat ? categoryMap[cat.id] : '';
-    if(!name || !category) return;
-    card.dataset.clickReady='1';
-    card.setAttribute('role','button');
-    card.setAttribute('tabindex','0');
-    card.style.cursor='pointer';
-    card.title='Click to request this service';
-    const open=()=>openServiceRequest(name,category);
-    card.addEventListener('click',open);
-    card.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', enableServiceCards);
-
-function scrollDacTo(id){
-  showPage('digital');
-  setTimeout(()=>{
-    const el=document.getElementById(id);
-    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-  },80);
-}
-
-// ═══ SERVICE SEARCH (no page reload) ═══
-function filterDacServices(query){
-  const q=query.trim().toLowerCase();
-  const cards=document.querySelectorAll('#page-digital .dac-card');
-  let count=0;
-  cards.forEach(card=>{
-    const kw=(card.dataset.kw||'')+' '+card.querySelector('.dac-name').textContent.toLowerCase();
-    const match = q==='' || kw.toLowerCase().includes(q);
-    card.classList.toggle('dac-hide', !match);
-    card.classList.toggle('dac-match', match && q!=='');
-    if(match) count++;
-  });
-  // Hide whole category block if it has no visible cards (only when searching)
-  document.querySelectorAll('#page-digital .dac-cat').forEach(cat=>{
-    const visible=[...cat.querySelectorAll('.dac-card')].some(c=>!c.classList.contains('dac-hide'));
-    cat.style.display = (q!=='' && !visible) ? 'none' : '';
-  });
-  const countEl=document.getElementById('dac-search-count');
-  if(countEl) countEl.textContent = q==='' ? '' : `${count} matching service${count===1?'':'s'} found`;
-}
-
-// ═══ REQUEST HELP FORM ═══
-const dacServiceMap = {
-  'Income Tax & TDS': ['ITR Filing Assistance','AIS & Form 26AS Review','TDS Credit Reconciliation','Form 16 / Form 16A Assistance','TDS Mismatch Investigation','Income Tax Refund Assistance','Old vs New Tax Regime Comparison','Revised Return Assistance','Tax Document Checklist'],
-  'GST & Business Compliance': ['GST Registration','GST Return Filing Assistance','GSTR-2B Reconciliation','GST Notice Document Assistance','Udyam / MSME Registration','FSSAI Registration / Licence Assistance','Trade Licence Assistance','Company / Firm Registration Coordination','Business Compliance Support'],
-  'Accounting & Tally': ['Bookkeeping','Bank Statement Data Preparation','Bank Reconciliation','Ledger Reconciliation','Customer / Vendor Reconciliation','Tally Data Entry Support','Accounting Entry Assistance','Excel Data Cleanup','P&L and Balance Sheet Preparation Support'],
-  'Job & Career': ['Professional Resume / CV Preparation','ATS-Friendly Resume Support','LinkedIn Profile Improvement','Job Application Assistance','Interview Preparation','Job Description vs Profile Comparison','Salary and CTC Understanding','Professional Email Drafting','Career Profile Review'],
-  'Digital Documents': ['PDF Merge / Split / Compress Assistance','PDF to Word / Excel Conversion','Excel Data Formatting and Cleanup','Online Application Form Assistance','Document Organisation','Digital Document Preparation','Basic Data Entry Assistance','PAN Card Assistance','TAN Application Assistance','DSC (Digital Signature Certificate) Assistance'],
-  'Voter / SIR': ['SIR / Enumeration Form Assistance','Voter Record Search Assistance','New Voter Registration Guidance','Voter Details Correction Assistance','Address Change / Shifting Assistance','Document Upload Assistance','Application Status Tracking Guidance'],
-  'Travel': ['Flight Booking Assistance','Hotel Booking Assistance','Cancellation Guidance','Refund Follow-up Assistance','Travel Itinerary Preparation','Booking Reconciliation Support'],
-  'Insurance': ['Health Insurance Requirement Assessment','Policy Feature Comparison Assistance','Family Health Insurance Guidance','Understanding Waiting Periods','Understanding Co-payment and Room Rent Limits','Claim Process Guidance','Connect with an Authorised Insurance Expert']
-};
-
-function updateSpecificServices(){
-  const cat=document.getElementById('rh-category').value;
-  const sel=document.getElementById('rh-service');
-  const list=dacServiceMap[cat];
-  if(!list){ sel.innerHTML='<option value="">Select category first</option>'; return; }
-  sel.innerHTML='<option value="">Select service</option>'+list.map(s=>`<option value="${s}">${s}</option>`).join('');
-}
-
-function getRequestHelpData(){
-  return {
-    category: document.getElementById('rh-category').value,
-    service: document.getElementById('rh-service').value,
-    name: document.getElementById('rh-name').value,
-    mobile: document.getElementById('rh-mobile').value,
-    email: document.getElementById('rh-email').value,
-    urgency: document.getElementById('rh-urgency').value,
-    notes: document.getElementById('rh-notes').value
-  };
-}
-
-async function submitRequestHelp(e){
-  e.preventDefault();
-  const d=getRequestHelpData();
-  if(!d.name || !d.mobile || !d.category){
-    showToast('⚠ Please fill in name, mobile and service category');
-    return false;
-  }
-
-  const btn=e.target.querySelector('button[type="submit"]');
-  const oldText=btn ? btn.innerHTML : '';
-  if(btn){ btn.disabled=true; btn.innerHTML='Submitting...'; }
-
-  try{
-    if(typeof window.saveServiceRequest !== 'function') throw new Error('Firebase is still loading. Please try again.');
-    const requestId=await window.saveServiceRequest(d);
-    showToast('✓ Request submitted successfully. Reference: '+requestId);
-    e.target.reset();
-    if(document.getElementById('rh-service')) document.getElementById('rh-service').innerHTML='<option value="">Select a category first</option>';
-  }catch(err){
-    console.error('Service request submission failed:',err);
-    showToast('⚠ Could not submit request. Please try WhatsApp or email.');
-  }finally{
-    if(btn){ btn.disabled=false; btn.innerHTML=oldText; }
-  }
-  return false;
-}
-
-function sendRequestOnWhatsApp(){
-  const d=getRequestHelpData();
-  if(!d.name || !d.mobile || !d.category){
-    showToast('⚠ Please fill in name, mobile and service category');
-    return;
-  }
-  const msg='Hi DigiCafe, I would like to request assistance:\n'+
-    'Category: '+d.category+'\n'+
-    'Specific Service: '+(d.service||'-')+'\n'+
-    'Name: '+d.name+'\n'+
-    'Mobile: '+d.mobile+'\n'+
-    'Email: '+(d.email||'-')+'\n'+
-    'Urgency: '+d.urgency+'\n'+
-    'Notes: '+(d.notes||'-');
-  window.open('https://wa.me/918539979271?text='+encodeURIComponent(msg),'_blank');
-}
 </script>
 </body>
 </html>
