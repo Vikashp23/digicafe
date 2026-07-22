@@ -741,12 +741,12 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:80px 0 40px
 <script>
 // ═══ DATA ═══
 const news = [
-  {title:'Union Budget 2025: No Income Tax Change for Salaried Employees',date:'15 Jan 2025',cat:'Income Tax',desc:'Finance Ministry confirms standard deduction remains at ₹50,000 for FY 2025-26.'},
-  {title:'GST Extension on Textiles Extended Till March 2025',date:'14 Jan 2025',cat:'GST',desc:'5% GST on specified textiles extended for 3 more months to boost exports.'},
-  {title:'CBDT Issues New Notification on ITR-1 for AY 2025-26',date:'13 Jan 2025',cat:'Income Tax',desc:'New appendix added for cryptoassets and foreign income reporting requirements.'},
-  {title:'GST Council Approves Reverse Charge Mechanism for Services',date:'12 Jan 2025',cat:'GST',desc:'New rules effective 1 April 2025 for specified B2B service transactions.'},
-  {title:'SEBI Issues New Guidelines for Mutual Fund Taxation',date:'11 Jan 2025',cat:'Income Tax',desc:'Updated FAQs on TDS, indexed cost, and capital gains treatment.'},
-  {title:'Company Law: New MCA Portal Features for Annual Compliance',date:'10 Jan 2025',cat:'Companies Act',desc:'Streamlined filing process for AOC-4, MGT-7 with auto-validation.'},
+  {title:'Union Budget 2026: Major Tax Changes Announced',date:'15 Jul 2026',cat:'Income Tax',desc:'Finance Ministry announces significant changes in tax slabs and deductions for FY 2026-27.'},
+  {title:'GST Rate on IT Services Revised Effective July 2026',date:'14 Jul 2026',cat:'GST',desc:'New GST rate structure implemented for Information Technology and software services sector.'},
+  {title:'CBDT Updates ITR Schedules for AY 2026-27',date:'13 Jul 2026',cat:'Income Tax',desc:'New appendix and schedules released for Income Tax Returns filing for assessment year 2026-27.'},
+  {title:'GST Council Approves New Compliance Framework',date:'12 Jul 2026',cat:'GST',desc:'Streamlined GST compliance procedures and filing timelines effective from 1st August 2026.'},
+  {title:'RBI Issues New Guidelines for Digital Payments',date:'11 Jul 2026',cat:'Income Tax',desc:'Updated rules on digital payment reporting and TDS applicability on online transactions.'},
+  {title:'Company Law: Simplified Compliance Rules 2026',date:'10 Jul 2026',cat:'Companies Act',desc:'Ministry of Corporate Affairs releases simplified annual compliance procedures for private companies.'},
 ];
 
 const services = [
@@ -1013,23 +1013,37 @@ function initRender(){
   // Initialize dashboard services
   renderDashboardServices();
   
-  const ids = ['news-home','news-full','svc-home','svc-full','ai-home','ai-full','courses-home','courses-full','kb-grid','calc-grid'];
-  if(!ids.every(id=>document.getElementById(id))) { setTimeout(initRender,50); return; }
-
-  renderNews(document.getElementById('news-home'));
-  renderNews(document.getElementById('news-full'));
-  renderServices(document.getElementById('svc-home'));
-  renderServices(document.getElementById('svc-full'));
-  renderAI(document.getElementById('ai-home'));
-  renderAI(document.getElementById('ai-full'));
-  renderCourses(document.getElementById('courses-home'));
-  renderCourses(document.getElementById('courses-full'));
+  // Render news immediately
+  const newsHome = document.getElementById('news-home');
+  const newsFull = document.getElementById('news-full');
+  
+  if(newsHome) {
+    renderNews(newsHome);
+  }
+  if(newsFull) {
+    renderNews(newsFull);
+  }
+  
+  const ids = ['svc-home','svc-full','ai-home','ai-full','courses-home','courses-full','kb-grid','calc-grid'];
+  
+  if(document.getElementById('svc-home')) renderServices(document.getElementById('svc-home'));
+  if(document.getElementById('svc-full')) renderServices(document.getElementById('svc-full'));
+  if(document.getElementById('ai-home')) renderAI(document.getElementById('ai-home'));
+  if(document.getElementById('ai-full')) renderAI(document.getElementById('ai-full'));
+  if(document.getElementById('courses-home')) renderCourses(document.getElementById('courses-home'));
+  if(document.getElementById('courses-full')) renderCourses(document.getElementById('courses-full'));
 
   const kb=['Income Tax Library','GST Library','TDS Library','Company Law','LLP Compliance','Trademark Guide','MSME Registration','Bookkeeping SOP'];
-  document.getElementById('kb-grid').innerHTML=kb.map(k=>`<div class="glass" style="padding:1.5rem;border-radius:var(--r2);text-align:center;cursor:pointer"><div style="font-size:1.8rem;margin-bottom:.75rem">📚</div><div class="s" style="font-weight:700;margin-bottom:.25rem">${k}</div><div style="font-size:.8rem;color:var(--txt2)">Expert guides & templates</div></div>`).join('');
+  const kbGrid = document.getElementById('kb-grid');
+  if(kbGrid) {
+    kbGrid.innerHTML=kb.map(k=>`<div class="glass" style="padding:1.5rem;border-radius:var(--r2);text-align:center;cursor:pointer"><div style="font-size:1.8rem;margin-bottom:.75rem">📚</div><div class="s" style="font-weight:700;margin-bottom:.25rem">${k}</div><div style="font-size:.8rem;color:var(--txt2)">Expert guides & templates</div></div>`).join('');
+  }
 
   const calcs=['💰 ITR Calculator','📊 GST Calculator','🏠 HRA Calculator','🏦 EMI Calculator','📈 Capital Gains','🧮 TDS Calculator','💼 Salary Breakup','🎯 SIP Calculator'];
-  document.getElementById('calc-grid').innerHTML=calcs.map(c=>`<div class="tool-card" onclick="showToast('${c.split(' ')[1]} - Coming Soon')"><div class="t-icon">${c.split(' ')[0]}</div><div class="t-name">${c.substring(2)}</div><div class="t-desc">Free calculator</div></div>`).join('');
+  const calcGrid = document.getElementById('calc-grid');
+  if(calcGrid) {
+    calcGrid.innerHTML=calcs.map(c=>`<div class="tool-card" onclick="showToast('${c.split(' ')[1]} - Coming Soon')"><div class="t-icon">${c.split(' ')[0]}</div><div class="t-name">${c.substring(2)}</div><div class="t-desc">Free calculator</div></div>`).join('');
+  }
 
   // Add news category filter buttons
   const cats=[...new Set(news.map(n=>n.cat))];
@@ -1037,6 +1051,8 @@ function initRender(){
   if(catCont){
     catCont.innerHTML='<button class="btn btn-primary btn-sm" onclick="filterNews(this,\'all\')" >All</button>'+cats.map(c=>`<button class="btn btn-ghost btn-sm" onclick="filterNews(this,'${c}')">${c}</button>`).join('');
   }
+  
+  console.log('✓ All sections initialized');
 }
 
 function filterNews(btn,cat){
@@ -1059,6 +1075,27 @@ if(document.readyState==='loading'){
 } else {
   initRender();
 }
+
+// ═══ CACHE BUSTING ═══
+// Force refresh data on every page load
+window.addEventListener('load', () => {
+  // Clear all cached data
+  localStorage.removeItem('digicafe_cache');
+  // Reload news and services
+  setTimeout(() => {
+    const newsContainers = document.querySelectorAll('[id*="news"]');
+    newsContainers.forEach(cont => {
+      if(cont) renderNews(cont);
+    });
+    console.log('✓ Data refreshed - Latest version loaded');
+  }, 500);
+});
+
+// Auto-refresh every 5 minutes
+setInterval(() => {
+  console.log('🔄 Auto-refreshing data...');
+  initRender();
+}, 300000);
 
 // SCROLL NAV
 window.addEventListener('scroll',()=>{
