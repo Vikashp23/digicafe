@@ -379,6 +379,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
   });
 
   console.log("Admin Portal Firebase initialized 🚀");
+  
+  // Force refresh on load
+  window.addEventListener('load', () => {
+    localStorage.removeItem('digicafe_admin_cache');
+    console.log('✓ Admin data refreshed');
+  });
+
 </script>
 
 <script>
@@ -399,11 +406,11 @@ function showAdminPage(section) {
 
 // ═══ REQUEST MANAGEMENT ═══
 const mockRequests = [
-  {id:1, client:'Rahul Agarwal', email:'rahul@example.com', service:'Income Tax (ITR)', date:'15 Jan 2025', status:'pending', amount:'₹2,999'},
-  {id:2, client:'Priya Sharma', email:'priya@example.com', service:'GST Registration', date:'14 Jan 2025', status:'in-progress', amount:'₹3,499'},
-  {id:3, client:'Mukesh Kumar', email:'mukesh@example.com', service:'Company Registration', date:'13 Jan 2025', status:'completed', amount:'₹8,999'},
-  {id:4, client:'Anjali Singh', email:'anjali@example.com', service:'TDS Compliance', date:'12 Jan 2025', status:'pending', amount:'₹1,499'},
-  {id:5, client:'Arun Patel', email:'arun@example.com', service:'Trademark Registration', date:'11 Jan 2025', status:'on-hold', amount:'₹2,999'},
+  {id:1, client:'Rahul Agarwal', email:'rahul@example.com', service:'Income Tax (ITR)', date:'15 Jul 2026', status:'pending', amount:'₹2,999'},
+  {id:2, client:'Priya Sharma', email:'priya@example.com', service:'GST Registration', date:'14 Jul 2026', status:'in-progress', amount:'₹3,499'},
+  {id:3, client:'Mukesh Kumar', email:'mukesh@example.com', service:'Company Registration', date:'13 Jul 2026', status:'completed', amount:'₹8,999'},
+  {id:4, client:'Anjali Singh', email:'anjali@example.com', service:'TDS Compliance', date:'12 Jul 2026', status:'pending', amount:'₹1,499'},
+  {id:5, client:'Arun Patel', email:'arun@example.com', service:'Trademark Registration', date:'11 Jul 2026', status:'on-hold', amount:'₹2,999'},
 ];
 
 function loadRequests() {
