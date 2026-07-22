@@ -741,12 +741,51 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:80px 0 40px
 <script>
 // ═══ DATA ═══
 const news = [
+  // LATEST NEWS (July 22, 2026)
+  {title:'Ministry of Corporate Affairs Announces New Company Registration Guidelines',date:'22 Jul 2026',cat:'Ministry',desc:'New streamlined process for company registration launched. Expected processing time reduced from 7 days to 24 hours. Apply through MCA portal with Aadhaar and PAN.'},
+  
+  {title:'Digital India Initiative: 500 New Common Service Centers Inaugurated Across India',date:'21 Jul 2026',cat:'Digital India',desc:'Government inaugurates 500 CSCs in rural areas. Free Wi-Fi and digital services now available in villages. Focus on digital literacy and financial inclusion.'},
+  
+  {title:'MSME Registration Crosses 5 Crore Mark: Udyam Portal Success',date:'20 Jul 2026',cat:'MSME',desc:'Ministry of MSME announces 5 crore+ businesses registered under Udyam scheme. Average growth 15% YoY. Government extends GST exemption for MSMEs earning <40 lakh.'},
+  
+  {title:'Bangalore Startup Ecosystem Valued at $100 Billion: New Report',date:'19 Jul 2026',cat:'Local News',desc:'Bangalore tech industry report shows 12,000+ startups operating. Job creation up 25%. IT exports reach $180 billion. Infrastructure development ongoing at Electronics City.'},
+  
+  {title:'Stock Market Hits New Record: Sensex Crosses 85,000 Mark',date:'18 Jul 2026',cat:'Business',desc:'Indian stock markets show strong performance. Auto and IT sectors lead gains. Foreign investments increase 18% YoY. RBI maintains growth forecast at 6.5%.'},
+  
+  {title:'GST Council Approves Changes: Tax Rate Modifications Effective August 2026',date:'17 Jul 2026',cat:'Tax',desc:'New GST rate structure approved for 40+ commodities. IT services, healthcare, and agriculture see rate adjustments. Implementation guidelines released by CBDT.'},
+  
+  {title:'Ministry Launches Digital Rupee: Pilot Phase Complete',date:'16 Jul 2026',cat:'Digital India',desc:'RBI completes e-Rupee pilot testing. Full launch planned September 2026. Banks begin preparations for digital currency integration. Enhanced security features added.'},
+  
+  // PREVIOUS NEWS (July 15 & earlier)
   {title:'Union Budget 2026: Major Tax Changes Announced',date:'15 Jul 2026',cat:'Income Tax',desc:'Finance Ministry announces significant changes in tax slabs and deductions for FY 2026-27.'},
+  
   {title:'GST Rate on IT Services Revised Effective July 2026',date:'14 Jul 2026',cat:'GST',desc:'New GST rate structure implemented for Information Technology and software services sector.'},
+  
   {title:'CBDT Updates ITR Schedules for AY 2026-27',date:'13 Jul 2026',cat:'Income Tax',desc:'New appendix and schedules released for Income Tax Returns filing for assessment year 2026-27.'},
+  
   {title:'GST Council Approves New Compliance Framework',date:'12 Jul 2026',cat:'GST',desc:'Streamlined GST compliance procedures and filing timelines effective from 1st August 2026.'},
+  
   {title:'RBI Issues New Guidelines for Digital Payments',date:'11 Jul 2026',cat:'Income Tax',desc:'Updated rules on digital payment reporting and TDS applicability on online transactions.'},
-  {title:'Company Law: Simplified Compliance Rules 2026',date:'10 Jul 2026',cat:'Companies Act',desc:'Ministry of Corporate Affairs releases simplified annual compliance procedures for private companies.'},
+  
+  {title:'Company Law: Simplified Compliance Rules 2026',date:'10 Jul 2026',cat:'Ministry',desc:'Ministry of Corporate Affairs releases simplified annual compliance procedures for private companies.'},
+  
+  {title:'MSME Credit Guarantee Scheme Extended: 50 Lakh Loans Approved',date:'09 Jul 2026',cat:'MSME',desc:'Government announces extension of CGTMSE scheme. Guarantee coverage increased to 90%. Interest rate subsidy enhanced for women entrepreneurs.'},
+  
+  {title:'Startup India Registration Surges: 2.5 Lakh New Startups in 2026',date:'08 Jul 2026',cat:'Business',desc:'Startup India program sees record registrations. Tax benefits and funding support boost entrepreneurship. Tech startups dominate with 40% share.'},
+  
+  {title:'National Digital Literacy Mission Reaches 2 Crore Citizens',date:'07 Jul 2026',cat:'Digital India',desc:'Digital literacy initiative covers rural and urban areas. Focus on senior citizens and women. Free training centers opened across states.'},
+  
+  {title:'Bangalore Tech Park Expansion: New 500 Acre IT Hub Announced',date:'06 Jul 2026',cat:'Local News',desc:'White-field IT park development approved in Outer Ring Road. Expected to attract 50,000+ employees. Infrastructure investment: ₹5,000 crore.'},
+  
+  {title:'Foreign Institutional Investors Increase India Investments by 22%',date:'05 Jul 2026',cat:'Business',desc:'FII inflow increases to $45 billion in first half 2026. Positive outlook on Indian markets. Tech and pharma sectors attract major investments.'},
+  
+  {title:'Income Tax Department Launches AI-Powered Compliance Portal',date:'04 Jul 2026',cat:'Income Tax',desc:'New digital platform for ITR filing, refund tracking, and compliance checks. Mobile app launched for seamless e-filing. 50% faster processing promised.'},
+  
+  {title:'Ministry of Commerce: India-UAE Trade Pact Boosts Exports',date:'03 Jul 2026',cat:'Business',desc:'New bilateral trade agreement signed. Export opportunities for MSME and startups enhanced. 40% tariff reduction on 500+ products.'},
+  
+  {title:'Bengaluru Attracts 50% of India\'s VC Funding in H1 2026',date:'02 Jul 2026',cat:'Local News',desc:'Venture capital funding in Bangalore reaches $8.2 billion. AI and fintech startups lead investment. Government incentives drive growth.'},
+  
+  {title:'GST Compliance: Government Extends Deadline for August Filings',date:'01 Jul 2026',cat:'GST',desc:'GSTN announces deadline extension due to technical upgrades. New e-invoicing system implemented. Compliance support centers opened nationwide.'},
 ];
 
 const services = [
@@ -788,6 +827,14 @@ function showPage(p){
   document.querySelector('[data-p="'+p+'"]')?.classList.add('active');
   window.scrollTo(0,0);
   updateNav();
+  
+  // Render news when news page is shown
+  if(p === 'news') {
+    const newsFull = document.getElementById('news-full');
+    if(newsFull && news.length > 0) {
+      renderNews(newsFull);
+    }
+  }
 }
 
 function updateNav(){
@@ -1008,20 +1055,23 @@ function downloadClientDocs() {
   // In a real app, this would create a zip file of all documents
 }
 
+
+
 // ═══ INIT ═══
 function initRender(){
   // Initialize dashboard services
   renderDashboardServices();
   
-  // Render news immediately
+  // Render news on home
   const newsHome = document.getElementById('news-home');
-  const newsFull = document.getElementById('news-full');
-  
   if(newsHome) {
     renderNews(newsHome);
   }
-  if(newsFull) {
-    renderNews(newsFull);
+  
+  // Render services on home
+  const svcHome = document.getElementById('svc-home');
+  if(svcHome) {
+    renderServices(svcHome);
   }
   
   const ids = ['svc-home','svc-full','ai-home','ai-full','courses-home','courses-full','kb-grid','calc-grid'];
