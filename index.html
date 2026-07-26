@@ -1,431 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DigiCafe — India's #1 AI-Powered Tax, GST, Compliance & Learning Platform. ITR Filing, GST Registration, Company Incorporation, TDS, Trademark, News, Courses, AI Tools, and Professional Services.">
-<meta name="keywords" content="ITR Filing, GST, Tax Consultant, Company Registration, LLP, Compliance, AI Tax Assistant, Courses, India">
-<title>DigiCafe – Our Service, Your Solution | Premium Compliance Platform</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#0a0e27;--bg2:#0f1535;--bg3:#141d3f;--bg4:#0d1228;
-  --surf:rgba(59,130,246,0.05);--surf2:rgba(59,130,246,0.08);
-  --bdr:rgba(59,130,246,0.15);--bdr2:rgba(59,130,246,0.25);
-  --blue:#3b82f6;--blue2:#60a5fa;--blue3:#1d4ed8;--blue4:#0d47a1;
-  --teal:#06d6a0;--teal2:#34d399;--gold:#f59e0b;--gold2:#fbbf24;
-  --purple:#a855f7;--red:#ef4444;--green:#10b981;--orange:#f97316;
-  --txt:#f8fafc;--txt2:#cbd5e1;--txt3:#94a3b8;--txt4:#64748b;
-  --r:12px;--r2:18px;--shadow:0 10px 40px rgba(0,0,0,0.4);--glow:0 0 60px rgba(59,130,246,0.2)
-}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px}
-::-webkit-scrollbar-thumb:hover{background:var(--blue2)}
-.s{font-family:'Sora',sans-serif}
-.mono{font-family:'JetBrains Mono',monospace}
-.c{max-width:1320px;margin:0 auto;padding:0 24px}
-.hidden{display:none!important}
-.page{display:none}
-.page.active{display:block;animation:fadeIn .5s cubic-bezier(0.34,1.56,0.64,1)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-
-/* GLASS MORPHISM */
-.glass{background:rgba(15,21,53,0.6);border:1px solid var(--bdr);border-radius:var(--r2);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-.glass:hover{border-color:var(--bdr2);box-shadow:var(--shadow);transition:all .3s ease}
-
-/* GRADIENTS */
-.g-text{background:linear-gradient(135deg,#60a5fa 0%,#06d6a0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.g-blue{background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%)}
-.g-teal{background:linear-gradient(135deg,#06d6a0 0%,#059669 100%)}
-
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.7rem 1.6rem;border-radius:var(--r);font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .3s ease;text-decoration:none;font-family:inherit;white-space:nowrap}
-.btn-primary{background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color:#fff;box-shadow:0 8px 24px rgba(59,130,246,0.4);}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(59,130,246,0.6)}
-.btn-primary:active{transform:translateY(-1px)}
-.btn-teal{background:linear-gradient(135deg,#06d6a0 0%,#059669 100%);color:#000;font-weight:700;box-shadow:0 8px 24px rgba(6,214,160,0.3)}
-.btn-teal:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(6,214,160,0.4)}
-.btn-ghost{background:transparent;color:var(--txt2);border:2px solid var(--bdr2);backdrop-filter:blur(10px)}
-.btn-ghost:hover{background:var(--surf2);color:var(--txt);border-color:var(--blue2)}
-.btn-sm{padding:.5rem 1.2rem;font-size:.85rem}
-.btn-lg{padding:.9rem 2.2rem;font-size:1rem}
-.btn-xl{padding:1.1rem 2.8rem;font-size:1.05rem}
-.btn-full{width:100%;justify-content:center}
-.btn:disabled{opacity:0.6;cursor:not-allowed}
-
-/* BADGES */
-.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem 1rem;border-radius:30px;font-size:.75rem;font-weight:700;letter-spacing:.5px}
-.badge-blue{background:rgba(59,130,246,0.2);color:#60a5fa;border:1px solid rgba(59,130,246,0.4)}
-.badge-teal{background:rgba(6,214,160,0.2);color:#34d399;border:1px solid rgba(6,214,160,0.4)}
-.badge-gold{background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4)}
-
-/* NAVIGATION */
-#nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,14,39,0.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:1px solid var(--bdr);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
-.nav-wrap{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 24px;max-width:1400px;margin:0 auto}
-.logo{font-family:'Sora',sans-serif;font-weight:900;font-size:1.6rem;background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;letter-spacing:-1px;text-transform:uppercase;transition:all .3s}
-.logo:hover{transform:scale(1.05)}
-.nav-center{display:flex;gap:.25rem;list-style:none;align-items:center}
-.nav-center a{display:block;padding:.5rem 1rem;color:var(--txt3);font-size:.9rem;font-weight:600;text-decoration:none;border-radius:10px;cursor:pointer;transition:all .2s;position:relative}
-.nav-center a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,#60a5fa,#06d6a0);transition:width .3s}
-.nav-center a:hover{color:var(--txt);background:var(--surf2)}
-.nav-center a:hover::after{width:100%}
-.nav-center a.active{color:var(--txt);background:var(--surf2)}
-.nav-right{display:flex;gap:1rem;align-items:center}
-@media(max-width:1024px){.nav-center{display:none}}
-
-/* HERO SECTION */
-.hero{min-height:90vh;display:flex;align-items:center;padding:80px 0;background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(6,214,160,0.08));position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,0.3),transparent);border-radius:50%;filter:blur(60px);animation:float 8s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-30px)}}
-.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
-.hero h1{font-family:'Sora',sans-serif;font-size:clamp(2.4rem,6vw,4rem);font-weight:900;line-height:1.15;margin-bottom:1.5rem;color:var(--txt)}
-.hero h1 span{background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{font-size:1.1rem;color:var(--txt2);max-width:600px;margin-bottom:2.5rem;line-height:1.8;font-weight:500}
-.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
-@media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}}
-
-/* SECTIONS */
-.sec{padding:100px 0;position:relative}
-.sec:nth-child(even){background:linear-gradient(135deg,rgba(59,130,246,0.03),rgba(6,214,160,0.02))}
-.sh{text-align:center;margin-bottom:4rem}
-.sh h2{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin:.75rem 0 1.25rem;letter-spacing:-1px}
-.sh p{color:var(--txt2);font-size:1.1rem;max-width:620px;margin:0 auto;font-weight:500}
-
-/* CARDS */
-.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2rem}
-.news-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;transition:all .4s cubic-bezier(0.34,1.56,0.64,1);cursor:pointer;position:relative;overflow:hidden}
-.news-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(59,130,246,0.1),transparent);opacity:0;transition:opacity .4s}
-.news-card:hover{border-color:var(--bdr2);transform:translateY(-8px);box-shadow:var(--shadow)}
-.news-card:hover::before{opacity:1}
-.n-cat{display:inline-block;padding:.4rem 1rem;background:linear-gradient(135deg,rgba(59,130,246,0.25),rgba(6,214,160,0.15));color:#60a5fa;border-radius:25px;font-size:.75rem;font-weight:700;margin-bottom:1rem;letter-spacing:.5px;text-transform:uppercase}
-.n-title{font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:.75rem;line-height:1.4;color:var(--txt)}
-.n-desc{font-size:.9rem;color:var(--txt3);margin-bottom:1.25rem;line-height:1.7}
-.n-date{font-size:.8rem;color:var(--txt4);display:flex;align-items:center;gap:.5rem}
-
-/* TOOLS GRID */
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.75rem}
-.tool-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;text-align:center;transition:all .3s;cursor:pointer}
-.tool-card:hover{border-color:var(--bdr2);transform:translateY(-5px);box-shadow:0 12px 32px rgba(59,130,246,0.2)}
-.t-icon{font-size:3rem;margin-bottom:1rem;display:inline-block}
-.t-name{font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.5rem;color:var(--txt)}
-.t-desc{font-size:.85rem;color:var(--txt3);line-height:1.5}
-
-/* COURSES */
-.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}
-.course-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);overflow:hidden;transition:all .4s;cursor:pointer}
-.course-card:hover{border-color:var(--bdr2);transform:translateY(-8px);box-shadow:0 16px 40px rgba(59,130,246,0.25)}
-.c-thumb{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(6,214,160,0.1));position:relative;overflow:hidden}
-.c-thumb::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.1),transparent);opacity:0;transition:opacity .4s}
-.course-card:hover .c-thumb::before{opacity:1}
-.c-body{padding:1.5rem}
-.c-title{font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:800;margin-bottom:.5rem;color:var(--txt)}
-.c-desc{font-size:.85rem;color:var(--txt3);margin-bottom:1rem;line-height:1.6}
-.c-meta{display:flex;gap:1rem;font-size:.75rem;color:var(--txt4);margin-bottom:1rem;font-weight:600}
-.c-btn{width:100%;padding:.75rem;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:700;transition:all .3s;font-size:.9rem}
-.c-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(59,130,246,0.4)}
-
-/* SERVICES */
-.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.75rem}
-.svc-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;transition:all .3s;cursor:pointer;position:relative}
-.svc-card:hover{border-color:var(--bdr2);background:var(--surf2);transform:translateY(-5px);box-shadow:0 12px 32px rgba(59,130,246,0.2)}
-.s-icon{font-size:2.5rem;margin-bottom:1rem;display:inline-block}
-.s-title{font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.5rem;color:var(--txt)}
-.s-desc{font-size:.85rem;color:var(--txt3);margin-bottom:1rem;line-height:1.6}
-.s-price{font-family:'Sora',sans-serif;font-size:1.1rem;color:#06d6a0;font-weight:800}
-
-/* DASHBOARD */
-.dash-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 68px)}
-.d-sidebar{background:var(--bg2);border-right:1px solid var(--bdr);padding:2rem 1.5rem;position:sticky;top:68px;height:calc(100vh - 68px);overflow-y:auto}
-.d-user{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding:1.25rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2)}
-.d-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#60a5fa,#06d6a0);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.1rem;flex-shrink:0}
-.d-uname{font-weight:800;font-size:.95rem;color:var(--txt)}
-.d-urole{font-size:.8rem;color:var(--txt3)}
-.side-nav{list-style:none}
-.side-nav a{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;color:var(--txt3);font-size:.9rem;font-weight:600;border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:.2rem}
-.side-nav a:hover{background:var(--surf);color:var(--txt)}
-.side-nav a.active{background:linear-gradient(135deg,rgba(59,130,246,0.3),rgba(6,214,160,0.1));color:#60a5fa;border-left:3px solid #60a5fa;padding-left:calc(1rem - 3px)}
-.d-main{background:var(--bg);padding:2.5rem;overflow-y:auto}
-.d-content{display:none}
-.d-content.active{display:block}
-.d-title{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:900;margin-bottom:.5rem;color:var(--txt)}
-.d-title span{background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;margin-bottom:2.5rem}
-.kpi{background:linear-gradient(135deg,var(--surf),rgba(59,130,246,0.03));border:1px solid var(--bdr);border-radius:var(--r2);padding:1.75rem;transition:all .3s}
-.kpi:hover{border-color:var(--bdr2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(59,130,246,0.15)}
-.kpi-val{font-family:'Sora',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
-.kpi-label{font-size:.8rem;color:var(--txt4);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
-
-/* FORMS */
-.form-group{margin-bottom:1.5rem}
-.form-group label{display:block;font-size:.85rem;font-weight:700;color:var(--txt2);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.5px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:.9rem 1.2rem;border-radius:var(--r);background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);font-family:inherit;font-size:.95rem;transition:all .3s}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--blue2);box-shadow:0 0 0 4px rgba(59,130,246,0.2);background:var(--bg3)}
-
-/* TABLE */
-.table{width:100%;border-collapse:collapse;font-size:.9rem}
-.table th{text-align:left;padding:1rem;background:var(--bg3);color:var(--txt4);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;font-weight:700;border-bottom:2px solid var(--bdr)}
-.table td{padding:1rem;border-bottom:1px solid var(--bdr);color:var(--txt2)}
-.table tr:hover td{background:var(--surf)}
-
-/* FOOTER */
-footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:80px 0 40px;margin-top:60px}
-.foot-grid{display:grid;grid-template-columns:2fr 1.5fr 1.5fr 1.5fr;gap:3rem;margin-bottom:3rem}
-.foot-brand h3{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#60a5fa,#06d6a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
-.foot-brand p{font-size:.9rem;color:var(--txt3);line-height:1.7;margin-bottom:1.5rem;font-weight:500}
-.foot-col h4{font-size:.8rem;font-weight:800;color:var(--txt2);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.25rem}
-.foot-col a{display:block;color:var(--txt3);text-decoration:none;font-size:.9rem;padding:.35rem 0;cursor:pointer;transition:all .2s;font-weight:500}
-.foot-col a:hover{color:var(--txt);transform:translateX(4px)}
-.foot-bottom{border-top:1px solid var(--bdr);padding-top:1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
-.foot-bottom p{font-size:.8rem;color:var(--txt4);font-weight:600}
-
-/* TOAST */
-#toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:var(--bg3);border:1.5px solid var(--bdr2);border-radius:var(--r);padding:1rem 1.5rem;font-size:.9rem;font-weight:600;box-shadow:var(--shadow);transform:translateX(120%);transition:transform .3s cubic-bezier(0.34,1.56,0.64,1);max-width:380px}
-#toast.show{transform:translateX(0)}
-#toast.success{border-left:4px solid #10b981}
-#toast.error{border-left:4px solid #ef4444}
-#toast.info{border-left:4px solid #60a5fa}
-
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .nav-center{display:none}
-  .dash-layout,.admin-layout{grid-template-columns:1fr}
-  .d-sidebar,.admin-sidebar{display:none}
-  .foot-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:640px){
-  .c{padding:0 16px}
-  .sh h2{font-size:1.6rem}
-  .hero-buttons{flex-direction:column}
-  .btn{width:100%}
-}
-</style>
-
-<!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
-  import {
-    getAuth, GoogleAuthProvider,
-    signInWithPopup, signInWithRedirect, getRedirectResult,
-    createUserWithEmailAndPassword, updateProfile,
-    signOut, onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDcdR-ba5Lh-DfG-wuABRntQm1sSYSr3Kk",
-    authDomain: "digicafe-ee519.firebaseapp.com",
-    projectId: "digicafe-ee519",
-    storageBucket: "digicafe-ee519.appspot.com",
-    messagingSenderId: "582268562769",
-    appId: "1:582268562769:web:720288e24fd8de7166f770",
-    measurementId: "G-25T4WHH8X4"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-  provider.addScope('email');
-  provider.addScope('profile');
-
-  // Handle user after sign-in
-  function handleUser(user) {
-    if (!user) return;
-    const nameParts = user.displayName ? user.displayName.split(' ') : ['U',''];
-    const initials = (nameParts[0][0] + (nameParts[1]?.[0] || '')).toUpperCase();
-    const avatarEl = document.querySelector('.d-avatar');
-    const nameEl = document.querySelector('.d-uname');
-    const titleEl = document.querySelector('.d-title');
-    if (avatarEl) avatarEl.textContent = initials;
-    if (nameEl) nameEl.textContent = user.displayName || user.email;
-    if (titleEl) titleEl.textContent = 'Welcome back, ' + (user.displayName?.split(' ')[0] || 'User') + '!';
-    showToast('✓ Signed in as ' + (user.displayName || user.email));
-    setTimeout(() => showPage('dashboard'), 800);
-  }
-
-  // Check for redirect result on page load
-  getRedirectResult(auth).then((result) => {
-    if (result?.user) handleUser(result.user);
-  }).catch((err) => {
-    if (err.code) showToast('⚠ Google error: ' + err.code);
-  });
-
-  window.signInWithGoogle = async function() {
-    const btn = document.getElementById('google-signin-btn');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-    try {
-      // Try popup first, fall back to redirect
-      const result = await signInWithPopup(auth, provider);
-      handleUser(result.user);
-    } catch (err) {
-      // If popup fails for any reason, use redirect
-      if (
-        err.code === 'auth/popup-blocked' ||
-        err.code === 'auth/popup-closed-by-user' ||
-        err.code === 'auth/cancelled-popup-request' ||
-        err.code === 'auth/operation-not-supported-in-this-environment'
-      ) {
-        showToast('Redirecting to Google...');
-        await signInWithRedirect(auth, provider);
-        return; // page will redirect
-      }
-      // Show exact error code in toast for debugging
-      showToast('⚠ ' + (err.message || err.code || 'Sign-in failed'));
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fab fa-google"></i> Sign in with Google';
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DigiCafe – Our Service, Your Solution</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+  <style>
+    :root {
+      --bg: #0a0e27;
+      --bg2: #0f1535;
+      --bg3: #141d3f;
+      --bg4: #0d1228;
+      --surf: rgba(59,130,246,0.05);
+      --bdr: rgba(59,130,246,0.15);
+      --bdr2: rgba(59,130,246,0.25);
+      --blue: #3b82f6;
+      --blue2: #60a5fa;
+      --teal: #06d6a0;
+      --gold: #f59e0b;
+      --red: #ef4444;
+      --green: #10b981;
+      --txt: #f8fafc;
+      --txt2: #cbd5e1;
+      --txt3: #94a3b8;
+      --txt4: #64748b;
+      --r: 12px;
+      --r2: 18px;
+      --shadow: 0 10px 40px rgba(0,0,0,0.4);
     }
-  };
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log('✓ Firebase user:', user.email);
-      // Update nav logout button to use firebaseSignOut (client dashboard only)
-      document.querySelectorAll('.side-nav a').forEach(btn => {
-        if(btn.getAttribute('onclick') === "showPage('home')"){
-          btn.setAttribute('onclick', 'firebaseSignOut()');
-        }
-      });
-  });
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--txt); line-height: 1.6; }
+    
+    .page { display: none; width: 100%; }
+    .page.active { display: block; animation: fadeIn .5s cubic-bezier(0.34,1.56,0.64,1); }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  window.firebaseSignOut = async function() {
-    await signOut(auth);
-    showToast('✓ Signed out');
-    showPage('home');
-  };
-
-  window._firebaseRegister = async function(name, email, password) {
-    try {
-      const cred = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(cred.user, { displayName: name });
-      handleUser(cred.user);
-      showToast('✓ Account created! Welcome, ' + name.split(' ')[0] + '!');
-    } catch(err) {
-      let msg = err.message || 'Registration failed';
-      if(err.code === 'auth/email-already-in-use') msg = 'Email already registered. Please log in.';
-      if(err.code === 'auth/weak-password') msg = 'Password too weak. Use 6+ characters.';
-      showToast('⚠ ' + msg);
-      throw err;
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 68px;
+      backdrop-filter: blur(30px);
+      background: rgba(15,21,53,0.6);
+      border-bottom: 1px solid var(--bdr);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      z-index: 1000;
     }
-  };
 
-  console.log("Firebase initialized successfully 🚀");
-</script>
+    nav .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; }
+    nav ul { display: flex; list-style: none; gap: 2rem; }
+    nav a { color: var(--txt2); text-decoration: none; font-weight: 600; transition: color .3s; cursor: pointer; }
+    nav a:hover, nav a.active { color: var(--blue); }
+
+    /* CONTAINER */
+    .c { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .sh { text-align: center; margin-bottom: 3rem; }
+    .sh h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; }
+    .g-text { background: linear-gradient(135deg, #60a5fa, #06d6a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* HERO */
+    .hero { padding: 150px 20px 50px; text-align: center; }
+    .hero-title { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2; }
+    .hero-subtitle { font-size: 1.2rem; color: var(--txt2); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+
+    /* BUTTONS */
+    .btn { padding: .75rem 1.5rem; border-radius: var(--r); border: none; cursor: pointer; font-weight: 600; transition: all .3s; }
+    .btn-primary { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; box-shadow: 0 8px 24px rgba(59,130,246,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(59,130,246,0.5); }
+    .btn-secondary { background: var(--surf); border: 1px solid var(--bdr); color: var(--txt); }
+    .btn-secondary:hover { background: var(--bg3); border-color: var(--bdr2); }
+
+    /* SERVICES GRID */
+    .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+    .svc-card { background: var(--surf); border: 1px solid var(--bdr); border-radius: var(--r2); padding: 2rem; transition: all .3s; cursor: pointer; }
+    .svc-card:hover { transform: translateY(-8px); border-color: var(--bdr2); box-shadow: var(--shadow); }
+    .svc-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .svc-name { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+    .svc-price { color: var(--gold); font-weight: 600; }
+
+    /* NEWS */
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; }
+    .news-card { background: var(--surf); border: 1px solid var(--bdr); border-radius: var(--r2); padding: 2rem; transition: all .4s cubic-bezier(0.34,1.56,0.64,1); cursor: pointer; }
+    .news-card:hover { transform: translateY(-8px); border-color: var(--bdr2); box-shadow: var(--shadow); }
+    .n-cat { display: inline-block; background: linear-gradient(135deg,#3b82f6,#06d6a0); color: white; padding: .25rem .75rem; border-radius: 20px; font-size: .75rem; font-weight: 700; margin-bottom: .75rem; }
+    .n-title { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; color: var(--txt); }
+    .n-desc { color: var(--txt2); font-size: .9rem; line-height: 1.5; margin-bottom: .75rem; }
+    .n-date { color: var(--txt3); font-size: .8rem; }
+
+    /* DASHBOARD */
+    .dashboard { padding: 100px 20px 50px; }
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; }
+    .sidebar { background: var(--surf); border: 1px solid var(--bdr); border-radius: var(--r2); padding: 2rem; height: fit-content; }
+    .sidebar-item { padding: 1rem; cursor: pointer; border-radius: var(--r); transition: all .3s; }
+    .sidebar-item:hover, .sidebar-item.active { background: var(--bg3); color: var(--blue); }
+    .main-content { background: var(--surf); border: 1px solid var(--bdr); border-radius: var(--r2); padding: 2rem; }
+
+    /* CLIENT INFO */
+    .client-info { display: flex; gap: 1rem; margin-bottom: 2rem; align-items: center; }
+    .avatar { width: 60px; height: 60px; background: linear-gradient(135deg,#3b82f6,#06d6a0); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white; font-size: 1.5rem; }
+
+    /* FILE UPLOAD */
+    .upload-card { background: linear-gradient(135deg,rgba(59,130,246,0.1),rgba(6,214,160,0.1)); border: 2px dashed var(--bdr2); border-radius: var(--r2); padding: 2rem; text-align: center; cursor: pointer; transition: all .3s; margin-bottom: 2rem; }
+    .upload-card:hover { border-color: var(--blue); background: rgba(59,130,246,0.15); }
+
+    /* TABLE */
+    .table { width: 100%; border-collapse: collapse; }
+    .table th { background: var(--bg3); padding: 1rem; text-align: left; font-weight: 600; border-bottom: 1px solid var(--bdr); }
+    .table td { padding: 1rem; border-bottom: 1px solid var(--bdr); }
+    .table tr:hover { background: var(--bg3); }
+
+    /* TOAST */
+    #toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: var(--green); color: white; padding: 1rem 2rem; border-radius: var(--r); transition: bottom .3s; z-index: 2000; }
+    #toast.show { bottom: 20px; }
+
+    /* HIDDEN INPUT */
+    input[type="file"] { display: none; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      .hero-title { font-size: 2rem; }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .news-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
-  <div class="nav-wrap">
-    <div class="logo" onclick="goHome()">DigiCafe</div>
-    <ul class="nav-center">
-      <li><a onclick="showPage('home')" data-p="home">Home</a></li>
-      <li><a onclick="showPage('news')" data-p="news">News</a></li>
-      <li><a onclick="showPage('digital-assistance')" data-p="digital-assistance">Digital Assistance</a></li>
-      <!-- HIDDEN FROM NAV BUT CODE KEPT: Knowledge, Courses, AI Tools, Services, Calculators -->
-    </ul>
-    <div class="nav-right">
-      <button class="btn btn-ghost btn-sm" onclick="showPage('login')">Log In</button>
-      <button class="btn btn-primary btn-sm" onclick="showPage('login')">Get Started</button>
-    </div>
-  </div>
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">DigiCafe</div>
+  <ul>
+    <li><a onclick="showPage('home')" data-p="home" class="active">Home</a></li>
+    <li><a onclick="showPage('news')" data-p="news">News</a></li>
+    <li><a onclick="showPage('assistance')" data-p="assistance">Digital Assistance</a></li>
+    <li><a onclick="showPage('auth')" data-p="auth" id="auth-btn">Log In</a></li>
+  </ul>
 </nav>
 
 <!-- HOME PAGE -->
-<div class="page active" id="page-home" style="padding-top:64px">
-  <!-- HERO -->
-  <section class="hero">
-    <div class="c">
-      <div class="hero-inner">
-        <div>
-          <span class="badge badge-blue" style="margin-bottom:1rem">🇮🇳 #1 in India</span>
-          <h1>India's #1 AI-Powered<br><span class="g-text">Tax & Compliance</span><br>Platform</h1>
-          <p>File ITR, register for GST, incorporate companies, manage TDS — all with AI assistance, real-time tracking, and expert support.</p>
-          <div style="display:flex;gap:1rem;flex-wrap:wrap">
-            <button class="btn btn-primary btn-lg" onclick="showPage('login')"><i class="fas fa-rocket"></i> Start Free</button>
-            <button class="btn btn-ghost btn-lg" onclick="showPage('services')"><i class="fas fa-th"></i> Explore</button>
-            <a href="https://wa.me/918539979271" target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          </div>
-        </div>
-        <div class="hero-img" style="text-align:center;font-size:5rem">🏢📊💼</div>
-      </div>
+<div class="page active" id="page-home" style="padding-top:68px">
+  <div class="hero">
+    <h1 class="hero-title">India's #1 <span class="g-text">AI-Powered</span> Tax & Compliance Platform</h1>
+    <p class="hero-subtitle">Simplify your business compliance with expert guidance and automated services</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary" onclick="showPage('auth')">Start Free</button>
+      <button class="btn btn-secondary">Explore Services</button>
     </div>
-  </section>
+  </div>
 
-  <!-- STATS -->
-  <section style="padding:40px 0;background:var(--bg2);border-top:1px solid var(--bdr)">
-    <div class="c">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;text-align:center">
-        <div><div class="s" style="font-size:2.5rem;font-weight:800;color:var(--blue)">10K+</div><div style="color:var(--txt3);font-size:.9rem;margin-top:.25rem">Clients</div></div>
-        <div><div class="s" style="font-size:2.5rem;font-weight:800;color:var(--teal)">500+</div><div style="color:var(--txt3);font-size:.9rem;margin-top:.25rem">Templates</div></div>
-        <div><div class="s" style="font-size:2.5rem;font-weight:800;color:var(--gold)">120+</div><div style="color:var(--txt3);font-size:.9rem;margin-top:.25rem">Services</div></div>
-        <div><div class="s" style="font-size:2.5rem;font-weight:800;color:var(--purple)">50+</div><div style="color:var(--txt3);font-size:.9rem;margin-top:.25rem">Courses</div></div>
-      </div>
+  <div class="c">
+    <div class="sh">
+      <h2>DigiCafe <span class="g-text">Services</span></h2>
+      <p>Professional compliance services across India</p>
     </div>
-  </section>
+    <div class="svc-grid" id="svc-home"></div>
+  </div>
 
-  <!-- NEWS PREVIEW -->
-  <section class="sec">
-    <div class="c">
-      <div class="sh">
-        <span class="badge badge-blue">Latest Updates</span>
-        <h2>Government & Tax <span class="g-text">News</span></h2>
-        <p>Daily news, notifications, and updates on Income Tax, GST, Companies Act, and more.</p>
-      </div>
-      <div class="news-grid" id="news-home"></div>
+  <div class="c" style="margin-bottom:3rem">
+    <div class="sh">
+      <h2>Latest <span class="g-text">News</span></h2>
+      <p>Stay updated with compliance and business news</p>
     </div>
-  </section>
+    <div class="news-grid" id="news-home"></div>
+  </div>
 
-  <!-- SERVICES PREVIEW -->
-  <section class="sec" style="background:var(--bg2)">
-    <div class="c">
-      <div class="sh">
-        <span class="badge badge-teal">120+ Services</span>
-        <h2>Complete <span class="g-text">Compliance Solutions</span></h2>
-      </div>
-      <div class="svc-grid" id="svc-home"></div>
+  <div class="c" style="margin-bottom:3rem">
+    <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:3rem;text-align:center">
+      <h3 style="font-size:1.5rem;font-weight:800;margin-bottom:1rem">Need Help?</h3>
+      <p style="color:var(--txt2);margin-bottom:1.5rem">Get instant support on WhatsApp</p>
+      <a href="https://wa.me/918539979271" target="_blank" class="btn btn-primary">
+        <i class="fab fa-whatsapp"></i> WhatsApp: +91 85399 79271
+      </a>
     </div>
-  </section>
-
-  <!-- AI TOOLS -->
-  <section class="sec">
-    <div class="c">
-      <div class="sh">
-        <span class="badge badge-blue">AI Assistant</span>
-        <h2>Powered by <span class="g-text">Artificial Intelligence</span></h2>
-        <p>AI drafts notices, analyzes documents, generates notices — 24/7.</p>
-      </div>
-      <div class="tools-grid" id="ai-home"></div>
-    </div>
-  </section>
-
-  <!-- COURSES PREVIEW -->
-  <section class="sec" style="background:var(--bg2)">
-    <div class="c">
-      <div class="sh">
-        <span class="badge badge-gold">Learning</span>
-        <h2>Professional <span class="g-text">Courses</span></h2>
-      </div>
-      <div class="course-grid" id="courses-home"></div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section style="padding:80px 0;background:linear-gradient(135deg,var(--bg3),var(--bg2))">
-    <div class="c" style="text-align:center">
-      <h2 class="s" style="font-size:2.2rem;font-weight:800;margin-bottom:1rem">Ready to Transform Your Practice?</h2>
-      <p style="color:var(--txt2);font-size:1.05rem;margin-bottom:2rem">Join 10,000+ tax professionals trusted by DigiCafe.</p>
-      <button class="btn btn-primary btn-lg" onclick="showPage('login')" style="font-size:1rem;padding:1rem 2.5rem"><i class="fas fa-rocket"></i> Get Started Free</button>
-    </div>
-  </section>
+  </div>
 </div>
 
 <!-- NEWS PAGE -->
@@ -433,724 +191,368 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:80px 0 40px
   <div class="c">
     <div class="sh">
       <h2>Tax & <span class="g-text">Compliance News</span></h2>
-      <p>Latest updates on Income Tax, GST, Companies Act, and Government notifications.</p>
+      <p>Latest updates on Income Tax, GST, Companies Act, and Government notifications</p>
     </div>
-    <div style="margin-bottom:2rem;display:flex;gap:.5rem;flex-wrap:wrap" id="news-cats"></div>
     <div class="news-grid" id="news-full"></div>
   </div>
 </div>
 
 <!-- DIGITAL ASSISTANCE PAGE -->
-<div class="page" id="page-digital-assistance" style="padding:80px 20px">
+<div class="page" id="page-assistance" style="padding:80px 20px">
   <div class="c">
     <div class="sh">
-      <h2>Digital <span class="g-text">Assistance Services</span></h2>
-      <p>Get expert guidance on tax, compliance, business services, and government documentation.</p>
+      <h2>Digital <span class="g-text">Assistance</span></h2>
+      <p>Get expert help whenever you need it</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem">
-      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Connect with our experts on WhatsApp!')">
-        <div style="font-size:2.5rem;margin-bottom:.75rem">💼</div>
-        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Tax & Compliance Guidance</h3>
-        <p style="color:var(--txt2);font-size:.9rem">Expert advice on ITR filing, GST registration, TDS compliance, and tax planning.</p>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-icon">💰</div>
+        <div class="svc-name">Tax & Compliance Guidance</div>
+        <div style="color:var(--txt2);font-size:.9rem">Expert advice on ITR, GST, and compliance matters</div>
       </div>
-      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Our team is ready to help!')">
-        <div style="font-size:2.5rem;margin-bottom:.75rem">📋</div>
-        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Government Services</h3>
-        <p style="color:var(--txt2);font-size:.9rem">Assistance with PAN, Aadhaar, company registration, trademark, and digital signatures.</p>
+      <div class="svc-card">
+        <div class="svc-icon">🏛️</div>
+        <div class="svc-name">Government Services</div>
+        <div style="color:var(--txt2);font-size:.9rem">Navigate government registrations and filings</div>
       </div>
-      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="window.open('https://wa.me/918539979271','_blank')">
-        <div style="font-size:2.5rem;margin-bottom:.75rem">💬</div>
-        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">WhatsApp Support</h3>
-        <p style="color:var(--txt2);font-size:.9rem">Chat with our team on WhatsApp for quick support and guidance on any service.</p>
+      <div class="svc-card">
+        <div class="svc-icon">💬</div>
+        <div class="svc-name">WhatsApp Support</div>
+        <div style="color:var(--txt2);font-size:.9rem">Real-time support on WhatsApp</div>
       </div>
-      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Document assistance available!')">
-        <div style="font-size:2.5rem;margin-bottom:.75rem">📄</div>
-        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Document Assistance</h3>
-        <p style="color:var(--txt2);font-size:.9rem">Help with document preparation, verification, and filing for all services.</p>
+      <div class="svc-card">
+        <div class="svc-icon">📄</div>
+        <div class="svc-name">Document Assistance</div>
+        <div style="color:var(--txt2);font-size:.9rem">Help with document preparation and verification</div>
       </div>
-      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Premium consulting available!')">
-        <div style="font-size:2.5rem;margin-bottom:.75rem">👨‍💼</div>
-        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Expert Consultation</h3>
-        <p style="color:var(--txt2);font-size:.9rem">One-on-one consultation with certified tax professionals and compliance experts.</p>
+      <div class="svc-card">
+        <div class="svc-icon">👨‍💼</div>
+        <div class="svc-name">Expert Consultation</div>
+        <div style="color:var(--txt2);font-size:.9rem">One-on-one consultation with compliance experts</div>
       </div>
-      <div class="glass" style="padding:1.5rem;border-radius:var(--r2);cursor:pointer" onclick="showToast('Schedule your call now!')">
-        <div style="font-size:2.5rem;margin-bottom:.75rem">📞</div>
-        <h3 class="s" style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Phone Support</h3>
-        <p style="color:var(--txt2);font-size:.9rem">Call our support team at +91 85399 79271 for any assistance or inquiries.</p>
+      <div class="svc-card">
+        <div class="svc-icon">📞</div>
+        <div class="svc-name">Phone Support</div>
+        <div style="color:var(--txt2);font-size:.9rem">Dedicated phone support for urgent matters</div>
       </div>
-    </div>
-    <div style="text-align:center;margin-top:3rem">
-      <button class="btn btn-primary btn-lg" onclick="window.open('https://wa.me/918539979271','_blank')" style="font-size:1rem;padding:1rem 2.5rem"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</button>
     </div>
   </div>
 </div>
 
-<!-- KNOWLEDGE PAGE -->
-<div class="page" id="page-knowledge" style="padding:80px 20px">
-  <div class="c">
+<!-- AUTH PAGE -->
+<div class="page" id="page-auth" style="padding:80px 20px">
+  <div class="c" style="max-width:500px">
     <div class="sh">
-      <h2>Knowledge <span class="g-text">Center</span></h2>
-      <p>Complete library of tax, GST, compliance, and business guides.</p>
+      <h2><span class="g-text">Create Account</span></h2>
+      <p>Sign up to get started</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem" id="kb-grid"></div>
-  </div>
-</div>
 
-<!-- COURSES PAGE -->
-<div class="page" id="page-courses" style="padding:80px 20px">
-  <div class="c">
-    <div class="sh">
-      <h2><span class="g-text">Professional Courses</span></h2>
-      <p>Live webinars, recorded courses, certificates, and community learning.</p>
-    </div>
-    <div class="course-grid" id="courses-full"></div>
-  </div>
-</div>
-
-<!-- AI TOOLS PAGE -->
-<div class="page" id="page-ai" style="padding:80px 20px">
-  <div class="c">
-    <div class="sh">
-      <h2>DigiCafe <span class="g-text">AI Tools</span></h2>
-      <p>Intelligent assistants for tax, GST, compliance, and business needs.</p>
-    </div>
-    <div class="tools-grid" id="ai-full"></div>
-    <div style="text-align:center;margin-top:3rem">
-      <button class="btn btn-primary btn-lg" onclick="showPage('login')"><i class="fas fa-robot"></i> Try AI Assistant</button>
-    </div>
-  </div>
-</div>
-
-<!-- SERVICES PAGE -->
-<div class="page" id="page-services" style="padding:80px 20px">
-  <div class="c">
-    <div class="sh">
-      <h2>All <span class="g-text">Services</span></h2>
-      <p>120+ compliance, tax, and government services in one platform.</p>
-    </div>
-    <div class="svc-grid" id="svc-full"></div>
-  </div>
-</div>
-
-<!-- TOOLS PAGE (CALCULATORS) -->
-<div class="page" id="page-tools" style="padding:80px 20px">
-  <div class="c">
-    <div class="sh">
-      <h2>Free <span class="g-text">Calculators</span></h2>
-      <p>Instant tax and finance calculations for all your needs.</p>
-    </div>
-    <div class="tools-grid" id="calc-grid"></div>
-  </div>
-</div>
-
-<!-- LOGIN PAGE -->
-<div class="page" id="page-login" style="padding:80px 20px;min-height:calc(100vh - 64px);display:flex;align-items:center">
-  <div class="c" style="max-width:420px;margin:0 auto;width:100%">
-    <div class="glass" style="padding:2.5rem;border-radius:24px">
-      <div style="text-align:center;margin-bottom:1.5rem">
-        <div class="logo s" style="font-size:1.8rem;display:inline-block">DigiCafe</div>
-        <p style="color:var(--txt3);font-size:.85rem;margin-top:.5rem">Professional Tax & Compliance Platform</p>
+    <div id="login-form" style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem">
+      <div style="margin-bottom:1.5rem">
+        <label style="display:block;margin-bottom:.5rem;font-weight:600">Email</label>
+        <input type="email" id="signup-email" placeholder="your@email.com" style="width:100%;padding:.75rem;border:1px solid var(--bdr);border-radius:var(--r);background:var(--bg3);color:var(--txt)">
       </div>
-      <div style="display:flex;gap:.5rem;background:var(--bg2);border-radius:10px;padding:4px;margin-bottom:1.5rem">
-        <button class="btn-tab active" style="flex:1;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:.5rem;cursor:pointer;font-weight:600;font-size:.85rem;font-family:inherit" onclick="switchTab('login')">Log In</button>
-        <button class="btn-tab" style="flex:1;background:none;color:var(--txt2);border:none;cursor:pointer;font-weight:600;font-size:.85rem;font-family:inherit;padding:.5rem" onclick="switchTab('register')">Register</button>
+
+      <div style="margin-bottom:1.5rem">
+        <label style="display:block;margin-bottom:.5rem;font-weight:600">Password</label>
+        <input type="password" id="signup-password" placeholder="••••••••" style="width:100%;padding:.75rem;border:1px solid var(--bdr);border-radius:var(--r);background:var(--bg3);color:var(--txt)">
       </div>
-      <form id="login-form" onsubmit="return handleLogin(event)">
-        <div style="margin-bottom:1.1rem">
-          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Email Address</label>
-          <input type="email" placeholder="you@example.com" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
-        </div>
-        <div style="margin-bottom:1.1rem">
-          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Password</label>
-          <input type="password" placeholder="Your password" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
-        </div>
-        <button type="submit" class="btn btn-primary btn-full" style="margin-bottom:1rem;padding:1rem"><i class="fas fa-sign-in-alt"></i> Log In</button>
-      </form>
-      <div id="login-forgot" style="text-align:center;font-size:.8rem;color:var(--txt3)">Forgot password? <a href="#" style="color:var(--blue)">Reset</a></div>
-      <!-- REGISTER FORM -->
-      <form id="register-form" style="display:none" onsubmit="return handleRegister(event)">
-        <div style="margin-bottom:1.1rem">
-          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Full Name</label>
-          <input type="text" id="reg-name" placeholder="Your full name" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
-        </div>
-        <div style="margin-bottom:1.1rem">
-          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Email Address</label>
-          <input type="email" id="reg-email" placeholder="you@example.com" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
-        </div>
-        <div style="margin-bottom:1.1rem">
-          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Password</label>
-          <input type="password" id="reg-password" placeholder="Min 6 characters" required style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
-        </div>
-        <div style="margin-bottom:1.1rem">
-          <label style="display:block;font-size:.85rem;font-weight:600;color:var(--txt2);margin-bottom:.4rem">Mobile Number</label>
-          <input type="tel" id="reg-phone" placeholder="+91 98765 43210" style="width:100%;padding:.75rem 1rem;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bdr2);color:var(--txt);font-family:inherit;font-size:.9rem">
-        </div>
-        <button type="submit" id="reg-btn" class="btn btn-primary btn-full" style="margin-bottom:1rem;padding:1rem"><i class="fas fa-user-plus"></i> Create Account</button>
-      </form>
-      <div style="text-align:center;color:var(--txt3);font-size:.8rem;margin:1rem 0;position:relative">
-        <span style="background:var(--bg2);padding:0 .5rem;position:relative;z-index:1">or</span>
-        <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:var(--bdr);z-index:0"></div>
+
+      <div style="margin-bottom:1.5rem">
+        <label style="display:block;margin-bottom:.5rem;font-weight:600">Full Name</label>
+        <input type="text" id="signup-name" placeholder="Your Name" style="width:100%;padding:.75rem;border:1px solid var(--bdr);border-radius:var(--r);background:var(--bg3);color:var(--txt)">
       </div>
-      <button type="button" class="btn btn-ghost btn-full" id="google-signin-btn" onclick="signInWithGoogle()"><i class="fab fa-google"></i> Sign in with Google</button>
-      <div style="text-align:center;font-size:.82rem;color:var(--txt3);margin-top:1.5rem">New here? <a href="#" style="color:var(--blue);cursor:pointer" onclick="switchTab('register');return false">Create Account</a></div>
+
+      <button class="btn btn-primary" onclick="signupUser()" style="width:100%;margin-bottom:1rem">Create Account</button>
+      <button class="btn btn-secondary" onclick="googleSignup()" style="width:100%"><i class="fab fa-google"></i> Sign up with Google</button>
+    </div>
+
+    <div style="text-align:center;margin-top:1rem">
+      <p style="color:var(--txt2)">Already have an account? <a onclick="loginUser()" style="color:var(--blue);cursor:pointer;text-decoration:underline">Log In</a></p>
     </div>
   </div>
 </div>
 
-<!-- CLIENT DASHBOARD -->
-<div class="page" id="page-dashboard">
-  <div class="dash-layout">
-    <div class="d-sidebar">
-      <div class="d-user">
-        <div class="d-avatar">VK</div>
+<!-- DASHBOARD PAGE -->
+<div class="page" id="page-dashboard" style="padding:80px 20px">
+  <div class="c">
+    <div class="dashboard">
+      <div class="client-info">
+        <div class="avatar" id="user-avatar">VK</div>
         <div>
-          <div class="d-uname">Vikash Pathak</div>
-          <div class="d-urole">Client</div>
+          <div style="font-size:1.5rem;font-weight:800" id="user-name">Welcome</div>
+          <button class="btn btn-secondary" onclick="logoutUser()" style="margin-top:.5rem">Log Out</button>
         </div>
       </div>
-      <ul class="side-nav">
-        <li><a onclick="showDash('overview')" class="active"><i class="fas fa-home"></i> Overview</a></li>
-        <li><a onclick="showDash('applications')"><i class="fas fa-file-alt"></i> Applications</a></li>
-        <li><a onclick="showDash('documents')"><i class="fas fa-folder"></i> Documents</a></li>
-        <li><a onclick="showDash('invoices')"><i class="fas fa-receipt"></i> Invoices</a></li>
-        <li><a onclick="showDash('messages')"><i class="fas fa-envelope"></i> Messages</a></li>
-        <li><a onclick="showDash('support')"><i class="fas fa-headset"></i> Support</a></li>
-        <li><a onclick="showPage('home')"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-      </ul>
-    </div>
-    <div class="d-main">
-      <div class="d-content active" id="dash-overview">
-        <div class="d-title" id="dash-welcome">Welcome back!</div>
-        <p style="color:var(--txt2);margin-bottom:2rem" id="dash-subtitle">Your compliance status and pending applications.</p>
-        
-        <div class="kpi-grid" id="dash-kpi-grid">
-          <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Active Applications</div></div>
-          <div class="kpi"><div class="kpi-val">₹0</div><div class="kpi-label">Total Paid</div></div>
-          <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Pending Documents</div></div>
-          <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Completed Services</div></div>
+
+      <div class="dashboard-grid">
+        <div class="sidebar">
+          <div class="sidebar-item active">📊 Overview</div>
+          <div class="sidebar-item">📝 My Applications</div>
+          <div class="sidebar-item">📄 Documents</div>
+          <div class="sidebar-item">⚙️ Settings</div>
         </div>
 
-        <!-- DIGICAFE SERVICES SECTION -->
-        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;margin:2rem 0">
-          <h3 class="s" style="font-weight:700;margin-bottom:1.5rem">💼 DigiCafe Services Available for You</h3>
-          <p id="services-msg" style="color:var(--txt2);font-size:.95rem;margin-bottom:1.5rem">No services availed yet. Explore DigiCafe services below and submit a request.</p>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem" id="dash-services-grid">
-            <!-- Services will be loaded here by JavaScript -->
-          </div>
-        </div>
+        <div>
+          <h3 style="font-size:1.5rem;font-weight:800;margin-bottom:1rem">DigiCafe Services Available for You</h3>
+          <div class="svc-grid" id="dashboard-services"></div>
 
-        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;margin:2rem 0">
-          <h3 class="s" style="font-weight:700;margin-bottom:1.5rem">📂 My Documents & Files</h3>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
-            <div style="background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(6,214,160,.08));border:2px dashed var(--bdr);border-radius:var(--r2);padding:2rem;text-align:center;cursor:pointer" onclick="triggerFileUpload()">
-              <div style="font-size:2.5rem;margin-bottom:.5rem">📤</div>
-              <div class="s" style="font-weight:700;margin-bottom:.3rem">Upload Documents</div>
-              <div style="font-size:.8rem;color:var(--txt3)">Click to upload files for this service</div>
-            </div>
-            <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;text-align:center">
-              <div style="font-size:2.5rem;margin-bottom:.5rem">📥</div>
-              <div class="s" style="font-weight:700;margin-bottom:.3rem">Downloaded Files</div>
-              <button class="btn btn-sm btn-ghost" onclick="downloadClientDocs()"><i class="fas fa-download"></i> Download</button>
-            </div>
-          </div>
+          <h3 style="font-size:1.5rem;font-weight:800;margin:2rem 0 1rem">My Applications</h3>
+          <table class="table" id="applications-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="applications-body">
+              <tr>
+                <td colspan="4" style="text-align:center;color:var(--txt3)">No applications yet</td>
+              </tr>
+            </tbody>
+          </table>
 
-          <!-- UPLOADED FILES LIST -->
-          <div style="background:var(--bg3);border-radius:var(--r2);overflow:hidden">
-            <div style="padding:1rem;border-bottom:1px solid var(--bdr);background:var(--bg2);font-weight:700">Uploaded Files</div>
-            <div id="uploaded-files" style="padding:1.5rem">
-              <div style="text-align:center;color:var(--txt3);padding:1rem">
-                <p><i class="fas fa-info-circle"></i> No documents uploaded yet</p>
-                <p style="font-size:.8rem;margin-top:.5rem">Upload documents using the button above</p>
-              </div>
-            </div>
+          <h3 style="font-size:1.5rem;font-weight:800;margin:2rem 0 1rem">My Documents & Files</h3>
+          <div class="upload-card" onclick="triggerFileUpload()">
+            <i class="fas fa-cloud-upload-alt" style="font-size:2rem;margin-bottom:1rem;color:var(--blue)"></i>
+            <div style="font-weight:600;margin-bottom:.5rem">Upload Documents</div>
+            <div style="color:var(--txt3);font-size:.9rem">Drag & drop or click to select files</div>
           </div>
-        </div>
+          <input type="file" id="file-input" multiple onchange="handleFileUpload(event)">
 
-        <!-- APPLICATIONS TRACKER -->
-        <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;margin:2rem 0">
-          <h3 class="s" style="font-weight:700;margin-bottom:1.5rem">📊 My Applications</h3>
-          <div id="dash-recent-apps-container">
-            <div style="text-align:center;padding:2rem;color:var(--txt3)">
-              <i class="fas fa-inbox"></i>
-              <p style="margin-top:.5rem">No applications yet</p>
-            </div>
-          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>Size</th>
+                <th>Uploaded</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="files-body">
+              <tr>
+                <td colspan="4" style="text-align:center;color:var(--txt3)">No files uploaded</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="d-content" id="dash-applications"><p style="padding:2rem;color:var(--txt2)">Your applications here...</p></div>
-      <div class="d-content" id="dash-documents"><p style="padding:2rem;color:var(--txt2)">Document upload and management here...</p></div>
-      <div class="d-content" id="dash-invoices"><p style="padding:2rem;color:var(--txt2)">Your invoices and payment history here...</p></div>
-      <div class="d-content" id="dash-messages"><p style="padding:2rem;color:var(--txt2)">Messages from support team here...</p></div>
-      <div class="d-content" id="dash-support"><p style="padding:2rem;color:var(--txt2)">Support tickets and help center here...</p></div>
     </div>
   </div>
 </div>
-
-<!-- ADMIN PANEL REMOVED - See admin.html for separate admin portal -->
-
-<!-- FOOTER -->
-<footer>
-  <div class="c">
-    <div class="foot-grid">
-      <div>
-        <div class="logo s" style="font-size:1.3rem">DigiCafe</div>
-        <p style="font-size:.85rem;color:var(--txt2);margin:1rem 0">India's #1 AI-Powered Tax & Compliance Platform. Our Service, Your Solution.</p>
-        <div style="display:flex;gap:.75rem">
-          <button class="btn btn-primary btn-sm" onclick="showPage('login')"><i class="fas fa-phone"></i> Support</button>
-          <a href="https://wa.me/918539979271" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        </div>
-      </div>
-      <div>
-        <h4>Services</h4>
-        <a onclick="showPage('services')">All Services</a>
-        <a onclick="showPage('services')">Income Tax</a>
-        <a onclick="showPage('services')">GST</a>
-        <a onclick="showPage('services')">Company Reg</a>
-      </div>
-      <div>
-        <h4>Learning</h4>
-        <a onclick="showPage('courses')">Courses</a>
-        <a onclick="showPage('knowledge')">Knowledge Base</a>
-        <a onclick="showPage('news')">News</a>
-        <a onclick="showPage('ai')">AI Tools</a>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <a onclick="showPage('home')">About Us</a>
-        <a onclick="showPage('home')">Contact</a>
-        <a onclick="showPage('home')">Privacy</a>
-        <a onclick="showPage('home')">Terms</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <p>© 2025 DigiCafe Compliance & Digital Solutions · MSME: UDYAM-KR-02-0041919</p>
-      <p>By Vikash Pathak · Bengaluru, India · <a href="mailto:vikashpathak.mgmt@gmail.com" style="color:var(--blue2)">vikashpathak.mgmt@gmail.com</a></p>
-    </div>
-  </div>
-</footer>
-
-<!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/918539979271?text=Hi%20DigiCafe!%20I%20want%20to%20know%20more" target="_blank" style="position:fixed;bottom:2rem;left:2rem;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;transition:all .3s" title="Chat on WhatsApp">💬</a>
-
-<!-- HIDDEN FILE INPUT -->
-<input type="file" id="file-input" style="display:none" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx">
 
 <!-- TOAST -->
 <div id="toast"></div>
 
 <script>
+// ═══ FIREBASE CONFIG ═══
+const firebaseConfig = {
+  apiKey: "AIzaSyDcdR-ba5Lh-DfG-wuABRntQm1sSYSr3Kk",
+  authDomain: "digicafe-ee519.firebaseapp.com",
+  projectId: "digicafe-ee519",
+  storageBucket: "digicafe-ee519.appspot.com",
+  messagingSenderId: "582268562769",
+  appId: "1:582268562769:web:720288e24fd8de7166f770",
+  measurementId: "G-25T4WHH8X4"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
 // ═══ DATA ═══
-const news = [
-  // LATEST NEWS (July 22, 2026)
-  {title:'Ministry of Corporate Affairs Announces New Company Registration Guidelines',date:'22 Jul 2026',cat:'Ministry',desc:'New streamlined process for company registration launched. Expected processing time reduced from 7 days to 24 hours. Apply through MCA portal with Aadhaar and PAN.'},
-  
-  {title:'Digital India Initiative: 500 New Common Service Centers Inaugurated Across India',date:'21 Jul 2026',cat:'Digital India',desc:'Government inaugurates 500 CSCs in rural areas. Free Wi-Fi and digital services now available in villages. Focus on digital literacy and financial inclusion.'},
-  
-  {title:'MSME Registration Crosses 5 Crore Mark: Udyam Portal Success',date:'20 Jul 2026',cat:'MSME',desc:'Ministry of MSME announces 5 crore+ businesses registered under Udyam scheme. Average growth 15% YoY. Government extends GST exemption for MSMEs earning <40 lakh.'},
-  
-  {title:'Bangalore Startup Ecosystem Valued at $100 Billion: New Report',date:'19 Jul 2026',cat:'Local News',desc:'Bangalore tech industry report shows 12,000+ startups operating. Job creation up 25%. IT exports reach $180 billion. Infrastructure development ongoing at Electronics City.'},
-  
-  {title:'Stock Market Hits New Record: Sensex Crosses 85,000 Mark',date:'18 Jul 2026',cat:'Business',desc:'Indian stock markets show strong performance. Auto and IT sectors lead gains. Foreign investments increase 18% YoY. RBI maintains growth forecast at 6.5%.'},
-  
-  {title:'GST Council Approves Changes: Tax Rate Modifications Effective August 2026',date:'17 Jul 2026',cat:'Tax',desc:'New GST rate structure approved for 40+ commodities. IT services, healthcare, and agriculture see rate adjustments. Implementation guidelines released by CBDT.'},
-  
-  {title:'Ministry Launches Digital Rupee: Pilot Phase Complete',date:'16 Jul 2026',cat:'Digital India',desc:'RBI completes e-Rupee pilot testing. Full launch planned September 2026. Banks begin preparations for digital currency integration. Enhanced security features added.'},
-  
-  // PREVIOUS NEWS (July 15 & earlier)
-  {title:'Union Budget 2026: Major Tax Changes Announced',date:'15 Jul 2026',cat:'Income Tax',desc:'Finance Ministry announces significant changes in tax slabs and deductions for FY 2026-27.'},
-  
-  {title:'GST Rate on IT Services Revised Effective July 2026',date:'14 Jul 2026',cat:'GST',desc:'New GST rate structure implemented for Information Technology and software services sector.'},
-  
-  {title:'CBDT Updates ITR Schedules for AY 2026-27',date:'13 Jul 2026',cat:'Income Tax',desc:'New appendix and schedules released for Income Tax Returns filing for assessment year 2026-27.'},
-  
-  {title:'GST Council Approves New Compliance Framework',date:'12 Jul 2026',cat:'GST',desc:'Streamlined GST compliance procedures and filing timelines effective from 1st August 2026.'},
-  
-  {title:'RBI Issues New Guidelines for Digital Payments',date:'11 Jul 2026',cat:'Income Tax',desc:'Updated rules on digital payment reporting and TDS applicability on online transactions.'},
-  
-  {title:'Company Law: Simplified Compliance Rules 2026',date:'10 Jul 2026',cat:'Ministry',desc:'Ministry of Corporate Affairs releases simplified annual compliance procedures for private companies.'},
-  
-  {title:'MSME Credit Guarantee Scheme Extended: 50 Lakh Loans Approved',date:'09 Jul 2026',cat:'MSME',desc:'Government announces extension of CGTMSE scheme. Guarantee coverage increased to 90%. Interest rate subsidy enhanced for women entrepreneurs.'},
-  
-  {title:'Startup India Registration Surges: 2.5 Lakh New Startups in 2026',date:'08 Jul 2026',cat:'Business',desc:'Startup India program sees record registrations. Tax benefits and funding support boost entrepreneurship. Tech startups dominate with 40% share.'},
-  
-  {title:'National Digital Literacy Mission Reaches 2 Crore Citizens',date:'07 Jul 2026',cat:'Digital India',desc:'Digital literacy initiative covers rural and urban areas. Focus on senior citizens and women. Free training centers opened across states.'},
-  
-  {title:'Bangalore Tech Park Expansion: New 500 Acre IT Hub Announced',date:'06 Jul 2026',cat:'Local News',desc:'White-field IT park development approved in Outer Ring Road. Expected to attract 50,000+ employees. Infrastructure investment: ₹5,000 crore.'},
-  
-  {title:'Foreign Institutional Investors Increase India Investments by 22%',date:'05 Jul 2026',cat:'Business',desc:'FII inflow increases to $45 billion in first half 2026. Positive outlook on Indian markets. Tech and pharma sectors attract major investments.'},
-  
-  {title:'Income Tax Department Launches AI-Powered Compliance Portal',date:'04 Jul 2026',cat:'Income Tax',desc:'New digital platform for ITR filing, refund tracking, and compliance checks. Mobile app launched for seamless e-filing. 50% faster processing promised.'},
-  
-  {title:'Ministry of Commerce: India-UAE Trade Pact Boosts Exports',date:'03 Jul 2026',cat:'Business',desc:'New bilateral trade agreement signed. Export opportunities for MSME and startups enhanced. 40% tariff reduction on 500+ products.'},
-  
-  {title:'Bengaluru Attracts 50% of India\'s VC Funding in H1 2026',date:'02 Jul 2026',cat:'Local News',desc:'Venture capital funding in Bangalore reaches $8.2 billion. AI and fintech startups lead investment. Government incentives drive growth.'},
-  
-  {title:'GST Compliance: Government Extends Deadline for August Filings',date:'01 Jul 2026',cat:'GST',desc:'GSTN announces deadline extension due to technical upgrades. New e-invoicing system implemented. Compliance support centers opened nationwide.'},
-];
-
 const services = [
-  {icon:'💰',name:'Income Tax (ITR)',desc:'ITR-1, ITR-2, ITR-4 filing, tax planning, refund tracking',price:'₹999+'},
-  {icon:'📊',name:'GST Registration',desc:'GSTIN approval, GSTR-1/3B/9 filing, reconciliation',price:'₹1,999+'},
-  {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, OPC, LLP formation, DIN services',price:'₹4,999+'},
-  {icon:'📋',name:'TDS Compliance',desc:'24Q/26Q filing, Form 16, challan preparation',price:'₹1,499+'},
-  {icon:'™️',name:'Trademark Registration',desc:'Search, application, objection reply, renewal',price:'₹2,999+'},
-  {icon:'🔐',name:'Digital Signature (DSC)',desc:'Class 3 DSC, USB token, installation support',price:'₹1,299+'},
-  {icon:'🚀',name:'MSME/Udyam Registration',desc:'Udyam registration, Startup India registration',price:'₹1,499+'},
-  {icon:'👤',name:'PAN/TAN/Aadhaar',desc:'New PAN, TAN registration, Aadhaar update assistance',price:'₹499+'},
+  {icon:'💰', name:'Income Tax (ITR)', price:'999'},
+  {icon:'📊', name:'GST Registration', price:'1999'},
+  {icon:'🏢', name:'Company Registration', price:'4999'},
+  {icon:'📋', name:'TDS Compliance', price:'1499'},
+  {icon:'™️', name:'Trademark Registration', price:'2999'},
+  {icon:'🔐', name:'Digital Signature (DSC)', price:'1299'},
+  {icon:'🚀', name:'MSME/Udyam Registration', price:'1499'},
+  {icon:'👤', name:'PAN/TAN/Aadhaar', price:'499'},
 ];
 
-const aiTools = [
-  {icon:'🧠',name:'AI Tax Assistant',desc:'ITR guidance, tax planning, deduction tips'},
-  {icon:'📊',name:'AI GST Assistant',desc:'GST classification, ITC optimization, GSTR help'},
-  {icon:'📝',name:'Notice Reply Generator',desc:'Draft professional IT/GST notice replies instantly'},
-  {icon:'📧',name:'Email Generator',desc:'Professional client emails for all situations'},
-  {icon:'📱',name:'WhatsApp Generator',desc:'Client reminders and compliance messages'},
-  {icon:'🔍',name:'Document Review AI',desc:'AI verifies PAN, Aadhaar, GST documents'},
-  {icon:'💼',name:'Business Consultant',desc:'AI business advice, strategy, growth tips'},
-  {icon:'💰',name:'Loan Advisor AI',desc:'Loan eligibility, EMI calculation, advisory'},
+const news = [
+  {title:'Ministry of Corporate Affairs Announces New Company Registration Guidelines',date:'22 Jul 2026',cat:'Ministry',desc:'New streamlined process for company registration launched. Expected processing time reduced from 7 days to 24 hours.'},
+  {title:'Digital India Initiative: 500 New Common Service Centers Inaugurated',date:'21 Jul 2026',cat:'Digital India',desc:'Government inaugurates 500 CSCs in rural areas. Free Wi-Fi and digital services now available.'},
+  {title:'MSME Registration Crosses 5 Crore Mark: Udyam Portal Success',date:'20 Jul 2026',cat:'MSME',desc:'Ministry announces 5 crore+ businesses registered. Government extends GST exemption.'},
+  {title:'Bangalore Startup Ecosystem Valued at $100 Billion',date:'19 Jul 2026',cat:'Local News',desc:'Bangalore tech industry shows strong growth with 12,000+ startups operating.'},
+  {title:'Stock Market Hits New Record: Sensex Crosses 85,000 Mark',date:'18 Jul 2026',cat:'Business',desc:'Indian stock markets show strong performance with auto and IT sectors leading.'},
+  {title:'GST Council Approves Changes: Tax Rate Modifications Effective August 2026',date:'17 Jul 2026',cat:'GST',desc:'New GST rate structure approved for 40+ commodities.'},
+  {title:'Ministry Launches Digital Rupee: Pilot Phase Complete',date:'16 Jul 2026',cat:'Digital India',desc:'RBI completes e-Rupee pilot testing. Full launch planned September 2026.'},
+  {title:'Union Budget 2026: Major Tax Changes Announced',date:'15 Jul 2026',cat:'Income Tax',desc:'Finance Ministry announces significant changes in tax slabs for FY 2026-27.'},
+  {title:'GST Rate on IT Services Revised Effective July 2026',date:'14 Jul 2026',cat:'GST',desc:'New GST rate structure for Information Technology services sector.'},
+  {title:'CBDT Updates ITR Schedules for AY 2026-27',date:'13 Jul 2026',cat:'Income Tax',desc:'New schedules released for Income Tax Returns filing.'},
+  {title:'GST Council Approves New Compliance Framework',date:'12 Jul 2026',cat:'GST',desc:'Streamlined procedures effective from 1st August 2026.'},
+  {title:'RBI Issues New Guidelines for Digital Payments',date:'11 Jul 2026',cat:'Income Tax',desc:'Updated rules on digital payment reporting and TDS applicability.'},
+  {title:'Company Law: Simplified Compliance Rules 2026',date:'10 Jul 2026',cat:'Ministry',desc:'Ministry releases simplified annual compliance procedures.'},
+  {title:'MSME Credit Guarantee Scheme Extended',date:'09 Jul 2026',cat:'MSME',desc:'50 lakh loans approved with guarantee coverage increased.'},
+  {title:'Startup India Registration Surges: 2.5 Lakh New Startups',date:'08 Jul 2026',cat:'Business',desc:'Record registrations with tech startups dominating.'},
+  {title:'National Digital Literacy Mission Reaches 2 Crore Citizens',date:'07 Jul 2026',cat:'Digital India',desc:'Digital literacy initiative covers rural and urban areas.'},
+  {title:'Bangalore Tech Park Expansion: New 500 Acre IT Hub Announced',date:'06 Jul 2026',cat:'Local News',desc:'White-field IT park development approved on Outer Ring Road.'},
+  {title:'Foreign Institutional Investors Increase India Investments by 22%',date:'05 Jul 2026',cat:'Business',desc:'FII inflow increases to $45 billion in H1 2026.'},
+  {title:'Income Tax Department Launches AI-Powered Compliance Portal',date:'04 Jul 2026',cat:'Income Tax',desc:'New digital platform for ITR filing and refund tracking.'},
+  {title:'Ministry of Commerce: India-UAE Trade Pact Boosts Exports',date:'03 Jul 2026',cat:'Business',desc:'40% tariff reduction on 500+ products for MSME.'},
+  {title:'Bengaluru Attracts 50% of India\'s VC Funding in H1 2026',date:'02 Jul 2026',cat:'Local News',desc:'Venture capital funding reaches $8.2 billion.'},
+  {title:'GST Compliance: Government Extends Deadline for August Filings',date:'01 Jul 2026',cat:'GST',desc:'GSTN announces deadline extension for technical upgrades.'},
 ];
 
-const courses = [
-  {icon:'💰',name:'Income Tax Mastery',desc:'Complete ITR filing, AIS analysis, tax planning',dur:'12 hrs',level:'Beginner'},
-  {icon:'📊',name:'GST Complete Course',desc:'Registration, GSTR filing, reconciliation, audit',dur:'15 hrs',level:'Beginner'},
-  {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, LLP, annual compliance, ROC filings',dur:'10 hrs',level:'Beginner'},
-  {icon:'📚',name:'Tally Prime Training',desc:'Complete accounting, GST, payroll, bank rec',dur:'20 hrs',level:'Intermediate'},
-  {icon:'🤖',name:'Excel for Accountants',desc:'Pivot tables, VLOOKUP, macros, automation',dur:'18 hrs',level:'Intermediate'},
-  {icon:'⚖️',name:'Company Law 101',desc:'Companies Act, ROC compliance, DIN services',dur:'12 hrs',level:'Beginner'},
-];
+// ═══ RENDER FUNCTIONS ═══
+function renderServices(cont) {
+  if(!cont) return;
+  cont.innerHTML = services.map(s => `
+    <div class="svc-card">
+      <div class="svc-icon">${s.icon}</div>
+      <div class="svc-name">${s.name}</div>
+      <div class="svc-price">₹${s.price}+</div>
+    </div>
+  `).join('');
+}
+
+function renderNews(cont) {
+  if(!cont) return;
+  cont.innerHTML = news.map(n => `
+    <div class="news-card">
+      <span class="n-cat">${n.cat}</span>
+      <div class="n-title">${n.title}</div>
+      <div class="n-desc">${n.desc}</div>
+      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
+    </div>
+  `).join('');
+}
 
 // ═══ PAGE ROUTING ═══
-function showPage(p){
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  document.querySelectorAll('[data-p]').forEach(x=>x.classList.remove('active'));
-  document.querySelector('[data-p="'+p+'"]')?.classList.add('active');
-  window.scrollTo(0,0);
-  updateNav();
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  const page = document.getElementById('page-' + p);
+  if(page) page.classList.add('active');
   
-  // Render news when news page is shown
+  document.querySelectorAll('nav a').forEach(x => x.classList.remove('active'));
+  document.querySelector(`[data-p="${p}"]`)?.classList.add('active');
+  
+  window.scrollTo(0, 0);
+  
   if(p === 'news') {
     const newsFull = document.getElementById('news-full');
-    if(newsFull && news.length > 0) {
-      renderNews(newsFull);
-    }
+    if(newsFull) renderNews(newsFull);
+  }
+  
+  if(p === 'dashboard') {
+    renderServices(document.getElementById('dashboard-services'));
   }
 }
 
-function updateNav(){
-  const active = document.querySelector('.page.active').id.replace('page-','');
-  document.querySelectorAll('[data-p]').forEach(x=>x.classList.toggle('active',x.dataset.p===active));
+// ═══ AUTH ═══
+function signupUser() {
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  const name = document.getElementById('signup-name').value;
+  
+  if(!email || !password || !name) {
+    showToast('Please fill all fields');
+    return;
+  }
+  
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(u => {
+      u.user.updateProfile({displayName: name});
+      showToast('✅ Account created! Welcome ' + name);
+      setTimeout(() => showDashboard(u.user), 500);
+    })
+    .catch(e => showToast('❌ ' + e.message));
 }
 
-function goHome(){showPage('home')}
-
-// ═══ DASHBOARD ═══
-function showDash(s){
-  document.querySelectorAll('#page-dashboard .d-content').forEach(x=>x.classList.remove('active'));
-  document.getElementById('dash-'+s).classList.add('active');
-  document.querySelectorAll('#page-dashboard .side-nav a').forEach(x=>x.classList.remove('active'));
-  event.target.closest('a').classList.add('active');
+function googleSignup() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result => {
+      showToast('✅ Welcome ' + result.user.displayName);
+      showDashboard(result.user);
+    })
+    .catch(e => showToast('❌ ' + e.message));
 }
 
-// ═══ ADMIN ═══
-// ADMIN PANEL MOVED TO SEPARATE admin.html FILE
-// Regular users cannot access admin functions from here
+function loginUser() {
+  const email = prompt('Email:');
+  if(!email) return;
+  const password = prompt('Password:');
+  if(!password) return;
+  
+  auth.signInWithEmailAndPassword(email, password)
+    .then(u => {
+      showToast('✅ Welcome back!');
+      showDashboard(u.user);
+    })
+    .catch(e => showToast('❌ ' + e.message));
+}
 
-// ═══ TABS ═══
-function switchTab(t){
-  document.querySelectorAll('.btn-tab').forEach(x=>{
-    x.style.background='none';
-    x.style.color='var(--txt2)';
-    x.classList.remove('active');
+function logoutUser() {
+  auth.signOut().then(() => {
+    showToast('👋 Logged out');
+    showPage('home');
+    document.getElementById('auth-btn').textContent = 'Log In';
   });
-  event.target.style.background='var(--blue)';
-  event.target.style.color='#fff';
-  event.target.classList.add('active');
-  document.getElementById('login-form').style.display = t==='login' ? 'block' : 'none';
-  document.getElementById('register-form').style.display = t==='register' ? 'block' : 'none';
-  document.getElementById('login-forgot').style.display = t==='login' ? 'block' : 'none';
-  document.getElementById('login-divider').style.display = 'block';
-  document.getElementById('google-signin-btn').style.display = 'flex';
 }
 
-function handleLogin(e){
-  e.preventDefault();
-  showToast('✓ Login successful!');
-  setTimeout(()=>showPage('dashboard'),1000);
-  return false;
+function showDashboard(user) {
+  document.getElementById('user-name').textContent = 'Welcome, ' + (user.displayName || user.email);
+  document.getElementById('user-avatar').textContent = (user.displayName || user.email).charAt(0).toUpperCase();
+  document.getElementById('auth-btn').textContent = 'Dashboard';
+  document.getElementById('auth-btn').onclick = () => showPage('dashboard');
+  showPage('dashboard');
 }
 
-function handleRegister(e){
-  e.preventDefault();
-  const btn = document.getElementById('reg-btn');
-  const name = document.getElementById('reg-name').value;
-  const email = document.getElementById('reg-email').value;
-  const password = document.getElementById('reg-password').value;
-  if(password.length < 6){ showToast('⚠ Password must be at least 6 characters'); return false; }
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
-  // Use Firebase if available, else demo mode
-  if(window._firebaseRegister){
-    window._firebaseRegister(name, email, password).then(()=>{
-      btn.disabled=false; btn.innerHTML='<i class="fas fa-user-plus"></i> Create Account';
-    });
-  } else {
-    setTimeout(()=>{
-      showToast('✓ Account created! Welcome, '+name+'!');
-      const avatarEl=document.querySelector('.d-avatar');
-      const nameEl=document.querySelector('.d-uname');
-      const titleEl=document.querySelector('.d-title');
-      if(avatarEl) avatarEl.textContent=(name[0]+(name.split(' ')[1]?.[0]||'')).toUpperCase();
-      if(nameEl) nameEl.textContent=name;
-      if(titleEl) titleEl.textContent='Welcome, '+name.split(' ')[0]+'!';
-      setTimeout(()=>showPage('dashboard'),800);
-      btn.disabled=false; btn.innerHTML='<i class="fas fa-user-plus"></i> Create Account';
-    },1000);
+// ═══ FILE UPLOAD ═══
+function triggerFileUpload() {
+  document.getElementById('file-input').click();
+}
+
+function handleFileUpload(event) {
+  const files = event.target.files;
+  let html = '';
+  
+  for(let f of files) {
+    html += `
+      <tr>
+        <td>${f.name}</td>
+        <td>${(f.size / 1024).toFixed(2)} KB</td>
+        <td>${new Date().toLocaleDateString()}</td>
+        <td><button class="btn btn-secondary" onclick="deleteFile(this)">Delete</button></td>
+      </tr>
+    `;
   }
-  return false;
+  
+  document.getElementById('files-body').innerHTML = html;
+  showToast('✅ ' + files.length + ' file(s) uploaded');
+}
+
+function deleteFile(btn) {
+  btn.parentElement.parentElement.remove();
+  showToast('🗑️ File deleted');
 }
 
 // ═══ TOAST ═══
-function showToast(m){
-  const t=document.getElementById('toast');
-  t.textContent=m;
+function showToast(m) {
+  const t = document.getElementById('toast');
+  t.textContent = m;
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
-
-// ═══ RENDER ═══
-function renderNews(cont){
-  cont.innerHTML=news.map(n=>`
-    <div class="news-card">
-      <span class="n-cat">${n.cat}</span>
-      <div class="n-title">${n.title}</div>
-      <div class="n-desc">${n.desc}</div>
-      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
-    </div>
-  `).join('');
-}
-
-function renderServices(cont){
-  cont.innerHTML=services.map(s=>`
-    <div class="svc-card">
-      <div class="s-icon">${s.icon}</div>
-      <div class="s-title">${s.name}</div>
-      <div class="s-desc">${s.desc}</div>
-      <div class="s-price">${s.price}</div>
-    </div>
-  `).join('');
-}
-
-function renderAI(cont){
-  cont.innerHTML=aiTools.map(a=>`
-    <div class="tool-card">
-      <div class="t-icon">${a.icon}</div>
-      <div class="t-name">${a.name}</div>
-      <div class="t-desc">${a.desc}</div>
-    </div>
-  `).join('');
-}
-
-function renderCourses(cont){
-  cont.innerHTML=courses.map(c=>`
-    <div class="course-card">
-      <div class="c-thumb">${c.icon}</div>
-      <div class="c-body">
-        <div class="c-title">${c.name}</div>
-        <div class="c-desc">${c.desc}</div>
-        <div class="c-meta"><span>${c.dur}</span> · <span>${c.level}</span></div>
-        <button class="c-btn" onclick="showPage('login');showToast('Enroll in course')"><i class="fas fa-book"></i> Enroll</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ═══ RENDER SERVICES IN CLIENT DASHBOARD ═══
-function renderDashboardServices(){
-  const cont = document.getElementById('dash-services-grid');
-  if(!cont) return;
-  cont.innerHTML=services.map(s=>`
-    <div class="svc-card" style="cursor:pointer;text-align:center" onclick="submitServiceRequest('${s.name}')">
-      <div class="s-icon">${s.icon}</div>
-      <div class="s-title">${s.name}</div>
-      <div style="font-size:.75rem;color:var(--txt2);margin-bottom:.5rem">${s.price}</div>
-      <button class="btn btn-primary btn-sm" style="width:100%" onclick="event.stopPropagation();submitServiceRequest('${s.name}')">Request</button>
-    </div>
-  `).join('');
-}
-
-function submitServiceRequest(serviceName){
-  showToast('✓ Service request submitted: '+serviceName);
-  // In a real app, this would save to Firebase Firestore
-}
-
-// ═══ FILE MANAGEMENT ═══
-let uploadedFiles = [];
-
-function triggerFileUpload() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.multiple = true;
-  input.accept = '.pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx';
-  input.onchange = (e) => {
-    const files = Array.from(e.target.files);
-    files.forEach(file => {
-      uploadedFiles.push({
-        name: file.name,
-        size: (file.size / 1024).toFixed(2),
-        date: new Date().toLocaleDateString(),
-        type: file.type.split('/')[1].toUpperCase()
-      });
-    });
-    displayUploadedFiles();
-    showToast(`✓ Uploaded ${files.length} file(s) successfully`, 'success');
-  };
-  input.click();
-}
-
-function displayUploadedFiles() {
-  const container = document.getElementById('uploaded-files');
-  if(uploadedFiles.length === 0) {
-    container.innerHTML = `<div style="text-align:center;color:var(--txt3);padding:1rem">
-      <p><i class="fas fa-info-circle"></i> No documents uploaded yet</p>
-      <p style="font-size:.8rem;margin-top:.5rem">Upload documents using the button above</p>
-    </div>`;
-    return;
-  }
-  
-  container.innerHTML = `
-    <table class="table">
-      <thead><tr><th>File Name</th><th>Type</th><th>Size</th><th>Uploaded</th><th>Action</th></tr></thead>
-      <tbody>
-        ${uploadedFiles.map((f, i) => `
-          <tr>
-            <td><i class="fas fa-file"></i> ${f.name}</td>
-            <td><span style="background:rgba(59,130,246,.2);color:var(--blue2);padding:.25rem .6rem;border-radius:4px;font-size:.75rem;font-weight:700">${f.type}</span></td>
-            <td>${f.size} KB</td>
-            <td>${f.date}</td>
-            <td>
-              <button class="btn btn-sm" style="background:transparent;color:var(--red);border:none;cursor:pointer;padding:.25rem" onclick="deleteFile(${i})">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-}
-
-function deleteFile(index) {
-  uploadedFiles.splice(index, 1);
-  displayUploadedFiles();
-  showToast('✓ File deleted', 'success');
-}
-
-function downloadClientDocs() {
-  if(uploadedFiles.length === 0) {
-    showToast('⚠ No files to download', 'error');
-    return;
-  }
-  showToast(`✓ Downloading ${uploadedFiles.length} file(s)...`, 'success');
-  // In a real app, this would create a zip file of all documents
-}
-
-
 
 // ═══ INIT ═══
-function initRender(){
-  // Initialize dashboard services
-  renderDashboardServices();
-  
-  // Render news on home
-  const newsHome = document.getElementById('news-home');
-  if(newsHome) {
-    renderNews(newsHome);
-  }
-  
-  // Render services on home
-  const svcHome = document.getElementById('svc-home');
-  if(svcHome) {
-    renderServices(svcHome);
-  }
-  
-  const ids = ['svc-home','svc-full','ai-home','ai-full','courses-home','courses-full','kb-grid','calc-grid'];
-  
-  if(document.getElementById('svc-home')) renderServices(document.getElementById('svc-home'));
-  if(document.getElementById('svc-full')) renderServices(document.getElementById('svc-full'));
-  if(document.getElementById('ai-home')) renderAI(document.getElementById('ai-home'));
-  if(document.getElementById('ai-full')) renderAI(document.getElementById('ai-full'));
-  if(document.getElementById('courses-home')) renderCourses(document.getElementById('courses-home'));
-  if(document.getElementById('courses-full')) renderCourses(document.getElementById('courses-full'));
-
-  const kb=['Income Tax Library','GST Library','TDS Library','Company Law','LLP Compliance','Trademark Guide','MSME Registration','Bookkeeping SOP'];
-  const kbGrid = document.getElementById('kb-grid');
-  if(kbGrid) {
-    kbGrid.innerHTML=kb.map(k=>`<div class="glass" style="padding:1.5rem;border-radius:var(--r2);text-align:center;cursor:pointer"><div style="font-size:1.8rem;margin-bottom:.75rem">📚</div><div class="s" style="font-weight:700;margin-bottom:.25rem">${k}</div><div style="font-size:.8rem;color:var(--txt2)">Expert guides & templates</div></div>`).join('');
-  }
-
-  const calcs=['💰 ITR Calculator','📊 GST Calculator','🏠 HRA Calculator','🏦 EMI Calculator','📈 Capital Gains','🧮 TDS Calculator','💼 Salary Breakup','🎯 SIP Calculator'];
-  const calcGrid = document.getElementById('calc-grid');
-  if(calcGrid) {
-    calcGrid.innerHTML=calcs.map(c=>`<div class="tool-card" onclick="showToast('${c.split(' ')[1]} - Coming Soon')"><div class="t-icon">${c.split(' ')[0]}</div><div class="t-name">${c.substring(2)}</div><div class="t-desc">Free calculator</div></div>`).join('');
-  }
-
-  // Add news category filter buttons
-  const cats=[...new Set(news.map(n=>n.cat))];
-  const catCont=document.getElementById('news-cats');
-  if(catCont){
-    catCont.innerHTML='<button class="btn btn-primary btn-sm" onclick="filterNews(this,\'all\')" >All</button>'+cats.map(c=>`<button class="btn btn-ghost btn-sm" onclick="filterNews(this,'${c}')">${c}</button>`).join('');
-  }
-  
-  console.log('✓ All sections initialized');
-}
-
-function filterNews(btn,cat){
-  document.querySelectorAll('#news-cats button').forEach(b=>b.className='btn btn-ghost btn-sm');
-  btn.className='btn btn-primary btn-sm';
-  const cont=document.getElementById('news-full');
-  const filtered=cat==='all'?news:news.filter(n=>n.cat===cat);
-  cont.innerHTML=filtered.map(n=>`
-    <div class="news-card">
-      <span class="n-cat">${n.cat}</span>
-      <div class="n-title">${n.title}</div>
-      <div class="n-desc">${n.desc}</div>
-      <div class="n-date"><i class="fas fa-calendar"></i> ${n.date}</div>
-    </div>
-  `).join('');
-}
-
-if(document.readyState==='loading'){
-  document.addEventListener('DOMContentLoaded', initRender);
-} else {
-  initRender();
-}
-
-// ═══ CACHE BUSTING ═══
-// Force refresh data on every page load
 window.addEventListener('load', () => {
-  // Clear all cached data
-  localStorage.removeItem('digicafe_cache');
-  // Reload news and services
-  setTimeout(() => {
-    const newsContainers = document.querySelectorAll('[id*="news"]');
-    newsContainers.forEach(cont => {
-      if(cont) renderNews(cont);
-    });
-    console.log('✓ Data refreshed - Latest version loaded');
-  }, 500);
-});
-
-// Auto-refresh every 5 minutes
-setInterval(() => {
-  console.log('🔄 Auto-refreshing data...');
-  initRender();
-}, 300000);
-
-// SCROLL NAV
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').style.boxShadow=window.scrollY>30?'0 4px 20px rgba(0,0,0,.5)':'none';
+  renderServices(document.getElementById('svc-home'));
+  renderNews(document.getElementById('news-home'));
+  
+  auth.onAuthStateChanged(user => {
+    if(user) {
+      showDashboard(user);
+    }
+  });
 });
 </script>
+
 </body>
 </html>
