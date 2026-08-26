@@ -163,6 +163,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
       <div class="admin-nav">
         <a onclick="showAdminPage('requests')"><i class="fas fa-tasks"></i> Requests</a>
       </div>
+      <h4>Tools</h4>
+      <div class="admin-nav">
+        <a href="https://automationcafe.in" target="_blank" rel="noopener" title="Opens automationcafe.in in a new tab — a separate desktop tool, not part of DigiCafe"><i class="fas fa-external-link-alt"></i> AutomationCafe Suite</a>
+      </div>
       <h4>Account</h4>
       <div class="admin-nav">
         <a onclick="adminSignOut()"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -298,19 +302,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
         
         <!-- FILTERS -->
         <div style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
-          <select id="status-filter" style="padding:.7rem 1rem;background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);border-radius:var(--r);font-weight:600;cursor:pointer">
+          <select id="status-filter" onchange="renderRequests()" style="padding:.7rem 1rem;background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);border-radius:var(--r);font-weight:600;cursor:pointer">
             <option value="">All Status</option>
-            <option value="pending">Pending</option>
-            <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
-            <option value="on-hold">On Hold</option>
+            <option value="Received">Received</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="On Hold">On Hold</option>
           </select>
-          <select id="service-filter" style="padding:.7rem 1rem;background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);border-radius:var(--r);font-weight:600;cursor:pointer">
+          <select id="service-filter" onchange="renderRequests()" style="padding:.7rem 1rem;background:var(--bg2);border:1.5px solid var(--bdr);color:var(--txt);border-radius:var(--r);font-weight:600;cursor:pointer">
             <option value="">All Services</option>
-            <option value="Income Tax">Income Tax</option>
-            <option value="GST">GST</option>
-            <option value="Company Reg">Company Registration</option>
-            <option value="TDS">TDS</option>
           </select>
         </div>
 
@@ -322,7 +322,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <th>Service</th>
               <th>Date</th>
               <th>Status</th>
-              <th>Documents</th>
+              <th>Urgency</th>
               <th>Actions</th>
             </tr></thead>
             <tbody id="requests-tbody">
@@ -341,7 +341,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-  import { getFirestore, collection, addDoc, deleteDoc, doc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, deleteDoc, doc, getDocs, updateDoc, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDcdR-ba5Lh-DfG-wuABRntQm1sSYSr3Kk",
@@ -365,6 +365,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
   window.fsDeleteDoc = deleteDoc;
   window.fsDoc = doc;
   window.fsServerTimestamp = serverTimestamp;
+  window.fsUpdateDoc = updateDoc;
+  window.fsQuery = query;
+  window.fsOrderBy = orderBy;
 
   function escapeHtml(str){
     return String(str ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -658,87 +661,115 @@ async function deleteAdminCompany(id) {
   }
 }
 
-// ═══ REQUEST MANAGEMENT ═══
-const mockRequests = [
-  {id:1, client:'Rahul Agarwal', email:'rahul@example.com', service:'Income Tax (ITR)', date:'15 Jan 2025', status:'pending', amount:'₹2,999'},
-  {id:2, client:'Priya Sharma', email:'priya@example.com', service:'GST Registration', date:'14 Jan 2025', status:'in-progress', amount:'₹3,499'},
-  {id:3, client:'Mukesh Kumar', email:'mukesh@example.com', service:'Company Registration', date:'13 Jan 2025', status:'completed', amount:'₹8,999'},
-  {id:4, client:'Anjali Singh', email:'anjali@example.com', service:'TDS Compliance', date:'12 Jan 2025', status:'pending', amount:'₹1,499'},
-  {id:5, client:'Arun Patel', email:'arun@example.com', service:'Trademark Registration', date:'11 Jan 2025', status:'on-hold', amount:'₹2,999'},
-];
+// ═══ REQUEST MANAGEMENT (real Firestore data) ═══
+let _allRequests = [];
 
-function loadRequests() {
+async function loadRequests() {
+  const tbody = document.getElementById('requests-tbody');
+  if (!window.db) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--txt3)">Firebase not ready yet — try again in a moment.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--txt3)">Loading…</td></tr>';
+
+  try {
+    const q = window.fsQuery(window.fsCollection(window.db, 'serviceRequests'), window.fsOrderBy('createdAt', 'desc'));
+    const snap = await window.fsGetDocs(q);
+    _allRequests = [];
+    snap.forEach(docSnap => _allRequests.push({ id: docSnap.id, ...docSnap.data() }));
+  } catch (err) {
+    console.error('Failed to load requests:', err);
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--red)">Failed to load: ${escapeHtml(err.message)}</td></tr>`;
+    return;
+  }
+
+  renderRequests();
+  populateServiceFilter();
+}
+
+function populateServiceFilter() {
+  const select = document.getElementById('service-filter');
+  const current = select.value;
+  const services = [...new Set(_allRequests.map(r => r.service || r.category).filter(Boolean))].sort();
+  select.innerHTML = '<option value="">All Services</option>' +
+    services.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+  select.value = current; // preserve selection across refreshes where possible
+}
+
+function renderRequests() {
   const tbody = document.getElementById('requests-tbody');
   const statusFilter = document.getElementById('status-filter').value;
   const serviceFilter = document.getElementById('service-filter').value;
-  
-  let filtered = mockRequests.filter(r => {
-    if(statusFilter && r.status !== statusFilter) return false;
-    if(serviceFilter && r.service !== serviceFilter) return false;
+
+  let filtered = _allRequests.filter(r => {
+    if (statusFilter && r.status !== statusFilter) return false;
+    if (serviceFilter && r.service !== serviceFilter) return false;
     return true;
   });
-  
-  if(filtered.length === 0) {
+
+  if (filtered.length === 0) {
     tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--txt3)">No requests found</td></tr>';
     return;
   }
-  
-  tbody.innerHTML = filtered.map(req => `
+
+  tbody.innerHTML = filtered.map(req => {
+    let dateStr = '-';
+    if (req.createdAt && typeof req.createdAt.toDate === 'function') {
+      dateStr = req.createdAt.toDate().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+    const status = req.status || 'Received';
+    return `
     <tr>
-      <td><strong>${req.client}</strong><br><span style="font-size:.75rem;color:var(--txt3)">${req.email}</span></td>
-      <td>${req.service}</td>
-      <td>${req.date}</td>
+      <td><strong>${escapeHtml(req.name || 'Unknown')}</strong><br><span style="font-size:.75rem;color:var(--txt3)">${escapeHtml(req.userEmail || req.email || '-')}</span></td>
+      <td>${escapeHtml(req.service || req.category || '-')}</td>
+      <td>${dateStr}</td>
       <td>
-        <select onchange="updateRequestStatus(${req.id}, this.value)" style="padding:.4rem .6rem;background:var(--bg2);border:1px solid var(--bdr);color:var(--txt);border-radius:6px;font-size:.8rem;font-weight:700;cursor:pointer;min-width:110px">
-          <option value="pending" ${req.status==='pending'?'selected':''}>⏳ Pending</option>
-          <option value="in-progress" ${req.status==='in-progress'?'selected':''}>⚙️ In Progress</option>
-          <option value="completed" ${req.status==='completed'?'selected':''}>✅ Completed</option>
-          <option value="on-hold" ${req.status==='on-hold'?'selected':''}>⏸️ On Hold</option>
+        <select onchange="updateRequestStatus('${req.id}', this.value)" style="padding:.4rem .6rem;background:var(--bg2);border:1px solid var(--bdr);color:var(--txt);border-radius:6px;font-size:.8rem;font-weight:700;cursor:pointer;min-width:110px">
+          <option value="Received" ${status==='Received'?'selected':''}>⏳ Received</option>
+          <option value="In Progress" ${status==='In Progress'?'selected':''}>⚙️ In Progress</option>
+          <option value="Completed" ${status==='Completed'?'selected':''}>✅ Completed</option>
+          <option value="On Hold" ${status==='On Hold'?'selected':''}>⏸️ On Hold</option>
         </select>
       </td>
-      <td><button class="btn btn-sm" style="background:rgba(59,130,246,.2);color:var(--blue2);border:none;cursor:pointer" onclick="showDocuments(${req.id})"><i class="fas fa-file"></i> Docs</button></td>
+      <td><span style="font-size:.75rem;color:var(--txt3)">${escapeHtml(req.urgency || '-')}</span></td>
       <td>
-        <button class="btn btn-sm" style="background:rgba(59,130,246,.2);color:var(--blue2);border:none;cursor:pointer;margin-right:.25rem" onclick="uploadDocument(${req.id})"><i class="fas fa-upload"></i></button>
-        <button class="btn btn-sm" style="background:rgba(6,214,160,.2);color:var(--teal);border:none;cursor:pointer" onclick="downloadDocument(${req.id})"><i class="fas fa-download"></i></button>
+        <button class="btn btn-sm" style="background:rgba(59,130,246,.2);color:var(--blue2);border:none;cursor:pointer" onclick="showRequestDetails('${req.id}')"><i class="fas fa-eye"></i> View</button>
       </td>
     </tr>
-  `).join('');
+  `;
+  }).join('');
 }
 
-function updateRequestStatus(id, status) {
-  const req = mockRequests.find(r => r.id === id);
-  if(req) {
-    req.status = status;
-    showToast(`✓ Request #${id} status updated to: ${status}`, 'success');
-    loadRequests();
+async function updateRequestStatus(id, status) {
+  try {
+    await window.fsUpdateDoc(window.fsDoc(window.db, 'serviceRequests', id), {
+      status,
+      updatedAt: window.fsServerTimestamp()
+    });
+    const req = _allRequests.find(r => r.id === id);
+    if (req) req.status = status;
+    showToast(`✓ Status updated to: ${status}`, 'success');
+  } catch (err) {
+    console.error('Status update failed:', err);
+    showToast('⚠ Failed to update status: ' + err.message, 'error');
+    loadRequests(); // reload to reflect the real state, since the dropdown may now be wrong
   }
 }
 
-function uploadDocument(id) {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.multiple = true;
-  input.onchange = (e) => {
-    const files = e.target.files;
-    if(files.length > 0) {
-      const fileNames = Array.from(files).map(f => f.name).join(', ');
-      showToast(`✓ Uploaded ${files.length} file(s) for request #${id}: ${fileNames}`, 'success');
-    }
-  };
-  input.click();
-}
-
-function downloadDocument(id) {
-  const req = mockRequests.find(r => r.id === id);
-  if(req) {
-    showToast(`✓ Downloading documents for: ${req.client}`, 'success');
-    // In real app: create zip or download specific documents
-  }
-}
-
-function showDocuments(id) {
-  const req = mockRequests.find(r => r.id === id);
-  showToast(`📄 ${req.client} has uploaded: ITR_2024.pdf, PAN_Card.jpg (2 files)`, 'info');
+function showRequestDetails(id) {
+  const req = _allRequests.find(r => r.id === id);
+  if (!req) return;
+  const lines = [
+    `Name: ${req.name || '-'}`,
+    `Mobile: ${req.mobile || '-'}`,
+    `Email: ${req.userEmail || req.email || '-'}`,
+    `Category: ${req.category || '-'}`,
+    `Service: ${req.service || '-'}`,
+    `Urgency: ${req.urgency || '-'}`,
+    `Notes: ${req.notes || '-'}`
+  ];
+  alert(lines.join('\n'));
 }
 
 function refreshRequests() {
