@@ -309,7 +309,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   window.queueAdminEmail = async function(subject, text) {
     // Compatible with Firebase Trigger Email extension when configured to watch the `mail` collection.
     return addDoc(collection(db, 'mail'), {
-      to: ['vikashpathak.mgmt@gmail.com'],
+      to: ['digicafe.admin@gmail.com'],
       message: { subject, text },
       createdAt: serverTimestamp()
     });
@@ -352,7 +352,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   // Only this email can add/delete News from the in-browser Admin panel.
   // This must ALSO be enforced in your Firestore Security Rules (see chat) —
   // this constant alone does not restrict access, it only shows/hides the UI.
-  const ADMIN_EMAIL = 'vikashpathak.mgmt@gmail.com';
+  const ADMIN_EMAIL = 'digicafe.admin@gmail.com';
   window._isAdmin = false;
   const provider = new GoogleAuthProvider();
   provider.addScope('email');
@@ -1592,7 +1592,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
     </div>
     <div class="foot-bottom">
       <p>© 2025 DigiCafe Compliance & Digital Solutions · MSME: UDYAM-KR-02-0041919</p>
-      <p>By Vikash Pathak · Bengaluru, India · <a href="mailto:vikashpathak.mgmt@gmail.com" style="color:var(--blue2)">vikashpathak.mgmt@gmail.com</a> · <a onclick="showPage('admin');showAdmin('news')" style="color:var(--txt3);cursor:pointer" title="Admin sign-in required">Admin</a></p>
+      <p>By Vikash Pathak · Bengaluru, India · <a href="mailto:digicafe.admin@gmail.com" style="color:var(--blue2)">digicafe.admin@gmail.com</a> · <a onclick="showPage('admin');showAdmin('news')" style="color:var(--txt3);cursor:pointer" title="Admin sign-in required">Admin</a></p>
     </div>
   </div>
 </footer>
