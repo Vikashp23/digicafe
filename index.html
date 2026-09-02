@@ -103,6 +103,27 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 
 /* SERVICES */
 .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
+
+/* SERVICE SLIDER (homepage) */
+.svc-slider-wrap{position:relative}
+.svc-slider{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.5rem .25rem 1.25rem;scrollbar-width:thin}
+.svc-slider::-webkit-scrollbar{height:8px}
+.svc-slider::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px}
+.svc-slider .svc-card{flex:0 0 260px;scroll-snap-align:start}
+.svc-slider-nav{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.5rem}
+.svc-slider-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--bdr);background:var(--surf);color:var(--txt);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.svc-slider-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.svc-cat-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.svc-cat-pill{padding:.4rem .9rem;border-radius:999px;border:1px solid var(--bdr);background:var(--surf);color:var(--txt2);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.svc-cat-pill:hover{border-color:var(--blue)}
+.svc-cat-pill.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* SERVICE DETAILS MODAL */
+.service-modal-overlay{position:fixed;inset:0;background:rgba(7,9,26,0.75);backdrop-filter:blur(4px);z-index:9999;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.service-modal-overlay.open{display:flex}
+.service-modal-box{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:2rem;max-width:480px;width:100%;max-height:85vh;overflow-y:auto;position:relative}
+.service-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--txt3);font-size:1.8rem;line-height:1;cursor:pointer}
+.service-modal-close:hover{color:var(--txt)}
 .svc-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r2);padding:1.5rem;transition:all .3s;cursor:pointer}
 .svc-card:hover{border-color:var(--blue);background:var(--surf2);transform:translateY(-3px)}
 .s-icon{font-size:2rem;margin-bottom:.75rem}
@@ -736,10 +757,18 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   <section class="sec" style="background:var(--bg2)">
     <div class="c">
       <div class="sh">
-        <span class="badge badge-teal">120+ Services</span>
+        <span class="badge badge-teal" id="svc-count-badge">63+ Services</span>
         <h2>Complete <span class="g-text">Compliance Solutions</span></h2>
+        <p>Click any service to see documents needed and the relevant government portal.</p>
       </div>
-      <div class="svc-grid" id="svc-home"></div>
+      <div class="svc-cat-pills" id="svc-cat-pills"></div>
+      <div class="svc-slider-wrap">
+        <div class="svc-slider" id="svc-home"></div>
+        <div class="svc-slider-nav">
+          <button class="svc-slider-btn" onclick="scrollSvcSlider(-1)" aria-label="Scroll left"><i class="fas fa-chevron-left"></i></button>
+          <button class="svc-slider-btn" onclick="scrollSvcSlider(1)" aria-label="Scroll right"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -779,7 +808,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
         <div style="flex:1;min-width:240px">
           <h3 style="font-weight:800;margin-bottom:.4rem">Meet the Founder</h3>
           <p style="color:var(--txt3);font-size:.9rem;margin-bottom:.75rem">I'm Vikash Pathak, founder of DigiCafe — also a finance &amp; accounts professional. See my personal freelance practice: GST, bookkeeping, TDS, ITR and reconciliation, priced per service.</p>
-          <a href="https://vikashp23.github.io/finance-portfolio/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">View My Profile <i class="fas fa-arrow-up-right-from-square"></i></a>
+          <a href="founder/index.html" target="_blank" rel="noopener" class="btn btn-outline btn-sm">View My Profile <i class="fas fa-arrow-up-right-from-square"></i></a>
         </div>
       </div>
       <div class="svc-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
@@ -793,7 +822,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
         <div class="glass" style="padding:1.75rem;border-radius:var(--r2)">
           <h3 style="font-weight:800;margin-bottom:.4rem">🎨 Vikash Builds AI</h3>
           <p style="color:var(--txt3);font-size:.85rem;margin-bottom:.75rem">A creative portfolio of AI-generated visuals, cinematic concepts and digital storytelling — AI art, productivity aesthetics, and more.</p>
-          <a href="https://vikashp23.github.io/vikash-builds-ai/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Explore Platform <i class="fas fa-arrow-up-right-from-square"></i></a>
+          <a href="vikash-builds-ai/index.html" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Explore Platform <i class="fas fa-arrow-up-right-from-square"></i></a>
         </div>
 
       </div>
@@ -863,7 +892,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
   <div class="c">
     <div class="sh">
       <h2>All <span class="g-text">Services</span></h2>
-      <p>120+ compliance, tax, and government services in one platform.</p>
+      <p>63+ compliance, tax, and government services in one platform.</p>
     </div>
     <div class="svc-grid" id="svc-full"></div>
   </div>
@@ -1085,7 +1114,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       <div style="margin-top:1.5rem;padding:1.25rem;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);">
         <div style="font-size:.8rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem">Related Platforms</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem">
-          <a href="https://vikashp23.github.io/EduMatch/" target="_blank" rel="noopener" style="display:block;padding:1rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);text-decoration:none">
+          <a href="edumatch/index.html" target="_blank" rel="noopener" style="display:block;padding:1rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);text-decoration:none">
             <div style="font-weight:700;color:var(--txt)">🎓 EduMatch <i class="fas fa-arrow-up-right-from-square" style="font-size:.7rem;color:var(--txt3)"></i></div>
             <div style="font-size:.8rem;color:var(--txt3);margin-top:.3rem">Find or become a tutor — home &amp; online tuition, Classes 1–10.</div>
           </a>
@@ -1159,7 +1188,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
       </div>
       <div style="margin-top:1.5rem;padding:1.25rem;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);">
         <div style="font-size:.8rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem">Related Platform</div>
-        <a href="https://vikashp23.github.io/Digitravel/" target="_blank" rel="noopener" style="display:block;max-width:340px;padding:1rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);text-decoration:none">
+        <a href="digitravel/index.html" target="_blank" rel="noopener" style="display:block;max-width:340px;padding:1rem;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);text-decoration:none">
           <div style="font-weight:700;color:var(--txt)">🗺️ DigiTravel <i class="fas fa-arrow-up-right-from-square" style="font-size:.7rem;color:var(--txt3)"></i></div>
           <div style="font-size:.8rem;color:var(--txt3);margin-top:.3rem">India travel-planning platform — 36 states, itineraries, group &amp; budget planners.</div>
         </a>
@@ -1691,15 +1720,70 @@ function getNewsData(){
   return news;
 }
 
-const services = [
-  {icon:'💰',name:'Income Tax',desc:'ITR filing, refund tracking, tax planning, notice reply',price:'₹999+'},
-  {icon:'📊',name:'GST Registration',desc:'GSTIN approval, GSTR filing, reconciliation, audit',price:'₹1,999+'},
-  {icon:'🏢',name:'Company Reg',desc:'Pvt Ltd, LLP, OPC, name approval, DIN services',price:'₹4,999+'},
-  {icon:'📋',name:'TDS Returns',desc:'24Q/26Q filing, Form 16, challan verification',price:'₹1,499+'},
-  {icon:'™️',name:'Trademark Reg',desc:'Search, filing, objection reply, renewal',price:'₹2,999+'},
-  {icon:'🔐',name:'Digital Signature',desc:'Class 3 DSC, renewal, USB token, installation',price:'₹1,299+'},
-  {icon:'🚀',name:'MSME/Startup',desc:'Udyam registration, Startup India, FSSAI',price:'₹1,499+'},
-  {icon:'👤',name:'PAN/TAN/Aadhaar',desc:'New PAN, TAN registration, Aadhaar update',price:'₹499+'},
+const allServices = [
+  {icon:'🧾',name:'ITR Filing Assistance',desc:'Help preparing and filing your Income Tax Return correctly and on time.',category:'Income Tax & TDS Assistance',price:'Price on complexity',statLabel:'Expert Assistance',docs:['PAN card','Aadhaar card','Form 16 (if salaried)','Bank statements','Investment/deduction proofs (80C, 80D, etc.)'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
+  {icon:'📄',name:'AIS & Form 26AS Review',desc:'Cross-checking your AIS and Form 26AS for accuracy before filing.',category:'Income Tax & TDS Assistance',price:'Starting from ₹99',statLabel:'Online Service',docs:['PAN card','Login credentials for e-filing portal'],portalLabel:'Income Tax e-Filing Portal (AIS/TIS section)',portalUrl:'https://www.incometax.gov.in'},
+  {icon:'🔄',name:'TDS Credit Reconciliation',desc:'Matching TDS deducted with credit reflecting in your tax records.',category:'Income Tax & TDS Assistance',price:'Price on Request',statLabel:'Expert Assistance',docs:['PAN card','Form 26AS','TDS certificates (Form 16/16A)','Bank statements showing deductions'],portalLabel:'TRACES Portal',portalUrl:'https://www.tdscpc.gov.in'},
+  {icon:'🧷',name:'Form 16 / Form 16A Assistance',desc:'Help understanding, organising and using your Form 16 / 16A.',category:'Income Tax & TDS Assistance',price:'Starting from ₹99',statLabel:'Available Now',docs:['PAN card','Employer/deductor details','Salary slips (for Form 16)'],portalLabel:'TRACES Portal',portalUrl:'https://www.tdscpc.gov.in'},
+  {icon:'🔍',name:'TDS Mismatch Investigation',desc:'Identifying reasons for TDS mismatches and the corrective steps needed.',category:'Income Tax & TDS Assistance',price:'Price on Request',statLabel:'Expert Assistance',docs:['Form 26AS','TDS certificates','Bank statements','Payment challans if available'],portalLabel:'TRACES Portal',portalUrl:'https://www.tdscpc.gov.in'},
+  {icon:'💸',name:'Income Tax Refund Assistance',desc:'Guidance on tracking, follow-up and resolving refund delays.',category:'Income Tax & TDS Assistance',price:'Price on Request',statLabel:'Online Service',docs:['PAN card','Filed ITR acknowledgement','Bank account details (pre-validated)'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
+  {icon:'⚖️',name:'Old vs New Tax Regime Comparison',desc:'Comparing both regimes against your income to see what suits you better.',category:'Income Tax & TDS Assistance',price:'Starting from ₹99',statLabel:'Available Now',docs:['Salary slips or income details','Investment/deduction details'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
+  {icon:'📝',name:'Revised Return Assistance',desc:'Support in correcting and refiling a revised Income Tax Return.',category:'Income Tax & TDS Assistance',price:'Price on complexity',statLabel:'Expert Assistance',docs:['Original ITR acknowledgement','PAN card','Corrected income/deduction details'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
+  {icon:'✅',name:'Tax Document Checklist',desc:'A ready checklist of documents required for smooth ITR filing.',category:'Income Tax & TDS Assistance',price:'Price on Request',statLabel:'Available Now',docs:['PAN card','Aadhaar card','Income and investment proofs (varies by your situation)'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
+  {icon:'🏛️',name:'GST Registration',desc:'Assistance with new GST registration and documentation.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['PAN card','Aadhaar card','Business address proof','Bank account statement/cancelled cheque','Passport-size photo'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
+  {icon:'📑',name:'GST Return Filing Assistance',desc:'Help preparing and filing periodic GST returns.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['GSTIN login credentials','Sales and purchase invoices','GSTR-2B data'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
+  {icon:'🔁',name:'GSTR-2B Reconciliation',desc:'Matching purchase records with GSTR-2B for accurate ITC claims.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Online Service',docs:['Purchase register','GSTR-2B statement','Vendor invoices'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
+  {icon:'📨',name:'GST Notice Document Assistance',desc:'Organising documents needed to respond to a GST notice.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['Copy of the notice','Relevant invoices/returns referenced in the notice','GSTIN login access'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
+  {icon:'🏭',name:'Udyam / MSME Registration',desc:'Guidance and filing support for Udyam / MSME registration.',category:'GST & Business Compliance',price:'Starting from ₹99',statLabel:'Available Now',docs:['Aadhaar card (proprietor/partner/director)','PAN card','Business address and activity details'],portalLabel:'Udyam Registration Portal',portalUrl:'https://udyamregistration.gov.in'},
+  {icon:'🍽️',name:'FSSAI Registration / Licence Assistance',desc:'Help with FSSAI application, documents and renewals.',category:'GST & Business Compliance',price:'Starting from ₹99',statLabel:'Online Service',docs:['PAN card','Aadhaar card','Business address proof','Photo ID of proprietor/partners','Food category/business details'],portalLabel:'FoSCoS (FSSAI) Portal',portalUrl:'https://foscos.fssai.gov.in'},
+  {icon:'🏪',name:'Trade Licence Assistance',desc:'Guidance on applying for and renewing a local trade licence.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Online Service',docs:['Business address proof','Identity proof','Property tax receipt/NOC (varies by local body)'],portalLabel:null,portalUrl:null},
+  {icon:'🏢',name:'Company / Firm Registration Coordination',desc:'Coordinating paperwork for Pvt Ltd / LLP / Firm registration.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['PAN & Aadhaar of directors/partners','Digital Signature Certificate (DSC)','Registered office address proof','MOA/AOA or partnership deed'],portalLabel:'MCA Portal',portalUrl:'https://www.mca.gov.in'},
+  {icon:'🧩',name:'Business Compliance Support',desc:'General ongoing help staying on top of regulatory filings.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['Varies by which specific filing is due — we\'ll confirm with you'],portalLabel:null,portalUrl:null},
+  {icon:'📚',name:'Bookkeeping',desc:'Day-to-day recording of financial transactions.',category:'Accounting & Tally Services',price:'Price based on volume',statLabel:'Online Service',docs:['Sales/purchase records','Bank statements','Expense receipts'],portalLabel:null,portalUrl:null},
+  {icon:'🏦',name:'Bank Statement Data Preparation',desc:'Converting bank statements into usable, organised data.',category:'Accounting & Tally Services',price:'Starting from ₹99',statLabel:'Available Now',docs:['Bank statements (PDF/Excel/scanned)'],portalLabel:null,portalUrl:null},
+  {icon:'🔗',name:'Bank Reconciliation',desc:'Matching book entries with bank statement transactions.',category:'Accounting & Tally Services',price:'Price based on volume',statLabel:'Online Service',docs:['Bank statements','Cash book / ledger records'],portalLabel:null,portalUrl:null},
+  {icon:'📒',name:'Ledger Reconciliation',desc:'Reviewing and reconciling ledger balances for accuracy.',category:'Accounting & Tally Services',price:'Price based on volume',statLabel:'Online Service',docs:['Ledger extracts','Supporting invoices/vouchers'],portalLabel:null,portalUrl:null},
+  {icon:'🤝',name:'Customer / Vendor Reconciliation',desc:'Matching outstanding balances with customers and vendors.',category:'Accounting & Tally Services',price:'Price based on volume',statLabel:'Online Service',docs:['Customer/vendor ledgers','Outstanding invoice list'],portalLabel:null,portalUrl:null},
+  {icon:'🧮',name:'Tally Data Entry Support',desc:'Data entry support for Tally-based accounting.',category:'Accounting & Tally Services',price:'Price based on volume',statLabel:'Available Now',docs:['Source documents (invoices, receipts, bank statements)'],portalLabel:null,portalUrl:null},
+  {icon:'✏️',name:'Accounting Entry Assistance',desc:'Help passing accurate day-to-day accounting entries.',category:'Accounting & Tally Services',price:'Price based on volume',statLabel:'Online Service',docs:['Transaction details/vouchers'],portalLabel:null,portalUrl:null},
+  {icon:'📊',name:'Excel Data Cleanup',desc:'Cleaning, formatting and organising messy Excel data.',category:'Accounting & Tally Services',price:'Starting from ₹99',statLabel:'Available Now',docs:['The Excel file(s) needing cleanup'],portalLabel:null,portalUrl:null},
+  {icon:'📈',name:'P&L and Balance Sheet Preparation Support',desc:'Support preparing draft P&L and Balance Sheet statements.',category:'Accounting & Tally Services',price:'Price on Request',statLabel:'Expert Assistance',docs:['Trial balance','Ledger extracts','Supporting schedules'],portalLabel:null,portalUrl:null},
+  {icon:'📄',name:'Professional Resume / CV Preparation',desc:'A polished, professional resume tailored to your profile.',category:'Job & Career Assistance',price:'Starting from ₹499',statLabel:'Available Now',docs:['Your work history/education details','Existing resume (if any)'],portalLabel:null,portalUrl:null},
+  {icon:'🤖',name:'ATS-Friendly Resume Support',desc:'Formatting your resume to pass applicant tracking systems.',category:'Job & Career Assistance',price:'Starting from ₹499',statLabel:'Online Service',docs:['Existing resume','Target job description (if available)'],portalLabel:null,portalUrl:null},
+  {icon:'💼',name:'LinkedIn Profile Improvement',desc:'Improving your LinkedIn profile to stand out to recruiters.',category:'Job & Career Assistance',price:'Price on Request',statLabel:'Online Service',docs:['LinkedIn profile access/screenshots','Resume or work history'],portalLabel:null,portalUrl:null},
+  {icon:'📤',name:'Job Application Assistance',desc:'Help completing and submitting job applications.',category:'Job & Career Assistance',price:'Price on Request',statLabel:'Available Now',docs:['Resume','Job posting details','Any required application documents'],portalLabel:null,portalUrl:null},
+  {icon:'🎤',name:'Interview Preparation',desc:'Guided practice and tips ahead of your interview.',category:'Job & Career Assistance',price:'Price on Request',statLabel:'Expert Assistance',docs:['Job description','Your resume'],portalLabel:null,portalUrl:null},
+  {icon:'🔎',name:'Job Description vs Profile Comparison',desc:'Checking how well your profile matches a job description.',category:'Job & Career Assistance',price:'Price on Request',statLabel:'Online Service',docs:['Job description','Your resume/profile'],portalLabel:null,portalUrl:null},
+  {icon:'💰',name:'Salary and CTC Understanding',desc:'Breaking down an offer\'s CTC into what you\'ll actually take home.',category:'Job & Career Assistance',price:'Price on Request',statLabel:'Online Service',docs:['Offer letter or CTC breakup document'],portalLabel:null,portalUrl:null},
+  {icon:'✉️',name:'Professional Email Drafting',desc:'Drafting clear, professional emails for job or work needs.',category:'Job & Career Assistance',price:'Starting from ₹99',statLabel:'Available Now',docs:['Context/details of what the email needs to cover'],portalLabel:null,portalUrl:null},
+  {icon:'🧭',name:'Career Profile Review',desc:'An overall review of your career profile with suggestions.',category:'Job & Career Assistance',price:'Price on Request',statLabel:'Expert Assistance',docs:['Resume','LinkedIn profile (if available)'],portalLabel:null,portalUrl:null},
+  {icon:'📎',name:'PDF Merge / Split / Compress Assistance',desc:'Combining, splitting or shrinking PDF files as needed.',category:'Digital Document Services',price:'Starting from ₹99',statLabel:'Available Now',docs:['The PDF file(s) to be processed'],portalLabel:null,portalUrl:null},
+  {icon:'🔄',name:'PDF to Word / Excel Conversion',desc:'Converting PDF files into editable Word or Excel formats.',category:'Digital Document Services',price:'Starting from ₹99',statLabel:'Online Service',docs:['The source PDF file'],portalLabel:null,portalUrl:null},
+  {icon:'📊',name:'Excel Data Formatting and Cleanup',desc:'Cleaning up and formatting Excel sheets for clarity.',category:'Digital Document Services',price:'Starting from ₹99',statLabel:'Available Now',docs:['The Excel file needing formatting'],portalLabel:null,portalUrl:null},
+  {icon:'🖥️',name:'Online Application Form Assistance',desc:'Help filling out online government or private forms.',category:'Digital Document Services',price:'Starting from ₹99',statLabel:'Expert Assistance',docs:['Details required by that specific form (varies by portal)'],portalLabel:null,portalUrl:null},
+  {icon:'🗂️',name:'Document Organisation',desc:'Organising your documents into a clear, usable structure.',category:'Digital Document Services',price:'Starting from ₹99',statLabel:'Online Service',docs:['The documents to be organised'],portalLabel:null,portalUrl:null},
+  {icon:'🧾',name:'Digital Document Preparation',desc:'Preparing digital copies of your documents, ready to submit.',category:'Digital Document Services',price:'Starting from ₹99',statLabel:'Available Now',docs:['Physical documents or existing scans'],portalLabel:null,portalUrl:null},
+  {icon:'⌨️',name:'Basic Data Entry Assistance',desc:'Simple data entry support for small day-to-day tasks.',category:'Digital Document Services',price:'Starting from ₹99',statLabel:'Online Service',docs:['Source data (handwritten, printed, or digital)'],portalLabel:null,portalUrl:null},
+  {icon:'📝',name:'SIR / Enumeration Form Assistance',desc:'Help filling out Special Intensive Revision / enumeration forms.',category:'SIR & Voter Service Assistance',price:'Starting from ₹99',statLabel:'Available Now',docs:['Aadhaar card','Existing Voter ID (EPIC) if available','Address proof'],portalLabel:'Voters\' Service Portal (ECI)',portalUrl:'https://voters.eci.gov.in'},
+  {icon:'🔍',name:'Voter Record Search Assistance',desc:'Help locating your existing voter record.',category:'SIR & Voter Service Assistance',price:'Starting from ₹99',statLabel:'Online Service',docs:['EPIC number (if known)','Full name, date of birth, and address'],portalLabel:'Voters\' Service Portal (ECI)',portalUrl:'https://voters.eci.gov.in'},
+  {icon:'🗳️',name:'New Voter Registration Guidance',desc:'Step-by-step guidance for first-time voter registration.',category:'SIR & Voter Service Assistance',price:'Starting from ₹99',statLabel:'Available Now',docs:['Aadhaar card','Passport-size photo','Age and address proof'],portalLabel:'Voters\' Service Portal (ECI)',portalUrl:'https://voters.eci.gov.in'},
+  {icon:'✏️',name:'Voter Details Correction Assistance',desc:'Help correcting errors in your existing voter details.',category:'SIR & Voter Service Assistance',price:'Starting from ₹99',statLabel:'Online Service',docs:['Existing Voter ID (EPIC)','Proof supporting the correction (e.g. Aadhaar for name/DOB)'],portalLabel:'Voters\' Service Portal (ECI)',portalUrl:'https://voters.eci.gov.in'},
+  {icon:'📍',name:'Address Change / Shifting Assistance',desc:'Guidance when updating your voter address after shifting.',category:'SIR & Voter Service Assistance',price:'Starting from ₹99',statLabel:'Online Service',docs:['Existing Voter ID (EPIC)','New address proof'],portalLabel:'Voters\' Service Portal (ECI)',portalUrl:'https://voters.eci.gov.in'},
+  {icon:'📤',name:'Document Upload Assistance',desc:'Help scanning and uploading the required supporting documents.',category:'SIR & Voter Service Assistance',price:'Starting from ₹99',statLabel:'Available Now',docs:['Scanned copies of the required supporting documents'],portalLabel:'Voters\' Service Portal (ECI)',portalUrl:'https://voters.eci.gov.in'},
+  {icon:'📊',name:'Application Status Tracking Guidance',desc:'Help checking and understanding your application status.',category:'SIR & Voter Service Assistance',price:'Starting from ₹99',statLabel:'Online Service',docs:['Application reference ID'],portalLabel:'Voters\' Service Portal (ECI)',portalUrl:'https://voters.eci.gov.in'},
+  {icon:'✈️',name:'Flight Booking Assistance',desc:'Help finding and booking suitable flight options.',category:'Travel Assistance',price:'Price on Request',statLabel:'Online Service',docs:['Travel dates','Passenger ID proof'],portalLabel:null,portalUrl:null},
+  {icon:'🏨',name:'Hotel Booking Assistance',desc:'Help finding and booking hotels for your trip.',category:'Travel Assistance',price:'Price on Request',statLabel:'Online Service',docs:['Travel dates','Guest ID proof'],portalLabel:null,portalUrl:null},
+  {icon:'🚫',name:'Cancellation Guidance',desc:'Guidance on cancelling flight or hotel bookings.',category:'Travel Assistance',price:'Price on Request',statLabel:'Online Service',docs:['Booking confirmation/reference number'],portalLabel:null,portalUrl:null},
+  {icon:'💵',name:'Refund Follow-up Assistance',desc:'Following up on pending travel refunds on your behalf.',category:'Travel Assistance',price:'Price on Request',statLabel:'Expert Assistance',docs:['Booking reference','Payment proof'],portalLabel:null,portalUrl:null},
+  {icon:'🗺️',name:'Travel Itinerary Preparation',desc:'Putting together a clear day-by-day travel itinerary.',category:'Travel Assistance',price:'Price on Request',statLabel:'Available Now',docs:['Travel dates','Destinations and preferences'],portalLabel:null,portalUrl:null},
+  {icon:'🧾',name:'Booking Reconciliation Support',desc:'Checking booking confirmations and charges for accuracy.',category:'Travel Assistance',price:'Price on Request',statLabel:'Online Service',docs:['Booking confirmations','Payment receipts'],portalLabel:null,portalUrl:null},
+  {icon:'🩺',name:'Health Insurance Requirement Assessment',desc:'General discussion to understand your health cover needs.',category:'Insurance Guidance & Expert Connect',price:'Price on Request',statLabel:'Online Service',docs:['Basic family/health details (self-reported)'],portalLabel:null,portalUrl:null},
+  {icon:'📋',name:'Policy Feature Comparison Assistance',desc:'Comparing publicly available features across policies.',category:'Insurance Guidance & Expert Connect',price:'Price on Request',statLabel:'Online Service',docs:['Policy documents/brochures you\'re comparing'],portalLabel:null,portalUrl:null},
+  {icon:'👨‍👩‍👧‍👦',name:'Family Health Insurance Guidance',desc:'General guidance while considering a family floater plan.',category:'Insurance Guidance & Expert Connect',price:'Price on Request',statLabel:'Online Service',docs:['Family member ages and any existing conditions (self-reported)'],portalLabel:null,portalUrl:null},
+  {icon:'⏳',name:'Understanding Waiting Periods',desc:'Explaining how waiting periods typically work in policies.',category:'Insurance Guidance & Expert Connect',price:'Price on Request',statLabel:'Online Service',docs:['The policy document in question'],portalLabel:null,portalUrl:null},
+  {icon:'🏥',name:'Understanding Co-payment and Room Rent Limits',desc:'Explaining common co-payment and room-rent clauses.',category:'Insurance Guidance & Expert Connect',price:'Price on Request',statLabel:'Online Service',docs:['The policy document in question'],portalLabel:null,portalUrl:null},
+  {icon:'📁',name:'Claim Process Guidance',desc:'General guidance on the typical insurance claim process.',category:'Insurance Guidance & Expert Connect',price:'Price on Request',statLabel:'Online Service',docs:['Policy document','Hospital/treatment bills (if claim already in progress)'],portalLabel:'IRDAI (Regulator Reference)',portalUrl:'https://www.irdai.gov.in'},
+  {icon:'🧑‍💼',name:'Connect with an Authorised Insurance Expert',desc:'We connect you with a licensed/authorised insurance professional.',category:'Insurance Guidance & Expert Connect',price:'Price on Request',statLabel:'Expert Assistance',docs:['Your requirement details'],portalLabel:null,portalUrl:null},
 ];
 
 const aiTools = [
@@ -1849,14 +1933,84 @@ function renderNews(cont){
 }
 
 function renderServices(cont){
-  cont.innerHTML=services.map(s=>`
-    <div class="svc-card">
+  cont.innerHTML=allServices.map((s,i)=>`
+    <div class="svc-card" onclick="openServiceModal(${i})" style="cursor:pointer">
       <div class="s-icon">${s.icon}</div>
       <div class="s-title">${s.name}</div>
       <div class="s-desc">${s.desc}</div>
-      <div class="s-price">${s.price}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.5rem">
+        <span class="s-price">${s.price}</span>
+        <span style="font-size:.78rem;color:var(--blue2)">View details →</span>
+      </div>
     </div>
   `).join('');
+}
+
+function openServiceModal(i){
+  const s = allServices[i];
+  const modal = document.getElementById('service-modal');
+  document.getElementById('sm-icon').textContent = s.icon;
+  document.getElementById('sm-name').textContent = s.name;
+  document.getElementById('sm-category').textContent = s.category;
+  document.getElementById('sm-desc').textContent = s.desc;
+  document.getElementById('sm-price').textContent = s.price + ' · ' + s.statLabel;
+  document.getElementById('sm-docs').innerHTML = s.docs.map(d=>`<li>${d}</li>`).join('');
+  const portalWrap = document.getElementById('sm-portal-wrap');
+  if(s.portalUrl){
+    portalWrap.innerHTML = `<a href="${s.portalUrl}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">🔗 ${s.portalLabel} <i class="fas fa-arrow-up-right-from-square"></i></a>`;
+  } else {
+    portalWrap.innerHTML = `<span style="font-size:.85rem;color:var(--txt3)">This is a private/professional service — no single government portal applies.</span>`;
+  }
+  modal.classList.add('open');
+}
+function closeServiceModal(){
+  document.getElementById('service-modal').classList.remove('open');
+}
+
+// ═══ HOMEPAGE SERVICE SLIDER ═══
+let _svcActiveCat = 'all';
+
+function renderServiceSlider(){
+  const badge = document.getElementById('svc-count-badge');
+  if(badge) badge.textContent = allServices.length + '+ Services';
+
+  // Category pills, built from whatever categories actually exist in the data
+  const cats = [...new Set(allServices.map(s=>s.category))];
+  const pillsCont = document.getElementById('svc-cat-pills');
+  pillsCont.innerHTML = ['all', ...cats].map(c =>
+    `<button class="svc-cat-pill${c===_svcActiveCat?' active':''}" onclick="filterSvcSlider('${c.replace(/'/g,"\\'")}')">${c==='all' ? 'All Services' : c}</button>`
+  ).join('');
+
+  renderSliderCards();
+}
+
+function filterSvcSlider(cat){
+  _svcActiveCat = cat;
+  document.querySelectorAll('.svc-cat-pill').forEach(p=>p.classList.remove('active'));
+  event.target.classList.add('active');
+  renderSliderCards();
+}
+
+function renderSliderCards(){
+  const cont = document.getElementById('svc-home');
+  const filtered = allServices.map((s,i)=>({...s, _idx:i})).filter(s => _svcActiveCat==='all' || s.category===_svcActiveCat);
+  cont.innerHTML = filtered.map(s => `
+    <div class="svc-card" onclick="openServiceModal(${s._idx})" style="cursor:pointer">
+      <div class="s-icon">${s.icon}</div>
+      <div class="s-title">${s.name}</div>
+      <div class="s-desc">${s.desc}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.5rem">
+        <span class="s-price">${s.price}</span>
+        <span style="font-size:.78rem;color:var(--blue2)">View details →</span>
+      </div>
+    </div>
+  `).join('');
+  cont.scrollLeft = 0;
+}
+
+function scrollSvcSlider(dir){
+  const cont = document.getElementById('svc-home');
+  cont.scrollBy({left: dir * 280, behavior: 'smooth'});
 }
 
 function renderAI(cont){
@@ -1890,7 +2044,7 @@ function initRender(){
 
   renderNews(document.getElementById('news-home'));
   renderNews(document.getElementById('news-full'));
-  renderServices(document.getElementById('svc-home'));
+  renderServiceSlider();
   renderServices(document.getElementById('svc-full'));
   renderAI(document.getElementById('ai-home'));
   renderAI(document.getElementById('ai-full'));
@@ -2486,6 +2640,27 @@ function sendRequestOnWhatsApp(){
   window.open('https://wa.me/918539979271?text='+encodeURIComponent(msg),'_blank');
 }
 </script>
+<!-- SERVICE DETAILS MODAL -->
+<div id="service-modal" class="service-modal-overlay" onclick="if(event.target===this)closeServiceModal()">
+  <div class="service-modal-box">
+    <button onclick="closeServiceModal()" class="service-modal-close" aria-label="Close">&times;</button>
+    <div style="font-size:2.5rem;margin-bottom:.5rem" id="sm-icon"></div>
+    <div style="font-size:.8rem;color:var(--blue2);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem" id="sm-category"></div>
+    <h3 style="margin-bottom:.6rem" id="sm-name"></h3>
+    <p style="color:var(--txt2);margin-bottom:1rem" id="sm-desc"></p>
+    <div style="font-weight:700;color:var(--teal);margin-bottom:1.25rem" id="sm-price"></div>
+    <div style="margin-bottom:1.25rem">
+      <div style="font-weight:700;margin-bottom:.6rem">📋 Documents typically needed</div>
+      <ul id="sm-docs" style="padding-left:1.2rem;color:var(--txt2);font-size:.92rem;line-height:1.8"></ul>
+    </div>
+    <div style="margin-bottom:1.5rem">
+      <div style="font-weight:700;margin-bottom:.6rem">🏛️ Government Portal</div>
+      <div id="sm-portal-wrap"></div>
+    </div>
+    <a href="https://wa.me/918539979271" target="_blank" class="btn btn-primary btn-block"><i class="fab fa-whatsapp"></i> Get Help With This</a>
+  </div>
+</div>
+
 <!-- Company Search module -->
 <script src="modules/company-search.js"></script>
 </body>
