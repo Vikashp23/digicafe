@@ -100,6 +100,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 .c-desc{font-size:.8rem;color:var(--txt2);margin-bottom:.75rem;line-height:1.5}
 .c-meta{display:flex;gap:.5rem;font-size:.75rem;color:var(--txt3);margin-bottom:.75rem}
 .c-btn{width:100%;padding:.6rem;background:var(--blue);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+.c-topics{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.75rem}
+.c-topics span{background:var(--surf2);border:1px solid var(--bdr);border-radius:14px;padding:.2rem .55rem;font-size:.68rem;color:var(--txt2)}
+.c-links{display:flex;gap:.5rem;margin-bottom:.6rem}
+.c-links a{flex:1;text-align:center;padding:.5rem;border-radius:8px;border:1px solid var(--bdr2);color:var(--txt2);font-size:.72rem;font-weight:600;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.3rem;transition:all .2s}
+.c-links a:hover{border-color:var(--blue);color:var(--txt);background:var(--surf2)}
+.t-detail{font-size:.76rem;color:var(--txt3);margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--bdr);text-align:left;line-height:1.6}
+.t-example{font-size:.72rem;color:var(--blue2);margin-top:.4rem;text-align:left;font-style:italic}
+.t-try{display:inline-flex;align-items:center;gap:.35rem;margin-top:.6rem;padding:.4rem .9rem;background:var(--blue);color:#fff;border-radius:8px;font-size:.75rem;font-weight:600;text-decoration:none}
 
 /* SERVICES */
 .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
@@ -1787,23 +1795,57 @@ const allServices = [
 ];
 
 const aiTools = [
-  {icon:'🧠',name:'AI Tax Assistant',desc:'ITR guidance, tax planning, deduction tips'},
-  {icon:'📊',name:'AI GST Assistant',desc:'GST classification, ITC optimization, GSTR help'},
-  {icon:'📝',name:'Notice Reply Generator',desc:'Draft professional IT/GST notice replies instantly'},
-  {icon:'📧',name:'Email Generator',desc:'Professional client emails for all situations'},
-  {icon:'📱',name:'WhatsApp Generator',desc:'Client reminders and compliance messages'},
-  {icon:'🔍',name:'Document Review AI',desc:'AI verifies PAN, Aadhaar, GST documents'},
-  {icon:'💼',name:'Business Consultant',desc:'AI business advice, strategy, growth tips'},
-  {icon:'💰',name:'Loan Advisor AI',desc:'Loan eligibility, EMI calculation, advisory'},
+  {icon:'🧠',name:'AI Tax Assistant',desc:'ITR guidance, tax planning, deduction tips',
+    detail:'Ask about which ITR form applies to you, old vs new regime comparison, and eligible deductions (80C, 80D, HRA, etc.) before you file.',
+    example:'e.g. "Which ITR form should I use as a salaried employee with one house property?"'},
+  {icon:'📊',name:'AI GST Assistant',desc:'GST classification, ITC optimization, GSTR help',
+    detail:'Get help classifying goods/services under the right GST rate, understanding ITC eligibility, and preparing GSTR-1/3B correctly.',
+    example:'e.g. "Is ITC available on a business laptop purchase?"'},
+  {icon:'📝',name:'Notice Reply Generator',desc:'Draft professional IT/GST notice replies instantly',
+    detail:'Share your notice type (143(1), GST ASMT-10, etc.) and we help draft a clear, professional reply with the right supporting points.',
+    example:'e.g. "I received a 143(1) intimation with a demand — how do I respond?"'},
+  {icon:'📧',name:'Email Generator',desc:'Professional client emails for all situations',
+    detail:'Get a polished, ready-to-send email for client follow-ups, document requests, deadline reminders, or status updates.',
+    example:'e.g. "Draft an email requesting pending Form 16 from a client."'},
+  {icon:'📱',name:'WhatsApp Generator',desc:'Client reminders and compliance messages',
+    detail:'Short, clear WhatsApp message templates for deadline reminders, document requests, and payment follow-ups.',
+    example:'e.g. "Draft a GST return due-date reminder for clients."'},
+  {icon:'🔍',name:'Document Review AI',desc:'AI verifies PAN, Aadhaar, GST documents',
+    detail:'Send us your PAN, Aadhaar, or GST certificate and we check it for completeness, mismatches, and common errors before submission.',
+    example:'e.g. "Please check if my GST certificate details match my PAN."'},
+  {icon:'💼',name:'Business Consultant',desc:'AI business advice, strategy, growth tips',
+    detail:'General guidance on business structuring, compliance planning, and practical next steps as you register or grow a small business.',
+    example:'e.g. "Should I register as an LLP or a Pvt Ltd company?"'},
+  {icon:'💰',name:'Loan Advisor AI',desc:'Loan eligibility, EMI calculation, advisory',
+    detail:'Understand typical loan eligibility factors, EMI calculation, and what documents lenders usually ask for.',
+    example:'e.g. "How is my loan eligibility usually calculated from my ITR?"'},
 ];
 
 const courses = [
-  {icon:'💰',name:'Income Tax Mastery',desc:'Complete ITR filing, AIS analysis, tax planning',dur:'12 hrs',level:'Beginner'},
-  {icon:'📊',name:'GST Complete Course',desc:'Registration, GSTR filing, reconciliation, audit',dur:'15 hrs',level:'Beginner'},
-  {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, LLP, annual compliance, ROC filings',dur:'10 hrs',level:'Beginner'},
-  {icon:'📚',name:'Tally Prime Training',desc:'Complete accounting, GST, payroll, bank rec',dur:'20 hrs',level:'Intermediate'},
-  {icon:'🤖',name:'Excel for Accountants',desc:'Pivot tables, VLOOKUP, macros, automation',dur:'18 hrs',level:'Intermediate'},
-  {icon:'⚖️',name:'Company Law 101',desc:'Companies Act, ROC compliance, DIN services',dur:'12 hrs',level:'Beginner'},
+  {icon:'💰',name:'Income Tax Mastery',desc:'Complete ITR filing, AIS analysis, tax planning',dur:'12 hrs',level:'Beginner',
+    topics:['ITR Forms & Regimes','Salary & HRA','Capital Gains','Form 26AS/AIS','Deductions (80C/80D)'],
+    link:'https://www.incometax.gov.in',linktext:'Income Tax e-filing portal',
+    pdf:'resources/income-tax-mastery-notes.pdf'},
+  {icon:'📊',name:'GST Complete Course',desc:'Registration, GSTR filing, reconciliation, audit',dur:'15 hrs',level:'Beginner',
+    topics:['GST Registration','GSTR-1 & 3B','Input Tax Credit','GSTR-2B Reconciliation','E-way Bills'],
+    link:'https://www.gst.gov.in/help/tutorials',linktext:'Official GST portal tutorials',
+    pdf:'resources/gst-complete-course-notes.pdf'},
+  {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, LLP, annual compliance, ROC filings',dur:'10 hrs',level:'Beginner',
+    topics:['SPICe+ Incorporation','DIN & DSC','MOA/AOA','Annual ROC Filings','Post-Incorp Compliance'],
+    link:'https://www.mca.gov.in',linktext:'MCA incorporation portal',
+    pdf:'resources/company-registration-notes.pdf'},
+  {icon:'📚',name:'Tally Prime Training',desc:'Complete accounting, GST, payroll, bank rec',dur:'20 hrs',level:'Intermediate',
+    topics:['Ledgers & Vouchers','GST Invoicing','Bank Reconciliation','Payroll Setup','MIS Reports'],
+    link:'https://tallysolutions.com/learn',linktext:'Tally official learning hub',
+    pdf:'resources/tally-prime-training-notes.pdf'},
+  {icon:'🤖',name:'Excel for Accountants',desc:'Pivot tables, VLOOKUP, macros, automation',dur:'18 hrs',level:'Intermediate',
+    topics:['XLOOKUP & SUMIFS','Pivot Tables','Conditional Formatting','Recon Templates','Dashboards'],
+    link:'https://exceljet.net',linktext:'ExcelJet free formula reference',
+    pdf:'resources/excel-for-accountants-notes.pdf'},
+  {icon:'⚖️',name:'Company Law 101',desc:'Companies Act, ROC compliance, DIN services',dur:'12 hrs',level:'Beginner',
+    topics:['Companies Act Basics','Board & AGM Rules','Statutory Registers','AOC-4/MGT-7','DIR-3 KYC'],
+    link:'https://www.mca.gov.in',linktext:'MCA Companies Act resources',
+    pdf:'resources/company-law-101-notes.pdf'},
 ];
 
 // ═══ PAGE ROUTING ═══
@@ -2014,13 +2056,26 @@ function scrollSvcSlider(dir){
 }
 
 function renderAI(cont){
-  cont.innerHTML=aiTools.map(a=>`
-    <div class="tool-card">
+  cont.innerHTML=aiTools.map((a,i)=>`
+    <div class="tool-card" onclick="toggleAiDetail(this,event)" data-ai="${i}">
       <div class="t-icon">${a.icon}</div>
       <div class="t-name">${a.name}</div>
       <div class="t-desc">${a.desc}</div>
+      <div class="t-detail" style="display:none">
+        ${a.detail}
+        <div class="t-example">${a.example}</div>
+        <a class="t-try" href="https://wa.me/918539979271?text=${encodeURIComponent('Hi DigiCafe, I want to try the '+a.name+'. '+a.example.replace('e.g. ',''))}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fas fa-comment-dots"></i> Try via WhatsApp</a>
+      </div>
     </div>
   `).join('');
+}
+
+function toggleAiDetail(card,e){
+  if(e.target.closest('.t-try')) return;
+  const d = card.querySelector('.t-detail');
+  const open = d.style.display !== 'none';
+  card.closest('.tools-grid').querySelectorAll('.t-detail').forEach(x=>x.style.display='none');
+  d.style.display = open ? 'none' : 'block';
 }
 
 function renderCourses(cont){
@@ -2031,6 +2086,11 @@ function renderCourses(cont){
         <div class="c-title">${c.name}</div>
         <div class="c-desc">${c.desc}</div>
         <div class="c-meta"><span>${c.dur}</span> · <span>${c.level}</span></div>
+        <div class="c-topics">${c.topics.map(t=>`<span>${t}</span>`).join('')}</div>
+        <div class="c-links">
+          <a href="${c.link}" target="_blank" rel="noopener" title="${c.linktext}"><i class="fas fa-arrow-up-right-from-square"></i> Learn Free</a>
+          <a href="${c.pdf}" target="_blank" rel="noopener" title="Download study notes"><i class="fas fa-file-pdf"></i> Notes PDF</a>
+        </div>
         <button class="c-btn" onclick="showPage('login');showToast('Enroll in course')"><i class="fas fa-book"></i> Enroll</button>
       </div>
     </div>
