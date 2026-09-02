@@ -85,6 +85,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 .ad-arrow:hover{background:rgba(0,0,0,.6)}
 .ad-arrow.prev{left:12px}
 .ad-arrow.next{right:12px}
+.ad-slide-img{background:#eaf2ff;text-decoration:none;cursor:pointer}
+.ad-slide-img img{max-width:92%;max-height:92%;object-fit:contain;border-radius:10px}
 @media(max-width:1024px){.hero-ad{height:260px;margin-top:1.5rem}}
 @media(max-width:600px){.ad-slide h3{font-size:1.1rem}.ad-slide .ad-icon{font-size:2.4rem}}
 
@@ -1859,7 +1861,7 @@ const courses = [
   {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, LLP, annual compliance, ROC filings',dur:'10 hrs',level:'Beginner',
     topics:['SPICe+ Incorporation','DIN & DSC','MOA/AOA','Annual ROC Filings','Post-Incorp Compliance'],
     link:'https://www.mca.gov.in',linktext:'MCA incorporation portal',
-    pdf:'resources/company-registration-notes.pdf'},
+    pdf:'resources/Company-Registration-Notes.pdf'},
   {icon:'📚',name:'Tally Prime Training',desc:'Complete accounting, GST, payroll, bank rec',dur:'20 hrs',level:'Intermediate',
     topics:['Ledgers & Vouchers','GST Invoicing','Bank Reconciliation','Payroll Setup','MIS Reports'],
     link:'https://tallysolutions.com/learn',linktext:'Tally official learning hub',
@@ -1876,22 +1878,18 @@ const courses = [
 
 // ═══ HERO AD SLIDER ═══
 const adSlides = [
+  {fullImage:true,img:'images/ad1.png',title:'GST Registration & Compliance',
+    waText:'Hi DigiCafe, I want to know more about GST Registration & Compliance.'},
+  {fullImage:true,img:'images/ad2.png',title:'Income Tax Filing',
+    waText:'Hi DigiCafe, I want to know more about Income Tax Filing.'},
+  {fullImage:true,img:'images/ad3.png',title:'Company / LLP Registration',
+    waText:'Hi DigiCafe, I want to know more about Company / LLP Registration.'},
+  {fullImage:true,img:'images/ad4.png',title:'Udyam / MSME Registration',
+    waText:'Hi DigiCafe, I want to know more about Udyam / MSME Registration.'},
   {gradient:'linear-gradient(135deg,#f59e0b,#3b82f6)',img:'images/ad-finance-academy.jpg',icon:'📊',tag:'New Launch',tagClass:'badge-gold',
     title:'Finance & Accounts Career Accelerator',
     text:'From Accounts Executive to CA-level corporate accounting capability — 11 practical modules.',
     price:'₹499',cta:'Enquire Now',action:"window.open('https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20want%20to%20know%20more%20about%20the%20Finance%20%26%20Accounts%20Career%20Accelerator.','_blank')"},
-  {gradient:'linear-gradient(135deg,#3b82f6,#06d6a0)',img:'images/ad-gst.jpg',icon:'🧾',tag:'Compliance',tagClass:'badge-blue',
-    title:'GST Registration & Filing',
-    text:'End-to-end GST registration, GSTR-1/3B filing and reconciliation, done for you.',
-    price:'Starts ₹999',cta:'Get Started',action:"showPage('services')"},
-  {gradient:'linear-gradient(135deg,#06d6a0,#3b82f6)',img:'images/ad-itr.jpg',icon:'💰',tag:'Tax Season',tagClass:'badge-teal',
-    title:'AI-Assisted ITR Filing',
-    text:'File your Income Tax Return faster with AI-checked deductions and AIS reconciliation.',
-    price:'Starts ₹499',cta:'Start Free',action:"showPage('login')"},
-  {gradient:'linear-gradient(135deg,#a855f7,#3b82f6)',img:'images/ad-company-registration.jpg',icon:'🏢',tag:'New Business',tagClass:'badge-purple',
-    title:'Company Registration',
-    text:'Incorporate your Pvt Ltd or LLP with SPICe+, DIN/DSC and annual compliance support.',
-    price:'Custom Quote',cta:'Talk to Us',action:"window.open('https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20want%20to%20register%20a%20company.','_blank')"},
   {gradient:'linear-gradient(135deg,#3b82f6,#a855f7)',img:'images/ad-ai-assistant.jpg',icon:'🤖',tag:'Free to Try',tagClass:'badge-blue',
     title:'AI Tax & GST Assistant',
     text:'Get instant, AI-powered guidance on tax planning, GST classification and notices.',
@@ -1903,7 +1901,14 @@ function renderAdSlider(){
   const track = document.getElementById('adTrack');
   const dots = document.getElementById('adDots');
   if(!track || !dots) return;
-  track.innerHTML = adSlides.map((a,i) => `
+  track.innerHTML = adSlides.map((a,i) => {
+    if(a.fullImage){
+      return `
+      <a class="ad-slide ad-slide-img" id="adSlide${i}" href="https://wa.me/918539979271?text=${encodeURIComponent(a.waText)}" target="_blank" rel="noopener">
+        <img src="${a.img}" alt="${a.title}">
+      </a>`;
+    }
+    return `
     <div class="ad-slide" id="adSlide${i}" style="background:${a.gradient}">
       <div class="ad-icon">${a.icon}</div>
       <span class="badge ${a.tagClass} ad-tag">${a.tag}</span>
@@ -1913,15 +1918,15 @@ function renderAdSlider(){
         <button class="btn btn-primary btn-sm" onclick="${a.action}"><i class="fas fa-arrow-right"></i> ${a.cta}</button>
         <span style="color:#fff;font-weight:700;font-size:.85rem;background:rgba(0,0,0,.3);padding:.35rem .7rem;border-radius:20px">${a.price}</span>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
   dots.innerHTML = adSlides.map((_,i)=>`<span class="${i===0?'active':''}" onclick="adGoTo(${i})"></span>`).join('');
   adUpdate();
-  // Progressive enhancement: if a real photo exists at a.img, swap it in behind the
-  // gradient once it loads successfully. If the file isn't uploaded yet (404), the
-  // gradient + emoji stays exactly as-is — nothing breaks.
+  // Progressive enhancement: only for slides without a guaranteed image (fullImage ones
+  // already point at real, confirmed files). If a.img exists for a gradient slide and
+  // loads successfully, swap it in behind the gradient; otherwise the gradient stays.
   adSlides.forEach((a,i)=>{
-    if(!a.img) return;
+    if(a.fullImage || !a.img) return;
     const test = new Image();
     test.onload = ()=>{
       const el = document.getElementById('adSlide'+i);
