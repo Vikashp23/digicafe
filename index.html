@@ -47,8 +47,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 .badge{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .8rem;border-radius:20px;font-size:.78rem;font-weight:600}
 .badge-blue{background:rgba(59,130,246,.15);color:var(--blue2);border:1px solid rgba(59,130,246,.25)}
 .badge-teal{background:rgba(6,214,160,.12);color:var(--teal);border:1px solid rgba(6,214,160,.25)}
-.badge-gold{background:rgba(245,158,11,.14);color:#f59e0b;border:1px solid rgba(245,158,11,.28)}
-.badge-purple{background:rgba(168,85,247,.14);color:#a855f7;border:1px solid rgba(168,85,247,.28)}
 
 /* NAV */
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,9,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr)}
@@ -68,27 +66,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 .hero h1{font-family:'Sora',sans-serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;line-height:1.1;margin-bottom:1.25rem}
 .hero p{font-size:1.05rem;color:var(--txt2);max-width:560px;margin-bottom:2rem;line-height:1.8}
 @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}}
-
-/* HERO AD SLIDER */
-.hero-ad{position:relative;border-radius:var(--r2);overflow:hidden;height:340px;background:var(--surf);border:1px solid var(--bdr)}
-.ad-track{display:flex;height:100%;transition:transform .55s cubic-bezier(.65,0,.35,1)}
-.ad-slide{min-width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative}
-.ad-slide .ad-icon{font-size:3.2rem;margin-bottom:.75rem}
-.ad-slide .ad-tag{margin-bottom:.6rem}
-.ad-slide h3{font-family:'Sora',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:.5rem;color:#fff}
-.ad-slide p{font-size:.85rem;color:rgba(255,255,255,.85);max-width:380px;margin-bottom:1.1rem;line-height:1.6}
-.ad-slide .btn{position:relative;z-index:2}
-.ad-dots{position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:.4rem;z-index:3}
-.ad-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:all .25s}
-.ad-dots span.active{background:#fff;width:22px;border-radius:5px}
-.ad-arrow{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;transition:all .2s}
-.ad-arrow:hover{background:rgba(0,0,0,.6)}
-.ad-arrow.prev{left:12px}
-.ad-arrow.next{right:12px}
-.ad-slide-img{background:#eaf2ff;text-decoration:none;cursor:pointer}
-.ad-slide-img img{max-width:92%;max-height:92%;object-fit:contain;border-radius:10px}
-@media(max-width:1024px){.hero-ad{height:260px;margin-top:1.5rem}}
-@media(max-width:600px){.ad-slide h3{font-size:1.1rem}.ad-slide .ad-icon{font-size:2.4rem}}
 
 /* SECTION */
 .sec{padding:80px 0}
@@ -123,14 +100,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 .c-desc{font-size:.8rem;color:var(--txt2);margin-bottom:.75rem;line-height:1.5}
 .c-meta{display:flex;gap:.5rem;font-size:.75rem;color:var(--txt3);margin-bottom:.75rem}
 .c-btn{width:100%;padding:.6rem;background:var(--blue);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600}
-.c-topics{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.75rem}
-.c-topics span{background:var(--surf2);border:1px solid var(--bdr);border-radius:14px;padding:.2rem .55rem;font-size:.68rem;color:var(--txt2)}
-.c-links{display:flex;gap:.5rem;margin-bottom:.6rem}
-.c-links a{flex:1;text-align:center;padding:.5rem;border-radius:8px;border:1px solid var(--bdr2);color:var(--txt2);font-size:.72rem;font-weight:600;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.3rem;transition:all .2s}
-.c-links a:hover{border-color:var(--blue);color:var(--txt);background:var(--surf2)}
-.t-detail{font-size:.76rem;color:var(--txt3);margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--bdr);text-align:left;line-height:1.6}
-.t-example{font-size:.72rem;color:var(--blue2);margin-top:.4rem;text-align:left;font-style:italic}
-.t-try{display:inline-flex;align-items:center;gap:.35rem;margin-top:.6rem;padding:.4rem .9rem;background:var(--blue);color:#fff;border-radius:8px;font-size:.75rem;font-weight:600;text-decoration:none}
 
 /* SERVICES */
 .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
@@ -755,12 +724,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:60px 0 30px
             <a href="https://wa.me/918539979271" target="_blank" class="btn btn-lg" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> WhatsApp</a>
           </div>
         </div>
-        <div class="hero-ad" id="heroAdSlider" onmouseenter="adPause=true" onmouseleave="adPause=false">
-          <div class="ad-track" id="adTrack"></div>
-          <div class="ad-arrow prev" onclick="adGo(-1)"><i class="fas fa-chevron-left"></i></div>
-          <div class="ad-arrow next" onclick="adGo(1)"><i class="fas fa-chevron-right"></i></div>
-          <div class="ad-dots" id="adDots"></div>
-        </div>
+        <div class="hero-img" style="text-align:center;font-size:5rem">🏢📊💼</div>
       </div>
     </div>
   </section>
@@ -1757,7 +1721,7 @@ function getNewsData(){
 }
 
 const allServices = [
-  {icon:'🧾',name:'ITR Filing Assistance',desc:'Help preparing and filing your Income Tax Return correctly and on time.',category:'Income Tax & TDS Assistance',price:'Price on complexity',statLabel:'Expert Assistance',docs:['PAN card','Aadhaar card','Form 16 (if salaried)','Bank statements','Investment/deduction proofs (80C, 80D, etc.)'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
+  {icon:'🧾',name:'ITR Filing Assistance',desc:'Help preparing and filing your Income Tax Return correctly and on time.',category:'Income Tax & TDS Assistance',price:'₹499 (salaried) – ₹3,000 (business & other)',statLabel:'Expert Assistance',docs:['PAN card','Aadhaar card','Form 16 (if salaried)','Bank statements','Investment/deduction proofs (80C, 80D, etc.)'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
   {icon:'📄',name:'AIS & Form 26AS Review',desc:'Cross-checking your AIS and Form 26AS for accuracy before filing.',category:'Income Tax & TDS Assistance',price:'Starting from ₹99',statLabel:'Online Service',docs:['PAN card','Login credentials for e-filing portal'],portalLabel:'Income Tax e-Filing Portal (AIS/TIS section)',portalUrl:'https://www.incometax.gov.in'},
   {icon:'🔄',name:'TDS Credit Reconciliation',desc:'Matching TDS deducted with credit reflecting in your tax records.',category:'Income Tax & TDS Assistance',price:'Price on Request',statLabel:'Expert Assistance',docs:['PAN card','Form 26AS','TDS certificates (Form 16/16A)','Bank statements showing deductions'],portalLabel:'TRACES Portal',portalUrl:'https://www.tdscpc.gov.in'},
   {icon:'🧷',name:'Form 16 / Form 16A Assistance',desc:'Help understanding, organising and using your Form 16 / 16A.',category:'Income Tax & TDS Assistance',price:'Starting from ₹99',statLabel:'Available Now',docs:['PAN card','Employer/deductor details','Salary slips (for Form 16)'],portalLabel:'TRACES Portal',portalUrl:'https://www.tdscpc.gov.in'},
@@ -1766,15 +1730,15 @@ const allServices = [
   {icon:'⚖️',name:'Old vs New Tax Regime Comparison',desc:'Comparing both regimes against your income to see what suits you better.',category:'Income Tax & TDS Assistance',price:'Starting from ₹99',statLabel:'Available Now',docs:['Salary slips or income details','Investment/deduction details'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
   {icon:'📝',name:'Revised Return Assistance',desc:'Support in correcting and refiling a revised Income Tax Return.',category:'Income Tax & TDS Assistance',price:'Price on complexity',statLabel:'Expert Assistance',docs:['Original ITR acknowledgement','PAN card','Corrected income/deduction details'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
   {icon:'✅',name:'Tax Document Checklist',desc:'A ready checklist of documents required for smooth ITR filing.',category:'Income Tax & TDS Assistance',price:'Price on Request',statLabel:'Available Now',docs:['PAN card','Aadhaar card','Income and investment proofs (varies by your situation)'],portalLabel:'Income Tax e-Filing Portal',portalUrl:'https://www.incometax.gov.in'},
-  {icon:'🏛️',name:'GST Registration',desc:'Assistance with new GST registration and documentation.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['PAN card','Aadhaar card','Business address proof','Bank account statement/cancelled cheque','Passport-size photo'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
-  {icon:'📑',name:'GST Return Filing Assistance',desc:'Help preparing and filing periodic GST returns.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['GSTIN login credentials','Sales and purchase invoices','GSTR-2B data'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
+  {icon:'🏛️',name:'GST Registration',desc:'Assistance with new GST registration and documentation.',category:'GST & Business Compliance',price:'₹2,000',statLabel:'Expert Assistance',docs:['PAN card','Aadhaar card','Business address proof','Bank account statement/cancelled cheque','Passport-size photo'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
+  {icon:'📑',name:'GST Return Filing Assistance',desc:'Help preparing and filing periodic GST returns.',category:'GST & Business Compliance',price:'₹1,000/month (₹500 for nil return)',statLabel:'Expert Assistance',docs:['GSTIN login credentials','Sales and purchase invoices','GSTR-2B data'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
   {icon:'🔁',name:'GSTR-2B Reconciliation',desc:'Matching purchase records with GSTR-2B for accurate ITC claims.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Online Service',docs:['Purchase register','GSTR-2B statement','Vendor invoices'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
   {icon:'📨',name:'GST Notice Document Assistance',desc:'Organising documents needed to respond to a GST notice.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['Copy of the notice','Relevant invoices/returns referenced in the notice','GSTIN login access'],portalLabel:'GST Portal',portalUrl:'https://www.gst.gov.in'},
-  {icon:'🏭',name:'Udyam / MSME Registration',desc:'Guidance and filing support for Udyam / MSME registration.',category:'GST & Business Compliance',price:'Starting from ₹99',statLabel:'Available Now',docs:['Aadhaar card (proprietor/partner/director)','PAN card','Business address and activity details'],portalLabel:'Udyam Registration Portal',portalUrl:'https://udyamregistration.gov.in'},
-  {icon:'🍽️',name:'FSSAI Registration / Licence Assistance',desc:'Help with FSSAI application, documents and renewals.',category:'GST & Business Compliance',price:'Starting from ₹99',statLabel:'Online Service',docs:['PAN card','Aadhaar card','Business address proof','Photo ID of proprietor/partners','Food category/business details'],portalLabel:'FoSCoS (FSSAI) Portal',portalUrl:'https://foscos.fssai.gov.in'},
+  {icon:'🏭',name:'Udyam / MSME Registration',desc:'Guidance and filing support for Udyam / MSME registration.',category:'GST & Business Compliance',price:'₹1,000',statLabel:'Available Now',docs:['Aadhaar card (proprietor/partner/director)','PAN card','Business address and activity details'],portalLabel:'Udyam Registration Portal',portalUrl:'https://udyamregistration.gov.in'},
+  {icon:'🍽️',name:'FSSAI Registration / Licence Assistance',desc:'Help with FSSAI application, documents and renewals.',category:'GST & Business Compliance',price:'₹1,500 (excl. govt fee)',statLabel:'Online Service',docs:['PAN card','Aadhaar card','Business address proof','Photo ID of proprietor/partners','Food category/business details'],portalLabel:'FoSCoS (FSSAI) Portal',portalUrl:'https://foscos.fssai.gov.in'},
   {icon:'🏪',name:'Trade Licence Assistance',desc:'Guidance on applying for and renewing a local trade licence.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Online Service',docs:['Business address proof','Identity proof','Property tax receipt/NOC (varies by local body)'],portalLabel:null,portalUrl:null},
-  {icon:'🏢',name:'Company / Firm Registration Coordination',desc:'Coordinating paperwork for Pvt Ltd / LLP / Firm registration.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['PAN & Aadhaar of directors/partners','Digital Signature Certificate (DSC)','Registered office address proof','MOA/AOA or partnership deed'],portalLabel:'MCA Portal',portalUrl:'https://www.mca.gov.in'},
-  {icon:'🧩',name:'Business Compliance Support',desc:'General ongoing help staying on top of regulatory filings.',category:'GST & Business Compliance',price:'Price on Request',statLabel:'Expert Assistance',docs:['Varies by which specific filing is due — we\'ll confirm with you'],portalLabel:null,portalUrl:null},
+  {icon:'🏢',name:'Company / Firm Registration Coordination',desc:'Coordinating paperwork for Pvt Ltd / LLP / Firm registration.',category:'GST & Business Compliance',price:'₹5,000 (Partnership) – ₹20,000 (Company)',statLabel:'Expert Assistance',docs:['PAN & Aadhaar of directors/partners','Digital Signature Certificate (DSC)','Registered office address proof','MOA/AOA or partnership deed'],portalLabel:'MCA Portal',portalUrl:'https://www.mca.gov.in'},
+  {icon:'🧩',name:'Business Compliance Support',desc:'General ongoing help staying on top of regulatory filings.',category:'GST & Business Compliance',price:'₹5,000 – ₹8,000 (per filing/annual)',statLabel:'Expert Assistance',docs:['Varies by which specific filing is due — we\'ll confirm with you'],portalLabel:null,portalUrl:null},
   {icon:'📚',name:'Bookkeeping',desc:'Day-to-day recording of financial transactions.',category:'Accounting & Tally Services',price:'Price based on volume',statLabel:'Online Service',docs:['Sales/purchase records','Bank statements','Expense receipts'],portalLabel:null,portalUrl:null},
   {icon:'🏦',name:'Bank Statement Data Preparation',desc:'Converting bank statements into usable, organised data.',category:'Accounting & Tally Services',price:'Starting from ₹99',statLabel:'Available Now',docs:['Bank statements (PDF/Excel/scanned)'],portalLabel:null,portalUrl:null},
   {icon:'🔗',name:'Bank Reconciliation',desc:'Matching book entries with bank statement transactions.',category:'Accounting & Tally Services',price:'Price based on volume',statLabel:'Online Service',docs:['Bank statements','Cash book / ledger records'],portalLabel:null,portalUrl:null},
@@ -1823,142 +1787,24 @@ const allServices = [
 ];
 
 const aiTools = [
-  {icon:'🧠',name:'AI Tax Assistant',desc:'ITR guidance, tax planning, deduction tips',
-    detail:'Ask about which ITR form applies to you, old vs new regime comparison, and eligible deductions (80C, 80D, HRA, etc.) before you file.',
-    example:'e.g. "Which ITR form should I use as a salaried employee with one house property?"'},
-  {icon:'📊',name:'AI GST Assistant',desc:'GST classification, ITC optimization, GSTR help',
-    detail:'Get help classifying goods/services under the right GST rate, understanding ITC eligibility, and preparing GSTR-1/3B correctly.',
-    example:'e.g. "Is ITC available on a business laptop purchase?"'},
-  {icon:'📝',name:'Notice Reply Generator',desc:'Draft professional IT/GST notice replies instantly',
-    detail:'Share your notice type (143(1), GST ASMT-10, etc.) and we help draft a clear, professional reply with the right supporting points.',
-    example:'e.g. "I received a 143(1) intimation with a demand — how do I respond?"'},
-  {icon:'📧',name:'Email Generator',desc:'Professional client emails for all situations',
-    detail:'Get a polished, ready-to-send email for client follow-ups, document requests, deadline reminders, or status updates.',
-    example:'e.g. "Draft an email requesting pending Form 16 from a client."'},
-  {icon:'📱',name:'WhatsApp Generator',desc:'Client reminders and compliance messages',
-    detail:'Short, clear WhatsApp message templates for deadline reminders, document requests, and payment follow-ups.',
-    example:'e.g. "Draft a GST return due-date reminder for clients."'},
-  {icon:'🔍',name:'Document Review AI',desc:'AI verifies PAN, Aadhaar, GST documents',
-    detail:'Send us your PAN, Aadhaar, or GST certificate and we check it for completeness, mismatches, and common errors before submission.',
-    example:'e.g. "Please check if my GST certificate details match my PAN."'},
-  {icon:'💼',name:'Business Consultant',desc:'AI business advice, strategy, growth tips',
-    detail:'General guidance on business structuring, compliance planning, and practical next steps as you register or grow a small business.',
-    example:'e.g. "Should I register as an LLP or a Pvt Ltd company?"'},
-  {icon:'💰',name:'Loan Advisor AI',desc:'Loan eligibility, EMI calculation, advisory',
-    detail:'Understand typical loan eligibility factors, EMI calculation, and what documents lenders usually ask for.',
-    example:'e.g. "How is my loan eligibility usually calculated from my ITR?"'},
+  {icon:'🧠',name:'AI Tax Assistant',desc:'ITR guidance, tax planning, deduction tips'},
+  {icon:'📊',name:'AI GST Assistant',desc:'GST classification, ITC optimization, GSTR help'},
+  {icon:'📝',name:'Notice Reply Generator',desc:'Draft professional IT/GST notice replies instantly'},
+  {icon:'📧',name:'Email Generator',desc:'Professional client emails for all situations'},
+  {icon:'📱',name:'WhatsApp Generator',desc:'Client reminders and compliance messages'},
+  {icon:'🔍',name:'Document Review AI',desc:'AI verifies PAN, Aadhaar, GST documents'},
+  {icon:'💼',name:'Business Consultant',desc:'AI business advice, strategy, growth tips'},
+  {icon:'💰',name:'Loan Advisor AI',desc:'Loan eligibility, EMI calculation, advisory'},
 ];
 
 const courses = [
-  {icon:'💰',name:'Income Tax Mastery',desc:'Complete ITR filing, AIS analysis, tax planning',dur:'12 hrs',level:'Beginner',
-    topics:['ITR Forms & Regimes','Salary & HRA','Capital Gains','Form 26AS/AIS','Deductions (80C/80D)'],
-    link:'https://www.incometax.gov.in',linktext:'Income Tax e-filing portal',
-    pdf:'resources/income-tax-mastery-notes.pdf'},
-  {icon:'📊',name:'GST Complete Course',desc:'Registration, GSTR filing, reconciliation, audit',dur:'15 hrs',level:'Beginner',
-    topics:['GST Registration','GSTR-1 & 3B','Input Tax Credit','GSTR-2B Reconciliation','E-way Bills'],
-    link:'https://www.gst.gov.in/help/tutorials',linktext:'Official GST portal tutorials',
-    pdf:'resources/gst-complete-course-notes.pdf'},
-  {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, LLP, annual compliance, ROC filings',dur:'10 hrs',level:'Beginner',
-    topics:['SPICe+ Incorporation','DIN & DSC','MOA/AOA','Annual ROC Filings','Post-Incorp Compliance'],
-    link:'https://www.mca.gov.in',linktext:'MCA incorporation portal',
-    pdf:'resources/Company-Registration-Notes.pdf'},
-  {icon:'📚',name:'Tally Prime Training',desc:'Complete accounting, GST, payroll, bank rec',dur:'20 hrs',level:'Intermediate',
-    topics:['Ledgers & Vouchers','GST Invoicing','Bank Reconciliation','Payroll Setup','MIS Reports'],
-    link:'https://tallysolutions.com/learn',linktext:'Tally official learning hub',
-    pdf:'resources/tally-prime-training-notes.pdf'},
-  {icon:'🤖',name:'Excel for Accountants',desc:'Pivot tables, VLOOKUP, macros, automation',dur:'18 hrs',level:'Intermediate',
-    topics:['XLOOKUP & SUMIFS','Pivot Tables','Conditional Formatting','Recon Templates','Dashboards'],
-    link:'https://exceljet.net',linktext:'ExcelJet free formula reference',
-    pdf:'resources/excel-for-accountants-notes.pdf'},
-  {icon:'⚖️',name:'Company Law 101',desc:'Companies Act, ROC compliance, DIN services',dur:'12 hrs',level:'Beginner',
-    topics:['Companies Act Basics','Board & AGM Rules','Statutory Registers','AOC-4/MGT-7','DIR-3 KYC'],
-    link:'https://www.mca.gov.in',linktext:'MCA Companies Act resources',
-    pdf:'resources/company-law-101-notes.pdf'},
+  {icon:'💰',name:'Income Tax Mastery',desc:'Complete ITR filing, AIS analysis, tax planning',dur:'12 hrs',level:'Beginner'},
+  {icon:'📊',name:'GST Complete Course',desc:'Registration, GSTR filing, reconciliation, audit',dur:'15 hrs',level:'Beginner'},
+  {icon:'🏢',name:'Company Registration',desc:'Pvt Ltd, LLP, annual compliance, ROC filings',dur:'10 hrs',level:'Beginner'},
+  {icon:'📚',name:'Tally Prime Training',desc:'Complete accounting, GST, payroll, bank rec',dur:'20 hrs',level:'Intermediate'},
+  {icon:'🤖',name:'Excel for Accountants',desc:'Pivot tables, VLOOKUP, macros, automation',dur:'18 hrs',level:'Intermediate'},
+  {icon:'⚖️',name:'Company Law 101',desc:'Companies Act, ROC compliance, DIN services',dur:'12 hrs',level:'Beginner'},
 ];
-
-// ═══ HERO AD SLIDER ═══
-const adSlides = [
-  {fullImage:true,img:'images/ad1.png',title:'GST Registration & Compliance',
-    waText:'Hi DigiCafe, I want to know more about GST Registration & Compliance.'},
-  {fullImage:true,img:'images/ad2.png',title:'Income Tax Filing',
-    waText:'Hi DigiCafe, I want to know more about Income Tax Filing.'},
-  {fullImage:true,img:'images/ad3.png',title:'Company / LLP Registration',
-    waText:'Hi DigiCafe, I want to know more about Company / LLP Registration.'},
-  {fullImage:true,img:'images/ad4.png',title:'Udyam / MSME Registration',
-    waText:'Hi DigiCafe, I want to know more about Udyam / MSME Registration.'},
-  {gradient:'linear-gradient(135deg,#f59e0b,#3b82f6)',img:'images/ad-finance-academy.jpg',icon:'📊',tag:'New Launch',tagClass:'badge-gold',
-    title:'Finance & Accounts Career Accelerator',
-    text:'From Accounts Executive to CA-level corporate accounting capability — 11 practical modules.',
-    price:'₹499',cta:'Enquire Now',action:"window.open('https://wa.me/918539979271?text=Hi%20DigiCafe%2C%20I%20want%20to%20know%20more%20about%20the%20Finance%20%26%20Accounts%20Career%20Accelerator.','_blank')"},
-  {gradient:'linear-gradient(135deg,#3b82f6,#a855f7)',img:'images/ad-ai-assistant.jpg',icon:'🤖',tag:'Free to Try',tagClass:'badge-blue',
-    title:'AI Tax & GST Assistant',
-    text:'Get instant, AI-powered guidance on tax planning, GST classification and notices.',
-    price:'Free',cta:'Try Now',action:"showPage('ai')"},
-];
-let adIndex = 0, adPause = false, adTimer = null;
-
-function renderAdSlider(){
-  const track = document.getElementById('adTrack');
-  const dots = document.getElementById('adDots');
-  if(!track || !dots) return;
-  track.innerHTML = adSlides.map((a,i) => {
-    if(a.fullImage){
-      return `
-      <a class="ad-slide ad-slide-img" id="adSlide${i}" href="https://wa.me/918539979271?text=${encodeURIComponent(a.waText)}" target="_blank" rel="noopener">
-        <img src="${a.img}" alt="${a.title}">
-      </a>`;
-    }
-    return `
-    <div class="ad-slide" id="adSlide${i}" style="background:${a.gradient}">
-      <div class="ad-icon">${a.icon}</div>
-      <span class="badge ${a.tagClass} ad-tag">${a.tag}</span>
-      <h3>${a.title}</h3>
-      <p>${a.text}</p>
-      <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;justify-content:center">
-        <button class="btn btn-primary btn-sm" onclick="${a.action}"><i class="fas fa-arrow-right"></i> ${a.cta}</button>
-        <span style="color:#fff;font-weight:700;font-size:.85rem;background:rgba(0,0,0,.3);padding:.35rem .7rem;border-radius:20px">${a.price}</span>
-      </div>
-    </div>`;
-  }).join('');
-  dots.innerHTML = adSlides.map((_,i)=>`<span class="${i===0?'active':''}" onclick="adGoTo(${i})"></span>`).join('');
-  adUpdate();
-  // Progressive enhancement: only for slides without a guaranteed image (fullImage ones
-  // already point at real, confirmed files). If a.img exists for a gradient slide and
-  // loads successfully, swap it in behind the gradient; otherwise the gradient stays.
-  adSlides.forEach((a,i)=>{
-    if(a.fullImage || !a.img) return;
-    const test = new Image();
-    test.onload = ()=>{
-      const el = document.getElementById('adSlide'+i);
-      if(el) el.style.background = `linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)), url('${a.img}') center/cover no-repeat`;
-    };
-    test.src = a.img;
-  });
-}
-
-function adUpdate(){
-  const track = document.getElementById('adTrack');
-  if(!track) return;
-  track.style.transform = `translateX(-${adIndex*100}%)`;
-  document.querySelectorAll('#adDots span').forEach((d,i)=>d.classList.toggle('active', i===adIndex));
-}
-
-function adGo(dir){
-  adIndex = (adIndex + dir + adSlides.length) % adSlides.length;
-  adUpdate();
-}
-
-function adGoTo(i){
-  adIndex = i;
-  adUpdate();
-}
-
-function startAdAutoplay(){
-  if(adTimer) clearInterval(adTimer);
-  adTimer = setInterval(()=>{ if(!adPause) adGo(1); }, 4500);
-}
-
-document.addEventListener('DOMContentLoaded', ()=>{ renderAdSlider(); startAdAutoplay(); });
 
 // ═══ PAGE ROUTING ═══
 function showPage(p){
@@ -2168,26 +2014,13 @@ function scrollSvcSlider(dir){
 }
 
 function renderAI(cont){
-  cont.innerHTML=aiTools.map((a,i)=>`
-    <div class="tool-card" onclick="toggleAiDetail(this,event)" data-ai="${i}">
+  cont.innerHTML=aiTools.map(a=>`
+    <div class="tool-card">
       <div class="t-icon">${a.icon}</div>
       <div class="t-name">${a.name}</div>
       <div class="t-desc">${a.desc}</div>
-      <div class="t-detail" style="display:none">
-        ${a.detail}
-        <div class="t-example">${a.example}</div>
-        <a class="t-try" href="https://wa.me/918539979271?text=${encodeURIComponent('Hi DigiCafe, I want to try the '+a.name+'. '+a.example.replace('e.g. ',''))}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fas fa-comment-dots"></i> Try via WhatsApp</a>
-      </div>
     </div>
   `).join('');
-}
-
-function toggleAiDetail(card,e){
-  if(e.target.closest('.t-try')) return;
-  const d = card.querySelector('.t-detail');
-  const open = d.style.display !== 'none';
-  card.closest('.tools-grid').querySelectorAll('.t-detail').forEach(x=>x.style.display='none');
-  d.style.display = open ? 'none' : 'block';
 }
 
 function renderCourses(cont){
@@ -2198,11 +2031,6 @@ function renderCourses(cont){
         <div class="c-title">${c.name}</div>
         <div class="c-desc">${c.desc}</div>
         <div class="c-meta"><span>${c.dur}</span> · <span>${c.level}</span></div>
-        <div class="c-topics">${c.topics.map(t=>`<span>${t}</span>`).join('')}</div>
-        <div class="c-links">
-          <a href="${c.link}" target="_blank" rel="noopener" title="${c.linktext}"><i class="fas fa-arrow-up-right-from-square"></i> Learn Free</a>
-          <a href="${c.pdf}" target="_blank" rel="noopener" title="Download study notes"><i class="fas fa-file-pdf"></i> Notes PDF</a>
-        </div>
         <button class="c-btn" onclick="showPage('login');showToast('Enroll in course')"><i class="fas fa-book"></i> Enroll</button>
       </div>
     </div>
